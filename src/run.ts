@@ -68,9 +68,6 @@ runProgram(async function () {
     let typegenFileName = opts.abi ? path.basename(opts.abi, `.json`) : opts.address
     let typegenFile = require(path.join(cwd, `./src/abi/${typegenFileName}.ts`))
 
-    let events = getFragments(`event`, typegenFile, opts.event || [])
-    let functions = getFragments(`function`, typegenFile, opts.function || [])
-
     let from = opts.from ? parseInt(opts.from) : 0
     if (from != null) {
         assert(Number.isSafeInteger(from))
@@ -78,6 +75,9 @@ runProgram(async function () {
     }
 
     logger.info(`generating schema...`)
+    let events = getFragments(`event`, typegenFile, opts.event || [])
+    let functions = getFragments(`function`, typegenFile, opts.function || [])
+
     let outputDir = new OutDir(cwd)
     new SchemaCodegen(outputDir, {
         events,
