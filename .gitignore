@@ -1,0 +1,8 @@
+**/node_modules/
+
+# IDE and tools
+.git
+.idea
+*.log
+
+package-lock.json
