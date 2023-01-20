@@ -7,6 +7,9 @@
   "bin": {
     "squid-gen-abi": "./bin/run"
   },
+  "files": [
+    "tsconfig.json"
+  ],
   "scripts": {
   },
   "dependencies": {
