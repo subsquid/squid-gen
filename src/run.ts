@@ -52,13 +52,16 @@ runProgram(async function () {
 
     let logger = createLogger(`sqd:abi-gen`)
 
+    let typegenArgs: string[] = []
+    typegenArgs.push(`./src/abi`)
+    typegenArgs.push(opts.abi || opts.address)
+    typegenArgs.push(`--clean`)
+    if (opts.etherscanApi) {
+        typegenArgs.push(`--etherscan-api ${opts.etherscanApi}`)
+    }
+
     logger.info(`running typegen...`)
-    await spawnAsync(`squid-evm-typegen`, [
-        `./src/abi`,
-        `${opts.abi || opts.address}`,
-        opts.etherscanApi ? `--etherscan-api ${opts.etherscanApi}` : ``,
-        `--clean`,
-    ])
+    await spawnAsync(`squid-evm-typegen`, typegenArgs)
 
     let cwd = process.cwd()
 
