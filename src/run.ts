@@ -3,16 +3,19 @@ import {spawn} from 'child_process'
 import path from 'path'
 import {program} from 'commander'
 import {ethers} from 'ethers'
+import {register} from 'ts-node'
 import {getType as getTsType} from '@subsquid/evm-typegen/lib/util/types'
+import {createLogger} from '@subsquid/logger'
 import {runProgram} from '@subsquid/util-internal'
 import {OutDir} from '@subsquid/util-internal-code-printer'
 import {toCamelCase} from '@subsquid/util-naming'
-import {createLogger} from '@subsquid/logger'
 import {SquidFragment, SquidFragmentParam, TypegenOutput} from './interfaces'
 import {ProcessorCodegen} from './processor'
 import {SchemaCodegen} from './schema'
 
 runProgram(async function () {
+    register()
+
     program
         .requiredOption(`--address <contract>`, `contract address`)
         .requiredOption(
@@ -107,7 +110,9 @@ function getFragments(kind: 'event' | 'function', typegenFile: TypegenOutput, na
         assert(fragment != null, `${kind === 'event' ? `Event` : `Function`} "${name}" doesn't exist for this contract`)
 
         let entityName = toEntityName(fragment.name)
-        let overloads = Object.values(abiInterface.fragments).filter((f) => f.type === kind && toEntityName(f.name) === entityName)
+        let overloads = Object.values(abiInterface.fragments).filter(
+            (f) => f.type === kind && toEntityName(f.name) === entityName
+        )
         if (overloads.length > 1) {
             let num = overloads.findIndex((f) => f.format('sighash') === fragment.format('sighash'))
             entityName += num

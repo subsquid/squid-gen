@@ -20,7 +20,7 @@ export class ProcessorCodegen {
 
     generate() {
         this.generateProcessor()
-        this.outDir.add(`util.ts`, [__dirname, './support/util.ts'])
+        this.outDir.add(`util.ts`, [__dirname, '../support/util.ts'])
     }
 
     private generateProcessor() {

@@ -1,5 +1,7 @@
 **/node_modules/
 
+/lib
+
 # IDE and tools
 .git
 .idea

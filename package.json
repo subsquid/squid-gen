@@ -8,8 +8,8 @@
     "squid-gen-abi": "./bin/run"
   },
   "files": [
-    "src",
-    "tsconfig.json"
+    "lib",
+    "support"
   ],
   "scripts": {
   },
