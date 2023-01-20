@@ -4,6 +4,9 @@
   "description": "A tool for generating squid from contract abi",
   "license": "GPL-3.0-or-later",
   "repository": "git@github.com:subsquid/squid-gen.git",
+  "publishConfig": {
+    "access": "public"
+  },
   "bin": {
     "squid-gen-abi": "./bin/run"
   },
@@ -12,6 +15,7 @@
     "support"
   ],
   "scripts": {
+    "build": "rm -rf lib && tsc"
   },
   "dependencies": {
     "@subsquid/logger": "^0.3.0",
