@@ -2,7 +2,7 @@ import assert from 'assert'
 import {spawn} from 'child_process'
 import path from 'path'
 import {program} from 'commander'
-import {ethers} from 'ethers'
+import {ethers, utils} from 'ethers'
 import {register} from 'ts-node'
 import {getType as getTsType} from '@subsquid/evm-typegen/lib/util/types'
 import {createLogger} from '@subsquid/logger'
@@ -99,34 +99,57 @@ runProgram(async function () {
     }).generate()
 })
 
+const STATIC_ENTITY_FIELDS: ReadonlyArray<string> = ['id', 'name', 'block', 'transaction']
+
 function getFragments(kind: 'event' | 'function', typegenFile: TypegenOutput, names: string[]): SquidFragment[] {
-    let abiInterface = typegenFile.abi
     let items = kind === 'event' ? typegenFile.events : typegenFile.functions
 
     if (names.includes(`*`)) {
         names = Object.keys(items)
     }
 
+    let overloads: Record<string, number> = {}
     let fragments: SquidFragment[] = []
     for (let name of names) {
         let fragment = items[name]?.fragment
         assert(fragment != null, `${kind === 'event' ? `Event` : `Function`} "${name}" doesn't exist for this contract`)
 
         let entityName = toEntityName(fragment.name)
-        let overloads = Object.values(abiInterface.fragments).filter(
-            (f) => f.type === kind && toEntityName(f.name) === entityName
-        )
-        if (overloads.length > 1) {
-            let num = overloads.findIndex((f) => f.format('sighash') === fragment.format('sighash'))
-            entityName += num
+        if (overloads[entityName] == null) {
+            if (Object.values(items).reduce((c, i) => (i.fragment.name === fragment.name ? c + 1 : c), 0) > 1) {
+                entityName += 0
+                overloads[entityName] = 1
+            }
+        } else if (overloads[entityName] != null) {
+            entityName += overloads[entityName]
+            overloads[entityName] += 1
         }
         entityName += kind === 'event' ? `Event` : `Function`
 
         let params: SquidFragmentParam[] = []
         for (let i = 0; i < fragment.inputs.length; i++) {
             let input = fragment.inputs[i]
+            let overlaps: Record<string, number> = {}
+            let fieldName: string
+            if (input.name) {
+                fieldName = toFieldName(input.name)
+                if (overlaps[fieldName] == null) {
+                    if (
+                        STATIC_ENTITY_FIELDS.indexOf(fieldName) > -1 ||
+                        fragment.inputs.reduce((c, i) => (toFieldName(i.name) === fieldName ? c + 1 : c), 0) > 1
+                    ) {
+                        fieldName += 0
+                        overlaps[fieldName] = 1
+                    }
+                } else {
+                    fieldName += overlaps[fieldName]
+                    overlaps[fieldName] += 1
+                }
+            } else {
+                fieldName = `arg${i}`
+            }
             params.push({
-                name: `arg${i}`,
+                name: fieldName,
                 indexed: input.indexed,
                 schemaType: getGqlType(input),
             })
@@ -164,6 +187,10 @@ function tsTypeToGqlType(type: string): string {
 function toEntityName(name: string) {
     let camelCased = toCamelCase(name)
     return camelCased.slice(0, 1).toUpperCase() + camelCased.slice(1)
+}
+
+function toFieldName(name: string) {
+    return toCamelCase(name)
 }
 
 async function spawnAsync(command: string, args: string[]) {
