@@ -19,7 +19,7 @@ export class SchemaCodegen {
             this.out.line(`id: ID!`)
             this.out.line(`number: Int! @index`)
             this.out.line(`timestamp: DateTime!`)
-            this.out.line(`transactions: [Transaction] @derivedFrom(field: "block")`)
+            this.out.line(`transactions: [Transaction!]! @derivedFrom(field: "block")`)
         })
         this.out.line()
         this.out.block(`type Transaction @entity`, () => {
