@@ -90,10 +90,10 @@ export class ProcessorCodegen {
                             if (this.hasEvents()) {
                                 this.out.line(`case 'evmLog':`)
                                 this.out.indentation(() => {
-                                    this.out.line(`it = parseEvmLog(ctx, item)`)
-                                    this.out.block(`if (it)`, () => {
-                                        this.out.line(`if (events[it.name] == null) events[it.name] = []`)
-                                        this.out.line(`events[it.name].push(it)`)
+                                    this.out.line(`let e = it = parseEvmLog(ctx, item)`)
+                                    this.out.block(`if (e)`, () => {
+                                        this.out.line(`if (events[e.name] == null) events[e.name] = []`)
+                                        this.out.line(`events[e.name].push(e)`)
                                     })
                                     this.out.line(`break`)
                                 })
@@ -101,10 +101,10 @@ export class ProcessorCodegen {
                             if (this.hasFunctions()) {
                                 this.out.line(`case 'transaction':`)
                                 this.out.indentation(() => {
-                                    this.out.line(`it = parseTransaction(ctx, item)`)
-                                    this.out.block(`if (it)`, () => {
-                                        this.out.line(`if (functions[it.name] == null) functions[it.name] = []`)
-                                        this.out.line(`functions[it.name].push(it)`)
+                                    this.out.line(`let f = it = parseTransaction(ctx, item)`)
+                                    this.out.block(`if (f)`, () => {
+                                        this.out.line(`if (functions[f.name] == null) functions[f.name] = []`)
+                                        this.out.line(`functions[f.name].push(f)`)
                                     })
                                     this.out.line(`break`)
                                 })
