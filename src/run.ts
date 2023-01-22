@@ -158,7 +158,10 @@ function getFragments(kind: 'event' | 'function', typegenFile: TypegenOutput, na
                 if (overlaps[fieldName] == null) {
                     if (
                         STATIC_ENTITY_FIELDS.indexOf(fieldName) > -1 ||
-                        fragment.inputs.reduce((c, i) => (toFieldName(i.name) === fieldName ? c + 1 : c), 0) > 1
+                        fragment.inputs.reduce(
+                            (c, i) => (i.name != null && toFieldName(i.name) === fieldName ? c + 1 : c),
+                            0
+                        ) > 1
                     ) {
                         fieldName += 0
                         overlaps[fieldName] = 1
