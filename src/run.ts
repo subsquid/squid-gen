@@ -1,17 +1,19 @@
 import assert from 'assert'
-import {spawn} from 'child_process'
 import path from 'path'
 import {program} from 'commander'
-import {ethers, utils} from 'ethers'
 import {register} from 'ts-node'
-import {getType as getTsType} from '@subsquid/evm-typegen/lib/util/types'
 import {createLogger} from '@subsquid/logger'
 import {runProgram} from '@subsquid/util-internal'
 import {OutDir} from '@subsquid/util-internal-code-printer'
-import {toCamelCase} from '@subsquid/util-naming'
-import {SquidFragment, SquidFragmentParam, TypegenOutput} from './interfaces'
+import {SquidArchive, SquidFragment, SquidFragmentParam, TypegenOutput} from './interfaces'
 import {ProcessorCodegen} from './processor'
 import {SchemaCodegen} from './schema'
+import {isURL, spawnAsync} from './util/misc'
+import {toEntityName, toFieldName} from './util/naming'
+import {getGqlType} from './util/types'
+import {knownArchivesEVM} from '@subsquid/archive-registry'
+
+let logger = createLogger(`sqd:abi-gen`)
 
 runProgram(async function () {
     register()
@@ -52,7 +54,7 @@ runProgram(async function () {
         etherscanApi?: string
     }
 
-    let logger = createLogger(`sqd:abi-gen`)
+    let archive = getArchive(opts.archive)
 
     let typegenArgs: string[] = []
     typegenArgs.push(`./src/abi`)
@@ -93,7 +95,7 @@ runProgram(async function () {
     let srcOutputDir = outputDir.child(`src`)
     new ProcessorCodegen(srcOutputDir, {
         address: (opts.proxy || opts.address).toLowerCase(),
-        archive: opts.archive,
+        archive,
         typegenFileName,
         events,
         functions,
@@ -154,7 +156,7 @@ function getFragments(kind: 'event' | 'function', typegenFile: TypegenOutput, na
                 name: fieldName,
                 indexed: input.indexed,
                 schemaType: getGqlType(input),
-                required: true
+                required: true,
             })
         }
 
@@ -168,51 +170,18 @@ function getFragments(kind: 'event' | 'function', typegenFile: TypegenOutput, na
     return fragments
 }
 
-function getGqlType(param: ethers.utils.ParamType): string {
-    let tsType = getTsType(param)
-    return tsTypeToGqlType(tsType)
-}
-
-function tsTypeToGqlType(type: string): string {
-    if (type === 'string') {
-        return 'String'
-    } else if (type === 'boolean') {
-        return 'Boolean'
-    } else if (type === 'number') {
-        return 'Int'
-    } else if (type === 'ethers.BigNumber') {
-        return 'BigInt'
+export function getArchive(str: string): SquidArchive {
+    if (isURL(str)) {
+        return {
+            value: str,
+            kind: 'url',
+        }
+    } else if (knownArchivesEVM.includes(str as any)) {
+        return {
+            value: str,
+            kind: 'name',
+        }
     } else {
-        return 'JSON'
+        throw new Error(`Invalid archive "${str}"`)
     }
-}
-
-function toEntityName(name: string) {
-    let camelCased = toCamelCase(name)
-    return camelCased.slice(0, 1).toUpperCase() + camelCased.slice(1)
-}
-
-function toFieldName(name: string) {
-    return toCamelCase(name)
-}
-
-async function spawnAsync(command: string, args: string[]) {
-    return await new Promise<number>((resolve, reject) => {
-        let proc = spawn(command, args, {
-            stdio: 'inherit',
-            shell: process.platform == 'win32',
-        })
-
-        proc.on('error', (err) => {
-            reject(err)
-        })
-
-        proc.on('close', (code) => {
-            if (code == 0) {
-                resolve(code)
-            } else {
-                reject(`error: command "${command}" exited with code ${code}`)
-            }
-        })
-    })
 }

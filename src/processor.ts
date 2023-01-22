@@ -1,14 +1,21 @@
 import {FileOutput, OutDir, Output} from '@subsquid/util-internal-code-printer'
-import {SquidFragment} from './interfaces'
+import {SquidArchive, SquidFragment} from './interfaces'
 
 export class ProcessorCodegen {
     private out: FileOutput
+
+    private models = new Set<string>()
+    private events = new Set<string>()
+    private functions = new Set<string>()
+    private util = new Set<string>()
+    private json = false
+    private archiveRegistry = false
 
     constructor(
         private outDir: OutDir,
         private options: {
             address: string
-            archive: string
+            archive: SquidArchive
             typegenFileName: string
             events: SquidFragment[]
             functions: SquidFragment[]
@@ -24,15 +31,7 @@ export class ProcessorCodegen {
     }
 
     private generateProcessor() {
-        this.out.line(
-            `import {EvmBatchProcessor, BatchProcessorItem, BatchProcessorLogItem, BatchHandlerContext, BatchProcessorTransactionItem} ` +
-                `from '@subsquid/evm-processor'`
-        )
-        this.out.line(`import {Store, TypeormDatabase} from '@subsquid/typeorm-store'`)
-        this.out.line(`import {toJSON} from '@subsquid/util-internal-json'`)
-        this.out.line(`import * as abi from './abi/${this.options.typegenFileName}'`)
-        this.importModels(this.out)
-        this.out.line(`import {normalize} from './util'`)
+        this.printImports()
         this.out.line()
         this.out.line(`const CONTRACT_ADDRESS = '${this.options.address}'`)
         this.out.line()
@@ -40,7 +39,12 @@ export class ProcessorCodegen {
         this.out.indentation(() => {
             this.out.line(`.setDataSource({`)
             this.out.indentation(() => {
-                this.out.line(`archive: '${this.options.archive}',`)
+                if (this.options.archive.kind === 'name') {
+                    this.useArchiveRegistry()
+                    this.out.line(`archive: lookupArchive('${this.options.archive.value}'),`)
+                } else {
+                    this.out.line(`archive: '${this.options.archive}',`)
+                }
             })
             this.out.line(`})`)
 
@@ -70,7 +74,10 @@ export class ProcessorCodegen {
             if (this.hasFunctions()) {
                 this.out.line(`let functions: Record<string, SquidFunctionEntity[]> = {}`)
             }
+
+            this.useModel(`Transaction`)
             this.out.line(`let transactions: Transaction[] = []`)
+            this.useModel(`Block`)
             this.out.line(`let blocks: Block[] = []`)
 
             this.out.block(`for (let {header: block, items} of ctx.blocks)`, () => {
@@ -164,6 +171,29 @@ export class ProcessorCodegen {
         return this.out.write()
     }
 
+    private printImports() {
+        this.out.lazy(() => {
+            this.out.line(`import * as abi from './abi/${this.options.typegenFileName}'`)
+            this.out.line(
+                `import {EvmBatchProcessor, BatchProcessorItem, BatchProcessorLogItem, BatchHandlerContext, BatchProcessorTransactionItem} ` +
+                    `from '@subsquid/evm-processor'`
+            )
+            this.out.line(`import {Store, TypeormDatabase} from '@subsquid/typeorm-store'`)
+            if (this.archiveRegistry) {
+                this.out.line(`import {lookupArchive} from '@subsquid/archive-registry'`)
+            }
+            if (this.json) {
+                this.out.line(`import {toJSON} from '@subsquid/util-internal-json'`)
+            }
+            if (this.models.size > 0) {
+                this.out.line(`import {${[...this.models].join(`, `)}} from './model'`)
+            }
+            if (this.util.size > 0) {
+                this.out.line(`import {${[...this.util].join(`, `)}} from './util'`)
+            }
+        })
+    }
+
     private printEvmLogSubscribe(events: SquidFragment[]) {
         this.out.line(`.addLog(CONTRACT_ADDRESS, {`)
         this.out.indentation(() => {
@@ -230,17 +260,20 @@ export class ProcessorCodegen {
             this.out.indentation(() => {
                 for (let e of events) {
                     this.out.block(`case abi.events['${e.name}'].topic:`, () => {
+                        this.useUtil(`normalize`)
                         this.out.line(`let e = normalize(abi.events['${e.name}'].decode(item.evmLog))`)
+                        this.useEventModel(e.entityName)
                         this.out.line(`return new ${e.entityName}({`)
                         this.out.indentation(() => {
                             this.out.line(`id: item.evmLog.id,`)
                             this.out.line(`name: '${e.name}',`)
                             for (let i = 0; i < e.params.length; i++) {
-                                this.out.line(
-                                    `${e.params[i].name}: ${
-                                        e.params[i].schemaType === 'JSON' ? `toJSON(e[${i}])` : `e[${i}]`
-                                    },`
-                                )
+                                if (e.params[i].schemaType === 'JSON') {
+                                    this.useJSON()
+                                    this.out.line(`${e.params[i].name}: toJSON(e[${i}]),`)
+                                } else {
+                                    this.out.line(`${e.params[i].name}: e[${i}],`)
+                                }
                             }
                         })
                         this.out.line(`})`)
@@ -261,17 +294,20 @@ export class ProcessorCodegen {
             this.out.indentation(() => {
                 for (let f of functions) {
                     this.out.block(`case abi.functions['${f.name}'].sighash:`, () => {
+                        this.useUtil(`normalize`)
                         this.out.line(`let f = normalize(abi.functions['${f.name}'].decode(item.transaction.input))`)
+                        this.useFunctionsModel(f.entityName)
                         this.out.line(`return new ${f.entityName}({`)
                         this.out.indentation(() => {
                             this.out.line(`id: item.transaction.id,`)
                             this.out.line(`name: '${f.name}',`)
                             for (let i = 0; i < f.params.length; i++) {
-                                this.out.line(
-                                    `${f.params[i].name}: ${
-                                        f.params[i].schemaType === 'JSON' ? `toJSON(f[${i}])` : `f[${i}]`
-                                    },`
-                                )
+                                if (f.params[i].schemaType === 'JSON') {
+                                    this.useJSON()
+                                    this.out.line(`${f.params[i].name}: toJSON(f[${i}]),`)
+                                } else {
+                                    this.out.line(`${f.params[i].name}: f[${i}],`)
+                                }
                             }
                         })
                         this.out.line(`})`)
@@ -283,27 +319,21 @@ export class ProcessorCodegen {
         this.out.line(`}`)
     }
 
-    private importModels(out: Output) {
-        let eventModels = Object.values(this.options.events).map((f) => f.entityName)
-        let functionModels = Object.values(this.options.functions).map((f) => f.entityName)
-        out.line(`import {${[`Transaction`, `Block`, ...eventModels, ...functionModels].join(`, `)}} from './model'`)
-    }
-
     private printEntityUnionType(out: Output) {
-        let models: string[] = []
-        if (this.hasEvents()) {
-            let eventModels = Object.values(this.options.events).map((f) => f.entityName)
-            out.line(`type SquidEventEntity = ${eventModels.join(` | `)}`)
-            models.push(`SquidEventEntity`)
-        }
-        if (this.hasFunctions()) {
-            let functionModels = Object.values(this.options.functions).map((f) => f.entityName)
-            out.line(`type SquidFunctionEntity = ${functionModels.join(` | `)}`)
-            models.push(`SquidFunctionEntity`)
-        }
-        if (models.length > 0) {
-            out.line(`type SquidEntity = ${models.join(` | `)}`)
-        }
+        this.out.lazy(() => {
+            let models: string[] = []
+            if (this.events.size > 0) {
+                out.line(`type SquidEventEntity = ${[...this.events].join(` | `)}`)
+                models.push(`SquidEventEntity`)
+            }
+            if (this.functions.size > 0) {
+                out.line(`type SquidFunctionEntity = ${[...this.functions].join(` | `)}`)
+                models.push(`SquidFunctionEntity`)
+            }
+            if (models.length > 0) {
+                out.line(`type SquidEntity = ${models.join(` | `)}`)
+            }
+        })
     }
 
     private hasEvents() {
@@ -312,5 +342,31 @@ export class ProcessorCodegen {
 
     private hasFunctions() {
         return this.options.functions.length > 0
+    }
+
+    private useArchiveRegistry() {
+        this.archiveRegistry = true
+    }
+
+    private useModel(str: string) {
+        this.models.add(str)
+    }
+
+    private useEventModel(str: string) {
+        this.events.add(str)
+        this.useModel(str)
+    }
+
+    private useFunctionsModel(str: string) {
+        this.functions.add(str)
+        this.useModel(str)
+    }
+
+    private useUtil(str: string) {
+        this.util.add(str)
+    }
+
+    private useJSON() {
+        this.json = true
     }
 }

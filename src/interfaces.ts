@@ -1,4 +1,4 @@
-import {ethers} from "ethers"
+import {ethers} from 'ethers'
 
 export interface TypegenOutput {
     abi: ethers.utils.Interface
@@ -17,4 +17,9 @@ export interface SquidFragment {
     name: string
     entityName: string
     params: SquidFragmentParam[]
+}
+
+export interface SquidArchive {
+    value: string
+    kind: 'url' | 'name'
 }
