@@ -43,7 +43,7 @@ export class ProcessorCodegen {
                     this.useArchiveRegistry()
                     this.out.line(`archive: lookupArchive('${this.options.archive.value}', {type: 'EVM'}),`)
                 } else {
-                    this.out.line(`archive: '${this.options.archive}',`)
+                    this.out.line(`archive: '${this.options.archive.value}',`)
                 }
             })
             this.out.line(`})`)
