@@ -17,26 +17,28 @@ runProgram(async function () {
     register()
 
     program
-        .requiredOption(`--address <contract>`, `contract address`)
+        .addHelpText('before', 'Generates code for a squid indexing given EVM events and functions. Run within a folder cloned from https://github.com/subsquid/squid-abi-template.\n')
+        .requiredOption(`--address <contract>`, `Contract address. Implementation address for proxy contracts.`)
         .requiredOption(
             `--archive <url>`,
-            `Archive endpoint for indexing. See https://docs.subsquid.io/ for the list of supported networks and Archive endpoints`
+            `Archive endpoint for the network where the contract runs. See https://docs.subsquid.io/ for the list of supported networks and Archive endpoints.`
         )
-        .option(`--proxy <contract>`, `proxy contract address`)
-        .option(`--abi <path>`, `path or URL to the contract ABI`)
+        .option(`--proxy <contract>`, `(optional) Proxy contract address.`)
+        .option(`--abi <path>`, `(optional) Path or URL to the contract JSON ABI. If omitted, it will be retrieved from Etherscan by address.`)
         .option(
             `-e, --event <name...>`,
-            `one or multiple contract events to be indexed. '*' indexes all events defined in the ABI`
+            `One or multiple contract events to be indexed. '*' indexes all events defined in the ABI.`
         )
         .option(
             `-f, --function <name...>`,
-            `one or multiple contract functions to be indexed. '*' indexes all functions defined in the ABI`
+            `One or multiple contract functions to be indexed. '*' indexes all functions defined in the ABI.`
         )
-        .option(`--from <block>`, `start indexing from the given block`)
+        .option(`--from <block>`, `Start indexing from the given block.`)
         .option(
             `--etherscan-api <url>`,
-            `an Etherscan API endpoint to fetch contract ABI by a known address. Default: https://api.etherscan.io/`
+            `Etherscan API-compatible endpoint to fetch contract ABI by a known address. Default: https://api.etherscan.io/.`
         )
+        .addHelpText('after', '\nExample:\nsquid-gen-abi --address 0x2E645469f354BB4F5c8a05B3b30A929361cf77eC --archive https://eth.archive.subsquid.io --event NewGravatar UpdatedGravatar --function \'*\' --from 6000000')
 
     program.parse()
     let opts = program.opts() as {
