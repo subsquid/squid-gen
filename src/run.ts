@@ -12,6 +12,7 @@ import {isURL, spawnAsync} from './util/misc'
 import {toEntityName, toFieldName} from './util/naming'
 import {getGqlType} from './util/types'
 import {knownArchivesEVM} from '@subsquid/archive-registry'
+import {ethers} from 'ethers'
 
 let logger = createLogger(`sqd:abi-gen`)
 
@@ -19,14 +20,20 @@ runProgram(async function () {
     register()
 
     program
-        .addHelpText('before', 'Generates code for a squid indexing given EVM events and functions. Run within a folder cloned from https://github.com/subsquid/squid-abi-template.\n')
+        .addHelpText(
+            'before',
+            'Generates code for a squid indexing given EVM events and functions. Run within a folder cloned from https://github.com/subsquid/squid-abi-template.\n'
+        )
         .requiredOption(`--address <contract>`, `Contract address. Implementation address for proxy contracts.`)
         .requiredOption(
             `--archive <url>`,
             `Archive endpoint for the network where the contract runs. See https://docs.subsquid.io/ for the list of supported networks and Archive endpoints.`
         )
         .option(`--proxy <contract>`, `(optional) Proxy contract address.`)
-        .option(`--abi <path>`, `(optional) Path or URL to the contract JSON ABI. If omitted, it will be retrieved from Etherscan by address.`)
+        .option(
+            `--abi <path>`,
+            `(optional) Path or URL to the contract JSON ABI. If omitted, it will be retrieved from Etherscan by address.`
+        )
         .option(
             `-e, --event <name...>`,
             `One or multiple contract events to be indexed. '*' indexes all events defined in the ABI.`
@@ -40,7 +47,10 @@ runProgram(async function () {
             `--etherscan-api <url>`,
             `Etherscan API-compatible endpoint to fetch contract ABI by a known address. Default: https://api.etherscan.io/.`
         )
-        .addHelpText('after', '\nExample:\nsquid-gen-abi --address 0x2E645469f354BB4F5c8a05B3b30A929361cf77eC --archive https://eth.archive.subsquid.io --event NewGravatar UpdatedGravatar --function \'*\' --from 6000000')
+        .addHelpText(
+            'after',
+            "\nExample:\nsquid-gen-abi --address 0x2E645469f354BB4F5c8a05B3b30A929361cf77eC --archive https://eth.archive.subsquid.io --event NewGravatar UpdatedGravatar --function '*' --from 6000000"
+        )
 
     program.parse()
     let opts = program.opts() as {
@@ -117,6 +127,14 @@ function getFragments(kind: 'event' | 'function', typegenFile: TypegenOutput, na
     for (let name of names) {
         let fragment = items[name]?.fragment
         assert(fragment != null, `${kind === 'event' ? `Event` : `Function`} "${name}" doesn't exist for this contract`)
+
+        if (kind === 'function') {
+            let functionFragment = fragment as ethers.utils.FunctionFragment
+            if (functionFragment.stateMutability === 'view') {
+                logger.warn(`Readonly function "${name}" skipped`)
+                continue
+            }
+        }
 
         let entityName = toEntityName(fragment.name)
         if (overloads[entityName] == null) {
