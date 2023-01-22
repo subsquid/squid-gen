@@ -27,7 +27,6 @@ export class ProcessorCodegen {
 
     generate() {
         this.generateProcessor()
-        this.outDir.add(`util.ts`, [__dirname, '../support/util.ts'])
     }
 
     private generateProcessor() {
@@ -260,8 +259,10 @@ export class ProcessorCodegen {
             this.out.indentation(() => {
                 for (let e of events) {
                     this.out.block(`case abi.events['${e.name}'].topic:`, () => {
-                        this.useUtil(`normalize`)
-                        this.out.line(`let e = normalize(abi.events['${e.name}'].decode(item.evmLog))`)
+                        if (e.params.length > 0) {
+                            this.useUtil(`normalize`)
+                            this.out.line(`let e = normalize(abi.events['${e.name}'].decode(item.evmLog))`)
+                        }
                         this.useEventModel(e.entityName)
                         this.out.line(`return new ${e.entityName}({`)
                         this.out.indentation(() => {
@@ -294,8 +295,10 @@ export class ProcessorCodegen {
             this.out.indentation(() => {
                 for (let f of functions) {
                     this.out.block(`case abi.functions['${f.name}'].sighash:`, () => {
-                        this.useUtil(`normalize`)
-                        this.out.line(`let f = normalize(abi.functions['${f.name}'].decode(item.transaction.input))`)
+                        if (f.params.length > 0) {
+                            this.useUtil(`normalize`)
+                            this.out.line(`let f = normalize(abi.functions['${f.name}'].decode(item.transaction.input))`)
+                        }
                         this.useFunctionsModel(f.entityName)
                         this.out.line(`return new ${f.entityName}({`)
                         this.out.indentation(() => {
@@ -363,6 +366,9 @@ export class ProcessorCodegen {
     }
 
     private useUtil(str: string) {
+        if (this.util.size == 0) {
+            this.outDir.add(`util.ts`, [__dirname, '../support/util.ts'])
+        }
         this.util.add(str)
     }
 
