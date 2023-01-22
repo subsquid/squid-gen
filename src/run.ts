@@ -151,7 +151,8 @@ function getFragments(kind: 'event' | 'function', typegenFile: TypegenOutput, na
             params.push({
                 name: fieldName,
                 indexed: input.indexed,
-                schemaType: getGqlType(input) + '!',
+                schemaType: getGqlType(input),
+                required: true
             })
         }
 

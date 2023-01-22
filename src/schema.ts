@@ -43,7 +43,7 @@ export class SchemaCodegen {
                 this.out.line(`transaction: Transaction!`)
                 this.out.line(`name: String! @index`)
                 for (let param of e.params) {
-                    let field = `${param.name}: ${param.schemaType}`
+                    let field = `${param.name}: ${param.schemaType}${param.required ? `!` : ``}`
                     if (param.indexed) {
                         field += ` @index`
                     }

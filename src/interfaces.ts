@@ -10,6 +10,7 @@ export interface SquidFragmentParam {
     name: string
     schemaType: string
     indexed: boolean
+    required: boolean
 }
 
 export interface SquidFragment {
