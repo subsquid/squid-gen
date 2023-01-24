@@ -71,8 +71,7 @@ runProgram(async function () {
     typegenArgs.push(opts.abi || opts.address)
     typegenArgs.push(`--clean`)
     if (opts.etherscanApi) {
-        typegenArgs.push(`--etherscan-api`)
-        typegenArgs.push(`${opts.etherscanApi}`)
+        typegenArgs.push(`--etherscan-api=${opts.etherscanApi}`)
     }
 
     logger.info(`running typegen...`)
