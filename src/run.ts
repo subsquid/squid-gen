@@ -26,8 +26,8 @@ runProgram(async function () {
         )
         .requiredOption(`--address <contract>`, `Contract address. Implementation address for proxy contracts.`)
         .requiredOption(
-            `--archive <url>`,
-            `Archive endpoint for the network where the contract runs. See https://docs.subsquid.io/ for the list of supported networks and Archive endpoints.`
+            `--archive <alias|url>`,
+            `Source Squid Archive for an EVM network. Can be a URL or an alias defined by @subsquid/archive-registry. See also https://docs.subsquid.io/ for the list of supported EVM networks.`
         )
         .option(`--proxy <contract>`, `(optional) Proxy contract address.`)
         .option(
