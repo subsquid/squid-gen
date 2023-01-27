@@ -5,14 +5,12 @@ import {register} from 'ts-node'
 import {createLogger} from '@subsquid/logger'
 import {runProgram} from '@subsquid/util-internal'
 import {OutDir} from '@subsquid/util-internal-code-printer'
-import {SquidArchive, SquidFragment, SquidFragmentParam, TypegenOutput} from './util/interfaces'
+import {SquidArchive} from './util/interfaces'
 import {ProcessorCodegen} from './processor'
 import {SchemaCodegen} from './schema'
 import {isURL, spawnAsync} from './util/misc'
-import {toEntityName, toFieldName} from './util/naming'
-import {getGqlType} from './util/types'
+import {FragmentsParser} from './util/parser'
 import {knownArchivesEVM} from '@subsquid/archive-registry'
-import {ethers} from 'ethers'
 
 let logger = createLogger(`sqd:abi-gen`)
 
@@ -89,8 +87,9 @@ runProgram(async function () {
     }
 
     logger.info(`generating schema...`)
-    let events = getFragments(`event`, typegenFile, opts.event || [])
-    let functions = getFragments(`function`, typegenFile, opts.function || [])
+    let parser = new FragmentsParser(typegenFile)
+    let events = parser.getEvents(opts.event || [])
+    let functions = parser.getFunctions(opts.function || [])
 
     let outputDir = new OutDir(cwd)
     new SchemaCodegen(outputDir, {
@@ -113,91 +112,7 @@ runProgram(async function () {
     }).generate()
 })
 
-class FragmentsParser {
-    constructor(private typegenFile: TypegenOutput) {}
-
-    getFragments(kind: 'event' | 'function', names: string[]): SquidFragment[] {
-        let items = kind === 'event' ? this.typegenFile.events : this.typegenFile.functions
-    
-        if (names.includes(`*`)) {
-            names = Object.keys(items)
-        }
-    
-        let overloads: Record<string, number> = {}
-        let fragments: SquidFragment[] = []
-        for (let name of names) {
-            let fragment = items[name]?.fragment
-            assert(fragment != null, `${kind === 'event' ? `Event` : `Function`} "${name}" doesn't exist for this contract`)
-    
-            if (kind === 'function') {
-                let functionFragment = fragment as ethers.utils.FunctionFragment
-                if (functionFragment.stateMutability === 'view') {
-                    logger.warn(`Readonly function "${name}" skipped`)
-                    continue
-                }
-            }
-    
-            let entityName = toEntityName(fragment.name)
-            if (overloads[entityName] == null) {
-                if (Object.values(items).reduce((c, i) => (i.fragment.name === fragment.name ? c + 1 : c), 0) > 1) {
-                    overloads[entityName] = 1
-                    entityName += 0
-                }
-            } else if (overloads[entityName] != null) {
-                overloads[entityName] += 1
-                entityName += overloads[entityName]
-            }
-            entityName += kind === 'event' ? `Event` : `Function`
-    
-            let params: SquidFragmentParam[] = []
-            for (let i = 0; i < fragment.inputs.length; i++) {
-                let input = fragment.inputs[i]
-                let overlaps: Record<string, number> = {}
-                let fieldName: string
-                if (input.name) {
-                    fieldName = toFieldName(input.name)
-                    if (overlaps[fieldName] == null) {
-                        if (
-                            STATIC_ENTITY_FIELDS.indexOf(fieldName) > -1 ||
-                            fragment.inputs.reduce(
-                                (c, i) => (i.name != null && toFieldName(i.name) === fieldName ? c + 1 : c),
-                                0
-                            ) > 1
-                        ) {
-                            fieldName += 0
-                            overlaps[fieldName] = 1
-                        }
-                    } else {
-                        fieldName += overlaps[fieldName]
-                        overlaps[fieldName] += 1
-                    }
-                } else {
-                    fieldName = `arg${i}`
-                }
-                params.push({
-                    name: fieldName,
-                    indexed: input.indexed,
-                    schemaType: getGqlType(input),
-                    required: true,
-                })
-            }
-    
-            fragments.push({
-                name,
-                entityName,
-                params,
-            })
-        }
-    
-        return fragments
-    }
-}
-
-const STATIC_ENTITY_FIELDS: ReadonlyArray<string> = ['id', 'name', 'block', 'transaction']
-
-
-
-export function getArchive(str: string): SquidArchive {
+function getArchive(str: string): SquidArchive {
     if (isURL(str)) {
         return {
             value: str,
