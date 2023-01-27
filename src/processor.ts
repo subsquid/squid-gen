@@ -96,7 +96,7 @@ export class ProcessorCodegen {
                             if (this.hasEvents()) {
                                 this.out.line(`case 'evmLog':`)
                                 this.out.indentation(() => {
-                                    this.out.line(`let e = it = parseEvmLog(ctx, item)`)
+                                    this.out.line(`let e = it = parseEvmLog(ctx, block, item)`)
                                     this.out.block(`if (e)`, () => {
                                         this.out.line(`if (events[e.name] == null) events[e.name] = []`)
                                         this.out.line(`events[e.name].push(e)`)
@@ -107,7 +107,7 @@ export class ProcessorCodegen {
                             if (this.hasFunctions()) {
                                 this.out.line(`case 'transaction':`)
                                 this.out.indentation(() => {
-                                    this.out.line(`let f = it = parseTransaction(ctx, item)`)
+                                    this.out.line(`let f = it = parseTransaction(ctx, block, item)`)
                                     this.out.block(`if (f)`, () => {
                                         this.out.line(`if (functions[f.name] == null) functions[f.name] = []`)
                                         this.out.line(`functions[f.name].push(f)`)
@@ -174,7 +174,7 @@ export class ProcessorCodegen {
         this.out.lazy(() => {
             this.out.line(`import * as abi from './abi/${this.options.typegenFileName}'`)
             this.out.line(
-                `import {EvmBatchProcessor, BatchProcessorItem, BatchProcessorLogItem, BatchHandlerContext, BatchProcessorTransactionItem} ` +
+                `import {EvmBatchProcessor, BatchProcessorItem, BatchProcessorLogItem, BatchHandlerContext, BatchProcessorTransactionItem, EvmBlock} ` +
                     `from '@subsquid/evm-processor'`
             )
             this.out.line(`import {Store, TypeormDatabase} from '@subsquid/typeorm-store'`)
@@ -252,34 +252,45 @@ export class ProcessorCodegen {
 
     private printEventsParser(events: SquidFragment[]) {
         this.out.line(
-            `function parseEvmLog(ctx: Context, item: BatchProcessorLogItem<typeof processor>): SquidEventEntity | undefined {`
+            `function parseEvmLog(ctx: Context, block: EvmBlock, item: BatchProcessorLogItem<typeof processor>): SquidEventEntity | undefined {`
         )
         this.out.indentation(() => {
-            this.out.line(`switch (item.evmLog.topics[0]) {`)
+            this.out.line(`try {`)
             this.out.indentation(() => {
-                for (let e of events) {
-                    this.out.block(`case abi.events['${e.name}'].topic:`, () => {
-                        if (e.params.length > 0) {
-                            this.useUtil(`normalize`)
-                            this.out.line(`let e = normalize(abi.events['${e.name}'].decode(item.evmLog))`)
-                        }
-                        this.useEventModel(e.entityName)
-                        this.out.line(`return new ${e.entityName}({`)
-                        this.out.indentation(() => {
-                            this.out.line(`id: item.evmLog.id,`)
-                            this.out.line(`name: '${e.name}',`)
-                            for (let i = 0; i < e.params.length; i++) {
-                                if (e.params[i].schemaType === 'JSON') {
-                                    this.useJSON()
-                                    this.out.line(`${e.params[i].name}: toJSON(e[${i}]),`)
-                                } else {
-                                    this.out.line(`${e.params[i].name}: e[${i}],`)
-                                }
+                this.out.line(`switch (item.evmLog.topics[0]) {`)
+                this.out.indentation(() => {
+                    for (let e of events) {
+                        this.out.block(`case abi.events['${e.name}'].topic:`, () => {
+                            if (e.params.length > 0) {
+                                this.useUtil(`normalize`)
+                                this.out.line(`let e = normalize(abi.events['${e.name}'].decode(item.evmLog))`)
                             }
+                            this.useEventModel(e.entityName)
+                            this.out.line(`return new ${e.entityName}({`)
+                            this.out.indentation(() => {
+                                this.out.line(`id: item.evmLog.id,`)
+                                this.out.line(`name: '${e.name}',`)
+                                for (let i = 0; i < e.params.length; i++) {
+                                    if (e.params[i].schemaType === 'JSON') {
+                                        this.useJSON()
+                                        this.out.line(`${e.params[i].name}: toJSON(e[${i}]),`)
+                                    } else {
+                                        this.out.line(`${e.params[i].name}: e[${i}],`)
+                                    }
+                                }
+                            })
+                            this.out.line(`})`)
                         })
-                        this.out.line(`})`)
-                    })
-                }
+                    }
+                })
+                this.out.line(`}`)
+            })
+            this.out.line(`} catch (error) {`)
+            this.out.indentation(() => {
+                this.out.line(
+                    `ctx.log.error({error, blockNumber: block.height, blockHash: block.hash}, ` +
+                        `\`Unable to decode event "\${item.evmLog.topics[0]}"\`)`
+                )
             })
             this.out.line(`}`)
         })
@@ -288,34 +299,47 @@ export class ProcessorCodegen {
 
     private printFunctionsParser(functions: SquidFragment[]) {
         this.out.line(
-            `function parseTransaction(ctx: Context, item: BatchProcessorTransactionItem<typeof processor>): SquidFunctionEntity | undefined  {`
+            `function parseTransaction(ctx: Context, block: EvmBlock, item: BatchProcessorTransactionItem<typeof processor>): SquidFunctionEntity | undefined  {`
         )
         this.out.indentation(() => {
-            this.out.line(`switch (item.transaction.input.slice(0, 10)) {`)
+            this.out.line(`try {`)
             this.out.indentation(() => {
-                for (let f of functions) {
-                    this.out.block(`case abi.functions['${f.name}'].sighash:`, () => {
-                        if (f.params.length > 0) {
-                            this.useUtil(`normalize`)
-                            this.out.line(`let f = normalize(abi.functions['${f.name}'].decode(item.transaction.input))`)
-                        }
-                        this.useFunctionsModel(f.entityName)
-                        this.out.line(`return new ${f.entityName}({`)
-                        this.out.indentation(() => {
-                            this.out.line(`id: item.transaction.id,`)
-                            this.out.line(`name: '${f.name}',`)
-                            for (let i = 0; i < f.params.length; i++) {
-                                if (f.params[i].schemaType === 'JSON') {
-                                    this.useJSON()
-                                    this.out.line(`${f.params[i].name}: toJSON(f[${i}]),`)
-                                } else {
-                                    this.out.line(`${f.params[i].name}: f[${i}],`)
-                                }
+                this.out.line(`switch (item.transaction.input.slice(0, 10)) {`)
+                this.out.indentation(() => {
+                    for (let f of functions) {
+                        this.out.block(`case abi.functions['${f.name}'].sighash:`, () => {
+                            if (f.params.length > 0) {
+                                this.useUtil(`normalize`)
+                                this.out.line(
+                                    `let f = normalize(abi.functions['${f.name}'].decode(item.transaction.input))`
+                                )
                             }
+                            this.useFunctionsModel(f.entityName)
+                            this.out.line(`return new ${f.entityName}({`)
+                            this.out.indentation(() => {
+                                this.out.line(`id: item.transaction.id,`)
+                                this.out.line(`name: '${f.name}',`)
+                                for (let i = 0; i < f.params.length; i++) {
+                                    if (f.params[i].schemaType === 'JSON') {
+                                        this.useJSON()
+                                        this.out.line(`${f.params[i].name}: toJSON(f[${i}]),`)
+                                    } else {
+                                        this.out.line(`${f.params[i].name}: f[${i}],`)
+                                    }
+                                }
+                            })
+                            this.out.line(`})`)
                         })
-                        this.out.line(`})`)
-                    })
-                }
+                    }
+                })
+                this.out.line(`}`)
+            })
+            this.out.line(`} catch (error) {`)
+            this.out.indentation(() => {
+                this.out.line(
+                    `ctx.log.error({error, blockNumber: block.height, blockHash: block.hash}, ` +
+                        `\`Unable to decode function "\${item.transaction.input.slice(0, 10)}"\`)`
+                )
             })
             this.out.line(`}`)
         })
