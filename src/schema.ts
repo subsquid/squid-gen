@@ -1,5 +1,5 @@
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
-import {SquidFragment} from './interfaces'
+import {SquidFragment} from './util/interfaces'
 
 export class SchemaCodegen {
     private out: FileOutput
