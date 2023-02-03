@@ -36,6 +36,6 @@
     "@subsquid/typeorm-codegen": "^0.3.1",
     "@subsquid/typeorm-store": "^0.2.0",
     "@subsquid/util-internal-json": "^0.2.0",
-    "ethers": "^5.7.2"
+    "ethers": "^5.7.2 || ^6.0.0"
   }
 }
