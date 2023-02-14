@@ -8,7 +8,7 @@
     "access": "public"
   },
   "bin": {
-    "squid-gen-abi": "./bin/run"
+    "squid-gen-abi": "./bin/abi.js"
   },
   "files": [
     "lib",
