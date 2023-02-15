@@ -5,14 +5,14 @@ import {register} from 'ts-node'
 import {createLogger} from '@subsquid/logger'
 import {runProgram} from '@subsquid/util-internal'
 import {OutDir} from '@subsquid/util-internal-code-printer'
-import {SquidArchive} from './util/interfaces'
+import {SquidArchive} from '../util/interfaces'
 import {ProcessorCodegen} from './processor'
 import {SchemaCodegen} from './schema'
-import {isURL, spawnAsync} from './util/misc'
-import {FragmentsParser} from './util/parser'
+import {isURL, spawnAsync} from '../util/misc'
+import {FragmentsParser} from '../util/parser'
 import {knownArchivesEVM} from '@subsquid/archive-registry'
 
-let logger = createLogger(`sqd:abi-gen`)
+let logger = createLogger(`sqd:gen`)
 
 runProgram(async function () {
     register()

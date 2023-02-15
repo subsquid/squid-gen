@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Config",
+  "description": "Generator config",
+  "type": "object",
+  "properties": {
+    "archive": {
+      "type": "string"
+    },
+    "contracts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "proxy": {
+            "type": "string"
+          },
+          "abi": {
+            "type": "string"
+          },
+          "events": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "functions": {
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "address"
+        ]
+      }
+    },
+    "etherscanApi": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "archive",
+    "contracts"
+  ]
+}

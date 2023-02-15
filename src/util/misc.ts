@@ -1,4 +1,6 @@
+import {knownArchivesEVM} from '@subsquid/archive-registry'
 import {spawn} from 'child_process'
+import {SquidArchive} from './interfaces'
 
 export async function spawnAsync(command: string, args: string[]) {
     return await new Promise<number>((resolve, reject) => {
@@ -27,5 +29,21 @@ export function isURL(str: string) {
         return true
     } catch {
         return false
+    }
+}
+
+export function getArchive(str: string): SquidArchive {
+    if (isURL(str)) {
+        return {
+            value: str,
+            kind: 'url',
+        }
+    } else if (knownArchivesEVM.includes(str as any)) {
+        return {
+            value: str,
+            kind: 'name',
+        }
+    } else {
+        throw new Error(`Invalid archive "${str}"`)
     }
 }

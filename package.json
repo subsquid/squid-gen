@@ -15,19 +15,22 @@
     "support"
   ],
   "scripts": {
-    "build": "rm -rf lib && tsc"
+    "build": "rm -rf lib && tsc",
+    "config2type": "json2ts src/config/schema.json > src/config/schema.ts"
   },
   "dependencies": {
     "@subsquid/logger": "^0.3.1",
     "@subsquid/util-internal": "^1.1.0",
     "@subsquid/util-internal-code-printer": "^0.1.1",
-    "@subsquid/util-internal-json": "^0.2.1",
+    "@subsquid/util-internal-config": "^1.0.1",
+    "@subsquid/util-internal-json": "^0.2.0",
     "@subsquid/util-naming": "^0.0.2",
     "commander": "^10.0.0",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
+    "json-schema-to-typescript": "^11.0.3",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {

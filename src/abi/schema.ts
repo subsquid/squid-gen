@@ -1,16 +1,10 @@
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
-import {SquidFragment} from './util/interfaces'
+import {SquidContract, SquidFragment} from '../util/interfaces'
 
 export class SchemaCodegen {
     private out: FileOutput
 
-    constructor(
-        outDir: OutDir,
-        private options: {
-            events: SquidFragment[]
-            functions: SquidFragment[]
-        }
-    ) {
+    constructor(outDir: OutDir, private contracts: SquidContract[]) {
         this.out = outDir.file(`schema.graphql`)
     }
 
@@ -35,44 +29,46 @@ export class SchemaCodegen {
             this.out.line(`transaction: Transaction!`)
             this.out.line(`name: String!`)
         })
-        for (let e of this.options.events) {
+        for (let contract of this.contracts) {
+            for (let e of contract.events) {
+                this.out.line()
+                this.out.block(`type ${e.entity.name} implements Event @entity`, () => {
+                    this.out.line(`id: ID!`)
+                    this.out.line(`block: Block!`)
+                    this.out.line(`transaction: Transaction!`)
+                    this.out.line(`name: String! @index`)
+                    for (let param of e.entity.fields) {
+                        let field = `${param.name}: ${param.schemaType}${param.required ? `!` : ``}`
+                        if (param.indexed) {
+                            field += ` @index`
+                        }
+                        this.out.line(field)
+                    }
+                })
+            }
             this.out.line()
-            this.out.block(`type ${e.entityName} implements Event @entity`, () => {
+            this.out.block(`interface Function @query`, () => {
                 this.out.line(`id: ID!`)
                 this.out.line(`block: Block!`)
                 this.out.line(`transaction: Transaction!`)
-                this.out.line(`name: String! @index`)
-                for (let param of e.params) {
-                    let field = `${param.name}: ${param.schemaType}${param.required ? `!` : ``}`
-                    if (param.indexed) {
-                        field += ` @index`
-                    }
-                    this.out.line(field)
-                }
+                this.out.line(`name: String!`)
             })
-        }
-        this.out.line()
-        this.out.block(`interface Function @query`, () => {
-            this.out.line(`id: ID!`)
-            this.out.line(`block: Block!`)
-            this.out.line(`transaction: Transaction!`)
-            this.out.line(`name: String!`)
-        })
-        for (let f of this.options.functions) {
-            this.out.line()
-            this.out.block(`type ${f.entityName} implements Function @entity`, () => {
-                this.out.line(`id: ID!`)
-                this.out.line(`block: Block!`)
-                this.out.line(`transaction: Transaction!`)
-                this.out.line(`name: String! @index`)
-                for (let param of f.params) {
-                    let field = `${param.name}: ${param.schemaType}`
-                    if (param.indexed) {
-                        field += ` @index`
+            for (let f of contract.functions) {
+                this.out.line()
+                this.out.block(`type ${f.entity.name} implements Function @entity`, () => {
+                    this.out.line(`id: ID!`)
+                    this.out.line(`block: Block!`)
+                    this.out.line(`transaction: Transaction!`)
+                    this.out.line(`name: String! @index`)
+                    for (let param of f.entity.fields) {
+                        let field = `${param.name}: ${param.schemaType}`
+                        if (param.indexed) {
+                            field += ` @index`
+                        }
+                        this.out.line(field)
                     }
-                    this.out.line(field)
-                }
-            })
+                })
+            }
         }
         this.out.write()
     }
