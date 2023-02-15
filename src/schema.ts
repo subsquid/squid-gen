@@ -17,6 +17,10 @@ export interface Config {
     abi?: string;
     events?: string[] | boolean;
     functions?: string[] | boolean;
+    range?: {
+      from?: number;
+      to?: number;
+    };
   }[];
   etherscanApi?: string;
 }

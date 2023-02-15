@@ -1,25 +1,28 @@
 import assert from 'assert'
-import {ethers, logger} from 'ethers'
+import {ethers} from 'ethers'
 import {getType as getTsType} from '@subsquid/evm-typegen/lib/util/types'
 import {SpecFile, SquidEntityField, SquidFragment} from './interfaces'
 import {toEntityName, toFieldName} from './naming'
+import {logger} from './logger'
 
 const STATIC_ENTITY_FIELDS: ReadonlyArray<string> = ['id', 'name', 'block', 'transaction']
 
 export class FragmentsParser {
+    private logger = logger.child(this.contractName)
+
     constructor(private contractName: string, private typegenFile: SpecFile) {}
 
     getEvents(names: string[] | true) {
         let fragments: Record<string, SquidFragment> = {}
 
-        let items = this.typegenFile.functions
+        let items = this.typegenFile.events
 
         let overloads: Record<string, number> = {}
 
         for (let name in items) {
             let fragment = items[name].fragment
 
-            let entityName = toEntityName(this.contractName + `Event` + fragment.name)
+            let entityName = toEntityName(fragment.name)
             while (true) {
                 let overloadIndex = overloads[entityName]
                 if (overloadIndex == null) {
@@ -37,6 +40,7 @@ export class FragmentsParser {
                 overloads[entityName] += 1
                 entityName += overloadIndex
             }
+            entityName = toEntityName(this.contractName, `event`, entityName)
 
             let params: SquidEntityField[] = []
             let overlaps: Record<string, number> = {}
@@ -106,7 +110,7 @@ export class FragmentsParser {
         for (let name in items) {
             let fragment = items[name].fragment
 
-            let entityName = toEntityName(this.contractName + `Function` + fragment.name)
+            let entityName = toEntityName(fragment.name)
             while (true) {
                 let overloadIndex = overloads[entityName]
                 if (overloadIndex == null) {
@@ -124,6 +128,7 @@ export class FragmentsParser {
                 overloads[entityName] += 1
                 entityName += overloadIndex
             }
+            entityName = toEntityName(this.contractName, `function`, entityName)
 
             let params: SquidEntityField[] = []
             let overlaps: Record<string, number> = {}
@@ -178,7 +183,7 @@ export class FragmentsParser {
             assert(fragment != null, `Function "${name}" doesn't exist for this contract`)
 
             if (this.typegenFile.functions[name].fragment.stateMutability === 'view') {
-                logger.warn(`Readonly function "${name}" skipped`)
+                this.logger.warn(`Readonly function "${name}" skipped`)
                 continue
             }
 

@@ -1,29 +1,18 @@
-import path from 'path'
-import {program} from 'commander'
-import {register} from 'ts-node'
 import {createLogger} from '@subsquid/logger'
-import {runProgram} from '@subsquid/util-internal'
 import {OutDir} from '@subsquid/util-internal-code-printer'
-import {read} from '@subsquid/util-internal-config'
-import {ProcessorCodegen} from '../abi/processor'
-import {SchemaCodegen} from '../abi/schema'
-import {SpecFile, SquidContract} from '../util/interfaces'
-import {getArchive, spawnAsync} from '../util/misc'
-import {FragmentsParser} from '../util/parser'
-import {Config} from './schema'
 import {toCamelCase} from '@subsquid/util-naming'
-import CONFIG_SCHEMA from './schema.json'
+import path from 'upath'
+import {Config} from './schema'
+import {SquidContract, SpecFile} from './util/interfaces'
+import {getArchive, spawnAsync} from './util/misc'
+import {FragmentsParser} from './util/parser'
+import {MAPPING, resolveModule, UTIL} from './generators/paths'
+import {MappingCodegen} from './generators/mappings'
+import {ProcessorCodegen} from './generators/processor'
+import {SchemaCodegen} from './generators/schema'
+import {logger} from './util/logger'
 
-let logger = createLogger(`sqd:gen`)
-
-runProgram(async function () {
-    register()
-
-    program.argument('<config>').parse()
-
-    let configFile = program.parse().processedArgs[0]
-    let config = await readConfig(configFile)
-
+export async function generateSquid(config: Config) {
     let archive = getArchive(config.archive)
 
     let typegenDir = `./src/abi`
@@ -75,12 +64,21 @@ runProgram(async function () {
 
     logger.info(`generating processor...`)
     let srcOutputDir = outputDir.child(`src`)
+    srcOutputDir.add(`${resolveModule(srcOutputDir.path(), UTIL)}.ts`, [__dirname, '../../support/util.ts'])
+
+    let mappingsOutputDir = srcOutputDir.child(resolveModule(srcOutputDir.path(), MAPPING))
+    for (let contract of contracts) {
+        new MappingCodegen(mappingsOutputDir, contract).generate()
+    }
+
+    let mappingsIndex = mappingsOutputDir.file('index.ts')
+    for (let contract of contracts) {
+        mappingsIndex.line(`export * as ${contract.name} from './${contract.name}'`)
+    }
+    mappingsIndex.write()
+
     new ProcessorCodegen(srcOutputDir, {
         archive,
         contracts,
     }).generate()
-})
-
-async function readConfig(file: string): Promise<Config> {
-    return read(file, CONFIG_SCHEMA)
 }

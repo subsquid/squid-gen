@@ -1,10 +1,14 @@
-import {toCamelCase} from "@subsquid/util-naming"
+import {toCamelCase} from '@subsquid/util-naming'
 
-export function toEntityName(name: string) {
-    let camelCased = toCamelCase(name)
-    return camelCased.slice(0, 1).toUpperCase() + camelCased.slice(1)
+export function toEntityName(...str: string[]) {
+    return str.map(toUpperCamelCase).join('')
 }
 
 export function toFieldName(name: string) {
     return toCamelCase(name)
+}
+
+function toUpperCamelCase(str: string) {
+    let camelCased = toCamelCase(str)
+    return camelCased.slice(0, 1).toUpperCase() + camelCased.slice(1)
 }

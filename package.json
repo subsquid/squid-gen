@@ -8,7 +8,8 @@
     "access": "public"
   },
   "bin": {
-    "squid-gen-abi": "./bin/abi.js"
+    "squid-gen-abi": "./bin/abi.js",
+    "squid-gen-config": "./bin/config.js"
   },
   "files": [
     "lib",
@@ -16,7 +17,7 @@
   ],
   "scripts": {
     "build": "rm -rf lib && tsc",
-    "config2type": "json2ts src/config/schema.json > src/config/schema.ts"
+    "config2type": "json2ts src/schema.json > src/schema.ts"
   },
   "dependencies": {
     "@subsquid/logger": "^0.3.1",
@@ -26,7 +27,8 @@
     "@subsquid/util-internal-json": "^0.2.0",
     "@subsquid/util-naming": "^0.0.2",
     "commander": "^10.0.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "upath": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
