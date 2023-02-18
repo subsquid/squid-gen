@@ -8,10 +8,11 @@
     "access": "public"
   },
   "bin": {
-    "squid-gen-abi": "./bin/abi.js",
-    "squid-gen-config": "./bin/config.js"
+    "squid-gen-abi": "bin/abi.js",
+    "squid-gen-config": "bin/config.js"
   },
   "files": [
+    "bin",
     "lib",
     "support"
   ],

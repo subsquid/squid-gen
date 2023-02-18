@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../lib/abi/run')
+require('../lib/commands/abi')
