@@ -11,8 +11,11 @@ import {MappingCodegen} from './generators/mappings'
 import {ProcessorCodegen} from './generators/processor'
 import {SchemaCodegen} from './generators/schema'
 import {logger} from './util/logger'
+import assert from 'assert'
 
 export async function generateSquid(config: Config) {
+    validateContractNames(config)
+
     let archive = getArchive(config.archive)
 
     let typegenDir = `./src/abi`
@@ -81,4 +84,14 @@ export async function generateSquid(config: Config) {
         archive,
         contracts,
     }).generate()
+}
+
+function validateContractNames(config: Config) {
+    let names = new Set<string>()
+    for (let contract of config.contracts) {
+        let name = toCamelCase(contract.name)
+        assert(/^[a-zA-Z0-9]+$/.test(name), `Invalid contract name "${contract.name}"`)
+        assert(!names.has(name), `Duplicate contract name "${contract.name}"`)
+        names.add(name)
+    }
 }
