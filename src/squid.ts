@@ -64,7 +64,7 @@ export async function generateSquid(config: Config) {
 
     logger.info(`generating processor...`)
     let srcOutputDir = outputDir.child(`src`)
-    srcOutputDir.add(`${resolveModule(srcOutputDir.path(), UTIL)}.ts`, [__dirname, '../../support/util.ts'])
+    srcOutputDir.add(`${resolveModule(srcOutputDir.path(), UTIL)}.ts`, [__dirname, '../support/util.ts'])
 
     let mappingsOutputDir = srcOutputDir.child(resolveModule(srcOutputDir.path(), MAPPING))
     for (let contract of contracts) {

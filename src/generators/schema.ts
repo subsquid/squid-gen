@@ -29,6 +29,13 @@ export class SchemaCodegen {
             this.out.line(`transaction: Transaction!`)
             this.out.line(`name: String!`)
         })
+        this.out.line()
+        this.out.block(`interface Function @query`, () => {
+            this.out.line(`id: ID!`)
+            this.out.line(`block: Block!`)
+            this.out.line(`transaction: Transaction!`)
+            this.out.line(`name: String!`)
+        })
         for (let contract of this.contracts) {
             for (let e of contract.events) {
                 this.out.line()
@@ -46,13 +53,6 @@ export class SchemaCodegen {
                     }
                 })
             }
-            this.out.line()
-            this.out.block(`interface Function @query`, () => {
-                this.out.line(`id: ID!`)
-                this.out.line(`block: Block!`)
-                this.out.line(`transaction: Transaction!`)
-                this.out.line(`name: String!`)
-            })
             for (let f of contract.functions) {
                 this.out.line()
                 this.out.block(`type ${f.entity.name} implements Function @entity`, () => {
