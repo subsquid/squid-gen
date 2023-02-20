@@ -160,7 +160,7 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
                 overlaps[fieldName] += 1
                 let prevName = fieldName
                 fieldName += overlapIndex
-                logger.warn(`${prevName} renamed to ${fieldName} for ${entityName} due to collision`)
+                logger.warn(`"${prevName}" field renamed to "${fieldName}" for ${entityName} due to collision`)
             }
 
             params.push({
@@ -249,7 +249,7 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
                 overlaps[fieldName] += 1
                 let prevName = fieldName
                 fieldName += overlapIndex
-                logger.warn(`${prevName} renamed to ${fieldName} for ${entityName} due to collision`)
+                logger.warn(`"${prevName}" field renamed to "${fieldName}" for ${entityName} due to collision`)
             }
 
             params.push({
