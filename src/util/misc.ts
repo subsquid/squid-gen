@@ -1,6 +1,6 @@
 import {spawn} from 'child_process'
 import {ethers} from 'ethers'
-import {knownArchivesEVM} from '@subsquid/archive-registry'
+import {archivesRegistryEVM} from '@subsquid/archive-registry'
 import {getType as getTsType} from '@subsquid/evm-typegen/lib/util/types'
 import {SquidArchive} from './interfaces'
 
@@ -40,7 +40,7 @@ export function getArchive(str: string): SquidArchive {
             value: str,
             kind: 'url',
         }
-    } else if (knownArchivesEVM.includes(str as any)) {
+    } else if (archivesRegistryEVM.archives.some((a) => a.network === str)) {
         return {
             value: str,
             kind: 'name',
