@@ -1,7 +1,9 @@
-import {toCamelCase} from '@subsquid/util-naming'
+import {toCamelCase, toSnakeCase} from '@subsquid/util-naming'
 
 export function toEntityName(...str: string[]) {
-    return str.map(toUpperCamelCase).join('')
+    let name = str.map(toSnakeCase).join('_')
+    name = name.slice(0, 62) // slice name to fit max postgress name length (63) and reserve one char for
+    return toUpperCamelCase(name)
 }
 
 export function toFieldName(name: string) {

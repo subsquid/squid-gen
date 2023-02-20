@@ -19,7 +19,7 @@ export class MappingCodegen {
         this.out.line()
         this.out.line(`export {abi}`)
         this.out.line()
-        this.out.line(`export const address = '${this.contract.address}'`)
+        this.out.line(`export const address = '${this.contract.address.toLowerCase()}'`)
         this.out.line()
         this.out.line('type EventItem = LogItem<{evmLog: {topics: true, data: true}, transaction: {hash: true}}>')
         this.out.line('type FunctionItem = TransactionItem<{transaction: {hash: true, input: true}}>')
@@ -57,7 +57,7 @@ export class MappingCodegen {
                 this.out.line(`import {toJSON} from '@subsquid/util-internal-json'`)
             }
             this.out.line(
-                `import * as abi from '${resolveModule(this.outDir.path(), path.join(ABI, this.contract.name))}'`
+                `import * as abi from '${resolveModule(this.outDir.path(), path.join(ABI, this.contract.spec))}'`
             )
             if (this.models.size > 0) {
                 this.out.line(
@@ -87,6 +87,10 @@ export class MappingCodegen {
                             this.out.line(`return new ${e.entity.name}({`)
                             this.out.indentation(() => {
                                 this.out.line(`id: item.evmLog.id,`)
+                                this.out.line(`blockNumber: block.height,`)
+                                this.out.line(`transactionHash: item.transaction.hash,`)
+                                this.out.line(`timestamp: new Date(block.timestamp),`)
+                                this.out.line(`contract: item.address,`)
                                 this.out.line(`name: '${e.name}',`)
                                 for (let i = 0; i < e.entity.fields.length; i++) {
                                     if (e.entity.fields[i].schemaType === 'JSON') {
@@ -136,6 +140,10 @@ export class MappingCodegen {
                             this.out.line(`return new ${f.entity.name}({`)
                             this.out.indentation(() => {
                                 this.out.line(`id: item.transaction.id,`)
+                                this.out.line(`blockNumber: block.height,`)
+                                this.out.line(`transactionHash: item.transaction.hash,`)
+                                this.out.line(`timestamp: new Date(block.timestamp),`)
+                                this.out.line(`contract: item.address,`)
                                 this.out.line(`name: '${f.name}',`)
                                 for (let i = 0; i < f.entity.fields.length; i++) {
                                     if (f.entity.fields[i].schemaType === 'JSON') {

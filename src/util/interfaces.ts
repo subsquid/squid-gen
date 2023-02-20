@@ -25,6 +25,7 @@ export interface SquidFragment {
 
 export interface SquidContract {
     name: string
+    spec: string
     address: string
     events: SquidFragment[]
     functions: SquidFragment[]

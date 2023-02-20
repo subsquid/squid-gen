@@ -24,28 +24,28 @@ export class ProcessorCodegen {
         this.printImports()
         this.out.line()
         this.out.line(`const processor = new EvmBatchProcessor()`)
+        // this.out.indentation(() => {
+        this.out.line(`processor.setDataSource({`)
         this.out.indentation(() => {
-            this.out.line(`.setDataSource({`)
+            if (this.options.archive.kind === 'name') {
+                this.useArchiveRegistry()
+                this.out.line(`archive: lookupArchive('${this.options.archive.value}', {type: 'EVM'}),`)
+            } else {
+                this.out.line(`archive: '${this.options.archive.value}',`)
+            }
+        })
+        this.out.line(`})`)
+        if (this.options.from != null) {
+            this.out.line(`processor.setBlockRange({`)
             this.out.indentation(() => {
-                if (this.options.archive.kind === 'name') {
-                    this.useArchiveRegistry()
-                    this.out.line(`archive: lookupArchive('${this.options.archive.value}', {type: 'EVM'}),`)
-                } else {
-                    this.out.line(`archive: '${this.options.archive.value}',`)
-                }
+                this.out.line(`from: ${this.options.from}`)
             })
             this.out.line(`})`)
-            if (this.options.from != null) {
-                this.out.line(`.setBlockRange({`)
-                this.out.indentation(() => {
-                    this.out.line(`from: ${this.options.from}`)
-                })
-                this.out.line(`})`)
-            }
-            this.printSubscribes()
-        })
+        }
+        this.printSubscribes()
+        // })
         this.out.line()
-        this.out.line(`processor.run(new TypeormDatabase(), async (ctx) => {`)
+        this.out.line(`processor.run(new TypeormDatabase(), async (ctx: BatchHandlerContext<Store, any>) => {`)
         this.out.indentation(() => {
             this.useModel(`Transaction`)
             this.out.line(`let transactions: Transaction[] = []`)
@@ -68,9 +68,10 @@ export class ProcessorCodegen {
                         this.out.line(`t = new Transaction({`)
                         this.out.indentation(() => {
                             this.out.line(`id: item.transaction.id,`)
+                            this.out.line(`blockNumber: block.height,`)
+                            this.out.line(`timestamp: new Date(block.timestamp),`)
+                            this.out.line(`contract: item.address,`)
                             this.out.line(`hash: item.transaction.hash,`)
-                            this.out.line(`contract: item.transaction.to,`)
-                            this.out.line(`block: b,`)
                         })
                         this.out.line(`})`)
                         this.out.line(`blockTransactions.set(t.id, t)`)
@@ -78,13 +79,11 @@ export class ProcessorCodegen {
 
                     this.out.line(``)
                     this.out.block(`let addEntity = (e: any) =>`, () => {
-                        this.out.line(`let a = other[e.contructor.name]`)
+                        this.out.line(`let a = other[e.constructor.name]`)
                         this.out.block(`if (a == null)`, () => {
                             this.out.line(`a = []`)
-                            this.out.line(`other[e.contructor.name] = a`)
+                            this.out.line(`other[e.constructor.name] = a`)
                         })
-                        this.out.line(`e.transaction = t`)
-                        this.out.line(`e.block = b`)
                         this.out.line(`a.push(e)`)
                     })
 
@@ -113,8 +112,8 @@ export class ProcessorCodegen {
 
     private printImports() {
         this.out.lazy(() => {
-            this.out.line(`import {EvmBatchProcessor} from '@subsquid/evm-processor'`)
-            this.out.line(`import {TypeormDatabase} from '@subsquid/typeorm-store'`)
+            this.out.line(`import {EvmBatchProcessor, BatchHandlerContext} from '@subsquid/evm-processor'`)
+            this.out.line(`import {Store, TypeormDatabase} from '@subsquid/typeorm-store'`)
             if (this.archiveRegistry) {
                 this.out.line(`import {lookupArchive} from '@subsquid/archive-registry'`)
             }
@@ -135,7 +134,7 @@ export class ProcessorCodegen {
         for (let contract of this.options.contracts) {
             this.useMapping(contract.name)
             if (contract.events.length > 0) {
-                this.out.line(`.addLog(${contract.name}.address, {`)
+                this.out.line(`processor.addLog(${contract.name}.address, {`)
                 this.out.indentation(() => {
                     this.out.line(`filter: [`)
                     this.out.indentation(() => {
@@ -167,7 +166,7 @@ export class ProcessorCodegen {
                 this.out.line(`})`)
             }
             if (contract.functions.length > 0) {
-                this.out.line(`.addTransaction(${contract.name}.address, {`)
+                this.out.line(`processor.addTransaction(${contract.name}.address, {`)
                 this.out.indentation(() => {
                     this.out.line(`sighash: [`)
                     this.out.indentation(() => {
