@@ -28,21 +28,29 @@ export class MappingCodegen {
             `export function parse(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item: EventItem | FunctionItem)`,
             () => {
                 this.out.block(`switch (item.kind)`, () => {
-                    this.out.line(`case 'evmLog':`)
-                    this.out.indentation(() => {
-                        this.out.line(`return parseEvent(ctx, block, item)`)
-                    })
-                    this.out.line(`case 'transaction':`)
-                    this.out.indentation(() => {
-                        this.out.line(`return parseFunction(ctx, block, item)`)
-                    })
+                    if (this.contract.events.length > 0) {
+                        this.out.line(`case 'evmLog':`)
+                        this.out.indentation(() => {
+                            this.out.line(`return parseEvent(ctx, block, item)`)
+                        })
+                    }
+                    if (this.contract.functions.length > 0) {
+                        this.out.line(`case 'transaction':`)
+                        this.out.indentation(() => {
+                            this.out.line(`return parseFunction(ctx, block, item)`)
+                        })
+                    }
                 })
             }
         )
         this.out.line()
-        this.printEventsParser()
+        if (this.contract.events.length > 0) {
+            this.printEventsParser()
+        }
         this.out.line()
-        this.printFunctionsParser()
+        if (this.contract.functions.length > 0) {
+            this.printFunctionsParser()
+        }
 
         return this.out.write()
     }
