@@ -62,15 +62,16 @@ export class ProcessorCodegen {
                         this.out.indentation(() => {
                             this.out.line(`id: item.transaction.id,`)
                             this.out.line(`blockNumber: block.height,`)
-                            this.out.line(`timestamp: new Date(block.timestamp),`)
-                            this.out.line(`contract: item.address,`)
+                            this.out.line(`blockTimestamp: new Date(block.timestamp),`)
                             this.out.line(`hash: item.transaction.hash,`)
+                            this.out.line(`to: item.transaction.to,`)
+                            this.out.line(`from: item.transaction.from,`)
                         })
                         this.out.line(`})`)
                         this.out.line(`blockTransactions.set(t.id, t)`)
                     })
 
-                    this.out.line(``)
+                    this.out.line()
                     this.out.block(`let addEntity = (e: any) =>`, () => {
                         this.out.line(`let a = other[e.constructor.name]`)
                         this.out.block(`if (a == null)`, () => {
@@ -81,7 +82,7 @@ export class ProcessorCodegen {
                     })
 
                     for (let contract of this.options.contracts) {
-                        this.out.line(``)
+                        this.out.line()
                         this.out.block(`if (item.address === ${contract.name}.address)`, () => {
                             this.useMapping(contract.name)
                             this.out.line(`let e = ${contract.name}.parse(ctx, block, item)`)
@@ -151,6 +152,7 @@ export class ProcessorCodegen {
                         this.out.line(`transaction: {`)
                         this.out.indentation(() => {
                             this.out.line(`hash: true,`)
+                            this.out.line(`from: true,`)
                         })
                         this.out.line(`},`)
                     })
@@ -186,6 +188,8 @@ export class ProcessorCodegen {
                         this.out.indentation(() => {
                             this.out.line(`hash: true,`)
                             this.out.line(`input: true,`)
+                            this.out.line(`from: true,`)
+                            this.out.line(`value: true,`)
                         })
                         this.out.line(`},`)
                     })

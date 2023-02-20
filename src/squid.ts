@@ -11,6 +11,7 @@ import {Config} from './schema'
 import {SpecFile, SquidContract, SquidEntityField, SquidFragment} from './util/interfaces'
 import {getArchive, getGqlType, spawnAsync} from './util/misc'
 import {toEntityName, toFieldName} from './util/naming'
+import {event, function_} from './util/staticEntities'
 
 export let logger = createLogger(`sqd:squidgen`)
 
@@ -105,15 +106,6 @@ function validateContractNames(config: Config) {
     }
 }
 
-const STATIC_ENTITY_FIELDS: ReadonlyArray<string> = [
-    'id',
-    'name',
-    'blockNumber',
-    'transactionHash',
-    'contract',
-    'timestamp',
-]
-
 function getEvents(specFile: SpecFile, contractName: string, names: string[] | true) {
     let fragments: Record<string, SquidFragment> = {}
 
@@ -157,7 +149,7 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
                 let overlapIndex = overlaps[fieldName]
                 if (overlapIndex == null) {
                     let ols = fragment.inputs.filter((i) => i.name != null && toFieldName(i.name) === fieldName)
-                    if (ols.length > 1 || STATIC_ENTITY_FIELDS.indexOf(fieldName) > -1) {
+                    if (ols.length > 1 || event.fields.some((f) => f.name === fieldName)) {
                         overlapIndex = overlaps[fieldName] = 0
                     } else if (ols.length > 0 && (input.name == null || fieldName !== toFieldName(input.name))) {
                         overlapIndex = overlaps[fieldName] = 0
@@ -166,7 +158,9 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
                     }
                 }
                 overlaps[fieldName] += 1
+                let prevName = fieldName
                 fieldName += overlapIndex
+                logger.warn(`${prevName} renamed to ${fieldName} for ${entityName} due to collision`)
             }
 
             params.push({
@@ -244,7 +238,7 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
                 let overlapIndex = overlaps[fieldName]
                 if (overlapIndex == null) {
                     let ols = fragment.inputs.filter((i) => i.name != null && toFieldName(i.name) === fieldName)
-                    if (ols.length > 1 || STATIC_ENTITY_FIELDS.indexOf(fieldName) > -1) {
+                    if (ols.length > 1 || function_.fields.some((f) => f.name === fieldName)) {
                         overlapIndex = overlaps[fieldName] = 0
                     } else if (ols.length > 0 && (input.name == null || fieldName !== toFieldName(input.name))) {
                         overlapIndex = overlaps[fieldName] = 0
@@ -253,7 +247,9 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
                     }
                 }
                 overlaps[fieldName] += 1
+                let prevName = fieldName
                 fieldName += overlapIndex
+                logger.warn(`${prevName} renamed to ${fieldName} for ${entityName} due to collision`)
             }
 
             params.push({
@@ -283,7 +279,7 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
         assert(fragment != null, `Function "${name}" doesn't exist for this contract`)
 
         if (specFile.functions[name].fragment.stateMutability === 'view') {
-            logger.warn(`Readonly function "${name}" skipped`)
+            logger.warn(`readonly function "${name}" skipped`)
             continue
         }
 

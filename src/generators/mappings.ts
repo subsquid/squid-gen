@@ -22,7 +22,7 @@ export class MappingCodegen {
         this.out.line(`export const address = '${this.contract.address.toLowerCase()}'`)
         this.out.line()
         this.out.line('type EventItem = LogItem<{evmLog: {topics: true, data: true}, transaction: {hash: true}}>')
-        this.out.line('type FunctionItem = TransactionItem<{transaction: {hash: true, input: true}}>')
+        this.out.line('type FunctionItem = TransactionItem<{transaction: {hash: true, input: true, value: true}}>')
         this.out.line()
         this.out.block(
             `export function parse(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item: EventItem | FunctionItem)`,
@@ -97,9 +97,9 @@ export class MappingCodegen {
                                 this.out.line(`id: item.evmLog.id,`)
                                 this.out.line(`blockNumber: block.height,`)
                                 this.out.line(`transactionHash: item.transaction.hash,`)
-                                this.out.line(`timestamp: new Date(block.timestamp),`)
+                                this.out.line(`blockTimestamp: new Date(block.timestamp),`)
                                 this.out.line(`contract: item.address,`)
-                                this.out.line(`name: '${e.name}',`)
+                                this.out.line(`eventName: '${e.name}',`)
                                 for (let i = 0; i < e.entity.fields.length; i++) {
                                     if (e.entity.fields[i].schemaType === 'JSON') {
                                         this.useJSON()
@@ -150,9 +150,10 @@ export class MappingCodegen {
                                 this.out.line(`id: item.transaction.id,`)
                                 this.out.line(`blockNumber: block.height,`)
                                 this.out.line(`transactionHash: item.transaction.hash,`)
-                                this.out.line(`timestamp: new Date(block.timestamp),`)
+                                this.out.line(`blockTimestamp: new Date(block.timestamp),`)
                                 this.out.line(`contract: item.address,`)
-                                this.out.line(`name: '${f.name}',`)
+                                this.out.line(`functionName: '${f.name}',`)
+                                this.out.line(`functionValue: item.transaction.value,`)
                                 for (let i = 0; i < f.entity.fields.length; i++) {
                                     if (f.entity.fields[i].schemaType === 'JSON') {
                                         this.useJSON()
