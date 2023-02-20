@@ -52,7 +52,7 @@ runProgram(async function () {
             '            "name": "Gravatar",\n' +
             '            "address": "0x2E645469f354BB4F5c8a05B3b30A929361cf77eC",\n' +
             '            "events": true,\n' +
-            '            "functions": true' +
+            '            "functions": true\n' +
             '        }\n' +
             '    ],\n' +
             '    "etherscanApi": "https://api.etherscan.io"\n' +
