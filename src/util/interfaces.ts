@@ -29,6 +29,7 @@ export interface SquidContract {
     address: string
     events: SquidFragment[]
     functions: SquidFragment[]
+    range?: {from?: number; to?: number}
 }
 
 export interface SquidArchive {

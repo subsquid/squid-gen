@@ -1,9 +1,9 @@
 import {program} from 'commander'
 import {register} from 'ts-node'
-import {createLogger} from '@subsquid/logger'
 import {runProgram} from '@subsquid/util-internal'
 import {Config} from '../schema'
 import {generateSquid} from '../squid'
+import {nat} from '@subsquid/util-internal-commander'
 
 runProgram(async function () {
     register()
@@ -33,8 +33,8 @@ runProgram(async function () {
             `One or multiple contract functions to be indexed. '*' indexes all functions defined in the ABI.`,
             []
         )
-        .option(`--from <block>`, `Start indexing from the given block.`)
-        .option(`--to <block>`, `End indexing on the given block.`)
+        .option(`--from <block>`, `Start indexing from the given block.`, nat)
+        .option(`--to <block>`, `End indexing on the given block.`, nat)
         .option(
             `--etherscan-api <url>`,
             `Etherscan API-compatible endpoint to fetch contract ABI by a known address. Default: https://api.etherscan.io/.`

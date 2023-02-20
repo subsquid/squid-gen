@@ -35,13 +35,6 @@ export class ProcessorCodegen {
             }
         })
         this.out.line(`})`)
-        if (this.options.from != null) {
-            this.out.line(`processor.setBlockRange({`)
-            this.out.indentation(() => {
-                this.out.line(`from: ${this.options.from}`)
-            })
-            this.out.line(`})`)
-        }
         this.printSubscribes()
         // })
         this.out.line()
@@ -162,6 +155,18 @@ export class ProcessorCodegen {
                         this.out.line(`},`)
                     })
                     this.out.line(`} as const,`)
+                    if (contract.range) {
+                        this.out.line(`range: {`)
+                        this.out.indentation(() => {
+                            if (contract.range?.from) {
+                                this.out.line(`from: ${contract.range.from}`)
+                            }
+                            if (contract.range?.to) {
+                                this.out.line(`to: ${contract.range.to}`)
+                            }
+                        })
+                        this.out.line(`},`)
+                    }
                 })
                 this.out.line(`})`)
             }

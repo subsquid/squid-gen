@@ -56,20 +56,17 @@ export async function generateSquid(config: Config) {
         let events = getEvents(specFile, name, contract.events || [])
         let functions = getFunctions(specFile, name, contract.functions || [])
 
+        let range = contract.range
+
         contracts.push({
             name,
             spec,
             address,
             events,
             functions,
+            range,
         })
     }
-
-    // let from = opts.from ? parseInt(opts.from) : 0
-    // if (from != null) {
-    //     assert(Number.isSafeInteger(from))
-    //     assert(from >= 0)
-    // }
 
     logger.info(`generating schema...`)
 
