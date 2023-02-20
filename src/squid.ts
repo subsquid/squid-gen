@@ -38,10 +38,12 @@ export async function generateSquid(config: Config) {
         let typegenArgs: string[] = []
         typegenArgs.push(typegenDir)
         typegenArgs.push(`${spec}`)
-        if (config.etherscanApi) {
+        if (config.etherscanApi != null) {
             typegenArgs.push(`--etherscan-api=${config.etherscanApi}`)
         }
-        typegenArgs.push(`--etherscan-api-key=CRWVAQDXNQEH6WCQ7RTJB7CPAAQ8WS7C3E`)
+        if (process.env.ETHERSCAN_API_KEY != null) {
+            typegenArgs.push(`--etherscan-api-key=${process.env.ETHERSCAN_API_KEY}`)
+        }
 
         await spawnAsync(`squid-evm-typegen`, typegenArgs)
 
