@@ -31,7 +31,7 @@
   },
   "peerDependencies": {
     "@subsquid/archive-registry": "^2.0.2",
-    "@subsquid/evm-processor": "^0.2.4",
+    "@subsquid/evm-processor": "^0.2.4 || ^0.3.0",
     "@subsquid/evm-typegen": "^2.0.2",
     "@subsquid/typeorm-codegen": "^0.3.1",
     "@subsquid/typeorm-store": "^0.2.0",
