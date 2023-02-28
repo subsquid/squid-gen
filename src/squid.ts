@@ -12,10 +12,13 @@ import {SpecFile, SquidContract, SquidEntityField, SquidFragment} from './util/i
 import {getArchive, getGqlType, spawnAsync} from './util/misc'
 import {toEntityName, toFieldName} from './util/naming'
 import {event, function_} from './util/staticEntities'
+import {register} from 'ts-node'
 
 export let logger = createLogger(`sqd:squidgen`)
 
 export async function generateSquid(config: Config) {
+    register()
+
     validateContractNames(config)
 
     let archive = getArchive(config.archive)

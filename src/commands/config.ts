@@ -1,22 +1,22 @@
 import {program} from 'commander'
-import {register} from 'ts-node'
 import {runProgram} from '@subsquid/util-internal'
-import {read} from '@subsquid/util-internal-config'
+import {read, validate} from '@subsquid/util-internal-config'
 import {Config} from '../schema'
 import CONFIG_SCHEMA from '../schema.json'
 import {generateSquid} from '../squid'
+import path from 'path'
+import * as yaml from 'yaml'
+import fs from 'fs'
 
-runProgram(async function () {
-    register()
-    program
-        .addHelpText(
-            'before',
-            'A generator of squids that can index specific EVM events and functions for each provided contract. Run within a folder cloned from https://github.com/subsquid/squid-abi-template.\n'
-        )
-        .argument('<config>', '(required) A JSON configuration file. See the full schema below.')
-        .addHelpText(
-            'after',
-            '\nFull schema (TypeScript-like):\n' +
+program
+    .addHelpText(
+        'before',
+        'A generator of squids that can index specific EVM events and functions for each provided contract. Run within a folder cloned from https://github.com/subsquid/squid-abi-template.\n'
+    )
+    .argument('<config>', '(required) A JSON configuration file. See the full schema below.')
+    .addHelpText(
+        'after',
+        '\nFull schema (TypeScript-like):\n' +
             '{\n' +
             '    archive: string; // Source Squid Archive for an EVM network. Can be a URL or\n' +
             '                     // an alias. See https://docs.subsquid.io/archives/overview\n' +
@@ -57,10 +57,9 @@ runProgram(async function () {
             '    ],\n' +
             '    "etherscanApi": "https://api.etherscan.io"\n' +
             '}\n'
-        )
+    )
 
-    program.parse()
-
+runProgram(async function () {
     let configFile = program.parse().processedArgs[0]
     let config = await readConfig(configFile)
 
@@ -68,5 +67,16 @@ runProgram(async function () {
 })
 
 async function readConfig(file: string): Promise<Config> {
-    return read(file, CONFIG_SCHEMA)
+    switch (path.extname(file)) {
+        case 'yaml':
+        case 'yml':
+            let content = fs.readFileSync(file, 'utf-8')
+            let config = yaml.parse(content, {schema: 'json'})
+            validate(config, CONFIG_SCHEMA)
+            return config
+        case 'json':
+            return read(file, CONFIG_SCHEMA)
+        default:
+            throw new Error(`Unsupported file extension "${path.extname(file)}"`)
+    }
 }
