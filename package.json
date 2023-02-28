@@ -8,26 +8,36 @@
     "access": "public"
   },
   "bin": {
-    "squid-gen-abi": "./bin/run"
+    "squid-gen": "bin/squid-gen.js",
+    "squid-gen-abi": "bin/squid-gen-abi.js",
+    "squid-gen-config": "bin/squid-gen-config.js"
   },
   "files": [
+    "bin",
     "lib",
     "support"
   ],
   "scripts": {
-    "build": "rm -rf lib && tsc"
+    "build": "rm -rf lib && tsc",
+    "config2type": "json2ts src/schema.json > src/schema.ts"
   },
   "dependencies": {
-    "@subsquid/logger": "^0.3.0",
-    "@subsquid/util-internal": "^1.0.0",
-    "@subsquid/util-internal-code-printer": "^0.1.0",
+    "@subsquid/logger": "^0.3.1",
+    "@subsquid/util-internal": "^1.1.0",
+    "@subsquid/util-internal-code-printer": "^0.1.1",
+    "@subsquid/util-internal-commander": "^0.0.2",
+    "@subsquid/util-internal-config": "^1.0.1",
+    "@subsquid/util-internal-json": "^0",
     "@subsquid/util-naming": "^0.0.2",
     "commander": "^10.0.0",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "upath": "^2.0.1",
+    "yaml": "^2.2.1"
   },
   "devDependencies": {
-    "@types/node": "^18.0.0",
-    "typescript": "^4.6.2"
+    "@types/node": "^18.13.0",
+    "json-schema-to-typescript": "^11.0.3",
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "@subsquid/archive-registry": "^2.0.2",
@@ -36,6 +46,6 @@
     "@subsquid/typeorm-codegen": "^0.3.1",
     "@subsquid/typeorm-store": "^0.2.0",
     "@subsquid/util-internal-json": "^0.2.0",
-    "ethers": "^5.7.2 || ^6.0.0"
+    "ethers": "^5.7.2
   }
 }

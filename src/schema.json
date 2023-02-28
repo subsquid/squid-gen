@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Config",
+  "description": "Generator config",
+  "type": "object",
+  "properties": {
+    "archive": {
+      "description": "Source Squid Archive for an EVM network. Can be a URL or an alias. See docs.subsquid.io/archives/overview.",
+      "type": "string"
+    },
+    "contracts": {
+      "description": "ContractJSONs defining the exact data to extract from each contract.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Contract string ID. Can contain spaces.",
+            "type": "string"
+          },
+          "address": {
+            "description": "Contract address. Implementation address for proxies.",
+            "type": "string"
+          },
+          "proxy": {
+            "description": "Proxy contract address.",
+            "type": "string"
+          },
+          "abi": {
+            "description": "Path or URL to the contract JSON ABI. If omitted, it will be retrieved from Etherscan by address.",
+            "type": "string"
+          },
+          "events": {
+            "description": "One or multiple contract events to be indexed. true indexes all events defined in the ABI; false indexes none. Default: false.",
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "functions": {
+            "description": "One or multiple contract functions to be indexed. true indexes all functions defined in the ABI; false indexes none. Default: false.",
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "range": {
+            "description": "Range of blocks to index. Default: all from the genesis.",
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "number"
+              },
+              "to": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "address"
+        ]
+      }
+    },
+    "etherscanApi": {
+      "description": "Etherscan API-compatible endpoint to fetch contract ABI by a known address. Default: https://api.etherscan.io/.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "archive",
+    "contracts"
+  ]
+}

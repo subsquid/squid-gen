@@ -1,22 +1,35 @@
 import {ethers} from 'ethers'
 
-export interface TypegenOutput {
+export interface SpecFile {
     abi: ethers.utils.Interface
     events: Record<string, {fragment: ethers.utils.EventFragment}>
     functions: Record<string, {fragment: ethers.utils.FunctionFragment}>
 }
 
-export interface SquidFragmentParam {
+export interface SquidEntityField {
     name: string
     schemaType: string
     indexed: boolean
     required: boolean
 }
 
+export interface SquidEntity {
+    name: string
+    fields: SquidEntityField[]
+}
+
 export interface SquidFragment {
     name: string
-    entityName: string
-    params: SquidFragmentParam[]
+    entity: SquidEntity
+}
+
+export interface SquidContract {
+    name: string
+    spec: string
+    address: string
+    events: SquidFragment[]
+    functions: SquidFragment[]
+    range?: {from?: number; to?: number}
 }
 
 export interface SquidArchive {
