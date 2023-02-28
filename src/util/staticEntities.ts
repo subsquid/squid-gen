@@ -54,7 +54,7 @@ export const transaction: SquidEntity = {
         {
             name: 'to',
             schemaType: 'String',
-            required: true,
+            required: false,
             indexed: true,
         },
         {
