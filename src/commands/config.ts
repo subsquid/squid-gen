@@ -71,7 +71,7 @@ async function readConfig(file: string): Promise<Config> {
         case '.yaml':
         case '.yml':
             let content = fs.readFileSync(file, 'utf-8')
-            let config = yaml.parse(content, {schema: 'json'})
+            let config = yaml.parse(content)
             validate(config, CONFIG_SCHEMA)
             return config
         case '.json':
