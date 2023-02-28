@@ -11,7 +11,7 @@ import fs from 'fs'
 program
     .addHelpText(
         'before',
-        'A generator of squids that can index specific EVM events and functions for each provided contract. Run within a folder cloned from https://github.com/subsquid/squid-abi-template.\n'
+        'Generates code for squid that can index specific EVM events and functions for each provided contract. Run within a folder cloned from https://github.com/subsquid/squid-abi-template.\n'
     )
     .argument('<config>', '(required) A JSON configuration file. See the full schema below.')
     .addHelpText(
