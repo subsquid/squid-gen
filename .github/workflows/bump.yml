@@ -1,36 +1,32 @@
-name: Bump
+name: bump
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        type: choice
-        description: 'Version'
-        required: true
-        options:
-          - patch
-          - minor
-          - major
 
 jobs:
   bump:
-    name: Increase version numbers
+    name: increase version numbers
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.11.0
+      - uses: actions/checkout@v2
         with:
-          access_token: ${{ github.token }}
+          fetch-depth: 0
 
-      - name: Checkout
-        uses: actions/checkout@v3
-        
-      - name: Configure git
+      - name: configure git
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+      - name: create local release branch
+        run: git fetch origin release:release
 
-      - name: Bump version
-        run: npm version ${{ github.event.inputs.version }} -m "bump to %s"
+      - name: check change files
+        run: node common/scripts/install-run-rush.js change --verify --target-branch origin/release
 
-      - name: Git push
-        run: git push origin 
+      - name: bump versions
+        run: node common/scripts/install-run-rush.js version --bump --target-branch release
+
+      - name: merge back release branch
+        run: |
+          git checkout "${GITHUB_REF##*/}"
+          git fetch origin release
+          git merge release
+          git push origin "${GITHUB_REF##*/}"
