@@ -27,7 +27,6 @@
     "@subsquid/util-internal-code-printer": "^0.1.1",
     "@subsquid/util-internal-commander": "^0.0.2",
     "@subsquid/util-internal-config": "^1.0.1",
-    "@subsquid/util-internal-json": "^0",
     "@subsquid/util-naming": "^0.0.2",
     "commander": "^10.0.0",
     "ts-node": "^10.9.1",
@@ -46,6 +45,7 @@
     "@subsquid/typeorm-codegen": "^0.3.1",
     "@subsquid/typeorm-store": "^0.2.0",
     "@subsquid/util-internal-json": "^0.2.0",
+    "typeorm": "^0.3.11",
     "ethers": "^5.7.2"
   }
 }
