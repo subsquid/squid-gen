@@ -418,7 +418,7 @@
 		// },
 		{
 			"packageName": "@subsquid/squid-gen",
-			"projectFolder": "squid-gen",
+			"projectFolder": "squid-codegen",
 			"shouldPublish": true,
 			"versionPolicyName": "npm"
 		}
