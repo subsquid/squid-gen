@@ -1,0 +1,51 @@
+{
+  "name": "@subsquid/ink-squid-codegen",
+  "version": "0.0.0",
+  "description": "A tool for generating squid from ink contract abi",
+  "license": "GPL-3.0-or-later",
+  "repository": "git@github.com:subsquid/squid-gen.git",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "squid-gen": "bin/squid-gen.js",
+    "squid-gen-abi": "bin/squid-gen-abi.js",
+    "squid-gen-config": "bin/squid-gen-config.js"
+  },
+  "files": [
+    "bin",
+    "lib",
+    "support"
+  ],
+  "scripts": {
+    "build": "rm -rf lib && tsc",
+    "config2type": "json2ts src/schema.json > src/schema.ts"
+  },
+  "dependencies": {
+    "@subsquid/logger": "^0.3.1",
+    "@subsquid/util-internal": "^1.1.0",
+    "@subsquid/util-internal-code-printer": "^0.1.1",
+    "@subsquid/util-internal-commander": "^0.0.2",
+    "@subsquid/util-internal-config": "^1.0.1",
+    "@subsquid/util-naming": "^0.0.2",
+    "commander": "^10.0.0",
+    "upath": "^2.0.1",
+    "yaml": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "json-schema-to-typescript": "^12.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "@subsquid/archive-registry": "^2.0.2",
+    "@subsquid/substrate-processor": "^2.4.1",
+    "@subsquid/ink-abi": "^1.1.0",
+    "@subsquid/ink-typegen": "^0.2.1",
+    "@subsquid/substrate-typegen": "^2.2.1",
+    "@subsquid/typeorm-codegen": "^0.3.1",
+    "@subsquid/typeorm-store": "^0.2.0",
+    "@subsquid/util-internal-json": "^0.2.0",
+    "typeorm": "^0.3.11"
+  }
+}

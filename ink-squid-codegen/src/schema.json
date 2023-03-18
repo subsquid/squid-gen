@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Config",
+  "description": "Generator config",
+  "type": "object",
+  "properties": {
+    "archive": {
+      "description": "Source Squid Archive for a network that supports 'contracts' pallet. Can be a URL or an alias. See docs.subsquid.io/archives/overview.",
+      "type": "string"
+    },
+    "contracts": {
+      "description": "ContractJSONs defining the exact data to extract from each contract.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Contract name.",
+            "type": "string"
+          },
+          "address": {
+            "description": "Contract address.",
+            "type": "string"
+          },
+          "abi": {
+            "description": "Path to the contract JSON ABI.",
+            "type": "string"
+          },
+          "events": {
+            "description": "One or multiple contract events to be indexed. true indexes all events defined in the ABI; false indexes none. Default: false.",
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "range": {
+            "description": "Range of blocks to index. Default: all from the genesis.",
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "number"
+              },
+              "to": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "address",
+          "abi"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "archive",
+    "contracts"
+  ]
+}

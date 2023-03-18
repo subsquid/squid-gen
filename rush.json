@@ -421,6 +421,12 @@
 			"projectFolder": "squid-codegen",
 			"shouldPublish": true,
 			"versionPolicyName": "npm"
+		},
+          {
+			"packageName": "@subsquid/ink-squid-codegen",
+			"projectFolder": "ink-squid-codegen",
+			"shouldPublish": true,
+			"versionPolicyName": "npm"
 		}
 	]
 }
