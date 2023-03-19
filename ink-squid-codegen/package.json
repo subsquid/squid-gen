@@ -1,7 +1,7 @@
 {
-  "name": "@subsquid/squid-gen",
-  "version": "0.4.3",
-  "description": "A tool for generating squid from contract abi",
+  "name": "@subsquid/ink-squid-codegen",
+  "version": "0.0.0",
+  "description": "A tool for generating squid from ink contract abi",
   "license": "GPL-3.0-or-later",
   "repository": "git@github.com:subsquid/squid-gen.git",
   "publishConfig": {
@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "rm -rf lib && tsc",
-    "config2type": "json2ts src/config.schema.json > src/config.ts"
+    "config2type": "json2ts src/schema.json > src/schema.ts"
   },
   "dependencies": {
     "@subsquid/logger": "^0.3.1",
@@ -29,11 +29,8 @@
     "@subsquid/util-internal-config": "^1.0.1",
     "@subsquid/util-naming": "^0.0.2",
     "commander": "^10.0.0",
-    "ts-node": "^10.9.1",
     "upath": "^2.0.1",
-    "yaml": "^2.2.1",
-    "@subsquid/squid-gen-targets": "^0.0.0",
-    "@subsquid/squid-gen-utils": "^0.0.0"
+    "yaml": "^2.2.1"
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
@@ -42,9 +39,13 @@
   },
   "peerDependencies": {
     "@subsquid/archive-registry": "^2.0.2",
-    "@subsquid/evm-processor": "^0.2.4 || ^0.3.0",
-    "@subsquid/evm-typegen": "^2.0.2",
+    "@subsquid/substrate-processor": "^2.4.1",
+    "@subsquid/ink-abi": "^1.1.0",
+    "@subsquid/ink-typegen": "^0.2.1",
+    "@subsquid/substrate-typegen": "^2.2.1",
+    "@subsquid/typeorm-codegen": "^0.3.1",
+    "@subsquid/typeorm-store": "^0.2.0",
     "@subsquid/util-internal-json": "^0.2.0",
-    "ethers": "^5.7.2"
+    "typeorm": "^0.3.11"
   }
 }
