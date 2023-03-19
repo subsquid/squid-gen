@@ -1,7 +1,7 @@
 import {program} from 'commander'
 import {runProgram} from '@subsquid/util-internal'
 import {read, validate} from '@subsquid/util-internal-config'
-import {Config} from '../schema'
+import {Config} from '../config'
 import CONFIG_SCHEMA from '../schema.json'
 import {generateSquid} from '../squid'
 import path from 'path'

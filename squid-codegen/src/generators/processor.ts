@@ -1,11 +1,13 @@
+import {DataTarget, DataTargetPrinter} from '@subsquid/squid-gen-targets'
+import {resolveModule} from '@subsquid/squid-gen-utils'
+import {def} from '@subsquid/util-internal'
 import {FileOutput, OutDir, Output} from '@subsquid/util-internal-code-printer'
-import {SquidArchive, SquidContract, SquidFragment} from '../util/interfaces'
-import {MAPPING, MODEL, resolveModule} from './paths'
+import {SquidArchive, SquidContract} from '../util/interfaces'
+import {MAPPING} from './paths'
 
 export class ProcessorCodegen {
     private out: FileOutput
 
-    private models = new Set<string>()
     private mappings = new Set<string>()
     private archiveRegistry = false
 
@@ -14,6 +16,7 @@ export class ProcessorCodegen {
         private options: {
             archive: SquidArchive
             contracts: SquidContract[]
+            dataTarget: DataTarget
             from?: number
         }
     ) {
@@ -24,7 +27,6 @@ export class ProcessorCodegen {
         this.printImports()
         this.out.line()
         this.out.line(`const processor = new EvmBatchProcessor()`)
-        // this.out.indentation(() => {
         this.out.line(`processor.setDataSource({`)
         this.out.indentation(() => {
             if (this.options.archive.kind === 'name') {
@@ -36,15 +38,9 @@ export class ProcessorCodegen {
         })
         this.out.line(`})`)
         this.printSubscribes()
-        // })
         this.out.line()
         this.out.line(`processor.run(new TypeormDatabase(), async (ctx: BatchHandlerContext<Store, any>) => {`)
         this.out.indentation(() => {
-            this.useModel(`Transaction`)
-            this.out.line(`let transactions: Transaction[] = []`)
-            this.useModel(`Block`)
-            this.out.line(`let blocks: Block[] = []`)
-            this.out.line(`let other: Record<string, any[]> = {}`)
             this.out.block(`for (let {header: block, items} of ctx.blocks)`, () => {
                 this.out.line(`let b = new Block({`)
                 this.out.indentation(() => {
@@ -71,33 +67,16 @@ export class ProcessorCodegen {
                         this.out.line(`blockTransactions.set(t.id, t)`)
                     })
 
-                    this.out.line()
-                    this.out.block(`let addEntity = (e: any) =>`, () => {
-                        this.out.line(`let a = other[e.constructor.name]`)
-                        this.out.block(`if (a == null)`, () => {
-                            this.out.line(`a = []`)
-                            this.out.line(`other[e.constructor.name] = a`)
-                        })
-                        this.out.line(`a.push(e)`)
-                    })
-
                     for (let contract of this.options.contracts) {
                         this.out.line()
                         this.out.block(`if (item.address === ${contract.name}.address)`, () => {
                             this.useMapping(contract.name)
                             this.out.line(`let e = ${contract.name}.parse(ctx, block, item)`)
-                            this.out.block(`if (e != null)`, () => {
-                                this.out.line(`addEntity(e)`)
-                            })
+                            this.out.block(`if (e != null)`, () => {})
                         })
                     }
                 })
                 this.out.line(`transactions.push(...blockTransactions.values())`)
-            })
-            this.out.line(`await ctx.store.save(blocks)`)
-            this.out.line(`await ctx.store.save(transactions)`)
-            this.out.block(`for (let e in other)`, () => {
-                this.out.line(`await ctx.store.save(other[e])`)
             })
         })
         this.out.line(`})`)
@@ -108,19 +87,18 @@ export class ProcessorCodegen {
         this.out.lazy(() => {
             this.out.line(`import {EvmBatchProcessor, BatchHandlerContext} from '@subsquid/evm-processor'`)
             this.out.line(`import {Store, TypeormDatabase} from '@subsquid/typeorm-store'`)
+
             if (this.archiveRegistry) {
                 this.out.line(`import {lookupArchive} from '@subsquid/archive-registry'`)
             }
-            if (this.models.size > 0) {
-                this.out.line(
-                    `import {${[...this.models].join(`, `)}} from '${resolveModule(this.outDir.path(), MODEL)}'`
-                )
-            }
+
             if (this.mappings.size > 0) {
                 this.out.line(
                     `import {${[...this.mappings].join(`, `)}} from '${resolveModule(this.outDir.path(), MAPPING)}'`
                 )
             }
+
+            this.getTargetPrinter().printImports()
         })
     }
 
@@ -204,11 +182,12 @@ export class ProcessorCodegen {
         this.archiveRegistry = true
     }
 
-    private useModel(str: string) {
-        this.models.add(str)
-    }
-
     private useMapping(str: string) {
         this.mappings.add(str)
+    }
+
+    @def
+    private getTargetPrinter() {
+        return this.options.dataTarget.createPrinter(this.out)
     }
 }

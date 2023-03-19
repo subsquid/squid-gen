@@ -1,3 +1,4 @@
+import {Fragment} from '@subsquid/squid-gen-targets'
 import {ethers} from 'ethers'
 
 export interface SpecFile {
@@ -6,29 +7,12 @@ export interface SpecFile {
     functions: Record<string, {fragment: ethers.utils.FunctionFragment}>
 }
 
-export interface SquidEntityField {
-    name: string
-    schemaType: string
-    indexed: boolean
-    required: boolean
-}
-
-export interface SquidEntity {
-    name: string
-    fields: SquidEntityField[]
-}
-
-export interface SquidFragment {
-    name: string
-    entity: SquidEntity
-}
-
 export interface SquidContract {
     name: string
     spec: string
     address: string
-    events: SquidFragment[]
-    functions: SquidFragment[]
+    events: Record<string, Fragment>
+    functions: Record<string, Fragment>
     range?: {from?: number; to?: number}
 }
 

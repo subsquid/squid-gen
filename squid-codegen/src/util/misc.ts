@@ -3,6 +3,7 @@ import {ethers} from 'ethers'
 import {archivesRegistryEVM} from '@subsquid/archive-registry'
 import {getType as getTsType} from '@subsquid/evm-typegen/lib/util/types'
 import {SquidArchive} from './interfaces'
+import {ParamType} from '@subsquid/squid-gen-targets'
 
 export async function spawnAsync(command: string, args: string[]) {
     return await new Promise<number>((resolve, reject) => {
@@ -50,9 +51,29 @@ export function getArchive(str: string): SquidArchive {
     }
 }
 
-export function getGqlType(param: ethers.utils.ParamType): string {
-    let tsType = getTsType(param)
-    return tsTypeToGqlType(tsType)
+export function getType(param: ethers.utils.ParamType): ParamType {
+    if (param.baseType === 'array' || param.baseType === 'tuple') {
+        return 'json'
+    }
+
+    if (param.type === 'address' || param.type === 'string') {
+        return 'string'
+    }
+
+    if (param.type === 'bool') {
+        return 'boolean'
+    }
+
+    let match = param.type.match(/^(u?int)([0-9]+)$/)
+    if (match) {
+        return parseInt(match[2]) < 53 ? 'int' : 'bigint'
+    }
+
+    if (param.type.substring(0, 5) === 'bytes') {
+        return 'string'
+    }
+
+    throw new Error('unknown type')
 }
 
 function tsTypeToGqlType(type: string): string {

@@ -6,6 +6,4 @@ export const MAPPING = path.join(SRC, 'mapping')
 export const UTIL = path.join(SRC, 'util')
 export const ABI = path.join(SRC, 'abi')
 
-export function resolveModule(from: string, to: string) {
-    return path.normalizeSafe(path.joinSafe('./', path.relative(from, to)))
-}
+
