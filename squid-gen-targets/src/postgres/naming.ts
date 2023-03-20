@@ -18,6 +18,8 @@ export function toFieldName(name: string) {
 
 export function toGqlType(type: ParamType): string {
     switch (type) {
+        case 'id':
+            return 'ID'
         case 'string':
             return 'String'
         case 'boolean':

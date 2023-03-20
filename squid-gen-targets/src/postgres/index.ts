@@ -64,10 +64,10 @@ export class PostgresTarget implements DataTarget {
     }
 
     async generate() {
-        let out = this.src.file('../schema.graphql')
+        let schema = this.src.file('../schema.graphql')
         for (let e of this.entityMap.values()) {
             let indexedFields = e.fields.filter((f) => f.indexed).map((f) => `"${f.name}"`)
-            out.block(
+            schema.block(
                 `type ${e.name} @entity` +
                     (indexedFields.length > 0 ? ` @index(fields: [${indexedFields.join(', ')}])` : ``),
                 () => {
@@ -76,15 +76,24 @@ export class PostgresTarget implements DataTarget {
                         if (field.indexed) {
                             str += ` @index`
                         }
-                        out.line(str)
+                        schema.line(str)
                     }
                 }
             )
-            out.line()
+            schema.line()
         }
-        out.write()
+        schema.write()
 
         await spawnAsync(`squid-typeorm-codegen`, [])
+
+        let db = this.src.file('db.ts')
+        db.line(`import {Store as Store_, TypeormDatabase} from '@subsquid/typeorm-store'`)
+        db.line()
+        db.line(`export let db = new TypeormDatabase()`)
+        db.line(`export type Store = Store_`)
+        db.write()
+
+        this.src.add(`entityBuffer.ts`, path.resolve(__dirname, `..`, `..`, `support`, `entityBuffer.ts`))
     }
 
     createPrinter(out: FileOutput): DataTargetPrinter {
@@ -94,36 +103,44 @@ export class PostgresTarget implements DataTarget {
 
 class PostgresTargetPrinter implements DataTargetPrinter {
     private models = new Set<string>()
+    private buffer = false
 
     constructor(private out: FileOutput, private entityMap: EntityMap) {}
 
-    printPreBatch(): void {
-        this.out.line(`let entityBuffer: Record<string, any[]> = {}`)
-        this.out.line()
-        this.out.block(`let addEntity = (e: any) =>`, () => {
-            this.out.line(`let b = entityBuffer[e.constructor.name]`)
-            this.out.block(`if (b == null)`, () => {
-                this.out.line(`b = []`)
-                this.out.line(`entityBuffer[e.constructor.name] = b`)
-            })
-            this.out.line(`b.push(e)`)
-        })
-        this.out.line()
-    }
-
-    printFragmentSave(fragment: Fragment, varName: string): void {
-        let entity = this.entityFromFragment(fragment)
-        this.models.add(entity.name)
-        this.out.line(`addEntity(${varName})`)
-    }
+    printPreBatch(): void {}
 
     printPostBatch(): void {
-        this.out.block(`for (let e in entityBuffer)`, () => {
-            this.out.line(`await ctx.store.insert(entityBuffer[e])`)
+        this.useBuffer()
+        this.out.block(`for (let e of EntityBuffer.flush())`, () => {
+            this.out.line(`await ctx.store.insert(e)`)
         })
+    }
+
+    printFragmentSave(fragment: Fragment, args: string[]): void {
+        let entity = this.entityFromFragment(fragment)
+
+        this.useBuffer()
+        this.useModel(entity.name)
+        this.out.line(`EntityBuffer.add(`)
+        this.out.indentation(() => {
+            this.out.line(`new ${entity.name}({`)
+            this.out.indentation(() => {
+                for (let i = 0; i < entity.fields.length; i++) {
+                    this.out.line(`${entity.fields[i].name}: ${args[i]},`)
+                }
+            })
+            this.out.line(`})`)
+        })
+        this.out.line(`)`)
     }
 
     printImports(): void {
+        if (this.buffer) {
+            this.out.line(
+                `import {EntityBuffer} from '${resolveModule(this.out.file, path.resolve(`src`, `entityBuffer`))}'`
+            )
+        }
+
         if (this.models.size > 0) {
             this.out.file
             this.out.line(
@@ -133,6 +150,14 @@ class PostgresTargetPrinter implements DataTargetPrinter {
                 )}'`
             )
         }
+    }
+
+    private useModel(name: string) {
+        this.models.add(name)
+    }
+
+    private useBuffer() {
+        this.buffer = true
     }
 
     private entityFromFragment(fragment: Fragment): Entity {

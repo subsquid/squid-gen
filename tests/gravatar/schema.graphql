@@ -1,0 +1,126 @@
+type Block @entity @index(fields: ["number", "timestamp"]) {
+    id: ID!
+    number: Int! @index
+    timestamp: DateTime! @index
+}
+
+type Transaction @entity @index(fields: ["blockNumber", "blockTimestamp", "hash", "to", "from", "success"]) {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    hash: String! @index
+    to: String! @index
+    from: String! @index
+    success: Boolean! @index
+}
+
+type FactoryEventNewGravatar @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "eventName"]) {
+    id0: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    id1: BigInt!
+    owner0: String!
+    displayName0: String!
+    imageUrl0: String!
+    id2: BigInt!
+    owner1: String!
+    displayName1: String!
+    imageUrl1: String!
+}
+
+type FactoryEventUpdatedGravatar @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "eventName"]) {
+    id0: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    id1: BigInt!
+    owner0: String!
+    displayName0: String!
+    imageUrl0: String!
+    id2: BigInt!
+    owner1: String!
+    displayName1: String!
+    imageUrl1: String!
+}
+
+type FactoryFunctionUpdateGravatarImage @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"]) {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt!
+    functionSuccess: Boolean! @index
+    imageUrl0: String!
+    owner: String!
+    param00: BigInt!
+    param01: String!
+    displayName0: String!
+    displayName1: String!
+    imageUrl1: String!
+    param02: BigInt!
+}
+
+type FactoryFunctionSetMythicalGravatar @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"]) {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt!
+    functionSuccess: Boolean! @index
+    imageUrl0: String!
+    owner: String!
+    param00: BigInt!
+    param01: String!
+    displayName0: String!
+    displayName1: String!
+    imageUrl1: String!
+    param02: BigInt!
+}
+
+type FactoryFunctionUpdateGravatarName @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"]) {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt!
+    functionSuccess: Boolean! @index
+    imageUrl0: String!
+    owner: String!
+    param00: BigInt!
+    param01: String!
+    displayName0: String!
+    displayName1: String!
+    imageUrl1: String!
+    param02: BigInt!
+}
+
+type FactoryFunctionCreateGravatar @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"]) {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt!
+    functionSuccess: Boolean! @index
+    imageUrl0: String!
+    owner: String!
+    param00: BigInt!
+    param01: String!
+    displayName0: String!
+    displayName1: String!
+    imageUrl1: String!
+    param02: BigInt!
+}
+

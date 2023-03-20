@@ -23,5 +23,5 @@ export async function spawnAsync(command: string, args: string[]) {
 }
 
 export function resolveModule(from: string, to: string) {
-    return path.normalizeSafe(path.joinSafe('./', path.relative(from, to)))
+    return path.normalizeSafe(path.joinSafe('./', path.relative(path.dirname(from), to)))
 }

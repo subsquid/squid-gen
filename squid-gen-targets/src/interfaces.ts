@@ -1,12 +1,12 @@
 import {Output} from '@subsquid/util-internal-code-printer'
 
-export type ParamType = 'string' | 'boolean' | 'int' | 'bigint' | 'datetime' | 'json'
+export type ParamType = 'string' | 'boolean' | 'int' | 'bigint' | 'datetime' | 'json' | 'id'
 
 export interface FragmentParam {
     name: string
     type: ParamType
     indexed: boolean
-    nullable: boolean
+    nullable?: boolean
 }
 
 export interface Fragment {
@@ -25,7 +25,7 @@ export interface DataTargetPrinter {
 
     printPreBatch(): void
 
-    printFragmentSave(fragment: Fragment, varName: string): void
+    printFragmentSave(fragment: Fragment, args: string[]): void
 
     printPostBatch(): void
 }

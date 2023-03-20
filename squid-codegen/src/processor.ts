@@ -1,9 +1,10 @@
-import {DataTarget, DataTargetPrinter} from '@subsquid/squid-gen-targets'
+import path from 'path'
+import {DataTarget} from '@subsquid/squid-gen-targets'
 import {resolveModule} from '@subsquid/squid-gen-utils'
 import {def} from '@subsquid/util-internal'
-import {FileOutput, OutDir, Output} from '@subsquid/util-internal-code-printer'
-import {SquidArchive, SquidContract} from '../util/interfaces'
-import {MAPPING} from './paths'
+import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
+import {SquidArchive, SquidContract} from './util/interfaces'
+import {block, transaction} from './util/staticEntities'
 
 export class ProcessorCodegen {
     private out: FileOutput
@@ -39,54 +40,46 @@ export class ProcessorCodegen {
         this.out.line(`})`)
         this.printSubscribes()
         this.out.line()
-        this.out.line(`processor.run(new TypeormDatabase(), async (ctx: BatchHandlerContext<Store, any>) => {`)
+        let targetPrinter = this.getTargetPrinter()
+        this.out.line(`processor.run(db, async (ctx: BatchHandlerContext<Store, any>) => {`)
         this.out.indentation(() => {
+            targetPrinter.printPreBatch()
             this.out.block(`for (let {header: block, items} of ctx.blocks)`, () => {
-                this.out.line(`let b = new Block({`)
-                this.out.indentation(() => {
-                    this.out.line(`id: block.id,`)
-                    this.out.line(`number: block.height,`)
-                    this.out.line(`timestamp: new Date(block.timestamp),`)
-                })
-                this.out.line(`})`)
-                this.out.line(`blocks.push(b)`)
-                this.out.line(`let blockTransactions = new Map<string, Transaction>()`)
+                targetPrinter.printFragmentSave(block, [`block.id`, `block.height`, `new Date(block.timestamp)`])
+                this.out.line(`let lastTxHash: string | undefined`)
                 this.out.block(`for (let item of items)`, () => {
-                    this.out.line(`let t = blockTransactions.get(item.transaction.id)`)
-                    this.out.block(`if (t == null)`, () => {
-                        this.out.line(`t = new Transaction({`)
-                        this.out.indentation(() => {
-                            this.out.line(`id: item.transaction.id,`)
-                            this.out.line(`blockNumber: block.height,`)
-                            this.out.line(`blockTimestamp: new Date(block.timestamp),`)
-                            this.out.line(`hash: item.transaction.hash,`)
-                            this.out.line(`to: item.transaction.to,`)
-                            this.out.line(`from: item.transaction.from,`)
-                        })
-                        this.out.line(`})`)
-                        this.out.line(`blockTransactions.set(t.id, t)`)
+                    this.out.block(`if (item.transaction.hash != lastTxHash)`, () => {
+                        this.out.line(`lastTxHash = item.transaction.hash`)
+                        targetPrinter.printFragmentSave(transaction, [
+                            `item.transaction.id`,
+                            `block.height`,
+                            `new Date(block.timestamp)`,
+                            `item.transaction.hash`,
+                            `item.transaction.to`,
+                            `item.transaction.from`,
+                            `item.transaction.success`,
+                        ])
                     })
 
                     for (let contract of this.options.contracts) {
                         this.out.line()
                         this.out.block(`if (item.address === ${contract.name}.address)`, () => {
                             this.useMapping(contract.name)
-                            this.out.line(`let e = ${contract.name}.parse(ctx, block, item)`)
-                            this.out.block(`if (e != null)`, () => {})
+                            this.out.line(`${contract.name}.parse(ctx, block, item)`)
                         })
                     }
                 })
-                this.out.line(`transactions.push(...blockTransactions.values())`)
             })
+            targetPrinter.printPostBatch()
         })
         this.out.line(`})`)
         return this.out.write()
     }
 
     private printImports() {
+        let targetPrinter = this.getTargetPrinter()
         this.out.lazy(() => {
             this.out.line(`import {EvmBatchProcessor, BatchHandlerContext} from '@subsquid/evm-processor'`)
-            this.out.line(`import {Store, TypeormDatabase} from '@subsquid/typeorm-store'`)
 
             if (this.archiveRegistry) {
                 this.out.line(`import {lookupArchive} from '@subsquid/archive-registry'`)
@@ -94,26 +87,30 @@ export class ProcessorCodegen {
 
             if (this.mappings.size > 0) {
                 this.out.line(
-                    `import {${[...this.mappings].join(`, `)}} from '${resolveModule(this.outDir.path(), MAPPING)}'`
+                    `import {${[...this.mappings].join(`, `)}} from '${resolveModule(
+                        this.out.file,
+                        path.resolve(`src`, `mapping`)
+                    )}'`
                 )
             }
 
-            this.getTargetPrinter().printImports()
+            this.out.line(`import {db, Store} from '${resolveModule(this.out.file, path.resolve(`src`, `db`))}'`)
+            targetPrinter.printImports()
         })
     }
 
     private printSubscribes() {
         for (let contract of this.options.contracts) {
             this.useMapping(contract.name)
-            if (contract.events.length > 0) {
+            if (Object.keys(contract.events).length > 0) {
                 this.out.line(`processor.addLog(${contract.name}.address, {`)
                 this.out.indentation(() => {
                     this.out.line(`filter: [`)
                     this.out.indentation(() => {
                         this.out.line(`[`)
                         this.out.indentation(() => {
-                            for (let e of contract.events) {
-                                this.out.line(`${contract.name}.abi.events['${e.name}'].topic,`)
+                            for (let e in contract.events) {
+                                this.out.line(`${contract.name}.spec.events['${e}'].topic,`)
                             }
                         })
                         this.out.line(`],`)
@@ -150,13 +147,13 @@ export class ProcessorCodegen {
                 })
                 this.out.line(`})`)
             }
-            if (contract.functions.length > 0) {
+            if (Object.keys(contract.functions).length > 0) {
                 this.out.line(`processor.addTransaction(${contract.name}.address, {`)
                 this.out.indentation(() => {
                     this.out.line(`sighash: [`)
                     this.out.indentation(() => {
-                        for (let t of contract.functions) {
-                            this.out.line(`${contract.name}.abi.functions['${t.name}'].sighash,`)
+                        for (let f in contract.functions) {
+                            this.out.line(`${contract.name}.spec.functions['${f}'].sighash,`)
                         }
                     })
                     this.out.line(`],`)

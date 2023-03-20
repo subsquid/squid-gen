@@ -1,18 +1,17 @@
 import assert from 'assert'
+import ethers from 'ethers'
 import {register} from 'ts-node'
-import path from 'upath'
+import path from 'path'
 import {createLogger} from '@subsquid/logger'
+import {Fragment, FragmentParam, ParamType, PostgresTarget} from '@subsquid/squid-gen-targets'
 import {OutDir} from '@subsquid/util-internal-code-printer'
 import {toCamelCase} from '@subsquid/util-naming'
-import {MappingCodegen} from './generators/mappings'
-import {ABI, MAPPING, UTIL} from './generators/paths'
-import {ProcessorCodegen} from './generators/processor'
 import {Config} from './config'
+import {MappingCodegen} from './mappings'
+import {ProcessorCodegen} from './processor'
 import {SpecFile, SquidContract} from './util/interfaces'
 import {getArchive, spawnAsync} from './util/misc'
-import {Fragment, FragmentParam, ParamType, PostgresTarget} from '@subsquid/squid-gen-targets'
-import ethers from 'ethers'
-import {resolveModule} from '@subsquid/squid-gen-utils'
+import {block, event, function_, transaction} from './util/staticEntities'
 
 export let logger = createLogger(`sqd:squidgen`)
 
@@ -29,11 +28,11 @@ export async function generateSquid(config: Config) {
     let srcOutputDir = outputDir.child(`src`)
     srcOutputDir.del()
 
-    let typegenDir = ABI
+    let typegenDir = path.join(`src`, `abi`)
 
     logger.info(`running typegen...`)
     let contracts: SquidContract[] = []
-    let fragments: Fragment[] = []
+    let fragments: Fragment[] = [block, transaction]
     for (let contract of config.contracts) {
         logger.info(`processing "${contract.name}" contract...`)
 
@@ -80,11 +79,14 @@ export async function generateSquid(config: Config) {
     await dataTarget.generate()
 
     logger.info(`generating processor...`)
-    srcOutputDir.add(`${resolveModule(srcOutputDir.path(), UTIL)}.ts`, [__dirname, '../support/util.ts'])
+    srcOutputDir.add(
+        path.relative(srcOutputDir.path(), path.resolve(`src`, `util.ts`)),
+        path.join(__dirname, `..`, `support`, `util.ts`)
+    )
 
-    let mappingsOutputDir = srcOutputDir.child(resolveModule(srcOutputDir.path(), MAPPING))
+    let mappingsOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'mapping')))
     for (let contract of contracts) {
-        new MappingCodegen(mappingsOutputDir, contract).generate()
+        new MappingCodegen(mappingsOutputDir, {contract, dataTarget}).generate()
     }
 
     let mappingsIndex = mappingsOutputDir.file('index.ts')
@@ -94,18 +96,16 @@ export async function generateSquid(config: Config) {
     mappingsIndex.write()
 
     new ProcessorCodegen(srcOutputDir, {
-        archive,
         contracts,
+        dataTarget,
+        archive,
     }).generate()
 }
 
 function validateContractNames(config: Config) {
-    // let names = new Set<string>()
     for (let contract of config.contracts) {
         let name = toCamelCase(contract.name)
         assert(/^[a-zA-Z0-9]+$/.test(name), `Invalid contract name "${contract.name}"`)
-        // assert(!names.has(name), `Duplicate contract name "${contract.name}"`)
-        // names.add(name)
     }
 }
 
@@ -116,7 +116,7 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
     for (let name in items) {
         let fragment = items[name].fragment
 
-        let params: FragmentParam[] = []
+        let params: FragmentParam[] = event.params
         for (let i = 0; i < fragment.inputs.length; i++) {
             let input = fragment.inputs[i]
 
@@ -134,19 +134,17 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
         }
     }
 
-    return fragments
+    names = names == true ? Object.keys(items) : names
 
-    // names = names == true ? Object.keys(items) : names
+    let filtered: Record<string, Fragment> = {}
+    for (let name of names) {
+        let fragment = fragments[name]
+        assert(fragment != null, `Event "${name}" doesn't exist for this contract`)
 
-    // let filtered: Record<string, Fragment> = {}
-    // for (let name of names) {
-    //     let fragment = fragments[name]
-    //     assert(fragment != null, `Event "${name}" doesn't exist for this contract`)
+        filtered[name] = fragment
+    }
 
-    //     filtered[name] = fragment
-    // }
-
-    // return filtered
+    return filtered
 }
 
 function getFunctions(specFile: SpecFile, contractName: string, names: string[] | true) {
@@ -156,7 +154,7 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
     for (let name in items) {
         let fragment = items[name].fragment
 
-        let params: FragmentParam[] = []
+        let params: FragmentParam[] = function_.params
         for (let i = 0; i < fragment.inputs.length; i++) {
             let input = fragment.inputs[i]
             params.push({
@@ -173,24 +171,22 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
         }
     }
 
-    return fragments
+    names = names == true ? Object.keys(items) : names
 
-    // names = names == true ? Object.keys(items) : names
+    let filtered: Record<string, Fragment> = {}
+    for (let name of names) {
+        let fragment = fragments[name]
+        assert(fragment != null, `Function "${name}" doesn't exist for this contract`)
 
-    // let filtered: Record<string, Fragment> = {}
-    // for (let name of names) {
-    //     let fragment = fragments[name]
-    //     assert(fragment != null, `Function "${name}" doesn't exist for this contract`)
+        if (specFile.functions[name].fragment.stateMutability === 'view') {
+            logger.warn(`readonly function "${name}" skipped`)
+            continue
+        }
 
-    //     if (specFile.functions[name].fragment.stateMutability === 'view') {
-    //         logger.warn(`readonly function "${name}" skipped`)
-    //         continue
-    //     }
+        filtered[name] = fragment
+    }
 
-    //     filtered[name] = fragment
-    // }
-
-    // return filtered
+    return filtered
 }
 
 function getType(param: ethers.utils.ParamType): ParamType {

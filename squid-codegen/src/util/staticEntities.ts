@@ -1,169 +1,151 @@
-import {SquidEntity} from './interfaces'
+import {Fragment} from '@subsquid/squid-gen-targets'
 
-export const block: SquidEntity = {
-    name: 'Block',
-    fields: [
+export const block: Fragment = {
+    name: 'block',
+    params: [
         {
             name: 'id',
-            schemaType: 'ID',
-            required: true,
+            type: 'id',
             indexed: false,
         },
         {
             name: 'number',
-            schemaType: 'Int',
-            required: true,
+            type: 'int',
             indexed: true,
         },
         {
             name: 'timestamp',
-            schemaType: 'DateTime',
-            required: true,
+            type: 'datetime',
             indexed: true,
         },
     ],
 }
 
-export const transaction: SquidEntity = {
-    name: 'Transaction',
-    fields: [
+export const transaction: Fragment = {
+    name: 'transaction',
+    params: [
         {
             name: 'id',
-            schemaType: 'ID',
-            required: true,
+            type: 'id',
             indexed: false,
         },
         {
             name: 'blockNumber',
-            schemaType: 'Int',
-            required: true,
+            type: 'int',
             indexed: true,
+            nullable: true,
         },
         {
             name: 'blockTimestamp',
-            schemaType: 'DateTime',
-            required: true,
+            type: 'datetime',
             indexed: true,
         },
         {
             name: 'hash',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
         },
         {
             name: 'to',
-            schemaType: 'String',
-            required: false,
+            type: 'string',
             indexed: true,
+            nullable: true,
         },
         {
             name: 'from',
-            schemaType: 'String',
-            required: false,
+            type: 'string',
             indexed: true,
+            nullable: true,
         },
         {
             name: 'success',
-            schemaType: 'Boolean',
-            required: false,
+            type: 'boolean',
             indexed: true,
+            nullable: true,
         },
     ],
 }
 
-export const event: SquidEntity = {
+export const event: Fragment = {
     name: 'Event',
-    fields: [
+    params: [
         {
             name: 'id',
-            schemaType: 'ID',
-            required: true,
+            type: 'id',
             indexed: false,
         },
         {
             name: 'blockNumber',
-            schemaType: 'Int',
-            required: true,
+            type: 'int',
             indexed: true,
         },
         {
             name: 'blockTimestamp',
-            schemaType: 'DateTime',
-            required: true,
+            type: 'datetime',
             indexed: true,
         },
         {
             name: 'transactionHash',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
         },
         {
             name: 'contract',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
         },
         {
             name: 'eventName',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
         },
     ],
 }
 
-export const function_: SquidEntity = {
+export const function_: Fragment = {
     name: 'Function',
-    fields: [
+    params: [
         {
             name: 'id',
-            schemaType: 'ID',
-            required: true,
+            type: 'id',
             indexed: false,
         },
         {
             name: 'blockNumber',
-            schemaType: 'Int',
-            required: true,
+            type: 'int',
             indexed: true,
         },
         {
             name: 'blockTimestamp',
-            schemaType: 'DateTime',
-            required: true,
+            type: 'datetime',
             indexed: true,
         },
         {
             name: 'transactionHash',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
         },
         {
             name: 'contract',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
         },
         {
             name: 'functionName',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
         },
         {
             name: 'functionValue',
-            schemaType: 'BigInt',
-            required: false,
+            type: 'bigint',
             indexed: false,
+            nullable: true,
         },
         {
             name: 'functionSuccess',
-            schemaType: 'Boolean',
-            required: false,
+            type: 'boolean',
             indexed: true,
+            nullable: true,
         },
     ],
 }
