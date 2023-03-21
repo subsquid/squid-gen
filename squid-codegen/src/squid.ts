@@ -3,7 +3,7 @@ import ethers from 'ethers'
 import {register} from 'ts-node'
 import path from 'path'
 import {createLogger} from '@subsquid/logger'
-import {Fragment, FragmentParam, ParamType, PostgresTarget} from '@subsquid/squid-gen-targets'
+import {Fragment, FragmentParam, ParamType, ParquetFileTarget, PostgresTarget} from '@subsquid/squid-gen-targets'
 import {OutDir} from '@subsquid/util-internal-code-printer'
 import {toCamelCase} from '@subsquid/util-naming'
 import {Config} from './config'
@@ -75,7 +75,7 @@ export async function generateSquid(config: Config) {
     }
 
     logger.info(`running codegen...`)
-    let dataTarget = new PostgresTarget(srcOutputDir, fragments, {})
+    let dataTarget = new ParquetFileTarget(srcOutputDir, fragments, {dest: './data'})
     await dataTarget.generate()
 
     logger.info(`generating processor...`)
@@ -116,7 +116,7 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
     for (let name in items) {
         let fragment = items[name].fragment
 
-        let params: FragmentParam[] = event.params
+        let params: FragmentParam[] = [...event.params]
         for (let i = 0; i < fragment.inputs.length; i++) {
             let input = fragment.inputs[i]
 
@@ -154,7 +154,7 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
     for (let name in items) {
         let fragment = items[name].fragment
 
-        let params: FragmentParam[] = function_.params
+        let params: FragmentParam[] = [...function_.params]
         for (let i = 0; i < fragment.inputs.length; i++) {
             let input = fragment.inputs[i]
             params.push({

@@ -2,7 +2,7 @@ import {CommonHandlerContext, EvmBlock} from '@subsquid/evm-processor'
 import {LogItem, TransactionItem} from '@subsquid/evm-processor/lib/interfaces/dataSelection'
 import {Store} from '../db'
 import {EntityBuffer} from '../entityBuffer'
-import {FactoryEventNewGravatar, FactoryEventUpdatedGravatar, FactoryFunctionUpdateGravatarImage, FactoryFunctionSetMythicalGravatar, FactoryFunctionUpdateGravatarName, FactoryFunctionCreateGravatar} from '../model'
+import {GravatarEventNewGravatar, GravatarEventUpdatedGravatar, GravatarFunctionUpdateGravatarImage, GravatarFunctionSetMythicalGravatar, GravatarFunctionUpdateGravatarName, GravatarFunctionCreateGravatar} from '../model'
 import * as spec from '../abi/0x2e645469f354bb4f5c8a05b3b30a929361cf77ec'
 import {normalize} from '../util'
 
@@ -28,42 +28,34 @@ function parseEvent(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: Eve
             case spec.events['NewGravatar'].topic: {
                 let e = normalize(spec.events['NewGravatar'].decode(item.evmLog))
                 EntityBuffer.add(
-                    new FactoryEventNewGravatar({
-                        id0: item.evmLog.id,
+                    new GravatarEventNewGravatar({
+                        id: item.evmLog.id,
                         blockNumber: block.height,
                         blockTimestamp: new Date(block.timestamp),
                         transactionHash: item.transaction.hash,
                         contract: item.address,
                         eventName: 'NewGravatar',
-                        id1: e[0],
-                        owner0: e[1],
-                        displayName0: e[2],
-                        imageUrl0: e[3],
-                        id2: e[4],
-                        owner1: e[5],
-                        displayName1: e[6],
-                        imageUrl1: e[7],
+                        id0: e[0],
+                        owner: e[1],
+                        displayName: e[2],
+                        imageUrl: e[3],
                     })
                 )
             }
             case spec.events['UpdatedGravatar'].topic: {
                 let e = normalize(spec.events['UpdatedGravatar'].decode(item.evmLog))
                 EntityBuffer.add(
-                    new FactoryEventUpdatedGravatar({
-                        id0: item.evmLog.id,
+                    new GravatarEventUpdatedGravatar({
+                        id: item.evmLog.id,
                         blockNumber: block.height,
                         blockTimestamp: new Date(block.timestamp),
                         transactionHash: item.transaction.hash,
                         contract: item.address,
                         eventName: 'UpdatedGravatar',
-                        id1: e[0],
-                        owner0: e[1],
-                        displayName0: e[2],
-                        imageUrl0: e[3],
-                        id2: e[4],
-                        owner1: e[5],
-                        displayName1: e[6],
-                        imageUrl1: e[7],
+                        id0: e[0],
+                        owner: e[1],
+                        displayName: e[2],
+                        imageUrl: e[3],
                     })
                 )
             }
@@ -80,7 +72,7 @@ function parseFunction(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item
             case spec.functions['updateGravatarImage'].sighash: {
                 let f = normalize(spec.functions['updateGravatarImage'].decode(item.transaction.input))
                 EntityBuffer.add(
-                    new FactoryFunctionUpdateGravatarImage({
+                    new GravatarFunctionUpdateGravatarImage({
                         id: item.transaction.id,
                         blockNumber: block.height,
                         blockTimestamp: new Date(block.timestamp),
@@ -89,21 +81,14 @@ function parseFunction(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item
                         functionName: 'updateGravatarImage',
                         functionValue: item.transaction.value,
                         functionSuccess: f[0],
-                        imageUrl0: f[1],
-                        owner: f[2],
-                        param00: f[3],
-                        param01: f[4],
-                        displayName0: f[5],
-                        displayName1: f[6],
-                        imageUrl1: f[7],
-                        param02: f[8],
+                        imageUrl: f[1],
                     })
                 )
             }
             case spec.functions['setMythicalGravatar'].sighash: {
                 let f = normalize(spec.functions['setMythicalGravatar'].decode(item.transaction.input))
                 EntityBuffer.add(
-                    new FactoryFunctionSetMythicalGravatar({
+                    new GravatarFunctionSetMythicalGravatar({
                         id: item.transaction.id,
                         blockNumber: block.height,
                         blockTimestamp: new Date(block.timestamp),
@@ -112,21 +97,13 @@ function parseFunction(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item
                         functionName: 'setMythicalGravatar',
                         functionValue: item.transaction.value,
                         functionSuccess: f[0],
-                        imageUrl0: f[1],
-                        owner: f[2],
-                        param00: f[3],
-                        param01: f[4],
-                        displayName0: f[5],
-                        displayName1: f[6],
-                        imageUrl1: f[7],
-                        param02: f[8],
                     })
                 )
             }
             case spec.functions['updateGravatarName'].sighash: {
                 let f = normalize(spec.functions['updateGravatarName'].decode(item.transaction.input))
                 EntityBuffer.add(
-                    new FactoryFunctionUpdateGravatarName({
+                    new GravatarFunctionUpdateGravatarName({
                         id: item.transaction.id,
                         blockNumber: block.height,
                         blockTimestamp: new Date(block.timestamp),
@@ -135,21 +112,14 @@ function parseFunction(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item
                         functionName: 'updateGravatarName',
                         functionValue: item.transaction.value,
                         functionSuccess: f[0],
-                        imageUrl0: f[1],
-                        owner: f[2],
-                        param00: f[3],
-                        param01: f[4],
-                        displayName0: f[5],
-                        displayName1: f[6],
-                        imageUrl1: f[7],
-                        param02: f[8],
+                        displayName: f[1],
                     })
                 )
             }
             case spec.functions['createGravatar'].sighash: {
                 let f = normalize(spec.functions['createGravatar'].decode(item.transaction.input))
                 EntityBuffer.add(
-                    new FactoryFunctionCreateGravatar({
+                    new GravatarFunctionCreateGravatar({
                         id: item.transaction.id,
                         blockNumber: block.height,
                         blockTimestamp: new Date(block.timestamp),
@@ -158,14 +128,8 @@ function parseFunction(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item
                         functionName: 'createGravatar',
                         functionValue: item.transaction.value,
                         functionSuccess: f[0],
-                        imageUrl0: f[1],
-                        owner: f[2],
-                        param00: f[3],
-                        param01: f[4],
-                        displayName0: f[5],
-                        displayName1: f[6],
-                        imageUrl1: f[7],
-                        param02: f[8],
+                        displayName: f[1],
+                        imageUrl: f[2],
                     })
                 )
             }

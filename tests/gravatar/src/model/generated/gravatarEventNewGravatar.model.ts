@@ -3,16 +3,13 @@ import * as marshal from "./marshal"
 
 @Index_(["blockNumber", "blockTimestamp", "transactionHash", "contract", "eventName"], {unique: false})
 @Entity_()
-export class FactoryEventUpdatedGravatar {
-    constructor(props?: Partial<FactoryEventUpdatedGravatar>) {
+export class GravatarEventNewGravatar {
+    constructor(props?: Partial<GravatarEventNewGravatar>) {
         Object.assign(this, props)
     }
 
     @PrimaryColumn_()
     id!: string
-
-    @Column_("text", {nullable: false})
-    id0!: string
 
     @Column_("int4", {nullable: false})
     blockNumber!: number
@@ -34,26 +31,14 @@ export class FactoryEventUpdatedGravatar {
     eventName!: string
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    id1!: bigint
+    id0!: bigint
 
     @Column_("text", {nullable: false})
-    owner0!: string
+    owner!: string
 
     @Column_("text", {nullable: false})
-    displayName0!: string
+    displayName!: string
 
     @Column_("text", {nullable: false})
-    imageUrl0!: string
-
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    id2!: bigint
-
-    @Column_("text", {nullable: false})
-    owner1!: string
-
-    @Column_("text", {nullable: false})
-    displayName1!: string
-
-    @Column_("text", {nullable: false})
-    imageUrl1!: string
+    imageUrl!: string
 }

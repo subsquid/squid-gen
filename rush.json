@@ -443,6 +443,10 @@
     {
       "packageName": "gravatar",
       "projectFolder": "tests/gravatar"
+    },
+    {
+      "packageName": "gravatar-parquet",
+      "projectFolder": "tests/gravatar-parquet"
     }
   ]
 }

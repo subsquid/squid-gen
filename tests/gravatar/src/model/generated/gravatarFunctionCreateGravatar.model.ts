@@ -3,8 +3,8 @@ import * as marshal from "./marshal"
 
 @Index_(["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"], {unique: false})
 @Entity_()
-export class FactoryFunctionUpdateGravatarName {
-    constructor(props?: Partial<FactoryFunctionUpdateGravatarName>) {
+export class GravatarFunctionCreateGravatar {
+    constructor(props?: Partial<GravatarFunctionCreateGravatar>) {
         Object.assign(this, props)
     }
 
@@ -38,26 +38,8 @@ export class FactoryFunctionUpdateGravatarName {
     functionSuccess!: boolean
 
     @Column_("text", {nullable: false})
-    imageUrl0!: string
+    displayName!: string
 
     @Column_("text", {nullable: false})
-    owner!: string
-
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    param00!: bigint
-
-    @Column_("text", {nullable: false})
-    param01!: string
-
-    @Column_("text", {nullable: false})
-    displayName0!: string
-
-    @Column_("text", {nullable: false})
-    displayName1!: string
-
-    @Column_("text", {nullable: false})
-    imageUrl1!: string
-
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    param02!: bigint
+    imageUrl!: string
 }

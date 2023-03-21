@@ -7,6 +7,7 @@ export interface FragmentParam {
     type: ParamType
     indexed: boolean
     nullable?: boolean
+    static?: boolean
 }
 
 export interface Fragment {

@@ -1,10 +1,10 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 import * as marshal from "./marshal"
 
-@Index_(["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"], {unique: false})
+@Index_(["blockNumber", "blockTimestamp", "transactionHash", "contract", "eventName"], {unique: false})
 @Entity_()
-export class FactoryFunctionUpdateGravatarImage {
-    constructor(props?: Partial<FactoryFunctionUpdateGravatarImage>) {
+export class GravatarEventUpdatedGravatar {
+    constructor(props?: Partial<GravatarEventUpdatedGravatar>) {
         Object.assign(this, props)
     }
 
@@ -28,36 +28,17 @@ export class FactoryFunctionUpdateGravatarImage {
 
     @Index_()
     @Column_("text", {nullable: false})
-    functionName!: string
+    eventName!: string
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    functionValue!: bigint
-
-    @Index_()
-    @Column_("bool", {nullable: false})
-    functionSuccess!: boolean
-
-    @Column_("text", {nullable: false})
-    imageUrl0!: string
+    id0!: bigint
 
     @Column_("text", {nullable: false})
     owner!: string
 
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    param00!: bigint
+    @Column_("text", {nullable: false})
+    displayName!: string
 
     @Column_("text", {nullable: false})
-    param01!: string
-
-    @Column_("text", {nullable: false})
-    displayName0!: string
-
-    @Column_("text", {nullable: false})
-    displayName1!: string
-
-    @Column_("text", {nullable: false})
-    imageUrl1!: string
-
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    param02!: bigint
+    imageUrl!: string
 }

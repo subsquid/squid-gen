@@ -18,39 +18,42 @@ export class PostgresTarget implements DataTarget {
         for (let fragment of fragments) {
             let entityName = toEntityName(fragment.name)
             while (true) {
-                let overloadIndex = overloads[entityName]
-                if (overloadIndex == null) {
+                let repetitionIndex = overloads[entityName]
+                if (repetitionIndex == null) {
                     let ols = fragments.filter((f) => toEntityName(f.name) === entityName)
                     if (ols.length > 1) {
-                        overloadIndex = overloads[entityName] = 0
+                        repetitionIndex = overloads[entityName] = 0
                     } else if (ols.length > 0 && entityName !== toEntityName(fragment.name)) {
-                        overloadIndex = overloads[entityName] = 0
+                        repetitionIndex = overloads[entityName] = 0
                     } else {
                         break
                     }
                 }
                 overloads[entityName] += 1
-                entityName += overloadIndex
+                entityName += repetitionIndex
             }
             let fields: EntityField[] = []
             let overlaps: Record<string, number> = {}
             for (let param of fragment.params) {
                 let fieldName = toFieldName(param.name)
                 while (true) {
-                    let overlapIndex = overlaps[fieldName]
-                    if (overlapIndex == null) {
+                    let repetitionIndex = overlaps[fieldName]
+                    if (repetitionIndex == null) {
                         let ols = fragment.params.filter((p) => toFieldName(p.name) === fieldName)
                         if (ols.length > 1) {
-                            overlapIndex = overlaps[fieldName] = 0
+                            repetitionIndex = overlaps[fieldName] = 0
                         } else if (ols.length > 0 && fieldName !== toFieldName(param.name)) {
-                            overlapIndex = overlaps[fieldName] = 0
+                            repetitionIndex = overlaps[fieldName] = 0
                         } else {
                             break
                         }
                     }
-                    overlaps[fieldName] += 1
-                    fieldName += overlapIndex
-                    // logger.warn(`"${param.name}" param renamed to "${fieldName}" for ${entityName} due to collision`)
+                    if (param.static) {
+                        break
+                    } else {
+                        overlaps[fieldName] += 1
+                        fieldName += repetitionIndex
+                    }
                 }
                 fields.push({
                     name: fieldName,
