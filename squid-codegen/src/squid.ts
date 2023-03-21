@@ -9,9 +9,9 @@ import {toCamelCase} from '@subsquid/util-naming'
 import {Config} from './config'
 import {MappingCodegen} from './mappings'
 import {ProcessorCodegen} from './processor'
-import {SpecFile, SquidContract} from './util/interfaces'
-import {getArchive, spawnAsync} from './util/misc'
-import {block, event, function_, transaction} from './util/staticEntities'
+import {SpecFile, SquidContract} from './interfaces'
+import {getArchive, getType, spawnAsync} from './util'
+import {block, event, function_, transaction} from './staticEntities'
 
 export let logger = createLogger(`sqd:squidgen`)
 
@@ -187,29 +187,4 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
     }
 
     return filtered
-}
-
-function getType(param: ethers.utils.ParamType): ParamType {
-    if (param.baseType === 'array' || param.baseType === 'tuple') {
-        return 'json'
-    }
-
-    if (param.type === 'address' || param.type === 'string') {
-        return 'string'
-    }
-
-    if (param.type === 'bool') {
-        return 'boolean'
-    }
-
-    let match = param.type.match(/^(u?int)([0-9]+)$/)
-    if (match) {
-        return parseInt(match[2]) < 53 ? 'int' : 'bigint'
-    }
-
-    if (param.type.substring(0, 5) === 'bytes') {
-        return 'string'
-    }
-
-    throw new Error('unknown type')
 }

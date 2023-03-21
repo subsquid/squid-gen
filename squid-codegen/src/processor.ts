@@ -3,8 +3,8 @@ import {DataTarget} from '@subsquid/squid-gen-targets'
 import {resolveModule} from '@subsquid/squid-gen-utils'
 import {def} from '@subsquid/util-internal'
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
-import {SquidArchive, SquidContract} from './util/interfaces'
-import {block, transaction} from './util/staticEntities'
+import {SquidArchive, SquidContract} from './interfaces'
+import {block, transaction} from './staticEntities'
 
 export class ProcessorCodegen {
     private out: FileOutput
@@ -80,11 +80,9 @@ export class ProcessorCodegen {
         let targetPrinter = this.getTargetPrinter()
         this.out.lazy(() => {
             this.out.line(`import {EvmBatchProcessor, BatchHandlerContext} from '@subsquid/evm-processor'`)
-
             if (this.archiveRegistry) {
                 this.out.line(`import {lookupArchive} from '@subsquid/archive-registry'`)
             }
-
             if (this.mappings.size > 0) {
                 this.out.line(
                     `import {${[...this.mappings].join(`, `)}} from '${resolveModule(
@@ -93,7 +91,6 @@ export class ProcessorCodegen {
                     )}'`
                 )
             }
-
             this.out.line(`import {db, Store} from '${resolveModule(this.out.file, path.resolve(`src`, `db`))}'`)
             targetPrinter.printImports()
         })

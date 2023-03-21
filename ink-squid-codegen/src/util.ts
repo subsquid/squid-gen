@@ -1,29 +1,8 @@
 import assert from 'assert'
-import {spawn} from 'child_process'
-import fs from "fs"
+import fs from 'fs'
 import {archivesRegistrySubstrate} from '@subsquid/archive-registry'
+import {ParamType} from '@subsquid/squid-gen-targets'
 import {SquidArchive} from './interfaces'
-
-export async function spawnAsync(command: string, args: string[]) {
-    return await new Promise<number>((resolve, reject) => {
-        let proc = spawn(command, args, {
-            stdio: 'inherit',
-            shell: process.platform == 'win32',
-        })
-
-        proc.on('error', (err) => {
-            reject(err)
-        })
-
-        proc.on('close', (code) => {
-            if (code == 0) {
-                resolve(code)
-            } else {
-                reject(`error: command "${command}" exited with code ${code}`)
-            }
-        })
-    })
-}
 
 export function isURL(str: string) {
     try {
@@ -54,36 +33,39 @@ export function readInkMetadata(abi: string) {
     let content = fs.readFileSync(abi, 'utf-8')
     try {
         return JSON.parse(content)
-    } catch(e: any) {
+    } catch (e: any) {
         throw new Error(`Failed to parse ${abi}: ${e.message}`)
     }
 }
 
-function cleanOptionalType(type: string): {type: string, optional: boolean} {
-    if (!type.includes('|')) return {type, optional: false}
+function cleanOptionalType(type: string): {type: string; nullable: boolean} {
+    if (!type.includes('|')) return {type, nullable: false}
     let value = type.replace('(', '').replace(')', '').split(' ').join('')
     let [type_, undef] = value.split('|')
     assert(undef == 'undefined', `"${type}" is unexpected`)
-    return {type: type_, optional: true}
+    return {type: type_, nullable: true}
 }
 
-function tsTypeToGqlType(type: string) {
+export function parseTsType(type: string): ParamType {
     if (type === 'string') {
-        return 'String'
+        return 'string'
     } else if (type === 'Uint8Array') {
-        return 'Bytes'
+        return 'string'
     } else if (type === 'boolean') {
-        return 'Boolean'
+        return 'boolean'
     } else if (type === 'number') {
-        return 'Int'
+        return 'int'
     } else if (type === 'bigint') {
-        return 'BigInt'
+        return 'bigint'
     } else {
-        return 'JSON'
+        return 'json'
     }
 }
 
-export function parseTsType(type: string): {schemaType: string, required: boolean} {
-    let {type: type_, optional} = cleanOptionalType(type)
-    return {schemaType: tsTypeToGqlType(type_), required: !optional}
+export function getType(type: string): {type: ParamType; nullable: boolean} {
+    let {type: type_, nullable} = cleanOptionalType(type)
+    return {
+        type: parseTsType(type_),
+        nullable,
+    }
 }

@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "rm -rf lib && tsc",
-    "config2type": "json2ts src/schema.json > src/schema.ts"
+    "config2type": "json2ts src/config.schema.json > src/config.ts"
   },
   "dependencies": {
     "@subsquid/logger": "^0.3.1",
@@ -30,7 +30,9 @@
     "@subsquid/util-naming": "^0.0.2",
     "commander": "^10.0.0",
     "upath": "^2.0.1",
-    "yaml": "^2.2.1"
+    "yaml": "^2.2.1",
+    "@subsquid/squid-gen-targets": "^0.0.0",
+    "@subsquid/squid-gen-utils": "^0.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
@@ -43,9 +45,6 @@
     "@subsquid/ink-abi": "^1.1.0",
     "@subsquid/ink-typegen": "^0.2.1",
     "@subsquid/substrate-typegen": "^2.2.1",
-    "@subsquid/typeorm-codegen": "^0.3.1",
-    "@subsquid/typeorm-store": "^0.2.0",
-    "@subsquid/util-internal-json": "^0.2.0",
-    "typeorm": "^0.3.11"
+    "@subsquid/util-internal-json": "^0.2.0"
   }
 }

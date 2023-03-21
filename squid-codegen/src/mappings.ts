@@ -1,9 +1,9 @@
+import path from 'path'
 import {DataTarget} from '@subsquid/squid-gen-targets'
 import {resolveModule} from '@subsquid/squid-gen-utils'
 import {def} from '@subsquid/util-internal'
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
-import path from 'path'
-import {SquidContract} from './util/interfaces'
+import {SquidContract} from './interfaces'
 
 export class MappingCodegen {
     private out: FileOutput

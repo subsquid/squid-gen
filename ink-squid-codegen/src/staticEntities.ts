@@ -1,61 +1,61 @@
-import {SquidEntity} from './interfaces'
+import {Fragment} from '@subsquid/squid-gen-targets'
 
-export const block: SquidEntity = {
+export const block: Fragment = {
     name: 'Block',
-    fields: [
+    params: [
         {
             name: 'id',
-            schemaType: 'ID',
-            required: true,
+            type: 'id',
             indexed: false,
+            static: true,
         },
         {
             name: 'number',
-            schemaType: 'Int',
-            required: true,
+            type: 'int',
             indexed: true,
+            static: true,
         },
         {
             name: 'timestamp',
-            schemaType: 'DateTime',
-            required: true,
+            type: 'datetime',
             indexed: true,
+            static: true,
         },
     ],
 }
 
-export const event: SquidEntity = {
+export const event: Fragment = {
     name: 'Event',
-    fields: [
+    params: [
         {
             name: 'id',
-            schemaType: 'ID',
-            required: true,
+            type: 'id',
             indexed: false,
+            static: true,
         },
         {
             name: 'blockNumber',
-            schemaType: 'Int',
-            required: true,
+            type: 'int',
             indexed: true,
+            static: true,
         },
         {
             name: 'blockTimestamp',
-            schemaType: 'DateTime',
-            required: true,
+            type: 'datetime',
             indexed: true,
+            static: true,
         },
         {
             name: 'contract',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
+            static: true,
         },
         {
             name: 'eventName',
-            schemaType: 'String',
-            required: true,
+            type: 'string',
             indexed: true,
+            static: true,
         },
     ],
 }

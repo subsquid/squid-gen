@@ -1,6 +1,6 @@
 import {program} from 'commander'
 import {runProgram} from '@subsquid/util-internal'
-import {Config} from '../schema'
+import {Config} from '../config'
 import {generateSquid} from '../squid'
 import {nat} from '@subsquid/util-internal-commander'
 

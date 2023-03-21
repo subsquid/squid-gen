@@ -1,11 +1,14 @@
+import path from 'path'
+import {DataTarget} from '@subsquid/squid-gen-targets'
+import {resolveModule} from '@subsquid/squid-gen-utils'
+import {def} from '@subsquid/util-internal'
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
-import {SquidArchive, SquidContract} from '../util/interfaces'
-import {MAPPING, MODEL, resolveModule} from './paths'
+import {SquidArchive, SquidContract} from './interfaces'
+import {block} from './staticEntities'
 
 export class ProcessorCodegen {
     private out: FileOutput
 
-    private models = new Set<string>()
     private mappings = new Set<string>()
     private archiveRegistry = false
 
@@ -14,6 +17,7 @@ export class ProcessorCodegen {
         private options: {
             archive: SquidArchive
             contracts: SquidContract[]
+            dataTarget: DataTarget
             from?: number
         }
     ) {
@@ -38,75 +42,57 @@ export class ProcessorCodegen {
             this.printSubscribes()
         })
         this.out.line()
-        this.out.line(`processor.run(new TypeormDatabase(), async (ctx: BatchContext<Store, any>) => {`)
+        let targetPrinter = this.getTargetPrinter()
+        this.out.line(`processor.run(db, async (ctx: BatchContext<Store, any>) => {`)
         this.out.indentation(() => {
-            this.useModel(`Block`)
-            this.out.line(`let blocks: Block[] = []`)
-            this.out.line(`let other: Record<string, any[]> = {}`)
+            targetPrinter.printPreBatch()
             this.out.block(`for (let {header: block, items} of ctx.blocks)`, () => {
-                this.out.line(`let b = new Block({`)
-                this.out.indentation(() => {
-                    this.out.line(`id: block.id,`)
-                    this.out.line(`number: block.height,`)
-                    this.out.line(`timestamp: new Date(block.timestamp),`)
-                })
-                this.out.line(`})`)
-                this.out.line(`blocks.push(b)`)
+                targetPrinter.printFragmentSave(block, [`block.id`, `block.height`, `new Date(block.timestamp)`])
                 this.out.block(`for (let item of items)`, () => {
-                    this.out.block(`let addEntity = (e: any) =>`, () => {
-                        this.out.line(`let a = other[e.constructor.name]`)
-                        this.out.block(`if (a == null)`, () => {
-                            this.out.line(`a = []`)
-                            this.out.line(`other[e.constructor.name] = a`)
-                        })
-                        this.out.line(`a.push(e)`)
-                    })
-
                     this.out.line()
-                    this.out.block(`if (item.kind == 'event' && item.event.name == 'Contracts.ContractEmitted')`, () => {
-                        for (let contract of this.options.contracts) {
-                            this.useMapping(contract.name)
-                            this.out.block(`if (item.event.args.contract == ${contract.name}.address)`, () => {
-                                this.out.line(`let e = ${contract.name}.parse(block, item.event)`)
-                                this.out.line(`addEntity(e)`)
-                            })
+                    this.out.block(
+                        `if (item.kind == 'event' && item.event.name == 'Contracts.ContractEmitted')`,
+                        () => {
+                            for (let contract of this.options.contracts) {
+                                this.out.block(`if (item.event.args.contract == ${contract.name}.address)`, () => {
+                                    this.useMapping(contract.name)
+                                    this.out.line(`${contract.name}.parse(block, item.event)`)
+                                })
+                            }
                         }
-                    })
+                    )
                 })
             })
-            this.out.line(`await ctx.store.save(blocks)`)
-            this.out.block(`for (let e in other)`, () => {
-                this.out.line(`await ctx.store.save(other[e])`)
-            })
+            targetPrinter.printPostBatch()
         })
         this.out.line(`})`)
         return this.out.write()
     }
 
     private printImports() {
+        let targetPrinter = this.getTargetPrinter()
         this.out.lazy(() => {
             this.out.line(`import {SubstrateBatchProcessor, BatchContext} from '@subsquid/substrate-processor'`)
-            this.out.line(`import {Store, TypeormDatabase} from '@subsquid/typeorm-store'`)
             if (this.archiveRegistry) {
                 this.out.line(`import {lookupArchive} from '@subsquid/archive-registry'`)
             }
-            if (this.models.size > 0) {
-                this.out.line(
-                    `import {${[...this.models].join(`, `)}} from '${resolveModule(this.outDir.path(), MODEL)}'`
-                )
-            }
             if (this.mappings.size > 0) {
                 this.out.line(
-                    `import {${[...this.mappings].join(`, `)}} from '${resolveModule(this.outDir.path(), MAPPING)}'`
+                    `import {${[...this.mappings].join(`, `)}} from '${resolveModule(
+                        this.out.file,
+                        path.resolve(`src`, `mapping`)
+                    )}'`
                 )
             }
+            this.out.line(`import {db, Store} from '${resolveModule(this.out.file, path.resolve(`src`, `db`))}'`)
+            targetPrinter.printImports()
         })
     }
 
     private printSubscribes() {
         for (let contract of this.options.contracts) {
             this.useMapping(contract.name)
-            if (contract.events.length > 0) {
+            if (Object.keys(contract.events).length > 0) {
                 this.out.line(`.addContractsContractEmitted(${contract.name}.address, {`)
                 this.out.indentation(() => {
                     this.out.line(`data: {`)
@@ -136,11 +122,12 @@ export class ProcessorCodegen {
         this.archiveRegistry = true
     }
 
-    private useModel(str: string) {
-        this.models.add(str)
-    }
-
     private useMapping(str: string) {
         this.mappings.add(str)
+    }
+
+    @def
+    private getTargetPrinter() {
+        return this.options.dataTarget.createPrinter(this.out)
     }
 }

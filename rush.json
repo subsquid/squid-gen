@@ -447,6 +447,10 @@
     {
       "packageName": "gravatar-parquet",
       "projectFolder": "tests/gravatar-parquet"
+    },
+    {
+      "packageName": "ink-erc20",
+      "projectFolder": "tests/ink-erc20"
     }
   ]
 }

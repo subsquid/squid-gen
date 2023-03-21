@@ -1,0 +1,6 @@
+archive: shibuya
+contracts:
+  - name: ERC20
+    abi: "./abi/erc20.json"
+    address: "0x5207202c27b646ceeb294ce516d4334edafbd771f869215cb070ba51dd7e2c72"
+    events: true
