@@ -1,9 +1,10 @@
 archive: eth-mainnet
 target:
   type: parquet
-  path: s3://test/data
+  path: s3://subsquid-testing-bucket/dtest
 contracts:
-  - name: Gravatar
-    address: "0x2E645469f354BB4F5c8a05B3b30A929361cf77eC"
-    events: true
+  - name: usdt
+    address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    events:
+      - Transfer
     functions: true

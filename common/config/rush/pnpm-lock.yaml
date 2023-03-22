@@ -12,6 +12,7 @@ specifiers:
   '@subsquid/evm-typegen': ^2.1.1
   '@subsquid/file-store': ^0.2.0
   '@subsquid/file-store-parquet': ^0.3.0
+  '@subsquid/file-store-s3': ^0.2.0
   '@subsquid/ink-abi': ^1.0.1
   '@subsquid/ink-typegen': ^0.2.0
   '@subsquid/logger': ^0.3.1
@@ -43,6 +44,7 @@ dependencies:
   '@subsquid/evm-typegen': 2.1.1
   '@subsquid/file-store': 0.2.0
   '@subsquid/file-store-parquet': 0.3.0_@subsquid+file-store@0.2.0
+  '@subsquid/file-store-s3': 0.2.0_ec2339f70d1310ad9afdacddc53c86c6
   '@subsquid/ink-abi': 1.1.0
   '@subsquid/ink-typegen': 0.2.1
   '@subsquid/logger': 0.3.1
@@ -1866,6 +1868,27 @@ packages:
 
   /@subsquid/file-store-parquet/0.3.0_@subsquid+file-store@0.2.0:
     resolution: {integrity: sha512-TTHHrpj35AOFr0rQBoswOxFFTfeCp7biPkCMrOYvh/ux4c9wqfYmVGCCn8SW29EP80KEzHK0VJENiM1o5xTEUw==}
+    peerDependencies:
+      '@subsquid/file-store': ^0.2.0
+    dependencies:
+      '@subsquid/big-decimal': 0.0.0
+      '@subsquid/file-store': 0.2.0
+      '@subsquid/util-internal-json': 0.2.1
+      bson: 5.1.0
+      lz4: 0.6.5
+      lzo: 0.4.11
+      node-int64: 0.4.0
+      snappy: 7.2.2
+      thrift: 0.18.1
+      varint: 6.0.0
+      zstd.ts: 1.1.3
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
+
+  /@subsquid/file-store-parquet/0.4.0_@subsquid+file-store@0.2.0:
+    resolution: {integrity: sha512-1dY0H5z2vFjQrAKpB89JPF0G7HlSFU6AhIYYzNhDRJLwzaIAvekXsMdaJjCaMt5ucxGVwXW8j0LfNC4aTqMnZg==}
     peerDependencies:
       '@subsquid/file-store': ^0.2.0
     dependencies:
@@ -5148,7 +5171,7 @@ packages:
     dev: false
 
   file:projects/gravatar-parquet.tgz_c9c051ee1626c9fe4894e15829f5517a:
-    resolution: {integrity: sha512-LScNAVSlhpYSiqwygF5v0Q8pAi+byRFxUVjYQe1QRQ8Hkzc16LjAPoucqn18NSLZ9U8twuKYfyVPAloLc0Y12g==, tarball: file:projects/gravatar-parquet.tgz}
+    resolution: {integrity: sha512-4M1tg8rAXoQqXxgqQAmaNdqi6+6nLpnWe/nYIx49rcH5KmC5TobD2I8WI8DJVgpkfX1yV1PEYjSlJTyLdUKh7Q==, tarball: file:projects/gravatar-parquet.tgz}
     id: file:projects/gravatar-parquet.tgz
     name: '@rush-temp/gravatar-parquet'
     version: 0.0.0
@@ -5157,7 +5180,7 @@ packages:
       '@subsquid/evm-processor': 0.3.3_typeorm@0.3.12
       '@subsquid/evm-typegen': 2.1.1
       '@subsquid/file-store': 0.2.0
-      '@subsquid/file-store-parquet': 0.3.0_@subsquid+file-store@0.2.0
+      '@subsquid/file-store-parquet': 0.4.0_@subsquid+file-store@0.2.0
       '@subsquid/file-store-s3': 0.2.0_ec2339f70d1310ad9afdacddc53c86c6
       '@subsquid/util-internal-json': 0.2.1
       '@types/node': 18.15.3
@@ -5333,7 +5356,7 @@ packages:
     dev: false
 
   file:projects/squid-gen.tgz_typeorm@0.3.12:
-    resolution: {integrity: sha512-UojwcTKIaO6Ncv9qU9UUnwr7wWyGt22fcFF5zZMcbdTQzdhpXJ3QWHymnNkaUuyJfWx0zuwaWPmRu+b7wALezg==, tarball: file:projects/squid-gen.tgz}
+    resolution: {integrity: sha512-AYpgM5Mo2Akn9bIdE1Dkw5SYbw3Vd+QkYq/rxKAovfU21wcKLyaReozaweu37CbZ0Oxjbi4iKjN7PGdvqrG5Kg==, tarball: file:projects/squid-gen.tgz}
     id: file:projects/squid-gen.tgz
     name: '@rush-temp/squid-gen'
     version: 0.0.0

@@ -1,17 +1,16 @@
 import {EvmBatchProcessor, BatchHandlerContext} from '@subsquid/evm-processor'
 import {lookupArchive} from '@subsquid/archive-registry'
-import {gravatar} from './mapping'
+import {usdt} from './mapping'
 import {db, Store} from './db'
 
 const processor = new EvmBatchProcessor()
 processor.setDataSource({
     archive: lookupArchive('eth-mainnet', {type: 'EVM'}),
 })
-processor.addLog(gravatar.address, {
+processor.addLog(usdt.address, {
     filter: [
         [
-            gravatar.spec.events['NewGravatar'].topic,
-            gravatar.spec.events['UpdatedGravatar'].topic,
+            usdt.spec.events['Transfer'].topic,
         ],
     ],
     data: {
@@ -25,12 +24,21 @@ processor.addLog(gravatar.address, {
         },
     } as const,
 })
-processor.addTransaction(gravatar.address, {
+processor.addTransaction(usdt.address, {
     sighash: [
-        gravatar.spec.functions['updateGravatarImage'].sighash,
-        gravatar.spec.functions['setMythicalGravatar'].sighash,
-        gravatar.spec.functions['updateGravatarName'].sighash,
-        gravatar.spec.functions['createGravatar'].sighash,
+        usdt.spec.functions['deprecate'].sighash,
+        usdt.spec.functions['approve'].sighash,
+        usdt.spec.functions['addBlackList'].sighash,
+        usdt.spec.functions['transferFrom'].sighash,
+        usdt.spec.functions['unpause'].sighash,
+        usdt.spec.functions['pause'].sighash,
+        usdt.spec.functions['transfer'].sighash,
+        usdt.spec.functions['setParams'].sighash,
+        usdt.spec.functions['issue'].sighash,
+        usdt.spec.functions['redeem'].sighash,
+        usdt.spec.functions['removeBlackList'].sighash,
+        usdt.spec.functions['transferOwnership'].sighash,
+        usdt.spec.functions['destroyBlackFunds'].sighash,
     ],
     data: {
         transaction: {
@@ -64,8 +72,8 @@ processor.run(db, async (ctx: BatchHandlerContext<Store, any>) => {
                 })
             }
 
-            if (item.address === gravatar.address) {
-                gravatar.parse(ctx, block, item)
+            if (item.address === usdt.address) {
+                usdt.parse(ctx, block, item)
             }
         }
     }

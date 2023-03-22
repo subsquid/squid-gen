@@ -26,7 +26,7 @@ export class MappingCodegen {
         this.out.line(`export const address = '${this.options.contract.address.toLowerCase()}'`)
         this.out.line()
         this.out.line('type EventItem = LogItem<{evmLog: {topics: true, data: true}, transaction: {hash: true}}>')
-        this.out.line('type FunctionItem = TransactionItem<{transaction: {hash: true, input: true, value: true}}>')
+        this.out.line('type FunctionItem = TransactionItem<{transaction: {hash: true, input: true, value: true, status: true}}>')
         this.out.line()
         this.out.block(
             `export function parse(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: EventItem | FunctionItem)`,
@@ -158,6 +158,7 @@ export class MappingCodegen {
                                     `item.address`,
                                     `'${f}'`,
                                     `item.transaction.value`,
+                                    `Boolean(item.transaction.status)`,
                                     ...fragment.params.map((p, i) => {
                                         if (p.type === `json`) {
                                             this.useJSON()

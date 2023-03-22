@@ -70,19 +70,15 @@ export class PostgresTarget implements DataTarget {
         let schema = this.src.file('../schema.graphql')
         for (let e of this.entityMap.values()) {
             let indexedFields = e.fields.filter((f) => f.indexed).map((f) => `"${f.name}"`)
-            schema.block(
-                `type ${e.name} @entity` +
-                    (indexedFields.length > 0 ? ` @index(fields: [${indexedFields.join(', ')}])` : ``),
-                () => {
-                    for (let field of e.fields) {
-                        let str = `${field.name}: ${field.type}${field.required ? `!` : ``}`
-                        if (field.indexed) {
-                            str += ` @index`
-                        }
-                        schema.line(str)
+            schema.block(`type ${e.name} @entity`, () => {
+                for (let field of e.fields) {
+                    let str = `${field.name}: ${field.type}${field.required ? `!` : ``}`
+                    if (field.indexed) {
+                        str += ` @index`
                     }
+                    schema.line(str)
                 }
-            )
+            })
             schema.line()
         }
         schema.write()
