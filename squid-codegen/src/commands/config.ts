@@ -1,8 +1,8 @@
 import {program} from 'commander'
 import {runProgram} from '@subsquid/util-internal'
 import {read, validate} from '@subsquid/util-internal-config'
-import {Config} from '../schema'
-import CONFIG_SCHEMA from '../schema.json'
+import {Config} from '../config'
+import CONFIG_SCHEMA from '../config.schema.json'
 import {generateSquid} from '../squid'
 import path from 'path'
 import * as yaml from 'yaml'
@@ -77,6 +77,6 @@ async function readConfig(file: string): Promise<Config> {
         case '.json':
             return read(file, CONFIG_SCHEMA)
         default:
-            throw new Error(`Unsupported file extension "${path.extname(file)}"`)
+            throw new Error(`Unsupported config format "${path.extname(file)}"`)
     }
 }

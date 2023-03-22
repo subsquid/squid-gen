@@ -1,0 +1,10 @@
+archive: eth-mainnet
+target:
+  type: parquet
+  path: s3://subsquid-testing-bucket/dtest
+contracts:
+  - name: usdt
+    address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+    events:
+      - Transfer
+    functions: true

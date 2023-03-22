@@ -1,18 +1,24 @@
 import assert from 'assert'
-import path from 'upath'
+import ethers from 'ethers'
+import {register} from 'ts-node'
+import path from 'path'
 import {createLogger} from '@subsquid/logger'
+import {
+    DataTarget,
+    Fragment,
+    FragmentParam,
+    ParamType,
+    ParquetFileTarget,
+    PostgresTarget,
+} from '@subsquid/squid-gen-targets'
 import {OutDir} from '@subsquid/util-internal-code-printer'
 import {toCamelCase} from '@subsquid/util-naming'
-import {MappingCodegen} from './generators/mappings'
-import {ABI, MAPPING, UTIL, resolveModule} from './generators/paths'
-import {ProcessorCodegen} from './generators/processor'
-import {SchemaCodegen} from './generators/schema'
-import {Config} from './schema'
-import {SpecFile, SquidContract, SquidEntityField, SquidFragment} from './util/interfaces'
-import {getArchive, getGqlType, spawnAsync} from './util/misc'
-import {toEntityName, toFieldName} from './util/naming'
-import {event, function_} from './util/staticEntities'
-import {register} from 'ts-node'
+import {Config} from './config'
+import {MappingCodegen} from './mappings'
+import {ProcessorCodegen} from './processor'
+import {SpecFile, SquidContract} from './interfaces'
+import {getArchive, getType, spawnAsync} from './util'
+import {block, event, function_, transaction} from './staticEntities'
 
 export let logger = createLogger(`sqd:squidgen`)
 
@@ -29,10 +35,11 @@ export async function generateSquid(config: Config) {
     let srcOutputDir = outputDir.child(`src`)
     srcOutputDir.del()
 
-    let typegenDir = ABI
+    let typegenDir = path.join(`src`, `abi`)
 
     logger.info(`running typegen...`)
     let contracts: SquidContract[] = []
+    let fragments: Fragment[] = [block, transaction]
     for (let contract of config.contracts) {
         logger.info(`processing "${contract.name}" contract...`)
 
@@ -70,21 +77,31 @@ export async function generateSquid(config: Config) {
             functions,
             range,
         })
+        fragments.push(...Object.values(events))
+        fragments.push(...Object.values(functions))
     }
 
-    logger.info(`generating schema...`)
-
-    new SchemaCodegen(outputDir, contracts).generate()
-
     logger.info(`running codegen...`)
-    await spawnAsync(`squid-typeorm-codegen`, [])
+    let dataTarget: DataTarget
+    switch (config.target.type) {
+        case 'postgres':
+            dataTarget = new PostgresTarget(srcOutputDir, fragments, {})
+            break
+        case 'parquet':
+            dataTarget = new ParquetFileTarget(srcOutputDir, fragments, {path: config.target.path})
+            break
+    }
+    await dataTarget.generate()
 
     logger.info(`generating processor...`)
-    srcOutputDir.add(`${resolveModule(srcOutputDir.path(), UTIL)}.ts`, [__dirname, '../support/util.ts'])
+    srcOutputDir.add(
+        path.relative(srcOutputDir.path(), path.resolve(`src`, `util.ts`)),
+        path.join(__dirname, `..`, `support`, `util.ts`)
+    )
 
-    let mappingsOutputDir = srcOutputDir.child(resolveModule(srcOutputDir.path(), MAPPING))
+    let mappingsOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'mapping')))
     for (let contract of contracts) {
-        new MappingCodegen(mappingsOutputDir, contract).generate()
+        new MappingCodegen(mappingsOutputDir, {contract, dataTarget}).generate()
     }
 
     let mappingsIndex = mappingsOutputDir.file('index.ts')
@@ -94,189 +111,84 @@ export async function generateSquid(config: Config) {
     mappingsIndex.write()
 
     new ProcessorCodegen(srcOutputDir, {
-        archive,
         contracts,
+        dataTarget,
+        archive,
     }).generate()
 }
 
 function validateContractNames(config: Config) {
-    // let names = new Set<string>()
     for (let contract of config.contracts) {
         let name = toCamelCase(contract.name)
         assert(/^[a-zA-Z0-9]+$/.test(name), `Invalid contract name "${contract.name}"`)
-        // assert(!names.has(name), `Duplicate contract name "${contract.name}"`)
-        // names.add(name)
     }
 }
 
 function getEvents(specFile: SpecFile, contractName: string, names: string[] | true) {
-    let fragments: Record<string, SquidFragment> = {}
-
     let items = specFile.events
 
-    let overloads: Record<string, number> = {}
-
+    let fragments: Record<string, Fragment> = {}
     for (let name in items) {
         let fragment = items[name].fragment
 
-        let entityName = toEntityName(contractName, `event`, fragment.name)
-        while (true) {
-            let overloadIndex = overloads[entityName]
-            if (overloadIndex == null) {
-                let ols = specFile.abi.fragments.filter(
-                    (f) => f.type === fragment.type && toEntityName(contractName, `event`, f.name) === entityName
-                )
-                if (ols.length > 1) {
-                    overloadIndex = overloads[entityName] = 0
-                } else if (ols.length > 0 && entityName !== toEntityName(contractName, `event`, fragment.name)) {
-                    overloadIndex = overloads[entityName] = 0
-                } else {
-                    break
-                }
-            }
-            overloads[entityName] += 1
-            entityName += overloadIndex
-        }
-
-        let params: SquidEntityField[] = []
-        let overlaps: Record<string, number> = {}
+        let params: FragmentParam[] = [...event.params]
         for (let i = 0; i < fragment.inputs.length; i++) {
             let input = fragment.inputs[i]
-            let fieldName: string
-            if (input.name) {
-                fieldName = toFieldName(input.name)
-            } else {
-                fieldName = `arg${i}`
-            }
-            while (true) {
-                let overlapIndex = overlaps[fieldName]
-                if (overlapIndex == null) {
-                    let ols = fragment.inputs.filter((i) => i.name != null && toFieldName(i.name) === fieldName)
-                    if (ols.length > 1 || event.fields.some((f) => f.name === fieldName)) {
-                        overlapIndex = overlaps[fieldName] = 0
-                    } else if (ols.length > 0 && (input.name == null || fieldName !== toFieldName(input.name))) {
-                        overlapIndex = overlaps[fieldName] = 0
-                    } else {
-                        break
-                    }
-                }
-                overlaps[fieldName] += 1
-                let prevName = fieldName
-                fieldName += overlapIndex
-                logger.warn(`"${prevName}" field renamed to "${fieldName}" for ${entityName} due to collision`)
-            }
 
             params.push({
-                name: fieldName,
+                name: input.name || `param${i}`,
                 indexed: input.indexed,
-                schemaType: getGqlType(input),
-                required: true,
+                type: getType(input),
+                nullable: false,
             })
         }
 
         fragments[name] = {
-            name,
-            entity: {
-                name: entityName,
-                fields: params,
-            },
+            name: `${contractName}_event_${fragment.name}`,
+            params,
         }
     }
 
-    if (names === true) {
-        names = Object.keys(fragments)
-    }
+    names = names == true ? Object.keys(items) : names
 
-    let res: SquidFragment[] = []
+    let filtered: Record<string, Fragment> = {}
     for (let name of names) {
         let fragment = fragments[name]
         assert(fragment != null, `Event "${name}" doesn't exist for this contract`)
 
-        res.push(fragment)
+        filtered[name] = fragment
     }
 
-    return res
+    return filtered
 }
 
 function getFunctions(specFile: SpecFile, contractName: string, names: string[] | true) {
-    let fragments: Record<string, SquidFragment> = {}
-
     let items = specFile.functions
 
-    let overloads: Record<string, number> = {}
-
+    let fragments: Record<string, Fragment> = {}
     for (let name in items) {
         let fragment = items[name].fragment
 
-        let entityName = toEntityName(contractName, `function`, fragment.name)
-        while (true) {
-            let overloadIndex = overloads[entityName]
-            if (overloadIndex == null) {
-                let ols = specFile.abi.fragments.filter(
-                    (f) => f.type === fragment.type && toEntityName(contractName, `function`, f.name) === entityName
-                )
-                if (ols.length > 1) {
-                    overloadIndex = overloads[entityName] = 0
-                } else if (ols.length > 0 && entityName !== toEntityName(contractName, `function`, fragment.name)) {
-                    overloadIndex = overloads[entityName] = 0
-                } else {
-                    break
-                }
-            }
-            overloads[entityName] += 1
-            entityName += overloadIndex
-        }
-
-        let params: SquidEntityField[] = []
-        let overlaps: Record<string, number> = {}
+        let params: FragmentParam[] = [...function_.params]
         for (let i = 0; i < fragment.inputs.length; i++) {
             let input = fragment.inputs[i]
-            let fieldName: string
-            if (input.name) {
-                fieldName = toFieldName(input.name)
-            } else {
-                fieldName = `arg${i}`
-            }
-            while (true) {
-                let overlapIndex = overlaps[fieldName]
-                if (overlapIndex == null) {
-                    let ols = fragment.inputs.filter((i) => i.name != null && toFieldName(i.name) === fieldName)
-                    if (ols.length > 1 || function_.fields.some((f) => f.name === fieldName)) {
-                        overlapIndex = overlaps[fieldName] = 0
-                    } else if (ols.length > 0 && (input.name == null || fieldName !== toFieldName(input.name))) {
-                        overlapIndex = overlaps[fieldName] = 0
-                    } else {
-                        break
-                    }
-                }
-                overlaps[fieldName] += 1
-                let prevName = fieldName
-                fieldName += overlapIndex
-                logger.warn(`"${prevName}" field renamed to "${fieldName}" for ${entityName} due to collision`)
-            }
-
             params.push({
-                name: fieldName,
+                name: input.name || `param${i}`,
                 indexed: input.indexed,
-                schemaType: getGqlType(input),
-                required: true,
+                type: getType(input),
+                nullable: false,
             })
         }
 
         fragments[name] = {
-            name,
-            entity: {
-                name: entityName,
-                fields: params,
-            },
+            name: `${contractName}_function_${fragment.name}`,
+            params,
         }
     }
 
-    if (names === true) {
-        names = Object.keys(fragments)
-    }
+    names = names == true ? Object.keys(items) : names
 
-    let res: SquidFragment[] = []
+    let filtered: Record<string, Fragment> = {}
     for (let name of names) {
         let fragment = fragments[name]
         assert(fragment != null, `Function "${name}" doesn't exist for this contract`)
@@ -286,8 +198,8 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
             continue
         }
 
-        res.push(fragment)
+        filtered[name] = fragment
     }
 
-    return res
+    return filtered
 }

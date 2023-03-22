@@ -1,19 +1,19 @@
 import assert from 'assert'
-import path from 'upath'
+import path from 'path'
+import {AbiDescription} from '@subsquid/ink-abi/lib/abi-description'
+import {InkProject, getInkProject} from '@subsquid/ink-abi/lib/metadata/validator'
 import {createLogger} from '@subsquid/logger'
+import {DataTarget, Fragment, FragmentParam, ParquetFileTarget, PostgresTarget} from '@subsquid/squid-gen-targets'
+import {spawnAsync} from '@subsquid/squid-gen-utils'
+import {Interfaces} from '@subsquid/substrate-typegen/lib/ifs'
 import {OutDir} from '@subsquid/util-internal-code-printer'
 import {toCamelCase} from '@subsquid/util-naming'
-import {AbiDescription} from "@subsquid/ink-abi/lib/abi-description"
-import {InkProject, getInkProject} from '@subsquid/ink-abi/lib/metadata/validator'
-import {MappingCodegen} from './generators/mappings'
-import {ABI, MAPPING, resolveModule} from './generators/paths'
-import {ProcessorCodegen} from './generators/processor'
-import {SchemaCodegen} from './generators/schema'
-import {Config} from './schema'
-import {SquidContract, SquidEntityField, SquidFragment} from './util/interfaces'
-import {getArchive, readInkMetadata, parseTsType, spawnAsync} from './util/misc'
-import {toEntityName} from './util/naming'
-import {Interfaces} from "@subsquid/substrate-typegen/lib/ifs"
+import {Config} from './config'
+import {SquidContract} from './interfaces'
+import {MappingCodegen} from './mappings'
+import {ProcessorCodegen} from './processor'
+import {block, event} from './staticEntities'
+import {getArchive, getType, readInkMetadata} from './util'
 
 export let logger = createLogger(`sqd:squidgen`)
 
@@ -28,10 +28,11 @@ export async function generateSquid(config: Config) {
     let srcOutputDir = outputDir.child(`src`)
     srcOutputDir.del()
 
-    let typegenDir = ABI
+    let typegenDir = path.join(`src`, `abi`)
 
     logger.info(`running typegen...`)
     let contracts: SquidContract[] = []
+    let fragments: Fragment[] = [block]
     for (let contract of config.contracts) {
         logger.info(`processing "${contract.address}" contract...`)
 
@@ -44,12 +45,9 @@ export async function generateSquid(config: Config) {
         }
 
         let spec = contract.abi || contract.address
-        let typegenArgs = [
-            '--abi', contract.abi,
-            '--output', path.join(cwd, typegenDir, contract.name + '.ts')
-        ]
+        let typegenArgs = ['--abi', contract.abi, '--output', path.join(cwd, typegenDir, contract.name + '.ts')]
 
-        await spawnAsync('/home/tmcgroul/projects/squid-wasm-abi-template/node_modules/.bin/squid-ink-typegen', typegenArgs)
+        await spawnAsync('squid-ink-typegen', typegenArgs)
 
         spec = path.basename(spec, '.json')
 
@@ -61,21 +59,30 @@ export async function generateSquid(config: Config) {
             events,
             range: contract.range,
         })
+        fragments.push(...Object.values(events))
     }
 
-    logger.info(`generating schema...`)
-
-    new SchemaCodegen(outputDir, contracts).generate()
-
     logger.info(`running codegen...`)
-
-    await spawnAsync(`/home/tmcgroul/projects/squid-wasm-abi-template/node_modules/.bin/squid-typeorm-codegen`, [])
+    let dataTarget: DataTarget
+    switch (config.target.type) {
+        case 'postgres':
+            dataTarget = new PostgresTarget(srcOutputDir, fragments, {})
+            break
+        case 'parquet':
+            dataTarget = new ParquetFileTarget(srcOutputDir, fragments, {path: config.target.path})
+            break
+    }
+    await dataTarget.generate()
 
     logger.info(`generating processor...`)
+    srcOutputDir.add(
+        path.relative(srcOutputDir.path(), path.resolve(`src`, `util.ts`)),
+        path.join(__dirname, `..`, `support`, `util.ts`)
+    )
 
-    let mappingsOutputDir = srcOutputDir.child(resolveModule(srcOutputDir.path(), MAPPING))
+    let mappingsOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'mapping')))
     for (let contract of contracts) {
-        new MappingCodegen(mappingsOutputDir, contract).generate()
+        new MappingCodegen(mappingsOutputDir, {contract, dataTarget}).generate()
     }
 
     let mappingsIndex = mappingsOutputDir.file('index.ts')
@@ -85,8 +92,9 @@ export async function generateSquid(config: Config) {
     mappingsIndex.write()
 
     new ProcessorCodegen(srcOutputDir, {
-        archive,
         contracts,
+        dataTarget,
+        archive,
     }).generate()
 }
 
@@ -103,38 +111,35 @@ function getEvents(project: InkProject, contractName: string, names: string[] | 
     let description = new AbiDescription(project)
     let ifs = new Interfaces(description.types(), new Map())
 
-    let events: Record<string, SquidFragment> = {}
-    for (let event of project.spec.events) {
-        let entityName = toEntityName(contractName, `event`, event.label)
-        let args: SquidEntityField[] = event.args.map(arg => {
-            let {schemaType, required} = parseTsType(ifs.use(arg.type.type))
-            return {
-                name: arg.label,
-                indexed: arg.indexed,
-                schemaType,
-                required,
-            }
-        })
+    let fragments: Record<string, Fragment> = {}
+    for (let fragment of project.spec.events) {
+        let params: FragmentParam[] = [...event.params]
+        for (let param of fragment.args) {
+            let {type, nullable} = getType(ifs.use(param.type.type))
 
-        events[event.label] = {
-            name: event.label,
-            entity: {
-                name: entityName,
-                fields: args,
-            }
+            params.push({
+                name: param.label,
+                indexed: param.indexed,
+                type,
+                nullable,
+            })
+        }
+
+        fragments[fragment.label] = {
+            name: `${contractName}_event_${fragment.label}`,
+            params,
         }
     }
 
-    if (names === true) {
-        names = Object.keys(events)
-    }
+    names = names == true ? Object.keys(fragments) : names
 
-    let fragments: SquidFragment[] = []
+    let filtered: Record<string, Fragment> = {}
     for (let name of names) {
-        let fragment = events[name]
+        let fragment = fragments[name]
         assert(fragment != null, `Event "${name}" doesn't exist for this contract`)
-        fragments.push(fragment)
+
+        filtered[name] = fragment
     }
 
-    return fragments
+    return filtered
 }

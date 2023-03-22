@@ -4,8 +4,10 @@
     "target": "es2020",
     "outDir": "lib",
     "rootDir": "src",
+    "allowJs": true,
     "strict": true,
-    "declaration": false,
+    "declaration": true,
+    "declarationMap": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -16,5 +18,5 @@
   "include": ["src"],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }
