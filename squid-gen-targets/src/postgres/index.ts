@@ -114,8 +114,8 @@ class PostgresTargetPrinter implements DataTargetPrinter {
 
     printPostBatch(): void {
         this.useBuffer()
-        this.out.block(`for (let e of EntityBuffer.flush())`, () => {
-            this.out.line(`await ctx.store.insert(e)`)
+        this.out.block(`for (let entities of EntityBuffer.flush())`, () => {
+            this.out.line(`await ctx.store.insert(entities)`)
         })
     }
 

@@ -126,7 +126,7 @@ function getEvents(project: InkProject, contractName: string, names: string[] | 
         }
 
         fragments[fragment.label] = {
-            name: `${contractName}_event_${fragment.name}`,
+            name: `${contractName}_event_${fragment.label}`,
             params,
         }
     }
