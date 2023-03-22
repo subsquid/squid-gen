@@ -113,7 +113,7 @@ export class ParquetFileTarget implements DataTarget {
             } else {
                 assert(url.protocol == 's3:')
                 destType = 's3'
-                db.line(`dest: new S3Dest('${url.pathname}', '${url.host}'),`)
+                db.line(`dest: new S3Dest('${url.pathname.replace(/^\/+/g, '')}', '${url.host}'),`)
             }
 
             db.line(`chunkSizeMb: 40,`)
