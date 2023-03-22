@@ -3,7 +3,14 @@ import ethers from 'ethers'
 import {register} from 'ts-node'
 import path from 'path'
 import {createLogger} from '@subsquid/logger'
-import {Fragment, FragmentParam, ParamType, ParquetFileTarget, PostgresTarget} from '@subsquid/squid-gen-targets'
+import {
+    DataTarget,
+    Fragment,
+    FragmentParam,
+    ParamType,
+    ParquetFileTarget,
+    PostgresTarget,
+} from '@subsquid/squid-gen-targets'
 import {OutDir} from '@subsquid/util-internal-code-printer'
 import {toCamelCase} from '@subsquid/util-naming'
 import {Config} from './config'
@@ -75,7 +82,15 @@ export async function generateSquid(config: Config) {
     }
 
     logger.info(`running codegen...`)
-    let dataTarget = new ParquetFileTarget(srcOutputDir, fragments, {dest: './data'})
+    let dataTarget: DataTarget
+    switch (config.target.type) {
+        case 'postgres':
+            dataTarget = new PostgresTarget(srcOutputDir, fragments, {})
+            break
+        case 'parquet':
+            dataTarget = new ParquetFileTarget(srcOutputDir, fragments, {path: config.target.path})
+            break
+    }
     await dataTarget.generate()
 
     logger.info(`generating processor...`)

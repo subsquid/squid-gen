@@ -77,6 +77,6 @@ async function readConfig(file: string): Promise<Config> {
         case '.json':
             return read(file, CONFIG_SCHEMA)
         default:
-            throw new Error(`Unsupported file extension "${path.extname(file)}"`)
+            throw new Error(`Unsupported config format "${path.extname(file)}"`)
     }
 }

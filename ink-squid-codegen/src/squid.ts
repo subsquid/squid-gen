@@ -3,7 +3,7 @@ import path from 'path'
 import {AbiDescription} from '@subsquid/ink-abi/lib/abi-description'
 import {InkProject, getInkProject} from '@subsquid/ink-abi/lib/metadata/validator'
 import {createLogger} from '@subsquid/logger'
-import {Fragment, FragmentParam, PostgresTarget} from '@subsquid/squid-gen-targets'
+import {DataTarget, Fragment, FragmentParam, ParquetFileTarget, PostgresTarget} from '@subsquid/squid-gen-targets'
 import {spawnAsync} from '@subsquid/squid-gen-utils'
 import {Interfaces} from '@subsquid/substrate-typegen/lib/ifs'
 import {OutDir} from '@subsquid/util-internal-code-printer'
@@ -63,7 +63,15 @@ export async function generateSquid(config: Config) {
     }
 
     logger.info(`running codegen...`)
-    let dataTarget = new PostgresTarget(srcOutputDir, fragments, {})
+    let dataTarget: DataTarget
+    switch (config.target.type) {
+        case 'postgres':
+            dataTarget = new PostgresTarget(srcOutputDir, fragments, {})
+            break
+        case 'parquet':
+            dataTarget = new ParquetFileTarget(srcOutputDir, fragments, {path: config.target.path})
+            break
+    }
     await dataTarget.generate()
 
     logger.info(`generating processor...`)

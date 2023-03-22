@@ -9,7 +9,7 @@ import assert from 'assert'
 type TableMap = Map<Fragment, Table>
 
 interface ParquetTargetOptions {
-    dest: string
+    path: string
 }
 
 export class ParquetFileTarget implements DataTarget {

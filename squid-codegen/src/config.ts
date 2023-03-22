@@ -13,6 +13,15 @@ export interface Config {
    * Source Squid Archive for an EVM network. Can be a URL or an alias. See docs.subsquid.io/archives/overview.
    */
   archive: string;
+  target:
+    | {
+        type: "postgres";
+        path?: null;
+      }
+    | {
+        type: "parquet";
+        path: string;
+      };
   /**
    * ContractJSONs defining the exact data to extract from each contract.
    */

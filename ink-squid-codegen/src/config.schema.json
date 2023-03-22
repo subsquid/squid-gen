@@ -8,6 +8,41 @@
       "description": "Source Squid Archive for a network that supports 'contracts' pallet. Can be a URL or an alias. See docs.subsquid.io/archives/overview.",
       "type": "string"
     },
+    "target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "postgres"
+            },
+            "path": {
+              "type": "null"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "parquet"
+            },
+            "path": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "path"
+          ]
+        }
+      ]
+    },
     "contracts": {
       "description": "ContractJSONs defining the exact data to extract from each contract.",
       "type": "array",
@@ -65,6 +100,7 @@
   "additionalProperties": false,
   "required": [
     "archive",
-    "contracts"
+    "contracts",
+    "target"
   ]
 }
