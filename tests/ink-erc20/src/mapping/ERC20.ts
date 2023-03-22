@@ -1,6 +1,6 @@
 import {SubstrateBlock, ContractsContractEmittedEvent} from '@subsquid/substrate-processor'
 import {EntityBuffer} from '../entityBuffer'
-import {Erc20EventUndefined0, Erc20EventUndefined1} from '../model'
+import {Erc20EventTransfer, Erc20EventApproval} from '../model'
 import * as spec from '../abi/ERC20'
 import {normalize} from '../util'
 
@@ -11,7 +11,7 @@ export function parse(block: SubstrateBlock, event: ContractsContractEmittedEven
     switch (e.__kind) {
         case 'Transfer': {
             EntityBuffer.add(
-                new Erc20EventUndefined0({
+                new Erc20EventTransfer({
                     id: event.id,
                     blockNumber: block.height,
                     blockTimestamp: new Date(block.timestamp),
@@ -25,7 +25,7 @@ export function parse(block: SubstrateBlock, event: ContractsContractEmittedEven
         }
         case 'Approval': {
             EntityBuffer.add(
-                new Erc20EventUndefined1({
+                new Erc20EventApproval({
                     id: event.id,
                     blockNumber: block.height,
                     blockTimestamp: new Date(block.timestamp),

@@ -139,7 +139,7 @@ export class MappingCodegen {
     private printFunctionsParser() {
         let targetPrinter = this.getTargetPrinter()
         this.out.block(
-            `function parseFunction(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item: FunctionItem)`,
+            `function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: FunctionItem)`,
             () => {
                 this.out.block(`try`, () => {
                     this.out.block(`switch (item.transaction.input.slice(0, 10))`, () => {

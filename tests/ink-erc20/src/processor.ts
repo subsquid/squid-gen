@@ -33,7 +33,7 @@ processor.run(db, async (ctx: BatchContext<Store, any>) => {
             }
         }
     }
-    for (let e of EntityBuffer.flush()) {
-        await ctx.store.insert(e)
+    for (let entities of EntityBuffer.flush()) {
+        await ctx.store.insert(entities)
     }
 })

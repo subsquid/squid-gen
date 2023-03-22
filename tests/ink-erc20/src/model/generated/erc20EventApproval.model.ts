@@ -1,10 +1,10 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 import * as marshal from "./marshal"
 
-@Index_(["blockNumber", "blockTimestamp", "contract", "eventName", "from", "to"], {unique: false})
+@Index_(["blockNumber", "blockTimestamp", "contract", "eventName", "owner", "spender"], {unique: false})
 @Entity_()
-export class Erc20EventUndefined0 {
-    constructor(props?: Partial<Erc20EventUndefined0>) {
+export class Erc20EventApproval {
+    constructor(props?: Partial<Erc20EventApproval>) {
         Object.assign(this, props)
     }
 
@@ -28,11 +28,11 @@ export class Erc20EventUndefined0 {
 
     @Index_()
     @Column_("text", {nullable: false})
-    from!: string
+    owner!: string
 
     @Index_()
     @Column_("text", {nullable: false})
-    to!: string
+    spender!: string
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     value!: bigint

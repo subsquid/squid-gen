@@ -4,7 +4,7 @@ type Block @entity @index(fields: ["number", "timestamp"]) {
     timestamp: DateTime! @index
 }
 
-type Erc20EventUndefined0 @entity @index(fields: ["blockNumber", "blockTimestamp", "contract", "eventName", "from", "to"]) {
+type Erc20EventTransfer @entity @index(fields: ["blockNumber", "blockTimestamp", "contract", "eventName", "from", "to"]) {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
@@ -15,7 +15,7 @@ type Erc20EventUndefined0 @entity @index(fields: ["blockNumber", "blockTimestamp
     value: BigInt!
 }
 
-type Erc20EventUndefined1 @entity @index(fields: ["blockNumber", "blockTimestamp", "contract", "eventName", "owner", "spender"]) {
+type Erc20EventApproval @entity @index(fields: ["blockNumber", "blockTimestamp", "contract", "eventName", "owner", "spender"]) {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
