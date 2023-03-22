@@ -11,7 +11,8 @@
     "dotenv": "^16.0.0",
     "ethers": "^5.7.2",
     "@subsquid/file-store": "^0.2.0",
-    "@subsquid/file-store-parquet": "^0.3.0"
+    "@subsquid/file-store-parquet": "^0.3.0",
+    "@subsquid/file-store-s3": "^0.2.0"
   },
   "devDependencies": {
     "@subsquid/evm-typegen": "^2.1.1",

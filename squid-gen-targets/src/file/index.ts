@@ -106,10 +106,10 @@ export class ParquetFileTarget implements DataTarget {
         db.indentation(() => {
             db.line(`tables,`)
 
-            let url = parseUrl(this.options.dest)
+            let url = parseUrl(this.options.path)
             if (url == null) {
                 destType = 'local'
-                db.line(`dest: new LocalDest('${this.options.dest}'),`)
+                db.line(`dest: new LocalDest('${this.options.path}'),`)
             } else {
                 assert(url.protocol == 's3:')
                 destType = 's3'
@@ -119,6 +119,8 @@ export class ParquetFileTarget implements DataTarget {
             db.line(`chunkSizeMb: 40,`)
             db.line(`syncIntervalBlocks: 1000,`)
         })
+        db.line(`})`)
+        db.line()
         db.line(`export type Store = Store_<typeof db extends Database<infer R, any> ? R : never>`)
         db.write()
     }

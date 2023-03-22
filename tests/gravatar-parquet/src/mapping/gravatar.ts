@@ -60,7 +60,7 @@ function parseEvent(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: Eve
     }
 }
 
-function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: FunctionItem) {
+function parseFunction(ctx: CommonHandlerContext<unknown>, block: EvmBlock, item: FunctionItem) {
     try {
         switch (item.transaction.input.slice(0, 10)) {
             case spec.functions['updateGravatarImage'].sighash: {

@@ -45,6 +45,9 @@ runProgram(async function () {
 
     let config: Config = {
         archive: opts.archive,
+        target: {
+            type: "postgres"
+        },
         contracts: [
             {
                 name: opts.name,

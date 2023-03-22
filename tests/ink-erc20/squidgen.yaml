@@ -1,4 +1,6 @@
 archive: shibuya
+target:
+  type: postgres
 contracts:
   - name: ERC20
     abi: "./abi/erc20.json"
