@@ -20,7 +20,7 @@
     "dotenv": "^16.0.3",
     "pg": "8.8.0",
     "typeorm": "^0.3.11",
-    "@subsquid/ink-squid-codegen": "^0.0.0"
+    "@subsquid/squid-gen-evm": "^0.0.0"
   },
   "devDependencies": {
     "@subsquid/ink-typegen": "^0.2.0",

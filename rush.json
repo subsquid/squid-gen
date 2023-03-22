@@ -417,14 +417,14 @@
     //   // "versionPolicyName": ""
     // },
     {
-      "packageName": "@subsquid/squid-gen",
-      "projectFolder": "squid-codegen",
+      "packageName": "@subsquid/squid-gen-evm",
+      "projectFolder": "squid-gen-evm",
       "shouldPublish": true,
       "versionPolicyName": "npm"
     },
     {
-      "packageName": "@subsquid/ink-squid-codegen",
-      "projectFolder": "ink-squid-codegen",
+      "packageName": "@subsquid/squid-gen-ink",
+      "projectFolder": "squid-gen-ink",
       "shouldPublish": true,
       "versionPolicyName": "npm"
     },
