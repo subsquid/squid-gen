@@ -1,4 +1,4 @@
-import {Fragment} from '@subsquid/squid-gen-targets'
+import {Fragment} from '@subsquid/squid-gen-utils'
 
 export const block: Fragment = {
     name: 'block',

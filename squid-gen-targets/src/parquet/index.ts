@@ -1,10 +1,11 @@
 import {isDeepStrictEqual} from 'util'
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
-import {DataTarget, DataTargetPrinter, Fragment} from '../interfaces'
+import {DataTarget, DataTargetPrinter} from '../interfaces'
 import {Table, TableField} from './table'
 import {toTableName, toFieldName, toParquetType, toAliasName} from './naming'
 import {URL} from 'url'
 import assert from 'assert'
+import {Fragment} from '@subsquid/squid-gen-utils'
 
 type TableMap = Map<Fragment, Table>
 

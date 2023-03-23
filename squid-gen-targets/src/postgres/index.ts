@@ -1,8 +1,8 @@
 import path from 'path'
 import {isDeepStrictEqual} from 'util'
-import {resolveModule, spawnAsync} from '@subsquid/squid-gen-utils'
+import {Fragment, resolveModule, spawnAsync} from '@subsquid/squid-gen-utils'
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
-import {DataTarget, DataTargetPrinter, Fragment} from '../interfaces'
+import {DataTarget, DataTargetPrinter} from '../interfaces'
 import {Entity, EntityField} from './entity'
 import {toEntityName, toFieldName, toGqlType} from './naming'
 

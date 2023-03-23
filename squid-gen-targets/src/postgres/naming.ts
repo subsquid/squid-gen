@@ -1,5 +1,5 @@
+import {ParamType} from '@subsquid/squid-gen-utils'
 import {toCamelCase, toSnakeCase} from '@subsquid/util-naming'
-import {ParamType} from '../interfaces'
 
 export function toEntityName(str: string) {
     let name = toSnakeCase(str)

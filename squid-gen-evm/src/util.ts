@@ -2,7 +2,7 @@ import {spawn} from 'child_process'
 import {archivesRegistryEVM} from '@subsquid/archive-registry'
 import {SquidArchive} from './interfaces'
 import ethers from 'ethers'
-import {ParamType} from '@subsquid/squid-gen-targets'
+import {ParamType} from '@subsquid/squid-gen-utils'
 
 export async function spawnAsync(command: string, args: string[]) {
     return await new Promise<number>((resolve, reject) => {

@@ -1,16 +1,8 @@
 import assert from 'assert'
-import ethers from 'ethers'
 import {register} from 'ts-node'
 import path from 'path'
 import {createLogger} from '@subsquid/logger'
-import {
-    DataTarget,
-    Fragment,
-    FragmentParam,
-    ParamType,
-    ParquetFileTarget,
-    PostgresTarget,
-} from '@subsquid/squid-gen-targets'
+import {DataTarget, ParquetFileTarget, PostgresTarget} from '@subsquid/squid-gen-targets'
 import {OutDir} from '@subsquid/util-internal-code-printer'
 import {toCamelCase} from '@subsquid/util-naming'
 import {Config} from './config'
@@ -19,6 +11,7 @@ import {ProcessorCodegen} from './processor'
 import {SpecFile, SquidContract} from './interfaces'
 import {getArchive, getType, spawnAsync} from './util'
 import {block, event, function_, transaction} from './staticEntities'
+import {Fragment, FragmentParam} from '@subsquid/squid-gen-utils'
 
 export let logger = createLogger(`sqd:squidgen`)
 

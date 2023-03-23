@@ -1,7 +1,7 @@
 import assert from 'assert'
 import fs from 'fs'
 import {archivesRegistrySubstrate} from '@subsquid/archive-registry'
-import {ParamType} from '@subsquid/squid-gen-targets'
+import {ParamType} from '@subsquid/squid-gen-utils'
 import {SquidArchive} from './interfaces'
 
 export function isURL(str: string) {
