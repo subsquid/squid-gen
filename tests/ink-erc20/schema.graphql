@@ -1,21 +1,21 @@
-type Block @entity @index(fields: ["number", "timestamp"]) {
+type Block @entity {
     id: ID!
     number: Int! @index
     timestamp: DateTime! @index
 }
 
-type Erc20EventTransfer @entity @index(fields: ["blockNumber", "blockTimestamp", "contract", "eventName", "from", "to"]) {
+type Erc20EventTransfer @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
     contract: String! @index
     eventName: String! @index
-    from: String! @index
-    to: String! @index
+    from: String @index
+    to: String @index
     value: BigInt!
 }
 
-type Erc20EventApproval @entity @index(fields: ["blockNumber", "blockTimestamp", "contract", "eventName", "owner", "spender"]) {
+type Erc20EventApproval @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index

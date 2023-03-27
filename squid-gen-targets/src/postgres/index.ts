@@ -59,7 +59,7 @@ export class PostgresTarget implements DataTarget {
                     name: fieldName,
                     type: toGqlType(param.type),
                     indexed: param.indexed,
-                    required: true,
+                    required: !param.nullable,
                 })
             }
             this.entityMap.set(fragment, {name: entityName, fields})

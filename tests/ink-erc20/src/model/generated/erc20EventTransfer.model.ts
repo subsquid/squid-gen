@@ -1,7 +1,6 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 import * as marshal from "./marshal"
 
-@Index_(["blockNumber", "blockTimestamp", "contract", "eventName", "from", "to"], {unique: false})
 @Entity_()
 export class Erc20EventTransfer {
     constructor(props?: Partial<Erc20EventTransfer>) {
@@ -11,6 +10,7 @@ export class Erc20EventTransfer {
     @PrimaryColumn_()
     id!: string
 
+    @Index_()
     @Column_("int4", {nullable: false})
     blockNumber!: number
 
@@ -27,12 +27,12 @@ export class Erc20EventTransfer {
     eventName!: string
 
     @Index_()
-    @Column_("text", {nullable: false})
-    from!: string
+    @Column_("text", {nullable: true})
+    from!: string | undefined | null
 
     @Index_()
-    @Column_("text", {nullable: false})
-    to!: string
+    @Column_("text", {nullable: true})
+    to!: string | undefined | null
 
     @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
     value!: bigint

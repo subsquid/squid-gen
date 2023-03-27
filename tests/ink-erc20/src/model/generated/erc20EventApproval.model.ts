@@ -1,7 +1,6 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 import * as marshal from "./marshal"
 
-@Index_(["blockNumber", "blockTimestamp", "contract", "eventName", "owner", "spender"], {unique: false})
 @Entity_()
 export class Erc20EventApproval {
     constructor(props?: Partial<Erc20EventApproval>) {
@@ -11,6 +10,7 @@ export class Erc20EventApproval {
     @PrimaryColumn_()
     id!: string
 
+    @Index_()
     @Column_("int4", {nullable: false})
     blockNumber!: number
 

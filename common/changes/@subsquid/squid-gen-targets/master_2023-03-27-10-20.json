@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-targets",
+      "comment": "fix nullable fields for postgres target",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-targets"
+}
