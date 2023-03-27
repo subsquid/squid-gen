@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@subsquid/archive-registry": "2.1.9",
-    "@subsquid/evm-processor": "^0.3.3",
+    "@subsquid/evm-processor": "^0.4.0",
     "@subsquid/util-internal-json": "^0.2.1",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2",

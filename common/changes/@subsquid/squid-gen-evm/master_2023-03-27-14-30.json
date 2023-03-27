@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-evm",
+      "comment": "bump evm-processor",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-evm"
+}

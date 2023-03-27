@@ -11,7 +11,7 @@ specifiers:
   '@rush-temp/squid-gen-utils': file:./projects/squid-gen-utils.tgz
   '@rush-temp/workspace': file:./projects/workspace.tgz
   '@subsquid/archive-registry': 2.1.9
-  '@subsquid/evm-processor': ^0.3.3
+  '@subsquid/evm-processor': ^0.4.0
   '@subsquid/evm-typegen': ^2.1.1
   '@subsquid/file-store': ^0.2.0
   '@subsquid/file-store-parquet': ^0.4.0
@@ -60,7 +60,7 @@ dependencies:
   '@rush-temp/squid-gen-utils': file:projects/squid-gen-utils.tgz
   '@rush-temp/workspace': file:projects/workspace.tgz
   '@subsquid/archive-registry': 2.1.9
-  '@subsquid/evm-processor': 0.3.3_typeorm@0.3.12
+  '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
   '@subsquid/evm-typegen': 2.1.1
   '@subsquid/file-store': 0.2.0
   '@subsquid/file-store-parquet': 0.4.0_@subsquid+file-store@0.2.0
@@ -1858,8 +1858,8 @@ packages:
       big.js: 6.2.1
     dev: false
 
-  /@subsquid/evm-processor/0.3.3_typeorm@0.3.12:
-    resolution: {integrity: sha512-K16bHH8m1Wc/2VXuG90EoUUjdT/ompZNBunbvwutAW1jxTFFy5qAJ7s7pwzetx6Y90I2ieqLttxnaFcMesgRjQ==}
+  /@subsquid/evm-processor/0.4.0_typeorm@0.3.12:
+    resolution: {integrity: sha512-gDvJEtOiVuC7eX4m89o9e6mgrdGp6DYqLFrDt+qd9kGBruj0ZsoygqKjkaDC4QbmbxV/CXOUyZX9j07+pdGEPw==}
     dependencies:
       '@subsquid/logger': 0.3.1
       '@subsquid/rpc-client': 1.0.2
@@ -5123,14 +5123,14 @@ packages:
     dev: false
 
   file:projects/gravatar-parquet.tgz_typeorm@0.3.12:
-    resolution: {integrity: sha512-hZOmU7qgGbiwr4UnehD9vFsHqdRnVFfXAS2CA1z5XIB8ZA2AYE70IKzVoqk5EMIanmm4w+20h2lPayJZ4qlyyw==, tarball: file:projects/gravatar-parquet.tgz}
+    resolution: {integrity: sha512-OlIRSrv4AKZYdjdHjz3g1t+TDO5HXet87xGur3MoQ4JGUpVLOzHG/d/fpB9PoCaPp8LqyjQEFgALz3G+TTVPdg==, tarball: file:projects/gravatar-parquet.tgz}
     id: file:projects/gravatar-parquet.tgz
     name: '@rush-temp/gravatar-parquet'
     version: 0.0.0
     dependencies:
       '@aws-sdk/client-s3': 3.296.0
       '@subsquid/archive-registry': 2.1.9
-      '@subsquid/evm-processor': 0.3.3_typeorm@0.3.12
+      '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
       '@subsquid/evm-typegen': 2.1.1
       '@subsquid/file-store': 0.2.0
       '@subsquid/file-store-parquet': 0.4.0_@subsquid+file-store@0.2.0
@@ -5151,13 +5151,13 @@ packages:
     dev: false
 
   file:projects/gravatar.tgz_ts-node@10.9.1:
-    resolution: {integrity: sha512-6FRDLeHHsQhp0eG+YZvAXIEucE9jdRGTSrpDJfA9lcUrr0mAtINo2u2e2sqNdzhoOnOvSTlp5MRxyihStryfZg==, tarball: file:projects/gravatar.tgz}
+    resolution: {integrity: sha512-d7s/O1DsyHjA2QuHwCCg37Au/b9D+oqVdLLi4xyVg6VKQwRdVX1VYjVG6yAg6tNwwUBKBQwCaYoXZ94CH/C3Ow==, tarball: file:projects/gravatar.tgz}
     id: file:projects/gravatar.tgz
     name: '@rush-temp/gravatar'
     version: 0.0.0
     dependencies:
       '@subsquid/archive-registry': 2.1.9
-      '@subsquid/evm-processor': 0.3.3_typeorm@0.3.12
+      '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
       '@subsquid/evm-typegen': 2.1.1
       '@subsquid/graphql-server': 3.3.2_typeorm@0.3.12
       '@subsquid/typeorm-codegen': 0.3.3
@@ -5244,13 +5244,13 @@ packages:
     dev: false
 
   file:projects/squid-gen-evm.tgz_typeorm@0.3.12:
-    resolution: {integrity: sha512-H8FmhmO2nakDxTkTpk1mYMvMhei1ZirO8xvdxM180xctimtmb6s6mjui0QmWENvGe2e9lzRooab+750I9zxdVg==, tarball: file:projects/squid-gen-evm.tgz}
+    resolution: {integrity: sha512-DyqdFdeUD1G0OA1FbU6K2uPH1PIpSb+nYUB74g6EIJuKxP22S5XvutDKqVJHuAOsG/49N1z/bgbMWzcT+RYD5A==, tarball: file:projects/squid-gen-evm.tgz}
     id: file:projects/squid-gen-evm.tgz
     name: '@rush-temp/squid-gen-evm'
     version: 0.0.0
     dependencies:
       '@subsquid/archive-registry': 2.1.9
-      '@subsquid/evm-processor': 0.3.3_typeorm@0.3.12
+      '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
       '@subsquid/evm-typegen': 2.1.1
       '@subsquid/logger': 0.3.1
       '@subsquid/util-internal': 1.1.0
