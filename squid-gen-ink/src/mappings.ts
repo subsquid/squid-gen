@@ -32,6 +32,7 @@ export class MappingCodegen {
                             `event.id`,
                             `block.height`,
                             `new Date(block.timestamp)`,
+                            `event.extrinsic.hash`,
                             `event.args.contract`,
                             `'${e}'`,
                             ...fragment.params

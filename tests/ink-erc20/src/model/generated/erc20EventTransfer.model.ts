@@ -18,6 +18,9 @@ export class Erc20EventTransfer {
     @Column_("timestamp with time zone", {nullable: false})
     blockTimestamp!: Date
 
+    @Column_("text", {nullable: false})
+    extrinsicHash!: string
+
     @Index_()
     @Column_("text", {nullable: false})
     contract!: string

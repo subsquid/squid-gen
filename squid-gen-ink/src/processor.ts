@@ -97,7 +97,7 @@ export class ProcessorCodegen {
                 this.out.indentation(() => {
                     this.out.line(`data: {`)
                     this.out.indentation(() => {
-                        this.out.line(`event: {args: true}`)
+                        this.out.line(`event: {args: true, extrinsic: {hash: true}}`)
                     })
                     this.out.line(`},`)
                 })

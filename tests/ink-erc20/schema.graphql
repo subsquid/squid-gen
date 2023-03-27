@@ -8,6 +8,7 @@ type Erc20EventTransfer @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
+    extrinsicHash: String!
     contract: String! @index
     eventName: String! @index
     from: String @index
@@ -19,6 +20,7 @@ type Erc20EventApproval @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
+    extrinsicHash: String!
     contract: String! @index
     eventName: String! @index
     owner: String! @index

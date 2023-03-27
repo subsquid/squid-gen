@@ -18,6 +18,9 @@ export class Erc20EventApproval {
     @Column_("timestamp with time zone", {nullable: false})
     blockTimestamp!: Date
 
+    @Column_("text", {nullable: false})
+    extrinsicHash!: string
+
     @Index_()
     @Column_("text", {nullable: false})
     contract!: string

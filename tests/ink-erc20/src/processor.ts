@@ -11,7 +11,7 @@ const processor = new SubstrateBatchProcessor()
     })
     .addContractsContractEmitted(ERC20.address, {
         data: {
-            event: {args: true}
+            event: {args: true, extrinsic: {hash: true}}
         },
     })
 

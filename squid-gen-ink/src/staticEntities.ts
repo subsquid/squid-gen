@@ -46,6 +46,12 @@ export const event: Fragment = {
             static: true,
         },
         {
+            name: 'extrinsicHash',
+            type: 'string',
+            indexed: false,
+            static: true,
+        },
+        {
             name: 'contract',
             type: 'string',
             indexed: true,
