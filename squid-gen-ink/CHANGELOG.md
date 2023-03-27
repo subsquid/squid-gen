@@ -1,6 +1,17 @@
 # Change Log - @subsquid/squid-gen-ink
 
-This log was last generated on Mon, 27 Mar 2023 09:48:23 GMT and should not be manually modified.
+This log was last generated on Mon, 27 Mar 2023 15:32:48 GMT and should not be manually modified.
+
+## 0.1.0
+Mon, 27 Mar 2023 15:32:48 GMT
+
+### Minor changes
+
+- add extrinsicHash to event entities
+
+### Patches
+
+- add 'break' for each entity mapper
 
 ## 0.0.0
 Mon, 27 Mar 2023 09:48:23 GMT

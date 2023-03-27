@@ -2,6 +2,23 @@
   "name": "@subsquid/squid-gen-ink",
   "entries": [
     {
+      "version": "0.1.0",
+      "tag": "@subsquid/squid-gen-ink_v0.1.0",
+      "date": "Mon, 27 Mar 2023 15:32:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add 'break' for each entity mapper"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "add extrinsicHash to event entities"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.0",
       "tag": "@subsquid/squid-gen-ink_v0.0.0",
       "date": "Mon, 27 Mar 2023 09:48:23 GMT",

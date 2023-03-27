@@ -2,6 +2,21 @@
   "name": "@subsquid/squid-gen-evm",
   "entries": [
     {
+      "version": "0.5.1",
+      "tag": "@subsquid/squid-gen-evm_v0.5.1",
+      "date": "Mon, 27 Mar 2023 15:32:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add 'break' for each entity mapper"
+          },
+          {
+            "comment": "bump evm-processor"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.5.0",
       "tag": "@subsquid/squid-gen-evm_v0.5.0",
       "date": "Mon, 27 Mar 2023 09:48:23 GMT",
