@@ -16,6 +16,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
+
       - name: Write npm credentials
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" >> common/config/rush/.npmrc
