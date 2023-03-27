@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-evm",
+      "comment": "add data taargets",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-evm"
+}
