@@ -1,6 +1,6 @@
 {
   "name": "@subsquid/squid-gen-ink",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tool for generating squid from ink contract abi",
   "license": "GPL-3.0-or-later",
   "repository": "git@github.com:subsquid/squid-gen.git",
@@ -31,7 +31,7 @@
     "commander": "^10.0.0",
     "upath": "^2.0.1",
     "yaml": "^2.2.1",
-    "@subsquid/squid-gen-targets": "^0.0.0",
+    "@subsquid/squid-gen-targets": "^0.0.1",
     "@subsquid/squid-gen-utils": "^0.0.0"
   },
   "devDependencies": {

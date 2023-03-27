@@ -1,6 +1,6 @@
 {
   "name": "@subsquid/squid-gen-targets",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "license": "GPL-3.0-or-later",
   "repository": "git@github.com:subsquid/squid-gen.git",
