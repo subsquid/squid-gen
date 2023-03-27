@@ -1,5 +1,6 @@
 {
   "name": "ink-erc20",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "build": "rm -rf lib && tsc",
