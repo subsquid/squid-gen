@@ -36,6 +36,7 @@ function parseEvent(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: Eve
                     to: e[1],
                     value: e[2],
                 })
+                break
             }
         }
     }
@@ -60,6 +61,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionSuccess: Boolean(item.transaction.status),
                     upgradedAddress: f[0],
                 })
+                break
             }
             case spec.functions['approve'].sighash: {
                 let f = normalize(spec.functions['approve'].decode(item.transaction.input))
@@ -75,6 +77,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     spender: f[0],
                     value: f[1],
                 })
+                break
             }
             case spec.functions['addBlackList'].sighash: {
                 let f = normalize(spec.functions['addBlackList'].decode(item.transaction.input))
@@ -89,6 +92,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionSuccess: Boolean(item.transaction.status),
                     evilUser: f[0],
                 })
+                break
             }
             case spec.functions['transferFrom'].sighash: {
                 let f = normalize(spec.functions['transferFrom'].decode(item.transaction.input))
@@ -105,6 +109,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     to: f[1],
                     value: f[2],
                 })
+                break
             }
             case spec.functions['unpause'].sighash: {
                 let f = normalize(spec.functions['unpause'].decode(item.transaction.input))
@@ -118,6 +123,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionValue: item.transaction.value,
                     functionSuccess: Boolean(item.transaction.status),
                 })
+                break
             }
             case spec.functions['pause'].sighash: {
                 let f = normalize(spec.functions['pause'].decode(item.transaction.input))
@@ -131,6 +137,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionValue: item.transaction.value,
                     functionSuccess: Boolean(item.transaction.status),
                 })
+                break
             }
             case spec.functions['transfer'].sighash: {
                 let f = normalize(spec.functions['transfer'].decode(item.transaction.input))
@@ -146,6 +153,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     to: f[0],
                     value: f[1],
                 })
+                break
             }
             case spec.functions['setParams'].sighash: {
                 let f = normalize(spec.functions['setParams'].decode(item.transaction.input))
@@ -161,6 +169,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     newBasisPoints: f[0],
                     newMaxFee: f[1],
                 })
+                break
             }
             case spec.functions['issue'].sighash: {
                 let f = normalize(spec.functions['issue'].decode(item.transaction.input))
@@ -175,6 +184,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionSuccess: Boolean(item.transaction.status),
                     amount: f[0],
                 })
+                break
             }
             case spec.functions['redeem'].sighash: {
                 let f = normalize(spec.functions['redeem'].decode(item.transaction.input))
@@ -189,6 +199,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionSuccess: Boolean(item.transaction.status),
                     amount: f[0],
                 })
+                break
             }
             case spec.functions['removeBlackList'].sighash: {
                 let f = normalize(spec.functions['removeBlackList'].decode(item.transaction.input))
@@ -203,6 +214,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionSuccess: Boolean(item.transaction.status),
                     clearedUser: f[0],
                 })
+                break
             }
             case spec.functions['transferOwnership'].sighash: {
                 let f = normalize(spec.functions['transferOwnership'].decode(item.transaction.input))
@@ -217,6 +229,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionSuccess: Boolean(item.transaction.status),
                     newOwner: f[0],
                 })
+                break
             }
             case spec.functions['destroyBlackFunds'].sighash: {
                 let f = normalize(spec.functions['destroyBlackFunds'].decode(item.transaction.input))
@@ -231,6 +244,7 @@ function parseFunction(ctx: CommonHandlerContext<Store>, block: EvmBlock, item: 
                     functionSuccess: Boolean(item.transaction.status),
                     blackListedUser: f[0],
                 })
+                break
             }
         }
     }

@@ -1,7 +1,6 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 import * as marshal from "./marshal"
 
-@Index_(["blockNumber", "blockTimestamp", "transactionHash", "contract", "eventName"], {unique: false})
 @Entity_()
 export class GravatarEventUpdatedGravatar {
     constructor(props?: Partial<GravatarEventUpdatedGravatar>) {
@@ -11,6 +10,7 @@ export class GravatarEventUpdatedGravatar {
     @PrimaryColumn_()
     id!: string
 
+    @Index_()
     @Column_("int4", {nullable: false})
     blockNumber!: number
 

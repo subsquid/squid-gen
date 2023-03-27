@@ -122,6 +122,7 @@ export class MappingCodegen {
                                         }
                                     }),
                                 ])
+                                this.out.line('break')
                             })
                         }
                     })
@@ -168,6 +169,7 @@ export class MappingCodegen {
                                         }
                                     }),
                                 ])
+                                this.out.line('break')
                             })
                         }
                     })

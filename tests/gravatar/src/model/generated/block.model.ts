@@ -1,6 +1,5 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 
-@Index_(["number", "timestamp"], {unique: false})
 @Entity_()
 export class Block {
     constructor(props?: Partial<Block>) {
@@ -10,6 +9,7 @@ export class Block {
     @PrimaryColumn_()
     id!: string
 
+    @Index_()
     @Column_("int4", {nullable: false})
     number!: number
 

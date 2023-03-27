@@ -1,20 +1,20 @@
-type Block @entity @index(fields: ["number", "timestamp"]) {
+type Block @entity {
     id: ID!
     number: Int! @index
     timestamp: DateTime! @index
 }
 
-type Transaction @entity @index(fields: ["blockNumber", "blockTimestamp", "hash", "to", "from", "success"]) {
+type Transaction @entity {
     id: ID!
-    blockNumber: Int! @index
+    blockNumber: Int @index
     blockTimestamp: DateTime! @index
     hash: String! @index
-    to: String! @index
-    from: String! @index
-    success: Boolean! @index
+    to: String @index
+    from: String @index
+    success: Boolean @index
 }
 
-type GravatarEventNewGravatar @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "eventName"]) {
+type GravatarEventNewGravatar @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
@@ -27,7 +27,7 @@ type GravatarEventNewGravatar @entity @index(fields: ["blockNumber", "blockTimes
     imageUrl: String!
 }
 
-type GravatarEventUpdatedGravatar @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "eventName"]) {
+type GravatarEventUpdatedGravatar @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
@@ -40,50 +40,50 @@ type GravatarEventUpdatedGravatar @entity @index(fields: ["blockNumber", "blockT
     imageUrl: String!
 }
 
-type GravatarFunctionUpdateGravatarImage @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"]) {
+type GravatarFunctionUpdateGravatarImage @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
     transactionHash: String! @index
     contract: String! @index
     functionName: String! @index
-    functionValue: BigInt!
-    functionSuccess: Boolean! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
     imageUrl: String!
 }
 
-type GravatarFunctionSetMythicalGravatar @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"]) {
+type GravatarFunctionSetMythicalGravatar @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
     transactionHash: String! @index
     contract: String! @index
     functionName: String! @index
-    functionValue: BigInt!
-    functionSuccess: Boolean! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
 }
 
-type GravatarFunctionUpdateGravatarName @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"]) {
+type GravatarFunctionUpdateGravatarName @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
     transactionHash: String! @index
     contract: String! @index
     functionName: String! @index
-    functionValue: BigInt!
-    functionSuccess: Boolean! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
     displayName: String!
 }
 
-type GravatarFunctionCreateGravatar @entity @index(fields: ["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"]) {
+type GravatarFunctionCreateGravatar @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
     transactionHash: String! @index
     contract: String! @index
     functionName: String! @index
-    functionValue: BigInt!
-    functionSuccess: Boolean! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
     displayName: String!
     imageUrl: String!
 }

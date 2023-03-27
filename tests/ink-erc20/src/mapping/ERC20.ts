@@ -22,6 +22,7 @@ export function parse(block: SubstrateBlock, event: ContractsContractEmittedEven
                     value: e.value,
                 })
             )
+            break
         }
         case 'Approval': {
             EntityBuffer.add(
@@ -36,6 +37,7 @@ export function parse(block: SubstrateBlock, event: ContractsContractEmittedEven
                     value: e.value,
                 })
             )
+            break
         }
     }
 }

@@ -1,7 +1,6 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 import * as marshal from "./marshal"
 
-@Index_(["blockNumber", "blockTimestamp", "transactionHash", "contract", "functionName", "functionSuccess"], {unique: false})
 @Entity_()
 export class GravatarFunctionUpdateGravatarImage {
     constructor(props?: Partial<GravatarFunctionUpdateGravatarImage>) {
@@ -11,6 +10,7 @@ export class GravatarFunctionUpdateGravatarImage {
     @PrimaryColumn_()
     id!: string
 
+    @Index_()
     @Column_("int4", {nullable: false})
     blockNumber!: number
 
@@ -30,12 +30,12 @@ export class GravatarFunctionUpdateGravatarImage {
     @Column_("text", {nullable: false})
     functionName!: string
 
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
-    functionValue!: bigint
+    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: true})
+    functionValue!: bigint | undefined | null
 
     @Index_()
-    @Column_("bool", {nullable: false})
-    functionSuccess!: boolean
+    @Column_("bool", {nullable: true})
+    functionSuccess!: boolean | undefined | null
 
     @Column_("text", {nullable: false})
     imageUrl!: string

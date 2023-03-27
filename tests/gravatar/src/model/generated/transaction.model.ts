@@ -1,6 +1,5 @@
 import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, Index as Index_} from "typeorm"
 
-@Index_(["blockNumber", "blockTimestamp", "hash", "to", "from", "success"], {unique: false})
 @Entity_()
 export class Transaction {
     constructor(props?: Partial<Transaction>) {
@@ -10,8 +9,9 @@ export class Transaction {
     @PrimaryColumn_()
     id!: string
 
-    @Column_("int4", {nullable: false})
-    blockNumber!: number
+    @Index_()
+    @Column_("int4", {nullable: true})
+    blockNumber!: number | undefined | null
 
     @Index_()
     @Column_("timestamp with time zone", {nullable: false})
@@ -22,14 +22,14 @@ export class Transaction {
     hash!: string
 
     @Index_()
-    @Column_("text", {nullable: false})
-    to!: string
+    @Column_("text", {nullable: true})
+    to!: string | undefined | null
 
     @Index_()
-    @Column_("text", {nullable: false})
-    from!: string
+    @Column_("text", {nullable: true})
+    from!: string | undefined | null
 
     @Index_()
-    @Column_("bool", {nullable: false})
-    success!: boolean
+    @Column_("bool", {nullable: true})
+    success!: boolean | undefined | null
 }

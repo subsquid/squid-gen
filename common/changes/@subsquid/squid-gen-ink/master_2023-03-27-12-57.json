@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-ink",
+      "comment": "add 'break' for each entity mapper",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-ink"
+}
