@@ -2,6 +2,18 @@
   "name": "@subsquid/squid-gen-ink",
   "entries": [
     {
+      "version": "0.1.1",
+      "tag": "@subsquid/squid-gen-ink_v0.1.1",
+      "date": "Mon, 27 Mar 2023 18:23:22 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@subsquid/squid-gen-targets\" from `^0.0.0` to `^0.0.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.0",
       "tag": "@subsquid/squid-gen-ink_v0.1.0",
       "date": "Mon, 27 Mar 2023 15:32:48 GMT",

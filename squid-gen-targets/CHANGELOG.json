@@ -2,6 +2,18 @@
   "name": "@subsquid/squid-gen-targets",
   "entries": [
     {
+      "version": "0.0.1",
+      "tag": "@subsquid/squid-gen-targets_v0.0.1",
+      "date": "Mon, 27 Mar 2023 18:23:22 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "include support folder on publish"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.0",
       "tag": "@subsquid/squid-gen-targets_v0.0.0",
       "date": "Mon, 27 Mar 2023 09:48:23 GMT",
