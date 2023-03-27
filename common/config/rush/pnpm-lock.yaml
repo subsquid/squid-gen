@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@aws-sdk/client-s3': ^3.245.0
   '@rush-temp/gravatar': file:./projects/gravatar.tgz
   '@rush-temp/gravatar-parquet': file:./projects/gravatar-parquet.tgz
   '@rush-temp/ink-erc20': file:./projects/ink-erc20.tgz
@@ -49,8 +50,9 @@ specifiers:
   yaml: ^2.2.1
 
 dependencies:
+  '@aws-sdk/client-s3': 3.296.0
   '@rush-temp/gravatar': file:projects/gravatar.tgz_ts-node@10.9.1
-  '@rush-temp/gravatar-parquet': file:projects/gravatar-parquet.tgz_c9c051ee1626c9fe4894e15829f5517a
+  '@rush-temp/gravatar-parquet': file:projects/gravatar-parquet.tgz_typeorm@0.3.12
   '@rush-temp/ink-erc20': file:projects/ink-erc20.tgz_ts-node@10.9.1
   '@rush-temp/squid-gen-evm': file:projects/squid-gen-evm.tgz_typeorm@0.3.12
   '@rush-temp/squid-gen-ink': file:projects/squid-gen-ink.tgz_24be6cc6048e0dbb798046c26453161d
@@ -5120,12 +5122,13 @@ packages:
     resolution: {integrity: sha512-1xlKTD4O/4H2MEQ/McteFAdujc4cHxNZYDRzjxtWfLAimYbPzV7mIa+ZzzJqpN830AuNklVDA6RgHwcop6IZKw==}
     dev: false
 
-  file:projects/gravatar-parquet.tgz_c9c051ee1626c9fe4894e15829f5517a:
-    resolution: {integrity: sha512-G2W/HKl4tlDLuIu75Lk3f9miAICET1wYYEfu2IlKoWl3gG4SjqnZoqF8wIhPGg+Z8h8mS1ebAdOdR6VYT8ZsAg==, tarball: file:projects/gravatar-parquet.tgz}
+  file:projects/gravatar-parquet.tgz_typeorm@0.3.12:
+    resolution: {integrity: sha512-hZOmU7qgGbiwr4UnehD9vFsHqdRnVFfXAS2CA1z5XIB8ZA2AYE70IKzVoqk5EMIanmm4w+20h2lPayJZ4qlyyw==, tarball: file:projects/gravatar-parquet.tgz}
     id: file:projects/gravatar-parquet.tgz
     name: '@rush-temp/gravatar-parquet'
     version: 0.0.0
     dependencies:
+      '@aws-sdk/client-s3': 3.296.0
       '@subsquid/archive-registry': 2.1.9
       '@subsquid/evm-processor': 0.3.3_typeorm@0.3.12
       '@subsquid/evm-typegen': 2.1.1
@@ -5138,7 +5141,8 @@ packages:
       ethers: 5.7.2
       typescript: 5.0.2
     transitivePeerDependencies:
-      - '@aws-sdk/client-s3'
+      - '@aws-sdk/signature-v4-crt'
+      - aws-crt
       - bufferutil
       - encoding
       - supports-color
@@ -5147,7 +5151,7 @@ packages:
     dev: false
 
   file:projects/gravatar.tgz_ts-node@10.9.1:
-    resolution: {integrity: sha512-DCsG+atYjItGfdJp8zm+Dp6LWOJzecTUl2QK3HBt5N5Kq6l82O9XRTbNKjW/olLcpA3noSI01IGLL3LUD8EinA==, tarball: file:projects/gravatar.tgz}
+    resolution: {integrity: sha512-6FRDLeHHsQhp0eG+YZvAXIEucE9jdRGTSrpDJfA9lcUrr0mAtINo2u2e2sqNdzhoOnOvSTlp5MRxyihStryfZg==, tarball: file:projects/gravatar.tgz}
     id: file:projects/gravatar.tgz
     name: '@rush-temp/gravatar'
     version: 0.0.0
@@ -5304,7 +5308,7 @@ packages:
     dev: false
 
   file:projects/squid-gen-targets.tgz_commander@10.0.0:
-    resolution: {integrity: sha512-pSa6lQlbjk8s4JNB+W0KxnhF2t9ngojM48m5BnuPYLkSM437Zlg3ONxStPkRTcDPKHni+nv/+3M3z/twQ/P9nQ==, tarball: file:projects/squid-gen-targets.tgz}
+    resolution: {integrity: sha512-qFNWjWe0KlQM05KrYel/OH+jcE9Pvj9dYwzgb6mfUD2XLAKj6miEiFF6qMNu/Qk7lLwd0RPu4kktuWstjgAOJg==, tarball: file:projects/squid-gen-targets.tgz}
     id: file:projects/squid-gen-targets.tgz
     name: '@rush-temp/squid-gen-targets'
     version: 0.0.0

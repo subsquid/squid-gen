@@ -13,7 +13,8 @@
     "ethers": "^5.7.2",
     "@subsquid/file-store": "^0.2.0",
     "@subsquid/file-store-parquet": "^0.4.0",
-    "@subsquid/file-store-s3": "^0.2.0"
+    "@subsquid/file-store-s3": "^0.2.0",
+    "@aws-sdk/client-s3": "^3.245.0"
   },
   "devDependencies": {
     "@subsquid/evm-typegen": "^2.1.1",
