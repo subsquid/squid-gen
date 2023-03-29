@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-evm
 
-This log was last generated on Mon, 27 Mar 2023 18:23:22 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Mar 2023 19:59:26 GMT and should not be manually modified.
+
+## 0.5.3
+Wed, 29 Mar 2023 19:59:26 GMT
+
+### Patches
+
+- Fixed the squid-gen-evm crashes when events or functions are absent in ABI. Fixed the deps for squid-gen-evm and squid-gen-ink.
 
 ## 0.5.2
 Mon, 27 Mar 2023 18:23:22 GMT
