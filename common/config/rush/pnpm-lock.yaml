@@ -1839,6 +1839,19 @@ packages:
     resolution: {integrity: sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw==}
     dev: false
 
+  /@subsquid/archive-registry/2.1.10:
+    resolution: {integrity: sha512-tjHsBUuxFJ67GkEH0Qo823P8yLoIfd4Q82YFhO5gMUYXsRya6rWjFKzsbo+7G0kuqtC065jBwh/3zWExjkOJhg==}
+    hasBin: true
+    dependencies:
+      '@subsquid/util-internal': 1.1.0
+      commander: 10.0.0
+      easy-table: 1.2.0
+      node-abort-controller: 2.0.0
+      node-fetch: 2.6.9
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /@subsquid/archive-registry/2.1.9:
     resolution: {integrity: sha512-G9RcoSFlHbwjiyUDG1GLvBAIOQpwPXK8k6Hj45TOnIi1bNn9090VZrDVyNCchyz0TAcpWK8QvTfDJP/AlgwRVw==}
     hasBin: true
@@ -5123,7 +5136,7 @@ packages:
     dev: false
 
   file:projects/gravatar-parquet.tgz_typeorm@0.3.12:
-    resolution: {integrity: sha512-OlIRSrv4AKZYdjdHjz3g1t+TDO5HXet87xGur3MoQ4JGUpVLOzHG/d/fpB9PoCaPp8LqyjQEFgALz3G+TTVPdg==, tarball: file:projects/gravatar-parquet.tgz}
+    resolution: {integrity: sha512-hgSO0a3c8Ri8igRWci2cpZyuq0VLNoqCYftuGVwVqHGLle/K/HcVZXADqlFvOPdjfliuzuUPckRPQMcNTZ7SbQ==, tarball: file:projects/gravatar-parquet.tgz}
     id: file:projects/gravatar-parquet.tgz
     name: '@rush-temp/gravatar-parquet'
     version: 0.0.0
@@ -5151,7 +5164,7 @@ packages:
     dev: false
 
   file:projects/gravatar.tgz_ts-node@10.9.1:
-    resolution: {integrity: sha512-d7s/O1DsyHjA2QuHwCCg37Au/b9D+oqVdLLi4xyVg6VKQwRdVX1VYjVG6yAg6tNwwUBKBQwCaYoXZ94CH/C3Ow==, tarball: file:projects/gravatar.tgz}
+    resolution: {integrity: sha512-dAkDdmjcyIXx0QuRknDMQ5y6tcqYb6XWOFOfoqxagpbl3d1uMTB/5+tGpYVT3rEbrfF9EFCpYi6ahvd6bcqVNQ==, tarball: file:projects/gravatar.tgz}
     id: file:projects/gravatar.tgz
     name: '@rush-temp/gravatar'
     version: 0.0.0
@@ -5197,7 +5210,7 @@ packages:
     dev: false
 
   file:projects/ink-erc20.tgz_ts-node@10.9.1:
-    resolution: {integrity: sha512-ELDZU/f1fIo0kWVTSCjeDqfB8GuKjb5rhhn/P2uK28nOXVBra7Dxi2qiU0UjPvKrMsj7hPW/a3/vOC/ESSIdbw==, tarball: file:projects/ink-erc20.tgz}
+    resolution: {integrity: sha512-ASYDMZt2sfx9X7+l0mTgasMdAEAKgon0NPzmUd/ADN/MdEmQWFVjb7GeCioYH0dlQUsQ8PRkPZxGQiLeCGbtsQ==, tarball: file:projects/ink-erc20.tgz}
     id: file:projects/ink-erc20.tgz
     name: '@rush-temp/ink-erc20'
     version: 0.0.0
@@ -5244,12 +5257,12 @@ packages:
     dev: false
 
   file:projects/squid-gen-evm.tgz_typeorm@0.3.12:
-    resolution: {integrity: sha512-DyqdFdeUD1G0OA1FbU6K2uPH1PIpSb+nYUB74g6EIJuKxP22S5XvutDKqVJHuAOsG/49N1z/bgbMWzcT+RYD5A==, tarball: file:projects/squid-gen-evm.tgz}
+    resolution: {integrity: sha512-ZmLJezr2zr/sZT/CKdcfCGm9hMjkySj3pnul/oshKZg6G2DkgdKuUfA0AnYiTGgqJutk0dDjlxezV6gzQEtSyQ==, tarball: file:projects/squid-gen-evm.tgz}
     id: file:projects/squid-gen-evm.tgz
     name: '@rush-temp/squid-gen-evm'
     version: 0.0.0
     dependencies:
-      '@subsquid/archive-registry': 2.1.9
+      '@subsquid/archive-registry': 2.1.10
       '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
       '@subsquid/evm-typegen': 2.1.1
       '@subsquid/logger': 0.3.1
@@ -5277,12 +5290,12 @@ packages:
     dev: false
 
   file:projects/squid-gen-ink.tgz_24be6cc6048e0dbb798046c26453161d:
-    resolution: {integrity: sha512-bWWOZbACL4EkY7iaNx3fZ1uO3BaCkFbIEaLfzPFJTgIUM4RU+xtdPh4fzCDUN47yKCoV4TEcuDONK0APx0EiTA==, tarball: file:projects/squid-gen-ink.tgz}
+    resolution: {integrity: sha512-8xlL+qkleTzIOzOE+yVFL0WZqgQ5Sq/d7/RuTwbHh8VM2NEMI7am8+mdotmvYlCnjHqzUGWncF+TeWQ4tDAjqw==, tarball: file:projects/squid-gen-ink.tgz}
     id: file:projects/squid-gen-ink.tgz
     name: '@rush-temp/squid-gen-ink'
     version: 0.0.0
     dependencies:
-      '@subsquid/archive-registry': 2.1.9
+      '@subsquid/archive-registry': 2.1.10
       '@subsquid/ink-abi': 1.1.0
       '@subsquid/ink-typegen': 0.2.1
       '@subsquid/logger': 0.3.1
