@@ -2,8 +2,8 @@
   "changes": [
     {
       "packageName": "@subsquid/squid-gen-ink",
-      "comment": "",
-      "type": "none"
+      "comment": "Deps fixed",
+      "type": "patch"
     }
   ],
   "packageName": "@subsquid/squid-gen-ink"
