@@ -2,6 +2,18 @@
   "name": "@subsquid/squid-gen-ink",
   "entries": [
     {
+      "version": "0.1.2",
+      "tag": "@subsquid/squid-gen-ink_v0.1.2",
+      "date": "Wed, 29 Mar 2023 20:16:48 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Deps fixed"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.1",
       "tag": "@subsquid/squid-gen-ink_v0.1.1",
       "date": "Mon, 27 Mar 2023 18:23:22 GMT",
