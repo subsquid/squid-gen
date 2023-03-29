@@ -118,7 +118,7 @@ function validateContractNames(config: Config) {
 }
 
 function getEvents(specFile: SpecFile, contractName: string, names: string[] | true) {
-    let items = specFile.events
+    let items = specFile.events || {}
 
     let fragments: Record<string, Fragment> = {}
     for (let name in items) {
@@ -156,7 +156,7 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
 }
 
 function getFunctions(specFile: SpecFile, contractName: string, names: string[] | true) {
-    let items = specFile.functions
+    let items = specFile.functions || {}
 
     let fragments: Record<string, Fragment> = {}
     for (let name in items) {
