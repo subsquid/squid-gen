@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-evm",
+      "comment": "Fixed --help for the config command",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-evm"
+}
