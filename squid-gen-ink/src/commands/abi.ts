@@ -27,7 +27,7 @@ program
     .option(`--to <block>`, `(optional) End indexing on the given block.`, nat)
     .addHelpText(
         'after',
-        "\nExample:\nsquid-gen-abi --address 0x5207202c27b646ceeb294ce516d4334edafbd771f869215cb070ba51dd7e2c72 --archive shibuya --abi ./abi/erc20.json --event '*'"
+        "\nExample:\nsquid-gen-abi --name someToken --address 0x5207202c27b646ceeb294ce516d4334edafbd771f869215cb070ba51dd7e2c72 --archive shibuya --abi ./abi/erc20.json --event '*'"
     )
 
 runProgram(async function () {
