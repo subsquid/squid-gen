@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-ink",
+      "comment": "Fixed --help for both commands, added ts to the package",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-ink"
+}
