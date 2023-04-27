@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-ink",
+      "comment": "do not output range if nor form or to are defined",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-ink"
+}

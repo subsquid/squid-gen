@@ -37,6 +37,7 @@ export class ProcessorCodegen {
                 this.out.line(`archive: '${this.options.archive.value}',`)
             }
         })
+
         this.out.line(`})`)
         this.printSubscribes()
         this.out.line()
@@ -129,14 +130,13 @@ export class ProcessorCodegen {
                         this.out.line(`},`)
                     })
                     this.out.line(`} as const,`)
-                    if (contract.range) {
+                    if (contract.range != null && (contract.range.from != null || contract.range.to != null)) {
+                        let range = contract.range
                         this.out.line(`range: {`)
                         this.out.indentation(() => {
-                            if (contract.range?.from) {
-                                this.out.line(`from: ${contract.range.from}`)
-                            }
-                            if (contract.range?.to) {
-                                this.out.line(`to: ${contract.range.to}`)
+                            this.out.line(`from: ${range.from ?? 0}`)
+                            if (range.to) {
+                                this.out.line(`to: ${range.to}`)
                             }
                         })
                         this.out.line(`},`)
@@ -166,6 +166,17 @@ export class ProcessorCodegen {
                         this.out.line(`},`)
                     })
                     this.out.line(`} as const,`)
+                    if (contract.range != null && (contract.range.from != null || contract.range.to != null)) {
+                        let range = contract.range
+                        this.out.line(`range: {`)
+                        this.out.indentation(() => {
+                            this.out.line(`from: ${range.from ?? 0},`)
+                            if (range.to != null) {
+                                this.out.line(`to: ${range.to},`)
+                            }
+                        })
+                        this.out.line(`},`)
+                    }
                 })
                 this.out.line(`})`)
             }

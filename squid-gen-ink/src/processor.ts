@@ -101,14 +101,13 @@ export class ProcessorCodegen {
                     })
                     this.out.line(`},`)
                 })
-                if (contract.range?.from || contract.range?.to) {
+                if (contract.range != null && (contract.range.from != null || contract.range.to != null)) {
+                    let range = contract.range
                     this.out.line(`range: {`)
                     this.out.indentation(() => {
-                        if (contract.range?.from) {
-                            this.out.line(`from: ${contract.range.from}`)
-                        }
-                        if (contract.range?.to) {
-                            this.out.line(`to: ${contract.range.to}`)
+                        this.out.line(`from: ${range.from ?? 0},`)
+                        if (range.to != null) {
+                            this.out.line(`to: ${range.to},`)
                         }
                     })
                     this.out.line(`},`)

@@ -26,6 +26,10 @@ processor.addLog(gravatar.address, {
             from: true,
         },
     } as const,
+    range: {
+        from: 0
+        to: 10000000
+    },
 })
 processor.addTransaction(gravatar.address, {
     sighash: [
@@ -42,6 +46,10 @@ processor.addTransaction(gravatar.address, {
             value: true,
         },
     } as const,
+    range: {
+        from: 0,
+        to: 10000000,
+    },
 })
 
 processor.run(db, async (ctx: BatchHandlerContext<Store, any>) => {

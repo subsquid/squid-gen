@@ -15,9 +15,7 @@ program
         `--archive <alias|url>`,
         `Source Squid Archive for a network that supports 'contracts' pallet. Can be a URL or an alias defined by @subsquid/archive-registry.`
     )
-    .requiredOption(
-        `--abi <path>`, `Path to the contract JSON ABI.`
-    )
+    .requiredOption(`--abi <path>`, `Path to the contract JSON ABI.`)
     .option(
         `-e, --event <name...>`,
         `One or multiple contract events to be indexed. '*' indexes all events defined in the ABI.`,
@@ -46,7 +44,7 @@ runProgram(async function () {
     let config: Config = {
         archive: opts.archive,
         target: {
-            type: "postgres"
+            type: 'postgres',
         },
         contracts: [
             {
@@ -55,8 +53,8 @@ runProgram(async function () {
                 abi: opts.abi,
                 events: opts.event.includes('*') ? true : opts.event,
                 range: {
-                    from: Number(opts.from),
-                    to: Number(opts.to),
+                    from: opts.from != null ? Number(opts.from) : undefined,
+                    to: opts.to != null ? Number(opts.to) : undefined,
                 },
             },
         ],

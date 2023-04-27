@@ -69,8 +69,8 @@ runProgram(async function () {
                 functions: opts.function.includes('*') ? true : opts.function,
                 proxy: opts.proxy,
                 range: {
-                    from: Number(opts.from),
-                    to: Number(opts.to),
+                    from: opts.from != null ? Number(opts.from) : undefined,
+                    to: opts.to != null ? Number(opts.to) : undefined,
                 },
             },
         ],
