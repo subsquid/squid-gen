@@ -27,8 +27,8 @@ processor.addLog(gravatar.address, {
         },
     } as const,
     range: {
-        from: 0
-        to: 10000000
+        from: 0,
+        to: 10000000,
     },
 })
 processor.addTransaction(gravatar.address, {

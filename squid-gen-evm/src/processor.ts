@@ -134,9 +134,9 @@ export class ProcessorCodegen {
                         let range = contract.range
                         this.out.line(`range: {`)
                         this.out.indentation(() => {
-                            this.out.line(`from: ${range.from ?? 0}`)
+                            this.out.line(`from: ${range.from ?? 0},`)
                             if (range.to) {
-                                this.out.line(`to: ${range.to}`)
+                                this.out.line(`to: ${range.to},`)
                             }
                         })
                         this.out.line(`},`)
