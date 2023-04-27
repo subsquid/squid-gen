@@ -2,6 +2,18 @@
   "name": "@subsquid/squid-gen-ink",
   "entries": [
     {
+      "version": "0.1.4",
+      "tag": "@subsquid/squid-gen-ink_v0.1.4",
+      "date": "Thu, 27 Apr 2023 10:49:03 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "do not output range if nor form or to are defined"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.3",
       "tag": "@subsquid/squid-gen-ink_v0.1.3",
       "date": "Tue, 04 Apr 2023 20:02:26 GMT",

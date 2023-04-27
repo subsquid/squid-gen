@@ -1,6 +1,17 @@
 # Change Log - @subsquid/squid-gen-evm
 
-This log was last generated on Tue, 04 Apr 2023 20:02:26 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Apr 2023 10:49:03 GMT and should not be manually modified.
+
+## 0.6.0
+Thu, 27 Apr 2023 10:49:03 GMT
+
+### Minor changes
+
+- add name option for abi command
+
+### Patches
+
+- do not output range if nor form or to are defined
 
 ## 0.5.4
 Tue, 04 Apr 2023 20:02:25 GMT

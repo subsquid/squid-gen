@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-ink
 
-This log was last generated on Tue, 04 Apr 2023 20:02:26 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Apr 2023 10:49:03 GMT and should not be manually modified.
+
+## 0.1.4
+Thu, 27 Apr 2023 10:49:03 GMT
+
+### Patches
+
+- do not output range if nor form or to are defined
 
 ## 0.1.3
 Tue, 04 Apr 2023 20:02:26 GMT
