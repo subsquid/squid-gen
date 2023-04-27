@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-evm",
+      "comment": "add name option for abi command",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-evm"
+}

@@ -14,6 +14,7 @@ program
         `--archive <alias|url>`,
         `Source Squid Archive for an EVM network. Can be a URL or an alias defined by @subsquid/archive-registry. See also https://docs.subsquid.io/ for the list of supported EVM networks.`
     )
+    .option(`--name <name>`, `Contract name.`)
     .option(
         `-e, --event <name...>`,
         `One or multiple contract events to be indexed. '*' indexes all events defined in the ABI.`,
@@ -53,6 +54,7 @@ runProgram(async function () {
         from?: string
         to?: string
         etherscanApi?: string
+        name?: string
     }
 
     let config: Config = {
@@ -62,7 +64,7 @@ runProgram(async function () {
         },
         contracts: [
             {
-                name: 'contract',
+                name: opts.name || 'contract',
                 address: opts.address,
                 abi: opts.abi,
                 events: opts.event.includes('*') ? true : opts.event,
