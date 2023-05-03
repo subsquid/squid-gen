@@ -1,5 +1,5 @@
 import * as ss58 from '@subsquid/ss58'
-import {toHex} from '@subsquid/util-internal-hex'
+import {toHex, decodeHex} from '@subsquid/util-internal-hex'
 
 export function fromss58(addr: string) {
     let decodedAddr = ss58.decode(addr)
@@ -10,7 +10,7 @@ export function fromss58(addr: string) {
 }
 
 export function toss58(prefix: number, hexAddr: string) {
-    return ss58.encode({prefix, bytes: Uint8Array.from(Buffer.from(hexAddr.substr(2), 'hex'))})
+    return ss58.encode({prefix, bytes: Uint8Array.from(decodeHex(hexAddr))})
 }
 
 export function normalize(val: unknown) {
