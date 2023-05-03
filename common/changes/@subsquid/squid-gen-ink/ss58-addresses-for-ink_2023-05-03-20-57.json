@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-ink",
+      "comment": "Some support for ss58 addresses added, changed the test to use a ss58 address",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-ink"
+}
