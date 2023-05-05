@@ -2,9 +2,9 @@ import {Fragment} from '@subsquid/squid-gen-utils'
 import {ethers} from 'ethers'
 
 export interface SpecFile {
-    abi: ethers.utils.Interface
-    events: Record<string, {fragment: ethers.utils.EventFragment}>
-    functions: Record<string, {fragment: ethers.utils.FunctionFragment}>
+    abi: ethers.Interface
+    events: Record<string, {fragment: ethers.EventFragment}>
+    functions: Record<string, {fragment: ethers.FunctionFragment}>
 }
 
 export interface SquidContract {

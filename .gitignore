@@ -23,4 +23,3 @@
 Dockerfile
 /ops/docker-publish.sh
 
-**/.env

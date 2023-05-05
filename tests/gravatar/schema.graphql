@@ -11,7 +11,7 @@ type Transaction @entity {
     hash: String! @index
     to: String @index
     from: String @index
-    success: Boolean @index
+    status: Int @index
 }
 
 type GravatarEventNewGravatar @entity {

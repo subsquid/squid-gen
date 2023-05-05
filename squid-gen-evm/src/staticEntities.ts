@@ -67,8 +67,8 @@ export const transaction: Fragment = {
             static: true,
         },
         {
-            name: 'success',
-            type: 'boolean',
+            name: 'status',
+            type: 'int',
             indexed: true,
             nullable: true,
             static: true,

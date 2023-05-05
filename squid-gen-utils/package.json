@@ -19,7 +19,7 @@
     "upath": "^2.0.1"
   },
   "devDependencies": {
-    "@types/node": "^18.13.0",
-    "typescript": "~5.1.0"
+    "@types/node": "^20.0.0",
+    "typescript": "~5.0.4"
   }
 }

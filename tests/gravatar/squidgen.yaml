@@ -1,4 +1,4 @@
-archive: eth-mainnet
+archive: https://v2.archive.subsquid.io/network/ethereum-mainnet
 target:
   type: postgres
 contracts:
@@ -7,4 +7,4 @@ contracts:
     events: true
     functions: true
     range:
-      to: 10000000
+      from: 10175243 

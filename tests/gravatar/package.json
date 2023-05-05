@@ -6,22 +6,22 @@
     "build": "rm -rf lib/ && tsc"
   },
   "dependencies": {
-    "@subsquid/archive-registry": "2.1.9",
-    "@subsquid/evm-processor": "^0.4.0",
-    "@subsquid/graphql-server": "3.3.2",
-    "@subsquid/typeorm-migration": "0.1.6",
-    "@subsquid/typeorm-store": "0.2.2",
-    "@subsquid/util-internal-json": "^0.2.1",
+    "@subsquid/archive-registry": "^2.1.13",
+    "@subsquid/evm-processor": "^1.0.0",
+    "@subsquid/graphql-server": "^4.0.0",
+    "@subsquid/typeorm-migration": "^1.0.0",
+    "@subsquid/typeorm-store": "^1.0.0",
+    "@subsquid/util-internal-json": "^1.0.0",
     "dotenv": "^16.0.3",
-    "ethers": "^5.7.2",
+    "ethers": "^6.3.0",
     "pg": "8.8.0",
-    "typeorm": "^0.3.11"
+    "typeorm": "^0.3.15"
   },
   "devDependencies": {
-    "@subsquid/evm-typegen": "^2.1.1",
+    "@subsquid/evm-typegen": "^3.0.0",
     "@subsquid/squid-gen-evm": "^0.6.0",
-    "@subsquid/typeorm-codegen": "^0.3.3",
-    "@types/node": "^18.13.0",
-    "typescript": "~5.0.0"
+    "@subsquid/typeorm-codegen": "^1.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "~5.0.4"
   }
 }

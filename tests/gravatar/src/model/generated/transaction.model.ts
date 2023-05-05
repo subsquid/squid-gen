@@ -30,6 +30,6 @@ export class Transaction {
     from!: string | undefined | null
 
     @Index_()
-    @Column_("bool", {nullable: true})
-    success!: boolean | undefined | null
+    @Column_("int4", {nullable: true})
+    status!: number | undefined | null
 }
