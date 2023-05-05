@@ -34,7 +34,7 @@ export function parseFunction(ctx: DataHandlerContext<Store>, transaction: Trans
                         functionName: 'mint',
                         functionValue: transaction.value,
                         functionSuccess: transaction.status != null ? Boolean(transaction.status) : undefined,
-                        params: f[0],
+                        params: toJSON(f[0]),
                     })
                 )
                 break

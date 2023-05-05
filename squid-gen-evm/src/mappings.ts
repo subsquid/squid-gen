@@ -78,7 +78,7 @@ export class MappingCodegen {
                                 `log.transactionHash`,
                                 `log.address`,
                                 `'${e}'`,
-                                ...fragment.params.map((p, i) => {
+                                ...fragment.params.slice(6).map((p, i) => {
                                     if (p.type === `json`) {
                                         this.useJSON()
                                         return `toJSON(e[${i}])`
@@ -122,7 +122,7 @@ export class MappingCodegen {
                                     `'${f}'`,
                                     `transaction.value`,
                                     `transaction.status != null ? Boolean(transaction.status) : undefined`,
-                                    ...fragment.params.map((p, i) => {
+                                    ...fragment.params.slice(8).map((p, i) => {
                                         if (p.type === `json`) {
                                             this.useJSON()
                                             return `toJSON(f[${i}])`
