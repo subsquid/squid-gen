@@ -21,17 +21,10 @@ export class MappingCodegen {
         this.out.line()
         this.out.line(`const address = '${this.options.contract.address.toLowerCase()}'`)
         this.out.line()
-
-        if (Object.keys(this.options.contract.events).length > 0) {
-            this.out.line()
-            this.printEventsParser()
-        }
-
-        if (Object.keys(this.options.contract.functions).length > 0) {
-            this.out.line()
-            this.printFunctionsParser()
-        }
-
+        this.out.line()
+        this.printEventsParser()
+        this.out.line()
+        this.printFunctionsParser()
         return this.out.write()
     }
 

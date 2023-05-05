@@ -37,7 +37,6 @@ export class CoreCodegen {
                 this.out.line()
                 this.out.block(`for (let log of block.logs)`, () => {
                     for (let contract of this.options.contracts) {
-                        this.out.line()
                         this.out.block(`if (log.address === '${contract.address}')`, () => {
                             this.useMapping(contract.name)
                             this.out.line(`${contract.name}.parseEvent(ctx, log)`)
@@ -47,7 +46,6 @@ export class CoreCodegen {
                 this.out.line()
                 this.out.block(`for (let transaction of block.transactions)`, () => {
                     for (let contract of this.options.contracts) {
-                        this.out.line()
                         this.out.block(`if (transaction.to === '${contract.address}')`, () => {
                             this.useMapping(contract.name)
                             this.out.line(`${contract.name}.parseFunction(ctx, transaction)`)

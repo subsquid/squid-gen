@@ -1,9 +1,10 @@
 import {EvmBatchProcessor, EvmBatchProcessorFields, BlockHeader, Log as _Log, Transaction as _Transaction} from '@subsquid/evm-processor'
-import * as gravatarAbi from './abi/0x2e645469f354bb4f5c8a05b3b30a929361cf77ec'
+import {lookupArchive} from '@subsquid/archive-registry'
+import * as contractAbi from './abi/0xc36442b4a4522e871399cd717abdd847ab11fe88'
 
 export const processor = new EvmBatchProcessor()
     .setDataSource({
-        archive: 'https://v2.archive.subsquid.io/network/ethereum-mainnet',
+        archive: lookupArchive('eth-mainnet', {type: 'EVM'}),
     })
     .setFields({
             log: {
@@ -19,26 +20,13 @@ export const processor = new EvmBatchProcessor()
                 status: true,
         }
     })
-    .addLog({
-        address: ['0x2e645469f354bb4f5c8a05b3b30a929361cf77ec'],
-        topic0: [
-            gravatarAbi.events['NewGravatar'].topic,
-            gravatarAbi.events['UpdatedGravatar'].topic,
-        ],
-        range: {
-            from: 6175243,
-        },
-    })
     .addTransaction({
-        to: ['0x2e645469f354bb4f5c8a05b3b30a929361cf77ec'],
+        to: ['0xc36442b4a4522e871399cd717abdd847ab11fe88'],
         sighash: [
-            gravatarAbi.functions['updateGravatarImage'].sighash,
-            gravatarAbi.functions['setMythicalGravatar'].sighash,
-            gravatarAbi.functions['updateGravatarName'].sighash,
-            gravatarAbi.functions['createGravatar'].sighash,
+            contractAbi.functions['mint'].sighash,
         ],
         range: {
-            from: 6175243,
+            from: 12369651,
         },
     })
 
