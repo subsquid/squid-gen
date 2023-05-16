@@ -18,7 +18,13 @@ export class MappingCodegen {
     generate() {
         this.printImports()
         this.out.line()
-        this.out.line(`export const address = '${this.options.contract.address}'`)
+        if (this.options.contract.address.startsWith('0x')) {
+            this.out.line(`export const address = '${this.options.contract.address}'`)
+        } else {
+            this.useUtil(`fromss58`)
+            this.out.line(`const ss58address = '${this.options.contract.address}'`)
+            this.out.line(`export const { prefix, hexAddress: address } = fromss58(ss58address)`)
+        }
         this.out.line()
         let targetPrinter = this.getTargetPrinter()
         this.out.block(`export function parse(block: SubstrateBlock, event: ContractsContractEmittedEvent)`, () => {

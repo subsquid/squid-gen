@@ -4,5 +4,5 @@ target:
 contracts:
   - name: ERC20
     abi: "./abi/erc20.json"
-    address: "0x5207202c27b646ceeb294ce516d4334edafbd771f869215cb070ba51dd7e2c72"
+    address: "XnrLUQucQvzp5kaaWLG9Q3LbZw5DPwpGn69B5YcywSWVr5w"
     events: true

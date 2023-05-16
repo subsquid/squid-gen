@@ -1,3 +1,18 @@
+import * as ss58 from '@subsquid/ss58'
+import {toHex, decodeHex} from '@subsquid/util-internal-hex'
+
+export function fromss58(addr: string) {
+    let decodedAddr = ss58.decode(addr)
+    return {
+        prefix: decodedAddr.prefix,
+        hexAddress: toHex(decodedAddr.bytes)
+    }
+}
+
+export function toss58(prefix: number, hexAddr: string) {
+    return ss58.encode({prefix, bytes: Uint8Array.from(decodeHex(hexAddr))})
+}
+
 export function normalize(val: unknown) {
     switch (typeof val) {
         case 'object':
