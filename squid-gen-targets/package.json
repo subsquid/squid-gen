@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
-    "typescript": "~5.0.0",
+    "typescript": "~5.1.0",
     "@subsquid/typeorm-codegen": "^0.3.3"
   },
   "peerDependencies": {
