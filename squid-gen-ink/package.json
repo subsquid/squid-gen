@@ -37,7 +37,7 @@
   "devDependencies": {
     "@types/node": "^18.13.0",
     "json-schema-to-typescript": "^13.0.0",
-    "typescript": "~5.0.0"
+    "typescript": "~5.1.0"
   },
   "peerDependencies": {
     "@subsquid/archive-registry": "^2.1.10",
