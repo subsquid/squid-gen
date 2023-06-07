@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-targets
 
-This log was last generated on Mon, 27 Mar 2023 18:23:22 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Jun 2023 12:55:19 GMT and should not be manually modified.
+
+## 1.0.0
+Wed, 07 Jun 2023 12:55:19 GMT
+
+### Breaking changes
+
+- arrow squid
 
 ## 0.0.1
 Mon, 27 Mar 2023 18:23:22 GMT
