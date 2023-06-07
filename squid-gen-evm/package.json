@@ -40,7 +40,7 @@
     "typescript": "~5.0.4"
   },
   "peerDependencies": {
-    "@subsquid/archive-registry": "2.1.14",
+    "@subsquid/archive-registry": "^2.1.14",
     "@subsquid/evm-processor": "^1.1.0",
     "@subsquid/evm-typegen": "^3.0.0",
     "@subsquid/util-internal-json": "^1.0.0",

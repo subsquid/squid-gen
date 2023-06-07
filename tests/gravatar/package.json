@@ -6,8 +6,8 @@
     "build": "rm -rf lib/ && tsc"
   },
   "dependencies": {
-    "@subsquid/archive-registry": "^2.1.13",
-    "@subsquid/evm-processor": "^1.0.0",
+    "@subsquid/archive-registry": "^2.1.14",
+    "@subsquid/evm-processor": "^1.1.0",
     "@subsquid/graphql-server": "^4.0.0",
     "@subsquid/typeorm-migration": "^1.0.0",
     "@subsquid/typeorm-store": "^1.0.0",
