@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-evm",
+      "comment": "arrow squid",
+      "type": "major"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-evm"
+}
