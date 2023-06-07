@@ -2,6 +2,18 @@
   "name": "@subsquid/squid-gen-utils",
   "entries": [
     {
+      "version": "1.0.0",
+      "tag": "@subsquid/squid-gen-utils_v1.0.0",
+      "date": "Wed, 07 Jun 2023 11:43:48 GMT",
+      "comments": {
+        "major": [
+          {
+            "comment": "arrow squid"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.0",
       "tag": "@subsquid/squid-gen-utils_v0.0.0",
       "date": "Mon, 27 Mar 2023 09:48:23 GMT",

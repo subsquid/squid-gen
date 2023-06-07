@@ -1,6 +1,17 @@
 # Change Log - @subsquid/squid-gen-ink
 
-This log was last generated on Thu, 27 Apr 2023 10:49:03 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Jun 2023 11:43:48 GMT and should not be manually modified.
+
+## 1.0.0
+Wed, 07 Jun 2023 11:43:48 GMT
+
+### Breaking changes
+
+- arrow squid
+
+### Patches
+
+- Some support for ss58 addresses added, changed the test to use a ss58 address
 
 ## 0.1.4
 Thu, 27 Apr 2023 10:49:03 GMT
