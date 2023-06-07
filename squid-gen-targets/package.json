@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@subsquid/logger": "^1.0.0",
-    "@subsquid/util-internal": "^2.0.0",
+    "@subsquid/util-internal": "^2.1.0",
     "@subsquid/util-internal-code-printer": "^1.0.0",
     "@subsquid/util-internal-commander": "^1.0.0",
     "@subsquid/util-internal-config": "^2.0.0",
@@ -28,9 +28,10 @@
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "~5.0.4",
-    "@subsquid/typeorm-codegen": "^0.3.3"
+    "@subsquid/typeorm-codegen": "^1.0.0"
   },
   "peerDependencies": {
-    "@subsquid/typeorm-codegen": "^0.3.3"
+    "@subsquid/typeorm-codegen": "^1.0.0",
+    "@subsquid/file-store": "^1.0.0"
   }
 }
