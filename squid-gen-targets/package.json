@@ -1,6 +1,6 @@
 {
   "name": "@subsquid/squid-gen-targets",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "",
   "license": "GPL-3.0-or-later",
   "repository": "git@github.com:subsquid/squid-gen.git",
@@ -23,7 +23,7 @@
     "@subsquid/util-internal-commander": "^1.0.0",
     "@subsquid/util-internal-config": "^2.0.0",
     "@subsquid/util-naming": "^1.0.0",
-    "@subsquid/squid-gen-utils": "^0.0.0"
+    "@subsquid/squid-gen-utils": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
