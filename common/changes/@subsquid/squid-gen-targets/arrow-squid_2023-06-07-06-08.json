@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-targets",
+      "comment": "arrow squid",
+      "type": "major"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-targets"
+}

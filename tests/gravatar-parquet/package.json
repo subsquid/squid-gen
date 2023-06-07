@@ -6,20 +6,20 @@
     "build": "rm -rf lib/ && tsc"
   },
   "dependencies": {
-    "@subsquid/archive-registry": "2.1.9",
-    "@subsquid/evm-processor": "^0.4.0",
-    "@subsquid/util-internal-json": "^0.2.1",
+    "@subsquid/archive-registry": "2.1.13",
+    "@subsquid/evm-processor": "^1.0.0",
+    "@subsquid/util-internal-json": "^1.0.0",
     "dotenv": "^16.0.3",
-    "ethers": "^5.7.2",
+    "ethers": "^6.3.0",
     "@subsquid/file-store": "^0.2.0",
     "@subsquid/file-store-parquet": "^0.4.0",
     "@subsquid/file-store-s3": "^0.2.0",
     "@aws-sdk/client-s3": "^3.245.0"
   },
   "devDependencies": {
-    "@subsquid/evm-typegen": "^2.1.1",
+    "@subsquid/evm-typegen": "^3.0.0",
     "@subsquid/squid-gen-evm": "^0.6.0",
-    "@types/node": "^18.13.0",
-    "typescript": "~5.0.0"
+    "@types/node": "^20.0.0",
+    "typescript": "~5.0.4"
   }
 }

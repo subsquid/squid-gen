@@ -2,8 +2,8 @@ import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, I
 import * as marshal from "./marshal"
 
 @Entity_()
-export class GravatarFunctionUpdateGravatarName {
-    constructor(props?: Partial<GravatarFunctionUpdateGravatarName>) {
+export class ContractFunctionMint {
+    constructor(props?: Partial<ContractFunctionMint>) {
         Object.assign(this, props)
     }
 
@@ -37,6 +37,6 @@ export class GravatarFunctionUpdateGravatarName {
     @Column_("bool", {nullable: true})
     functionSuccess!: boolean | undefined | null
 
-    @Column_("text", {nullable: false})
-    displayName!: string
+    @Column_("jsonb", {nullable: false})
+    params!: unknown
 }

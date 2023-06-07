@@ -11,36 +11,10 @@ type Transaction @entity {
     hash: String! @index
     to: String @index
     from: String @index
-    success: Boolean @index
+    status: Int @index
 }
 
-type GravatarEventNewGravatar @entity {
-    id: ID!
-    blockNumber: Int! @index
-    blockTimestamp: DateTime! @index
-    transactionHash: String! @index
-    contract: String! @index
-    eventName: String! @index
-    id0: BigInt!
-    owner: String!
-    displayName: String!
-    imageUrl: String!
-}
-
-type GravatarEventUpdatedGravatar @entity {
-    id: ID!
-    blockNumber: Int! @index
-    blockTimestamp: DateTime! @index
-    transactionHash: String! @index
-    contract: String! @index
-    eventName: String! @index
-    id0: BigInt!
-    owner: String!
-    displayName: String!
-    imageUrl: String!
-}
-
-type GravatarFunctionUpdateGravatarImage @entity {
+type ContractFunctionMint @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
@@ -49,42 +23,6 @@ type GravatarFunctionUpdateGravatarImage @entity {
     functionName: String! @index
     functionValue: BigInt
     functionSuccess: Boolean @index
-    imageUrl: String!
-}
-
-type GravatarFunctionSetMythicalGravatar @entity {
-    id: ID!
-    blockNumber: Int! @index
-    blockTimestamp: DateTime! @index
-    transactionHash: String! @index
-    contract: String! @index
-    functionName: String! @index
-    functionValue: BigInt
-    functionSuccess: Boolean @index
-}
-
-type GravatarFunctionUpdateGravatarName @entity {
-    id: ID!
-    blockNumber: Int! @index
-    blockTimestamp: DateTime! @index
-    transactionHash: String! @index
-    contract: String! @index
-    functionName: String! @index
-    functionValue: BigInt
-    functionSuccess: Boolean @index
-    displayName: String!
-}
-
-type GravatarFunctionCreateGravatar @entity {
-    id: ID!
-    blockNumber: Int! @index
-    blockTimestamp: DateTime! @index
-    transactionHash: String! @index
-    contract: String! @index
-    functionName: String! @index
-    functionValue: BigInt
-    functionSuccess: Boolean @index
-    displayName: String!
-    imageUrl: String!
+    params: JSON!
 }
 

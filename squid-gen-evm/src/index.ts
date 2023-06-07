@@ -12,6 +12,7 @@ import {SpecFile, SquidContract} from './interfaces'
 import {getArchive, getType, spawnAsync} from './util'
 import {block, event, function_, transaction} from './staticEntities'
 import {Fragment, FragmentParam} from '@subsquid/squid-gen-utils'
+import {CoreCodegen} from './core'
 
 export let logger = createLogger(`sqd:squidgen`)
 
@@ -87,10 +88,11 @@ export async function generateSquid(config: Config) {
     await dataTarget.generate()
 
     logger.info(`generating processor...`)
-    srcOutputDir.add(
-        path.relative(srcOutputDir.path(), path.resolve(`src`, `util.ts`)),
-        path.join(__dirname, `..`, `support`, `util.ts`)
-    )
+
+    new ProcessorCodegen(srcOutputDir, {
+        contracts,
+        archive,
+    }).generate()
 
     let mappingsOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'mapping')))
     for (let contract of contracts) {
@@ -103,10 +105,9 @@ export async function generateSquid(config: Config) {
     }
     mappingsIndex.write()
 
-    new ProcessorCodegen(srcOutputDir, {
+    new CoreCodegen(srcOutputDir, {
         contracts,
         dataTarget,
-        archive,
     }).generate()
 }
 
@@ -130,7 +131,7 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
 
             params.push({
                 name: input.name || `param${i}`,
-                indexed: input.indexed,
+                indexed: input.indexed ?? false,
                 type: getType(input),
                 nullable: false,
             })
@@ -167,7 +168,7 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
             let input = fragment.inputs[i]
             params.push({
                 name: input.name || `param${i}`,
-                indexed: input.indexed,
+                indexed: input.indexed ?? false,
                 type: getType(input),
                 nullable: false,
             })

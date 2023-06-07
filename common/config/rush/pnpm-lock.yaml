@@ -10,95 +10,85 @@ specifiers:
   '@rush-temp/squid-gen-targets': file:./projects/squid-gen-targets.tgz
   '@rush-temp/squid-gen-utils': file:./projects/squid-gen-utils.tgz
   '@rush-temp/workspace': file:./projects/workspace.tgz
-  '@subsquid/archive-registry': 2.1.9
-  '@subsquid/evm-processor': ^0.4.0
-  '@subsquid/evm-typegen': ^2.1.1
+  '@subsquid/evm-processor': ^1.0.0
+  '@subsquid/evm-typegen': ^3.0.0
   '@subsquid/file-store': ^0.2.0
   '@subsquid/file-store-parquet': ^0.4.0
   '@subsquid/file-store-s3': ^0.2.0
-  '@subsquid/graphql-server': 3.3.2
   '@subsquid/ink-abi': ^1.1.0
   '@subsquid/ink-typegen': ^0.2.1
-  '@subsquid/logger': ^0.3.1
+  '@subsquid/logger': ^1.0.0
   '@subsquid/ss58': ^0.1.4
   '@subsquid/substrate-metadata-explorer': ^1.1.0
   '@subsquid/substrate-processor': 2.4.1
-  '@subsquid/typeorm-codegen': ^0.3.3
-  '@subsquid/typeorm-migration': 0.1.6
-  '@subsquid/typeorm-store': 0.2.2
-  '@subsquid/util-internal': ^1.1.0
-  '@subsquid/util-internal-code-printer': ^0.1.1
-  '@subsquid/util-internal-commander': ^0.0.2
-  '@subsquid/util-internal-config': ^1.0.1
-  '@subsquid/util-internal-json': ^0.2.1
-  '@subsquid/util-naming': ^0.0.2
-  '@types/node': ^18.13.0
+  '@subsquid/util-internal-code-printer': ^1.0.0
+  '@subsquid/util-internal-commander': ^1.0.0
+  '@subsquid/util-internal-config': ^2.0.0
+  '@subsquid/util-internal-json': ^1.0.0
+  '@subsquid/util-naming': ^1.0.0
+  '@types/node': ^20.0.0
   '@types/semver': ^7.3.13
-  commander: ^10.0.0
+  commander: ^10.0.1
   dotenv: ^16.0.3
-  ethers: ^5.7.2
-  json-schema-to-typescript: ^12.0.0
+  ethers: ^6.3.0
+  json-schema-to-typescript: ^13.0.1
   jsonc-parser: ^3.2.0
   latest-version: ^5.1.0
   pg: 8.8.0
   semver: ^7.3.8
   ts-node: ^10.9.1
   type-fest: ^3.0.0
-  typeorm: ^0.3.11
-  typescript: ~5.0.0
+  typescript: ~5.0.4
   upath: ^2.0.1
-  yaml: ^2.2.1
+  yaml: ^2.2.2
 
 dependencies:
   '@aws-sdk/client-s3': 3.296.0
   '@rush-temp/gravatar': file:projects/gravatar.tgz_ts-node@10.9.1
-  '@rush-temp/gravatar-parquet': file:projects/gravatar-parquet.tgz_typeorm@0.3.12
+  '@rush-temp/gravatar-parquet': file:projects/gravatar-parquet.tgz
   '@rush-temp/ink-erc20': file:projects/ink-erc20.tgz_ts-node@10.9.1
-  '@rush-temp/squid-gen-evm': file:projects/squid-gen-evm.tgz_typeorm@0.3.12
-  '@rush-temp/squid-gen-ink': file:projects/squid-gen-ink.tgz_24be6cc6048e0dbb798046c26453161d
-  '@rush-temp/squid-gen-targets': file:projects/squid-gen-targets.tgz_commander@10.0.0
+  '@rush-temp/squid-gen-evm': file:projects/squid-gen-evm.tgz
+  '@rush-temp/squid-gen-ink': file:projects/squid-gen-ink.tgz_typeorm@0.3.15
+  '@rush-temp/squid-gen-targets': file:projects/squid-gen-targets.tgz_78f09fb194586edd84b5a7d8bdb9b34f
   '@rush-temp/squid-gen-utils': file:projects/squid-gen-utils.tgz
   '@rush-temp/workspace': file:projects/workspace.tgz
-  '@subsquid/archive-registry': 2.1.9
-  '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
-  '@subsquid/evm-typegen': 2.1.1
+  '@subsquid/evm-processor': 1.0.0
+  '@subsquid/evm-typegen': 3.0.0_ethers@6.3.0
   '@subsquid/file-store': 0.2.0
   '@subsquid/file-store-parquet': 0.4.0_@subsquid+file-store@0.2.0
   '@subsquid/file-store-s3': 0.2.0_ec2339f70d1310ad9afdacddc53c86c6
-  '@subsquid/graphql-server': 3.3.2_typeorm@0.3.12
   '@subsquid/ink-abi': 1.1.0
   '@subsquid/ink-typegen': 0.2.1
-  '@subsquid/logger': 0.3.1
+  '@subsquid/logger': 1.0.0
   '@subsquid/ss58': 0.1.4
   '@subsquid/substrate-metadata-explorer': 1.1.2
-  '@subsquid/substrate-processor': 2.4.1_24be6cc6048e0dbb798046c26453161d
-  '@subsquid/typeorm-codegen': 0.3.3
-  '@subsquid/typeorm-migration': 0.1.6_typeorm@0.3.12
-  '@subsquid/typeorm-store': 0.2.2_typeorm@0.3.12
-  '@subsquid/util-internal': 1.1.0
-  '@subsquid/util-internal-code-printer': 0.1.1
-  '@subsquid/util-internal-commander': 0.0.2_commander@10.0.0
-  '@subsquid/util-internal-config': 1.0.1
-  '@subsquid/util-internal-json': 0.2.1
-  '@subsquid/util-naming': 0.0.2
-  '@types/node': 18.15.5
+  '@subsquid/substrate-processor': 2.4.1_typeorm@0.3.15
+  '@subsquid/util-internal-code-printer': 1.0.0
+  '@subsquid/util-internal-commander': 1.0.0_commander@10.0.1
+  '@subsquid/util-internal-config': 2.0.0
+  '@subsquid/util-internal-json': 1.0.0
+  '@subsquid/util-naming': 1.0.0
+  '@types/node': 20.0.0
   '@types/semver': 7.3.13
-  commander: 10.0.0
+  commander: 10.0.1
   dotenv: 16.0.3
-  ethers: 5.7.2
-  json-schema-to-typescript: 12.0.0
+  ethers: 6.3.0
+  json-schema-to-typescript: 13.0.1
   jsonc-parser: 3.2.0
   latest-version: 5.1.0
   pg: 8.8.0
   semver: 7.3.8
-  ts-node: 10.9.1_cac398dc69ef9ba81c05bffba6cf6d5b
+  ts-node: 10.9.1_eccc456b68e5796b8cbb2cb75e0631ff
   type-fest: 3.7.1
-  typeorm: 0.3.12_pg@8.8.0+ts-node@10.9.1
-  typescript: 5.0.2
+  typescript: 5.0.4
   upath: 2.0.1
-  yaml: 2.2.1
+  yaml: 2.2.2
 
 packages:
+
+  /@adraffy/ens-normalize/1.9.0:
+    resolution: {integrity: sha512-iowxq3U30sghZotgl4s/oJRci6WPBfNO5YYgk2cIOMCHr3LeGPcsZjCEr+33Q4N+oV3OABDAtA+pyvWjbvBifQ==}
+    dev: false
 
   /@apollo/protobufjs/1.2.6:
     resolution: {integrity: sha512-Wqo1oSHNUj/jxmsVp4iR3I480p6qdqHikn38lKrFhfzcDJ7lwd7Ck7cHRl4JE81tWNArl77xhnG/OkZhxKBYOw==}
@@ -1222,321 +1212,6 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: false
 
-  /@ethersproject/abi/5.7.0:
-    resolution: {integrity: sha512-351ktp42TiRcYB3H1OP8yajPeAQstMW/yCFokj/AthP9bLHzQFPlOrxOcwYEDkUAICmOHljvN4K39OMTMUa9RA==}
-    dependencies:
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/constants': 5.7.0
-      '@ethersproject/hash': 5.7.0
-      '@ethersproject/keccak256': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/strings': 5.7.0
-    dev: false
-
-  /@ethersproject/abstract-provider/5.7.0:
-    resolution: {integrity: sha512-R41c9UkchKCpAqStMYUpdunjo3pkEvZC3FAwZn5S5MGbXoMQOHIdHItezTETxAO5bevtMApSyEhn9+CHcDsWBw==}
-    dependencies:
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/networks': 5.7.1
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/transactions': 5.7.0
-      '@ethersproject/web': 5.7.1
-    dev: false
-
-  /@ethersproject/abstract-signer/5.7.0:
-    resolution: {integrity: sha512-a16V8bq1/Cz+TGCkE2OPMTOUDLS3grCpdjoJCYNnVBbdYEMSgKrU0+B90s8b6H+ByYTBZN7a3g76jdIJi7UfKQ==}
-    dependencies:
-      '@ethersproject/abstract-provider': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-    dev: false
-
-  /@ethersproject/address/5.7.0:
-    resolution: {integrity: sha512-9wYhYt7aghVGo758POM5nqcOMaE168Q6aRLJZwUmiqSrAungkG74gSSeKEIR7ukixesdRZGPgVqme6vmxs1fkA==}
-    dependencies:
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/keccak256': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/rlp': 5.7.0
-    dev: false
-
-  /@ethersproject/base64/5.7.0:
-    resolution: {integrity: sha512-Dr8tcHt2mEbsZr/mwTPIQAf3Ai0Bks/7gTw9dSqk1mQvhW3XvRlmDJr/4n+wg1JmCl16NZue17CDh8xb/vZ0sQ==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-    dev: false
-
-  /@ethersproject/basex/5.7.0:
-    resolution: {integrity: sha512-ywlh43GwZLv2Voc2gQVTKBoVQ1mti3d8HK5aMxsfu/nRDnMmNqaSJ3r3n85HBByT8OpoY96SXM1FogC533T4zw==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/properties': 5.7.0
-    dev: false
-
-  /@ethersproject/bignumber/5.7.0:
-    resolution: {integrity: sha512-n1CAdIHRWjSucQO3MC1zPSVgV/6dy/fjL9pMrPP9peL+QxEg9wOsVqwD4+818B6LUEtaXzVHQiuivzRoxPxUGw==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      bn.js: 5.2.1
-    dev: false
-
-  /@ethersproject/bytes/5.7.0:
-    resolution: {integrity: sha512-nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==}
-    dependencies:
-      '@ethersproject/logger': 5.7.0
-    dev: false
-
-  /@ethersproject/constants/5.7.0:
-    resolution: {integrity: sha512-DHI+y5dBNvkpYUMiRQyxRBYBefZkJfo70VUkUAsRjcPs47muV9evftfZ0PJVCXYbAiCgght0DtcF9srFQmIgWA==}
-    dependencies:
-      '@ethersproject/bignumber': 5.7.0
-    dev: false
-
-  /@ethersproject/contracts/5.7.0:
-    resolution: {integrity: sha512-5GJbzEU3X+d33CdfPhcyS+z8MzsTrBGk/sc+G+59+tPa9yFkl6HQ9D6L0QMgNTA9q8dT0XKxxkyp883XsQvbbg==}
-    dependencies:
-      '@ethersproject/abi': 5.7.0
-      '@ethersproject/abstract-provider': 5.7.0
-      '@ethersproject/abstract-signer': 5.7.0
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/constants': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/transactions': 5.7.0
-    dev: false
-
-  /@ethersproject/hash/5.7.0:
-    resolution: {integrity: sha512-qX5WrQfnah1EFnO5zJv1v46a8HW0+E5xuBBDTwMFZLuVTx0tbU2kkx15NqdjxecrLGatQN9FGQKpb1FKdHCt+g==}
-    dependencies:
-      '@ethersproject/abstract-signer': 5.7.0
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/base64': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/keccak256': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/strings': 5.7.0
-    dev: false
-
-  /@ethersproject/hdnode/5.7.0:
-    resolution: {integrity: sha512-OmyYo9EENBPPf4ERhR7oj6uAtUAhYGqOnIS+jE5pTXvdKBS99ikzq1E7Iv0ZQZ5V36Lqx1qZLeak0Ra16qpeOg==}
-    dependencies:
-      '@ethersproject/abstract-signer': 5.7.0
-      '@ethersproject/basex': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/pbkdf2': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/sha2': 5.7.0
-      '@ethersproject/signing-key': 5.7.0
-      '@ethersproject/strings': 5.7.0
-      '@ethersproject/transactions': 5.7.0
-      '@ethersproject/wordlists': 5.7.0
-    dev: false
-
-  /@ethersproject/json-wallets/5.7.0:
-    resolution: {integrity: sha512-8oee5Xgu6+RKgJTkvEMl2wDgSPSAQ9MB/3JYjFV9jlKvcYHUXZC+cQp0njgmxdHkYWn8s6/IqIZYm0YWCjO/0g==}
-    dependencies:
-      '@ethersproject/abstract-signer': 5.7.0
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/hdnode': 5.7.0
-      '@ethersproject/keccak256': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/pbkdf2': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/random': 5.7.0
-      '@ethersproject/strings': 5.7.0
-      '@ethersproject/transactions': 5.7.0
-      aes-js: 3.0.0
-      scrypt-js: 3.0.1
-    dev: false
-
-  /@ethersproject/keccak256/5.7.0:
-    resolution: {integrity: sha512-2UcPboeL/iW+pSg6vZ6ydF8tCnv3Iu/8tUmLLzWWGzxWKFFqOBQFLo6uLUv6BDrLgCDfN28RJ/wtByx+jZ4KBg==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      js-sha3: 0.8.0
-    dev: false
-
-  /@ethersproject/logger/5.7.0:
-    resolution: {integrity: sha512-0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==}
-    dev: false
-
-  /@ethersproject/networks/5.7.1:
-    resolution: {integrity: sha512-n/MufjFYv3yFcUyfhnXotyDlNdFb7onmkSy8aQERi2PjNcnWQ66xXxa3XlS8nCcA8aJKJjIIMNJTC7tu80GwpQ==}
-    dependencies:
-      '@ethersproject/logger': 5.7.0
-    dev: false
-
-  /@ethersproject/pbkdf2/5.7.0:
-    resolution: {integrity: sha512-oR/dBRZR6GTyaofd86DehG72hY6NpAjhabkhxgr3X2FpJtJuodEl2auADWBZfhDHgVCbu3/H/Ocq2uC6dpNjjw==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/sha2': 5.7.0
-    dev: false
-
-  /@ethersproject/properties/5.7.0:
-    resolution: {integrity: sha512-J87jy8suntrAkIZtecpxEPxY//szqr1mlBaYlQ0r4RCaiD2hjheqF9s1LVE8vVuJCXisjIP+JgtK/Do54ej4Sw==}
-    dependencies:
-      '@ethersproject/logger': 5.7.0
-    dev: false
-
-  /@ethersproject/providers/5.7.2:
-    resolution: {integrity: sha512-g34EWZ1WWAVgr4aptGlVBF8mhl3VWjv+8hoAnzStu8Ah22VHBsuGzP17eb6xDVRzw895G4W7vvx60lFFur/1Rg==}
-    dependencies:
-      '@ethersproject/abstract-provider': 5.7.0
-      '@ethersproject/abstract-signer': 5.7.0
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/base64': 5.7.0
-      '@ethersproject/basex': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/constants': 5.7.0
-      '@ethersproject/hash': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/networks': 5.7.1
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/random': 5.7.0
-      '@ethersproject/rlp': 5.7.0
-      '@ethersproject/sha2': 5.7.0
-      '@ethersproject/strings': 5.7.0
-      '@ethersproject/transactions': 5.7.0
-      '@ethersproject/web': 5.7.1
-      bech32: 1.1.4
-      ws: 7.4.6
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-    dev: false
-
-  /@ethersproject/random/5.7.0:
-    resolution: {integrity: sha512-19WjScqRA8IIeWclFme75VMXSBvi4e6InrUNuaR4s5pTF2qNhcGdCUwdxUVGtDDqC00sDLCO93jPQoDUH4HVmQ==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-    dev: false
-
-  /@ethersproject/rlp/5.7.0:
-    resolution: {integrity: sha512-rBxzX2vK8mVF7b0Tol44t5Tb8gomOHkj5guL+HhzQ1yBh/ydjGnpw6at+X6Iw0Kp3OzzzkcKp8N9r0W4kYSs9w==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-    dev: false
-
-  /@ethersproject/sha2/5.7.0:
-    resolution: {integrity: sha512-gKlH42riwb3KYp0reLsFTokByAKoJdgFCwI+CCiX/k+Jm2mbNs6oOaCjYQSlI1+XBVejwH2KrmCbMAT/GnRDQw==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      hash.js: 1.1.7
-    dev: false
-
-  /@ethersproject/signing-key/5.7.0:
-    resolution: {integrity: sha512-MZdy2nL3wO0u7gkB4nA/pEf8lu1TlFswPNmy8AiYkfKTdO6eXBJyUdmHO/ehm/htHw9K/qF8ujnTyUAD+Ry54Q==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      bn.js: 5.2.1
-      elliptic: 6.5.4
-      hash.js: 1.1.7
-    dev: false
-
-  /@ethersproject/solidity/5.7.0:
-    resolution: {integrity: sha512-HmabMd2Dt/raavyaGukF4XxizWKhKQ24DoLtdNbBmNKUOPqwjsKQSdV9GQtj9CBEea9DlzETlVER1gYeXXBGaA==}
-    dependencies:
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/keccak256': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/sha2': 5.7.0
-      '@ethersproject/strings': 5.7.0
-    dev: false
-
-  /@ethersproject/strings/5.7.0:
-    resolution: {integrity: sha512-/9nu+lj0YswRNSH0NXYqrh8775XNyEdUQAuf3f+SmOrnVewcJ5SBNAjF7lpgehKi4abvNNXyf+HX86czCdJ8Mg==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/constants': 5.7.0
-      '@ethersproject/logger': 5.7.0
-    dev: false
-
-  /@ethersproject/transactions/5.7.0:
-    resolution: {integrity: sha512-kmcNicCp1lp8qanMTC3RIikGgoJ80ztTyvtsFvCYpSCfkjhD0jZ2LOrnbcuxuToLIUYYf+4XwD1rP+B/erDIhQ==}
-    dependencies:
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/constants': 5.7.0
-      '@ethersproject/keccak256': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/rlp': 5.7.0
-      '@ethersproject/signing-key': 5.7.0
-    dev: false
-
-  /@ethersproject/units/5.7.0:
-    resolution: {integrity: sha512-pD3xLMy3SJu9kG5xDGI7+xhTEmGXlEqXU4OfNapmfnxLVY4EMSSRp7j1k7eezutBPH7RBN/7QPnwR7hzNlEFeg==}
-    dependencies:
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/constants': 5.7.0
-      '@ethersproject/logger': 5.7.0
-    dev: false
-
-  /@ethersproject/wallet/5.7.0:
-    resolution: {integrity: sha512-MhmXlJXEJFBFVKrDLB4ZdDzxcBxQ3rLyCkhNqVu3CDYvR97E+8r01UgrI+TI99Le+aYm/in/0vp86guJuM7FCA==}
-    dependencies:
-      '@ethersproject/abstract-provider': 5.7.0
-      '@ethersproject/abstract-signer': 5.7.0
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/hash': 5.7.0
-      '@ethersproject/hdnode': 5.7.0
-      '@ethersproject/json-wallets': 5.7.0
-      '@ethersproject/keccak256': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/random': 5.7.0
-      '@ethersproject/signing-key': 5.7.0
-      '@ethersproject/transactions': 5.7.0
-      '@ethersproject/wordlists': 5.7.0
-    dev: false
-
-  /@ethersproject/web/5.7.1:
-    resolution: {integrity: sha512-Gueu8lSvyjBWL4cYsWsjh6MtMwM0+H4HvqFPZfB6dV8ctbP9zFAO73VG1cMWae0FLPCtz0peKPpZY8/ugJJX2w==}
-    dependencies:
-      '@ethersproject/base64': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/strings': 5.7.0
-    dev: false
-
-  /@ethersproject/wordlists/5.7.0:
-    resolution: {integrity: sha512-S2TFNJNfHWVHNE6cNDjbVlZ6MgE17MIxMbMg2zv3wn+3XSJGosL1m9ZVv3GXCf/2ymSsQ+hRI5IzoMJTG6aoVA==}
-    dependencies:
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/hash': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/strings': 5.7.0
-    dev: false
-
   /@exodus/schemasafe/1.0.0:
     resolution: {integrity: sha512-2cyupPIZI69HQxEAPllLXBjQp4njDKkOjYRCYxvMZe3/LY9pp9fBM3Tb1wiFAdP6Emo4v3OEbCLGj6u73Q5KLw==}
     dev: false
@@ -1661,8 +1336,8 @@ packages:
     resolution: {integrity: sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==}
     dev: false
 
-  /@keyv/redis/2.5.6:
-    resolution: {integrity: sha512-WxR9x/TjGptVM5Vi1IyMqtZ+iAPMY8jh2NkGrHWnvrtGUDll4PyY2GbXkOTC0msGVXuV1JqPEHIM7M648O+Pfg==}
+  /@keyv/redis/2.5.7:
+    resolution: {integrity: sha512-WFDjJ1rXOytwnE56vjunrl+AR/p2T3qG6OK9rfCPR7+GUNlu8DfuNYjnvWeklKmK1FSe7zAYdD1C+MbJt5FJXg==}
     engines: {node: '>= 12'}
     dependencies:
       ioredis: 5.3.1
@@ -1787,6 +1462,14 @@ packages:
     dev: false
     optional: true
 
+  /@noble/hashes/1.1.2:
+    resolution: {integrity: sha512-KYRCASVTv6aeUi1tsF8/vpyR7zpfs3FUzy2Jqm+MU+LmUKhQ0y2FpfwqkCcxSg2ua4GALJd8k2R76WxwZGbQpA==}
+    dev: false
+
+  /@noble/secp256k1/1.7.1:
+    resolution: {integrity: sha512-hOUk6AyBFmqVrv7k5WAw/LpszxVbj9gGN4JRkIX52fdFAj1UA61KXmZDvqVEm+pOyec3+fIeZB02LYa/pWOArw==}
+    dev: false
+
   /@protobufjs/aspromise/1.1.2:
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
     dev: false
@@ -1839,27 +1522,13 @@ packages:
     resolution: {integrity: sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw==}
     dev: false
 
-  /@subsquid/archive-registry/2.1.10:
-    resolution: {integrity: sha512-tjHsBUuxFJ67GkEH0Qo823P8yLoIfd4Q82YFhO5gMUYXsRya6rWjFKzsbo+7G0kuqtC065jBwh/3zWExjkOJhg==}
+  /@subsquid/archive-registry/2.1.13:
+    resolution: {integrity: sha512-xmgyfa2zZLFfTyDsposCavGrFnPcKt1bIrx6AEZLFAAmI03sGBCBXA4tZ1f9ZPbDU3u1Xj2wyNF+9NN3jgg3HA==}
     hasBin: true
     dependencies:
       '@subsquid/util-internal': 1.1.0
-      commander: 10.0.0
+      commander: 10.0.1
       easy-table: 1.2.0
-      node-abort-controller: 2.0.0
-      node-fetch: 2.6.9
-    transitivePeerDependencies:
-      - encoding
-    dev: false
-
-  /@subsquid/archive-registry/2.1.9:
-    resolution: {integrity: sha512-G9RcoSFlHbwjiyUDG1GLvBAIOQpwPXK8k6Hj45TOnIi1bNn9090VZrDVyNCchyz0TAcpWK8QvTfDJP/AlgwRVw==}
-    hasBin: true
-    dependencies:
-      '@subsquid/util-internal': 1.1.0
-      commander: 10.0.0
-      easy-table: 1.2.0
-      node-abort-controller: 2.0.0
       node-fetch: 2.6.9
     transitivePeerDependencies:
       - encoding
@@ -1871,39 +1540,45 @@ packages:
       big.js: 6.2.1
     dev: false
 
-  /@subsquid/evm-processor/0.4.0_typeorm@0.3.12:
-    resolution: {integrity: sha512-gDvJEtOiVuC7eX4m89o9e6mgrdGp6DYqLFrDt+qd9kGBruj0ZsoygqKjkaDC4QbmbxV/CXOUyZX9j07+pdGEPw==}
+  /@subsquid/evm-processor/1.0.0:
+    resolution: {integrity: sha512-H9MSaubZ5dFiUUZor5s8D7p0OtbZzlfdRaL30QL5nhjkWIeh8QLSBUWGOmSTbYA6kt6ab8oWTmssWeqVQGZUMw==}
     dependencies:
-      '@subsquid/logger': 0.3.1
-      '@subsquid/rpc-client': 1.0.2
-      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.12
-      '@subsquid/util-internal': 1.1.0
-      '@subsquid/util-internal-binary-heap': 0.0.0
-      '@subsquid/util-internal-code-printer': 0.1.1
-      '@subsquid/util-internal-counters': 0.0.1
-      '@subsquid/util-internal-hex': 0.0.1
-      '@subsquid/util-internal-prometheus-server': 0.0.2_prom-client@14.2.0
-      '@subsquid/util-xxhash': 0.1.2
-      node-fetch: 2.6.9
-      prom-client: 14.2.0
+      '@subsquid/http-client': 1.0.0
+      '@subsquid/logger': 1.0.0
+      '@subsquid/util-internal': 2.0.0
+      '@subsquid/util-internal-hex': 1.0.0
+      '@subsquid/util-internal-processor-tools': 0.0.1
+      '@subsquid/util-internal-resilient-rpc': 1.0.0
     transitivePeerDependencies:
-      - encoding
       - supports-color
-      - typeorm
     dev: false
 
-  /@subsquid/evm-typegen/2.1.1:
-    resolution: {integrity: sha512-v906DTqNLs6L/g8FdoMKkpSXrM0O3M/LZPnCZyU8xcRrUGqtQl+PWA17MEbPvhofptqOTMhB9hS/guMM91jyPA==}
-    hasBin: true
+  /@subsquid/evm-processor/1.1.0:
+    resolution: {integrity: sha512-+uqCr3/qAIiXjqQYxwmMj7Nl0MSNx+CT3utwAodv5wUQwq6NCoUDUPWUwdF0F6Fw+YHr6qvVDN9nlWGqMuAqeg==}
     dependencies:
-      '@ethersproject/abi': 5.7.0
-      '@ethersproject/address': 5.7.0
-      '@subsquid/logger': 0.3.1
-      '@subsquid/util-internal': 1.1.0
-      '@subsquid/util-internal-code-printer': 0.1.1
-      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.0
-      '@subsquid/util-internal-http-client': 0.1.0
-      commander: 10.0.0
+      '@subsquid/http-client': 1.0.0
+      '@subsquid/logger': 1.0.0
+      '@subsquid/rpc-client': 4.0.0
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-hex': 1.0.0
+      '@subsquid/util-internal-processor-tools': 1.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@subsquid/evm-typegen/3.0.0_ethers@6.3.0:
+    resolution: {integrity: sha512-eecoCL5sE6hSiPr6A78Fv332PPo+4ZF6DK6w7mrHMG/wD/RXGa86aOPinCczVEHiBfypqoagStcvJw6KKdXsXA==}
+    hasBin: true
+    peerDependencies:
+      ethers: ^6.3.0
+    dependencies:
+      '@subsquid/http-client': 1.0.0
+      '@subsquid/logger': 1.0.0
+      '@subsquid/util-internal': 2.0.0
+      '@subsquid/util-internal-code-printer': 1.0.0
+      '@subsquid/util-internal-commander': 1.0.0_commander@10.0.1
+      commander: 10.0.1
+      ethers: 6.3.0
     dev: false
 
   /@subsquid/file-store-parquet/0.4.0_@subsquid+file-store@0.2.0:
@@ -1946,11 +1621,21 @@ packages:
       upath: 2.0.1
     dev: false
 
+  /@subsquid/file-store/1.0.0_b5ceb7cf9cdaed5e1f3ec654007c883c:
+    resolution: {integrity: sha512-agbjMUcSdfJ5fskqhh+h/mbcbAMg+9YnDczetOJ7QJjJAm94l70/kxpc+N5saya0r9tIqU45mk221fbG323llA==}
+    peerDependencies:
+      '@subsquid/util-internal-processor-tools': ^0.0.1
+    dependencies:
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-processor-tools': 0.0.1
+      upath: 2.0.1
+    dev: false
+
   /@subsquid/graphiql-console/0.3.0:
     resolution: {integrity: sha512-C89mus6IXnNi0xMQrZqUFBZwLj8tbuq9lye8Gq/lHmmERAUpi6UsWEyLdJLx2mneZzF3JtY8eNiiZ16jmjtvfw==}
     dev: false
 
-  /@subsquid/graphql-server/3.3.2_typeorm@0.3.12:
+  /@subsquid/graphql-server/3.3.2_typeorm@0.3.15:
     resolution: {integrity: sha512-sJbOqvUrIej34bodz2jYPgOCB8GxwdqmMYEkbk6jz4OAwGS103bUYzypAtk35zxJYL9xzFRPhIXrNOaa9glXQw==}
     hasBin: true
     peerDependencies:
@@ -1973,24 +1658,24 @@ packages:
       '@graphql-tools/merge': 8.4.0_graphql@15.8.0
       '@graphql-tools/schema': 8.5.1_graphql@15.8.0
       '@graphql-tools/utils': 8.13.1_graphql@15.8.0
-      '@keyv/redis': 2.5.6
+      '@keyv/redis': 2.5.7
       '@subsquid/logger': 0.3.1
       '@subsquid/openreader': 3.1.7
-      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.12
+      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.15
       '@subsquid/util-internal': 1.1.0
-      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.0
+      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.1
       '@subsquid/util-internal-http-server': 0.1.1
       apollo-server-core: 3.12.0_graphql@15.8.0
       apollo-server-express: 3.12.0_express@4.18.2+graphql@15.8.0
       apollo-server-plugin-response-cache: 3.7.1_graphql@15.8.0
-      commander: 10.0.0
+      commander: 10.0.1
       dotenv: 16.0.3
       express: 4.18.2
       graphql: 15.8.0
-      graphql-ws: 5.12.0_graphql@15.8.0
+      graphql-ws: 5.12.1_graphql@15.8.0
       keyv: 4.5.2
       pg: 8.10.0
-      typeorm: 0.3.12_pg@8.8.0+ts-node@10.9.1
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
       ws: 8.13.0
     transitivePeerDependencies:
       - bufferutil
@@ -1998,6 +1683,64 @@ packages:
       - pg-native
       - supports-color
       - utf-8-validate
+    dev: false
+
+  /@subsquid/graphql-server/4.0.0_typeorm@0.3.15:
+    resolution: {integrity: sha512-ecxGwfnwMda8FWt9IHWmpo0yw+B7mqVH2YzRqj4AKwfffMTOQUngPKjZLAt+A2/ynzWIMYPVvStvqEyp7DTSHA==}
+    hasBin: true
+    peerDependencies:
+      '@subsquid/big-decimal': ^1.0.0
+      class-validator: ^0.14.0
+      type-graphql: ^1.2.0-rc.1
+      typeorm: ^0.3.15
+    peerDependenciesMeta:
+      '@subsquid/big-decimal':
+        optional: true
+      class-validator:
+        optional: true
+      type-graphql:
+        optional: true
+      typeorm:
+        optional: true
+    dependencies:
+      '@apollo/utils.keyvadapter': 1.1.2
+      '@apollo/utils.keyvaluecache': 1.0.2
+      '@graphql-tools/merge': 8.4.0_graphql@15.8.0
+      '@graphql-tools/schema': 8.5.1_graphql@15.8.0
+      '@graphql-tools/utils': 8.13.1_graphql@15.8.0
+      '@keyv/redis': 2.5.7
+      '@subsquid/logger': 1.0.0
+      '@subsquid/openreader': 4.0.0
+      '@subsquid/typeorm-config': 3.0.0_typeorm@0.3.15
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-commander': 1.0.0_commander@10.0.1
+      '@subsquid/util-internal-http-server': 1.0.0
+      apollo-server-core: 3.12.0_graphql@15.8.0
+      apollo-server-express: 3.12.0_express@4.18.2+graphql@15.8.0
+      apollo-server-plugin-response-cache: 3.7.1_graphql@15.8.0
+      commander: 10.0.1
+      dotenv: 16.0.3
+      express: 4.18.2
+      graphql: 15.8.0
+      graphql-ws: 5.12.1_graphql@15.8.0
+      keyv: 4.5.2
+      pg: 8.10.0
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
+      ws: 8.13.0
+    transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - pg-native
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /@subsquid/http-client/1.0.0:
+    resolution: {integrity: sha512-4gB8ObGq+u86/MZshAU55d0kZ/O6SJwVFodpTjLlG0tjQ3AHGuUO6Iu/bbL2uDvgNIL4NvduyXYbGYhFA5cGHQ==}
+    dependencies:
+      '@subsquid/logger': 1.0.0
+      '@subsquid/util-internal': 2.0.0
+      node-fetch: 3.3.1
     dev: false
 
   /@subsquid/ink-abi/1.1.0:
@@ -2018,7 +1761,7 @@ packages:
       '@subsquid/substrate-typegen': 2.2.1
       '@subsquid/util-internal': 1.1.0
       '@subsquid/util-internal-code-printer': 0.1.1
-      commander: 10.0.0
+      commander: 10.0.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2028,6 +1771,14 @@ packages:
     dependencies:
       '@subsquid/util-internal-hex': 0.0.2
       '@subsquid/util-internal-json': 0.2.1
+      supports-color: 8.1.1
+    dev: false
+
+  /@subsquid/logger/1.0.0:
+    resolution: {integrity: sha512-8sGYVByu3m8WgdGnnZRn6vnGTSpqXiJtpnh1j34XKZQcEoYD+dNOz8b8PF0ZnJD7dOaFAEI5MKBO/czu3cMueg==}
+    dependencies:
+      '@subsquid/util-internal-hex': 1.0.0
+      '@subsquid/util-internal-json': 1.0.0
       supports-color: 8.1.1
     dev: false
 
@@ -2044,18 +1795,18 @@ packages:
       '@subsquid/graphiql-console': 0.3.0
       '@subsquid/logger': 0.3.1
       '@subsquid/util-internal': 1.1.0
-      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.0
+      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.1
       '@subsquid/util-internal-hex': 0.0.2
       '@subsquid/util-internal-http-server': 0.1.1
       '@subsquid/util-naming': 0.0.2
       apollo-server-core: 3.12.0_graphql@15.8.0
       apollo-server-express: 3.12.0_express@4.18.2+graphql@15.8.0
-      commander: 10.0.0
-      deep-equal: 2.2.0
+      commander: 10.0.1
+      deep-equal: 2.2.1
       express: 4.18.2
       graphql: 15.8.0
       graphql-parse-resolve-info: 4.13.0_graphql@15.8.0
-      graphql-ws: 5.12.0_graphql@15.8.0
+      graphql-ws: 5.12.1_graphql@15.8.0
       pg: 8.10.0
       ws: 8.13.0
     transitivePeerDependencies:
@@ -2066,19 +1817,67 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@subsquid/rpc-client/1.0.2:
-    resolution: {integrity: sha512-/z4cG3+yvRHkE0DZUyhTcyTvFPMo+DddEmh1eMXu2iFKHzE3XZqO0em04a3BL9HxF0FNXyi7XslGWWLsiKnm3Q==}
+  /@subsquid/openreader/4.0.0:
+    resolution: {integrity: sha512-tbAML8p+DcdFLRm+RMXkheunbB0qruq32rYSGnC1uo7G/7v7vRDsBJDtcmDKQ+xq4vU2MLpul/5tMROXPqdNZA==}
+    hasBin: true
+    peerDependencies:
+      '@subsquid/big-decimal': ^1.0.0
+    peerDependenciesMeta:
+      '@subsquid/big-decimal':
+        optional: true
     dependencies:
-      '@subsquid/util-timeout': 0.0.0
-      websocket: 1.0.34
+      '@graphql-tools/merge': 8.4.0_graphql@15.8.0
+      '@subsquid/graphiql-console': 0.3.0
+      '@subsquid/logger': 1.0.0
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-commander': 1.0.0_commander@10.0.1
+      '@subsquid/util-internal-hex': 1.0.0
+      '@subsquid/util-internal-http-server': 1.0.0
+      '@subsquid/util-naming': 1.0.0
+      apollo-server-core: 3.12.0_graphql@15.8.0
+      apollo-server-express: 3.12.0_express@4.18.2+graphql@15.8.0
+      commander: 10.0.1
+      deep-equal: 2.2.1
+      express: 4.18.2
+      graphql: 15.8.0
+      graphql-parse-resolve-info: 4.13.0_graphql@15.8.0
+      graphql-ws: 5.12.1_graphql@15.8.0
+      pg: 8.10.0
+      ws: 8.13.0
     transitivePeerDependencies:
+      - bufferutil
+      - encoding
+      - pg-native
       - supports-color
+      - utf-8-validate
     dev: false
 
   /@subsquid/rpc-client/2.0.0:
     resolution: {integrity: sha512-El67TER6lmeoaeOlRNELlH2AGpG4YWg8YRnIw3yrfzYhiXsmpX1Hra4XJi53/RxU5tsS1qMON2bd44QbceL27Q==}
     dependencies:
       '@subsquid/util-timeout': 1.0.0
+      websocket: 1.0.34
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@subsquid/rpc-client/3.0.0:
+    resolution: {integrity: sha512-oa15Cn4/vNfAkGAy3Lzx+0S9XpNJg3Agxn30KcWvXJGcEBc7Qgad5F9GIqji5Q9D6zGV0zk68rZN4hbuI45NSA==}
+    dependencies:
+      '@subsquid/util-timeout': 2.0.0
+      websocket: 1.0.34
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@subsquid/rpc-client/4.0.0:
+    resolution: {integrity: sha512-rFs3PlLbvGeuIiqw/qQxU7/GYAB2hfU/A4ZAxbjK5BHixHve8kOVS4mb/Cvo820MkGgi3eea9KXzHgEb0jyK3w==}
+    dependencies:
+      '@subsquid/http-client': 1.0.0
+      '@subsquid/logger': 1.0.0
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-binary-heap': 1.0.0
+      '@subsquid/util-internal-counters': 1.0.0
       websocket: 1.0.34
     transitivePeerDependencies:
       - supports-color
@@ -2110,12 +1909,12 @@ packages:
     dependencies:
       '@subsquid/logger': 0.3.1
       '@subsquid/util-internal': 1.1.0
-      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.0
+      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.1
       '@subsquid/util-internal-hex': 0.0.2
       '@subsquid/util-internal-http-client': 0.1.0
       '@subsquid/util-internal-read-lines': 0.0.2
       '@subsquid/util-internal-resilient-rpc': 0.0.3
-      commander: 10.0.0
+      commander: 10.0.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2128,7 +1927,7 @@ packages:
       '@subsquid/util-naming': 0.0.2
     dev: false
 
-  /@subsquid/substrate-processor/2.4.1_24be6cc6048e0dbb798046c26453161d:
+  /@subsquid/substrate-processor/2.4.1_1246982f7a24212c3d685903745efa05:
     resolution: {integrity: sha512-vFHDbiovCC/BDb03ui55M5Cf638Qcb9YZVKDs2xTltFMpT9lQM1Rs+bpaCne3AqAS5SY03A/PUKNu4jxl8fXTQ==}
     peerDependencies:
       '@subsquid/typeorm-store': ^0.2.2
@@ -2139,8 +1938,36 @@ packages:
       '@subsquid/logger': 0.3.1
       '@subsquid/scale-codec': 1.1.1
       '@subsquid/substrate-metadata': 2.2.2
-      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.12
-      '@subsquid/typeorm-store': 0.2.2_typeorm@0.3.12
+      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.15
+      '@subsquid/typeorm-store': 0.2.2_typeorm@0.3.15
+      '@subsquid/util-internal': 1.1.0
+      '@subsquid/util-internal-binary-heap': 0.0.0
+      '@subsquid/util-internal-code-printer': 0.1.1
+      '@subsquid/util-internal-counters': 0.0.2
+      '@subsquid/util-internal-hex': 0.0.2
+      '@subsquid/util-internal-http-client': 0.1.0
+      '@subsquid/util-internal-prometheus-server': 0.0.3_prom-client@14.2.0
+      '@subsquid/util-internal-resilient-rpc': 0.0.3
+      '@subsquid/util-xxhash': 0.1.2
+      blake2b: 2.1.4
+      prom-client: 14.2.0
+    transitivePeerDependencies:
+      - supports-color
+      - typeorm
+    dev: false
+
+  /@subsquid/substrate-processor/2.4.1_typeorm@0.3.15:
+    resolution: {integrity: sha512-vFHDbiovCC/BDb03ui55M5Cf638Qcb9YZVKDs2xTltFMpT9lQM1Rs+bpaCne3AqAS5SY03A/PUKNu4jxl8fXTQ==}
+    peerDependencies:
+      '@subsquid/typeorm-store': ^0.2.2
+    peerDependenciesMeta:
+      '@subsquid/typeorm-store':
+        optional: true
+    dependencies:
+      '@subsquid/logger': 0.3.1
+      '@subsquid/scale-codec': 1.1.1
+      '@subsquid/substrate-metadata': 2.2.2
+      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.15
       '@subsquid/util-internal': 1.1.0
       '@subsquid/util-internal-binary-heap': 0.0.0
       '@subsquid/util-internal-code-printer': 0.1.1
@@ -2170,7 +1997,7 @@ packages:
       '@subsquid/util-internal-config': 1.0.1
       '@subsquid/util-internal-read-lines': 0.0.2
       '@subsquid/util-naming': 0.0.2
-      commander: 10.0.0
+      commander: 10.0.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -2183,7 +2010,7 @@ packages:
       '@subsquid/util-internal': 1.1.0
       '@subsquid/util-internal-code-printer': 0.1.1
       '@subsquid/util-naming': 0.0.2
-      commander: 10.0.0
+      commander: 10.0.1
     transitivePeerDependencies:
       - '@subsquid/big-decimal'
       - bufferutil
@@ -2193,7 +2020,25 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@subsquid/typeorm-config/2.0.2_typeorm@0.3.12:
+  /@subsquid/typeorm-codegen/1.0.0:
+    resolution: {integrity: sha512-Cz0XVm0acGpQ60W7OI3UKzTF2R/2dWi3F8VsY5LembdisH1A9ZioMABW8MAXQUyu/8wxSVLmktYMIiF/W+lweA==}
+    hasBin: true
+    dependencies:
+      '@subsquid/openreader': 4.0.0
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-code-printer': 1.0.0
+      '@subsquid/util-naming': 1.0.0
+      commander: 10.0.1
+    transitivePeerDependencies:
+      - '@subsquid/big-decimal'
+      - bufferutil
+      - encoding
+      - pg-native
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /@subsquid/typeorm-config/2.0.2_typeorm@0.3.15:
     resolution: {integrity: sha512-LoyWzhFeNSI9fXnhgYF4MizyGuiBVB7t3je9TFsOTCnOTYSIcDKJJkmCDzobDlA8PgkJ5bFLFilxIFKsVFqt4w==}
     peerDependencies:
       typeorm: ^0.3.11
@@ -2202,47 +2047,99 @@ packages:
         optional: true
     dependencies:
       '@subsquid/util-naming': 0.0.2
-      typeorm: 0.3.12_pg@8.8.0+ts-node@10.9.1
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
     dev: false
 
-  /@subsquid/typeorm-migration/0.1.6_typeorm@0.3.12:
+  /@subsquid/typeorm-config/3.0.0_typeorm@0.3.15:
+    resolution: {integrity: sha512-trCB3odHIXK6zEYxhDnZ/0zcQkF7xG+1f3Xb8dpb1K3ZJ6MwA26GLFOF/75ZMBZzt8Z4TqaDFFb5Wb9pgYrRJg==}
+    peerDependencies:
+      typeorm: ^0.3.15
+    peerDependenciesMeta:
+      typeorm:
+        optional: true
+    dependencies:
+      '@subsquid/util-naming': 1.0.0
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
+    dev: false
+
+  /@subsquid/typeorm-migration/0.1.6_typeorm@0.3.15:
     resolution: {integrity: sha512-4J4VDJ96zf5b1qF7faHfcaK4x8oNmVXACJwzv/JidloNqt9TUkdkEnlXIpIw1oxijtzWByncnAW9jHU+gcO59Q==}
     hasBin: true
     peerDependencies:
       typeorm: ^0.3.11
     dependencies:
-      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.12
+      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.15
       '@subsquid/util-internal': 1.1.0
       '@subsquid/util-internal-code-printer': 0.1.1
-      commander: 10.0.0
+      commander: 10.0.1
       dotenv: 16.0.3
-      typeorm: 0.3.12_pg@8.8.0+ts-node@10.9.1
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
     dev: false
 
-  /@subsquid/typeorm-store/0.2.2_typeorm@0.3.12:
+  /@subsquid/typeorm-migration/1.0.0_typeorm@0.3.15:
+    resolution: {integrity: sha512-yP11s6mzp4ZSq3mPxrkgKy5EZqSRDWKUi+bh5Ev8m/zAaeLK+I1gR8TYw5TQlYJFzT8gBInKwy2J5KSwzbOQGg==}
+    hasBin: true
+    peerDependencies:
+      typeorm: ^0.3.15
+    dependencies:
+      '@subsquid/typeorm-config': 3.0.0_typeorm@0.3.15
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-code-printer': 1.0.0
+      commander: 10.0.1
+      dotenv: 16.0.3
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
+    dev: false
+
+  /@subsquid/typeorm-store/0.2.2_typeorm@0.3.15:
     resolution: {integrity: sha512-mzqiJCPFT/KBuwNuNAK8D3Wmf5Hws27wvYWw/bXAAT47rxAERz3oLMsAs/dSjXT30F63kMcQfJzvp5FOsa3Ohw==}
     peerDependencies:
       typeorm: ^0.3.11
     dependencies:
-      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.12
+      '@subsquid/typeorm-config': 2.0.2_typeorm@0.3.15
       '@subsquid/util-internal': 1.1.0
-      typeorm: 0.3.12_pg@8.8.0+ts-node@10.9.1
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
+    dev: false
+
+  /@subsquid/typeorm-store/1.0.0_typeorm@0.3.15:
+    resolution: {integrity: sha512-HCcMsEJrnhY5mhcU9mIrqcQ5vlRe/PYe4QUwe4fwhx1h9zNU3jMLyxlfqpsek5HU6YFUBpiENMcm25jzZXWS0A==}
+    peerDependencies:
+      typeorm: ^0.3.15
+    dependencies:
+      '@subsquid/typeorm-config': 3.0.0_typeorm@0.3.15
+      '@subsquid/util-internal': 2.1.0
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
     dev: false
 
   /@subsquid/util-internal-binary-heap/0.0.0:
     resolution: {integrity: sha512-eVtdf442+L10G4lgSHCcxgNzYEcrdZ3WKy7Y7CGkhKLJhKuOlgDtEwklZmh1/lM+37AQn9XnX/VpxTaJ2vA2sg==}
     dev: false
 
+  /@subsquid/util-internal-binary-heap/1.0.0:
+    resolution: {integrity: sha512-88auuc8yNFmCZugmJSTYzS7WM/nN2obKGQCgrl8Jty5rJUFbqazGSi8icqftKhv6MPtUMJ3PSTRLiTFXAUGnAA==}
+    dev: false
+
   /@subsquid/util-internal-code-printer/0.1.1:
     resolution: {integrity: sha512-367YmYeLoLaOiBdlrYElEC4AeM4Kx0XYWM9mA9VBllGvT9qWNnGllaJ+mY9UBhlhWQtCbUnTRtHXhjR5qL8g1w==}
     dev: false
 
-  /@subsquid/util-internal-commander/0.0.2_commander@10.0.0:
+  /@subsquid/util-internal-code-printer/1.0.0:
+    resolution: {integrity: sha512-ps9rwSGyJT/3EoOYooM9cKcOrzVFHC6hfaf6IZvqegKKDdMIWmJz/D/WAn6qyCFqnQluMgVhDCsHyHJrC4RD8Q==}
+    dev: false
+
+  /@subsquid/util-internal-commander/0.0.2_commander@10.0.1:
     resolution: {integrity: sha512-midCpkwu7NaXGhr0MiyQsJlIj284/0mAFBvVG8gRHqqRqb71GIAQq+aRcUSv8KNnAiRWnXK1OPak+gc40V9btw==}
     peerDependencies:
       commander: ^10.0.0
     dependencies:
-      commander: 10.0.0
+      commander: 10.0.1
+    dev: false
+
+  /@subsquid/util-internal-commander/1.0.0_commander@10.0.1:
+    resolution: {integrity: sha512-x5/iJdrmBSoFKy2oZdpj36kh3jxRfWuWEl14OjedWc7HB3QmTU6loBS6n8oDByXTkVcJmh94b024JU3ZDIik7g==}
+    peerDependencies:
+      commander: ^10.0.1
+    dependencies:
+      commander: 10.0.1
     dev: false
 
   /@subsquid/util-internal-config/1.0.1:
@@ -2252,20 +2149,27 @@ packages:
       jsonc-parser: 3.2.0
     dev: false
 
-  /@subsquid/util-internal-counters/0.0.1:
-    resolution: {integrity: sha512-cZOrsBWGDSV+0JuWBesGLxIXaXMG2aclNVsOnfZ3jV1ACXepLF8fM/U1ilaBBXIYxPjEeGoWNCcj0LRSQt6yFQ==}
+  /@subsquid/util-internal-config/2.0.0:
+    resolution: {integrity: sha512-DbjSzPqAxYPIyR3z+9xP1F+tBjUmuTqeySn28Ec6DnrYE3Q9GhWudQW6Ax7bBzvyoz0Ye0x7ngIUe9XcV60rNw==}
+    dependencies:
+      '@exodus/schemasafe': 1.0.0
+      jsonc-parser: 3.2.0
     dev: false
 
   /@subsquid/util-internal-counters/0.0.2:
     resolution: {integrity: sha512-x/O+56bR/X41ZEKjxZy0IqiapKCN9gGJB7G8md+idvGeC15kw8r5pg2Ck9tulB07VQEOqWLNNuvobrfvH0hNkg==}
     dev: false
 
-  /@subsquid/util-internal-hex/0.0.1:
-    resolution: {integrity: sha512-sNok0jQV6+OpAl3QKaH2VFh8PKZyZ6XHZhZ71LeirOhgfVprKFmEvFG9yQIp7qKe7JGXmolX54zu150OMP9f5w==}
+  /@subsquid/util-internal-counters/1.0.0:
+    resolution: {integrity: sha512-4XOBqi8beWhKLaNSUSXq1nMFnZXdeqpSOxSPRitRy2h5vH3tFgai2y2XZmbj26KnrNUHiEHTDufbhMI4AEU0rw==}
     dev: false
 
   /@subsquid/util-internal-hex/0.0.2:
     resolution: {integrity: sha512-EgqYmZjJ6ox885tXBObEAZQZImpRc5pFzQeOLEh78gGPTc39IH3VI4BG0zaomStvgBx+e25M7Y2cc+ae+ttuXQ==}
+    dev: false
+
+  /@subsquid/util-internal-hex/1.0.0:
+    resolution: {integrity: sha512-/GRdTUr0Ewphy9LlEeyJDVaVMbSB5GzEHqIpgizXAH+GQrjgrEBYZy/3r/aXR+FG9HZLTNnZVBPEukM0C6nSQQ==}
     dev: false
 
   /@subsquid/util-internal-http-client/0.1.0:
@@ -2282,18 +2186,45 @@ packages:
       stoppable: 1.1.0
     dev: false
 
+  /@subsquid/util-internal-http-server/1.0.0:
+    resolution: {integrity: sha512-jDciuiMrk2ZrNtsPNMzxYn7IEqr89BMFNwJ7AEN0CvLPy/DJru9QE1KPluccHbs6ZkElDmLoHDgAh8Z9xGSHkA==}
+    dependencies:
+      stoppable: 1.1.0
+    dev: false
+
   /@subsquid/util-internal-json/0.2.1:
     resolution: {integrity: sha512-X9bhhKWBcaeZekGEiE15i8xwfq07/aIYDhA+JFdiVT3aygdb9b57V85USuArd6oh3jjHeQ2SBgj6B5rd8m8vlA==}
     dependencies:
       '@subsquid/util-internal-hex': 0.0.2
     dev: false
 
-  /@subsquid/util-internal-prometheus-server/0.0.2_prom-client@14.2.0:
-    resolution: {integrity: sha512-ODLBH03RkDm34AHkInQ6M5gcm5LCtI9wBAoOlKtqCcgTSIflELJKfmvqGCd3hhPyw0t6PJ2LQayrX3rth/nOqw==}
-    peerDependencies:
-      prom-client: ^14.0.1
+  /@subsquid/util-internal-json/1.0.0:
+    resolution: {integrity: sha512-w2kcMssW3dOiFO8ZYiJRbpNKOimkadpu9/lqYz5FV/YNZVFZ50e1amkhHCrj2mKPlmrx22mkicIeqn8ynfXKZw==}
     dependencies:
-      '@subsquid/util-internal-http-server': 0.1.1
+      '@subsquid/util-internal-hex': 1.0.0
+    dev: false
+
+  /@subsquid/util-internal-processor-tools/0.0.1:
+    resolution: {integrity: sha512-xJrtJDJIKe5kp1w1PWdYzLdulo5eIymGTQPmUJ1JE4WXSkx4MPftZTZK0YXeLAP1plF3Ob0hQ3/h/B0n+04A+Q==}
+    dependencies:
+      '@subsquid/logger': 1.0.0
+      '@subsquid/util-internal': 2.0.0
+      '@subsquid/util-internal-binary-heap': 1.0.0
+      '@subsquid/util-internal-counters': 1.0.0
+      '@subsquid/util-internal-http-client': 0.1.0
+      '@subsquid/util-internal-prometheus-server': 1.0.0_prom-client@14.2.0
+      prom-client: 14.2.0
+    dev: false
+
+  /@subsquid/util-internal-processor-tools/1.0.0:
+    resolution: {integrity: sha512-1Eho352AVafJ7qj1cYw+5U3C3BJlV4iDgT3vjAmctfY97SLwB0qiPwVoFhHL/TAcPfQbRumlZ0pKVUzukCmkrw==}
+    dependencies:
+      '@subsquid/logger': 1.0.0
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-binary-heap': 1.0.0
+      '@subsquid/util-internal-counters': 1.0.0
+      '@subsquid/util-internal-http-client': 0.1.0
+      '@subsquid/util-internal-prometheus-server': 1.0.0_prom-client@14.2.0
       prom-client: 14.2.0
     dev: false
 
@@ -2303,6 +2234,15 @@ packages:
       prom-client: ^14.1.1
     dependencies:
       '@subsquid/util-internal-http-server': 0.1.1
+      prom-client: 14.2.0
+    dev: false
+
+  /@subsquid/util-internal-prometheus-server/1.0.0_prom-client@14.2.0:
+    resolution: {integrity: sha512-9Ddqg6pHhcSOGDARqtSr2H5va3o3xXqo2LTduXNAtBB+RaXWifcCybEDGZAbUkQhpp9cFxK87bskzLIhVccZng==}
+    peerDependencies:
+      prom-client: ^14.2.0
+    dependencies:
+      '@subsquid/util-internal-http-server': 1.0.0
       prom-client: 14.2.0
     dev: false
 
@@ -2323,8 +2263,29 @@ packages:
       - supports-color
     dev: false
 
+  /@subsquid/util-internal-resilient-rpc/1.0.0:
+    resolution: {integrity: sha512-R6NnUfLwmcFDfi7f8xksiCMbrDfYBR107ZvpDyv4gqd8kg6zMJ4iMIKLlyeWkU0G6Cn8+JSeTMA+yRuEMMje5Q==}
+    dependencies:
+      '@subsquid/http-client': 1.0.0
+      '@subsquid/logger': 1.0.0
+      '@subsquid/rpc-client': 3.0.0
+      '@subsquid/util-internal': 2.0.0
+      '@subsquid/util-internal-counters': 1.0.0
+      '@subsquid/util-timeout': 2.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /@subsquid/util-internal/1.1.0:
     resolution: {integrity: sha512-O6m666RDcWEw4vb3bmeNZKlAa1rGOHQvS0nhZFTBXnxZpqK/pU5N0jrQ7X/3is0pY2RKxFoxTurZjhv4QdxtqA==}
+    dev: false
+
+  /@subsquid/util-internal/2.0.0:
+    resolution: {integrity: sha512-HzihJEV+kDwErw903TGztbRdYEY985W0wvkBePF2jVF725vUPZDufnLVR9dqhj1Hutn2vI7mPdKdR6iiUpzTmQ==}
+    dev: false
+
+  /@subsquid/util-internal/2.1.0:
+    resolution: {integrity: sha512-23kNzeu5+ZodywyXmwRTX+tCD0MBCtd2LFsGz6aNbs6IZKELfx/etEbKKrpTQ/Jc/dPbvGvFH9RtwzB2wTknfA==}
     dev: false
 
   /@subsquid/util-naming/0.0.2:
@@ -2334,12 +2295,19 @@ packages:
       inflected: 2.1.0
     dev: false
 
-  /@subsquid/util-timeout/0.0.0:
-    resolution: {integrity: sha512-xvuGKuIc9Dm0rEu7fVAIaIylASGn1+edwYdG5IpXB9IVz5RGG1oeGJybY98hlcwVKAZfzFSMKnaEDqI9jKYwmg==}
+  /@subsquid/util-naming/1.0.0:
+    resolution: {integrity: sha512-IUMjFJOMo0aBNMWz8Afkx6J6cNGTnc4qnZxJhxLm9PqaPsyBAptIRerx/bJkxyd9SHxiwgi9kLpFs417Dg/z0A==}
+    dependencies:
+      camelcase: 6.3.0
+      inflected: 2.1.0
     dev: false
 
   /@subsquid/util-timeout/1.0.0:
     resolution: {integrity: sha512-6LiXYuRKIFcuUOsHPL3qN+cYDZJiCPGQFDdBECrZvXM/FtjF6dloX9JS4LJ7lMHsnKsu7v78+ioiUYpk1Jlyug==}
+    dev: false
+
+  /@subsquid/util-timeout/2.0.0:
+    resolution: {integrity: sha512-2J/DAPsBY9xEz2ePW8P82EXqnUZa65EpAnLHmgsFyt3b5z+NfznfX5uo5KFDR+gd6GNQXbjc/+yIA6ey/md3qA==}
     dev: false
 
   /@subsquid/util-xxhash/0.1.2:
@@ -2375,20 +2343,20 @@ packages:
   /@types/accepts/1.3.5:
     resolution: {integrity: sha512-jOdnI/3qTpHABjM5cx1Hc0sKsPoYCp+DP/GJRGtDlPd7fiV9oXGGIcjW/ZOxLIvjGz8MA+uMZI9metHlgqbgwQ==}
     dependencies:
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
     dev: false
 
   /@types/body-parser/1.19.2:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
     dev: false
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
     dev: false
 
   /@types/cors/2.8.12:
@@ -2398,7 +2366,7 @@ packages:
   /@types/express-serve-static-core/4.17.31:
     resolution: {integrity: sha512-DxMhY+NAsTwMMFHBTtJFNp5qiHKJ7TeqOo23zVEM9alT1Ml27Q3xcTH0xwxn7Q0BbMcVEJOs/7aQtUWupUQN3Q==}
     dependencies:
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
     dev: false
@@ -2416,7 +2384,7 @@ packages:
     resolution: {integrity: sha512-ZUxbzKl0IfJILTS6t7ip5fQQM/J3TJYubDm3nMbgubNNYS62eXeUpoLUC8/7fJNiFYHTrGPQn7hspDUzIHX3UA==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
     dev: false
 
   /@types/json-schema/7.0.11:
@@ -2426,7 +2394,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
     dev: false
 
   /@types/lodash/4.14.191:
@@ -2449,8 +2417,8 @@ packages:
     resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
     dev: false
 
-  /@types/node/18.15.5:
-    resolution: {integrity: sha512-Ark2WDjjZO7GmvsyFFf81MXuGTA/d6oP38anyxWOL6EREyBKAxKoFHwBhaZxCfLRLpO8JgVXwqOwSwa7jRcjew==}
+  /@types/node/20.0.0:
+    resolution: {integrity: sha512-cD2uPTDnQQCVpmRefonO98/PPijuOnnEy5oytWJFPY1N9aJCz2wJ5kSGWO+zJoed2cY2JxQh6yBuUq4vIn61hw==}
     dev: false
 
   /@types/prettier/2.7.2:
@@ -2468,7 +2436,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
     dev: false
 
   /@types/semver/7.3.13:
@@ -2479,7 +2447,7 @@ packages:
     resolution: {integrity: sha512-NUo5XNiAdULrJENtJXZZ3fHtfMolzZwczzBbnAeBbqBwG+LaG6YaJtuwzwGSQZ2wsCrxjEhNNjAkKigy3n8teQ==}
     dependencies:
       '@types/mime': 3.0.1
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
     dev: false
 
   /accepts/1.3.8:
@@ -2501,8 +2469,8 @@ packages:
     hasBin: true
     dev: false
 
-  /aes-js/3.0.0:
-    resolution: {integrity: sha512-H7wUZRn8WpTq9jocdxQ2c8x2sKo9ZVmzfRE13GiNJXfp7NcKYEdvl3vspKjXox6RIG2VtaRe4JFvxG4rqp2Zuw==}
+  /aes-js/4.0.0-beta.3:
+    resolution: {integrity: sha512-/xJX0/VTPcbc5xQE2VUP91y1xN8q/rDfhEzLm+vLc3hYvb5+qHCnpJRuFcrKn63zumK/sCwYYzhG8HP78JYSTA==}
     dev: false
 
   /ajv/8.12.0:
@@ -2686,6 +2654,13 @@ packages:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
     dev: false
 
+  /array-buffer-byte-length/1.0.0:
+    resolution: {integrity: sha512-LPuwb2P+NrQw3XhxGc36+XSvuBPopovXYTR9Ew++Du9Yb/bx5AzBfrIsBoj0EZUifjQU+sHL21sseZ3jerWO/A==}
+    dependencies:
+      call-bind: 1.0.2
+      is-array-buffer: 3.0.2
+    dev: false
+
   /array-flatten/1.1.1:
     resolution: {integrity: sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==}
     dev: false
@@ -2721,10 +2696,6 @@ packages:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
     dev: false
 
-  /bech32/1.1.4:
-    resolution: {integrity: sha512-s0IrSOzLlbvX7yp4WBfPITzpAU8sqQcpsmwXDiKwrG4r491vwCO/XpejasRNl0piBMe/DvP4Tz0mIS/X1DPJBQ==}
-    dev: false
-
   /big.js/6.2.1:
     resolution: {integrity: sha512-bCtHMwL9LeDIozFn+oNhhFoq+yQ3BNdnsLSASUxLciOb1vgvpHsIO1dsENiGMgbb4SkP5TrzWzRiLddn8ahVOQ==}
     dev: false
@@ -2749,14 +2720,6 @@ packages:
     dependencies:
       blake2b-wasm: 2.4.0
       nanoassert: 2.0.0
-    dev: false
-
-  /bn.js/4.12.0:
-    resolution: {integrity: sha512-c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==}
-    dev: false
-
-  /bn.js/5.2.1:
-    resolution: {integrity: sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==}
     dev: false
 
   /body-parser/1.20.1:
@@ -2814,10 +2777,6 @@ packages:
     resolution: {integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==}
     dependencies:
       balanced-match: 1.0.2
-    dev: false
-
-  /brorand/1.1.0:
-    resolution: {integrity: sha512-cKV8tMCEpQs4hK/ik71d6LrPOnpkpGBR0wzxqr68g2m/LB2GxVYQroAjMJZRVM1Y4BCjCKc3vAamxSzOY2RP+w==}
     dev: false
 
   /browser-or-node/1.3.0:
@@ -2967,8 +2926,8 @@ packages:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
     dev: false
 
-  /commander/10.0.0:
-    resolution: {integrity: sha512-zS5PnTI22FIRM6ylNW8G4Ap0IEOyk62fhLSD0+uHRT9McRCLGpkVNvao4bjimpK/GShynyQkFFxHhwMcETmduA==}
+  /commander/10.0.1:
+    resolution: {integrity: sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==}
     engines: {node: '>=14'}
     dev: false
 
@@ -3037,11 +2996,6 @@ packages:
     resolution: {integrity: sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==}
     dev: false
 
-  /date-fns/2.29.3:
-    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
-    engines: {node: '>=0.11'}
-    dev: false
-
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
     peerDependencies:
@@ -3072,9 +3026,10 @@ packages:
       mimic-response: 1.0.1
     dev: false
 
-  /deep-equal/2.2.0:
-    resolution: {integrity: sha512-RdpzE0Hv4lhowpIUKKMJfeH6C1pXdtT1/it80ubgWqwI3qpuxUBpC1S4hnHg+zjnuOoDkzUtUCEEkG+XG5l3Mw==}
+  /deep-equal/2.2.1:
+    resolution: {integrity: sha512-lKdkdV6EOGoVn65XaOsPdH4rMxTZOnmFyuIkMjM1i5HHCbfjC97dawgTAy0deYNfuqUqW+Q5VrVaQYtUpSd6yQ==}
     dependencies:
+      array-buffer-byte-length: 1.0.0
       call-bind: 1.0.2
       es-get-iterator: 1.1.3
       get-intrinsic: 1.2.0
@@ -3087,7 +3042,7 @@ packages:
       object-is: 1.1.5
       object-keys: 1.1.1
       object.assign: 4.1.4
-      regexp.prototype.flags: 1.4.3
+      regexp.prototype.flags: 1.5.0
       side-channel: 1.0.4
       which-boxed-primitive: 1.0.2
       which-collection: 1.0.1
@@ -3157,18 +3112,6 @@ packages:
 
   /ee-first/1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
-    dev: false
-
-  /elliptic/6.5.4:
-    resolution: {integrity: sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==}
-    dependencies:
-      bn.js: 4.12.0
-      brorand: 1.1.0
-      hash.js: 1.1.7
-      hmac-drbg: 1.0.1
-      inherits: 2.0.4
-      minimalistic-assert: 1.0.1
-      minimalistic-crypto-utils: 1.0.1
     dev: false
 
   /emoji-regex/8.0.0:
@@ -3248,39 +3191,16 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /ethers/5.7.2:
-    resolution: {integrity: sha512-wswUsmWo1aOK8rR7DIKiWSw9DbLWe6x98Jrn8wcTflTVvaXhAMaB5zGAXy0GYQEQp9iO1iSHWVyARQm11zUtyg==}
+  /ethers/6.3.0:
+    resolution: {integrity: sha512-CKFYvTne1YT4S1glTiu7TgGsj0t6c6GAD7evrIk8zbeUb6nK8dcUPAiAWM8uDX/1NmRTvLM9+1Vnn49hwKtEzw==}
+    engines: {node: '>=14.0.0'}
     dependencies:
-      '@ethersproject/abi': 5.7.0
-      '@ethersproject/abstract-provider': 5.7.0
-      '@ethersproject/abstract-signer': 5.7.0
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/base64': 5.7.0
-      '@ethersproject/basex': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/bytes': 5.7.0
-      '@ethersproject/constants': 5.7.0
-      '@ethersproject/contracts': 5.7.0
-      '@ethersproject/hash': 5.7.0
-      '@ethersproject/hdnode': 5.7.0
-      '@ethersproject/json-wallets': 5.7.0
-      '@ethersproject/keccak256': 5.7.0
-      '@ethersproject/logger': 5.7.0
-      '@ethersproject/networks': 5.7.1
-      '@ethersproject/pbkdf2': 5.7.0
-      '@ethersproject/properties': 5.7.0
-      '@ethersproject/providers': 5.7.2
-      '@ethersproject/random': 5.7.0
-      '@ethersproject/rlp': 5.7.0
-      '@ethersproject/sha2': 5.7.0
-      '@ethersproject/signing-key': 5.7.0
-      '@ethersproject/solidity': 5.7.0
-      '@ethersproject/strings': 5.7.0
-      '@ethersproject/transactions': 5.7.0
-      '@ethersproject/units': 5.7.0
-      '@ethersproject/wallet': 5.7.0
-      '@ethersproject/web': 5.7.1
-      '@ethersproject/wordlists': 5.7.0
+      '@adraffy/ens-normalize': 1.9.0
+      '@noble/hashes': 1.1.2
+      '@noble/secp256k1': 1.7.1
+      aes-js: 4.0.0-beta.3
+      tslib: 2.4.0
+      ws: 8.5.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3523,8 +3443,8 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /graphql-ws/5.12.0_graphql@15.8.0:
-    resolution: {integrity: sha512-PA3ImUp8utrpEjoxBMhvxsjkStvFEdU0E1gEBREt8HZIWkxOUymwJBhFnBL7t/iHhUq1GVPeZevPinkZFENxTw==}
+  /graphql-ws/5.12.1_graphql@15.8.0:
+    resolution: {integrity: sha512-umt4f5NnMK46ChM2coO36PTFhHouBrK9stWWBczERguwYrGnPNxJ9dimU6IyOBfOkC6Izhkg4H8+F51W/8CYDg==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: '>=0.11 <=16'
@@ -3571,23 +3491,8 @@ packages:
       function-bind: 1.1.1
     dev: false
 
-  /hash.js/1.1.7:
-    resolution: {integrity: sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==}
-    dependencies:
-      inherits: 2.0.4
-      minimalistic-assert: 1.0.1
-    dev: false
-
   /highlight.js/10.7.3:
     resolution: {integrity: sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==}
-    dev: false
-
-  /hmac-drbg/1.0.1:
-    resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
-    dependencies:
-      hash.js: 1.1.7
-      minimalistic-assert: 1.0.1
-      minimalistic-crypto-utils: 1.0.1
     dev: false
 
   /http-cache-semantics/4.1.1:
@@ -3810,10 +3715,6 @@ packages:
       ws: 5.2.3
     dev: false
 
-  /js-sha3/0.8.0:
-    resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==}
-    dev: false
-
   /js-yaml/4.1.0:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
     hasBin: true
@@ -3829,8 +3730,8 @@ packages:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
     dev: false
 
-  /json-schema-to-typescript/12.0.0:
-    resolution: {integrity: sha512-Uk/BDIAo8vqepPBhM86UhNMHgCv7JulicNj/BgnQPHE1fGCoej0UTtcEYzXU/uk6lSvbZCf7pccW+dnNMrr5rg==}
+  /json-schema-to-typescript/13.0.1:
+    resolution: {integrity: sha512-VU+Spn84eLJyt8R0Bmg2soTwHQFgvrGrU7V8mXbhqWFdEYCFekSYk4JcpCzx0i/WzjEVJKAU7r0y0PVYT14E6Q==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -4002,14 +3903,6 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
-  /minimalistic-assert/1.0.1:
-    resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
-    dev: false
-
-  /minimalistic-crypto-utils/1.0.1:
-    resolution: {integrity: sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==}
-    dev: false
-
   /minimatch/3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
     dependencies:
@@ -4074,10 +3967,6 @@ packages:
 
   /next-tick/1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
-    dev: false
-
-  /node-abort-controller/2.0.0:
-    resolution: {integrity: sha512-L8RfEgjBTHAISTuagw51PprVAqNZoG6KSB6LQ6H1bskMVkFs5E71IyjauLBv3XbuomJlguWF/VnRHdJ1gqiAqA==}
     dev: false
 
   /node-abort-controller/3.1.1:
@@ -4421,8 +4310,8 @@ packages:
     resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
     dev: false
 
-  /regexp.prototype.flags/1.4.3:
-    resolution: {integrity: sha512-fjggEOO3slI6Wvgjwflkc4NFRCTZAu5CnNfBd5qOMYhWdn67nJBBu34/TkD++eeFmd8C9r9jfXJ27+nSiRkSUA==}
+  /regexp.prototype.flags/1.5.0:
+    resolution: {integrity: sha512-0SutC3pNudRKgquxGoRGIz946MZVHqbNfPjBdxeOhBrdgDKlRoXmYLQN9xRbrR09ZXWeGAdPuif7egofn6v5LA==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -4471,14 +4360,6 @@ packages:
 
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-    dev: false
-
-  /sax/1.2.4:
-    resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
-    dev: false
-
-  /scrypt-js/3.0.1:
-    resolution: {integrity: sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==}
     dev: false
 
   /semver/6.3.0:
@@ -4685,7 +4566,7 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
     dev: false
 
-  /ts-node/10.9.1_cac398dc69ef9ba81c05bffba6cf6d5b:
+  /ts-node/10.9.1_eccc456b68e5796b8cbb2cb75e0631ff:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -4704,20 +4585,24 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.15.5
+      '@types/node': 20.0.0
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 5.0.2
+      typescript: 5.0.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: false
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+    dev: false
+
+  /tslib/2.4.0:
+    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: false
 
   /tslib/2.5.0:
@@ -4751,8 +4636,8 @@ packages:
       is-typedarray: 1.0.0
     dev: false
 
-  /typeorm/0.3.12_pg@8.8.0+ts-node@10.9.1:
-    resolution: {integrity: sha512-sYSxBmCf1nJLLTcYtwqZ+lQIRtLPyUoO93rHTOKk9vJCyT4UfRtU7oRsJvfvKP3nnZTD1hzz2SEy2zwPEN6OyA==}
+  /typeorm/0.3.15_pg@8.8.0+ts-node@10.9.1:
+    resolution: {integrity: sha512-R4JSw8QjDP1W+ypeRz/XrCXIqubrLSnNAzJAp9EQSQIPHTv+YmUHZis8g08lOwFpuhqL9m8jkPSz8GWEKlU/ow==}
     engines: {node: '>= 12.9.0'}
     hasBin: true
     peerDependencies:
@@ -4761,8 +4646,8 @@ packages:
       better-sqlite3: ^7.1.2 || ^8.0.0
       hdb-pool: ^0.1.6
       ioredis: ^5.0.4
-      mongodb: ^3.6.0
-      mssql: ^7.3.0
+      mongodb: ^5.2.0
+      mssql: ^9.1.1
       mysql2: ^2.2.5 || ^3.0.1
       oracledb: ^5.1.0
       pg: ^8.5.1
@@ -4814,26 +4699,23 @@ packages:
       buffer: 6.0.3
       chalk: 4.1.2
       cli-highlight: 2.1.11
-      date-fns: 2.29.3
       debug: 4.3.4
       dotenv: 16.0.3
       glob: 8.1.0
-      js-yaml: 4.1.0
       mkdirp: 2.1.5
       pg: 8.8.0
       reflect-metadata: 0.1.13
       sha.js: 2.4.11
-      ts-node: 10.9.1_cac398dc69ef9ba81c05bffba6cf6d5b
+      ts-node: 10.9.1_eccc456b68e5796b8cbb2cb75e0631ff
       tslib: 2.5.0
       uuid: 9.0.0
-      xml2js: 0.4.23
       yargs: 17.7.1
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /typescript/5.0.2:
-    resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
+  /typescript/5.0.4:
+    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
     engines: {node: '>=12.20'}
     hasBin: true
     dev: false
@@ -5008,19 +4890,6 @@ packages:
       async-limiter: 1.0.1
     dev: false
 
-  /ws/7.4.6:
-    resolution: {integrity: sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==}
-    engines: {node: '>=8.3.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
-    dev: false
-
   /ws/8.13.0:
     resolution: {integrity: sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==}
     engines: {node: '>=10.0.0'}
@@ -5034,17 +4903,17 @@ packages:
         optional: true
     dev: false
 
-  /xml2js/0.4.23:
-    resolution: {integrity: sha512-ySPiMjM0+pLDftHgXY4By0uswI3SPKLDw/i3UXbnO8M/p28zqexCUoPmQFrYD+/1BzhGJSs2i1ERWKJAtiLrug==}
-    engines: {node: '>=4.0.0'}
-    dependencies:
-      sax: 1.2.4
-      xmlbuilder: 11.0.1
-    dev: false
-
-  /xmlbuilder/11.0.1:
-    resolution: {integrity: sha512-fDlsI/kFEx7gLvbecc0/ohLG50fugQp8ryHzMTuW9vSa1GJ0XYWKnhsUx7oie3G98+r56aTQIUB4kht42R3JvA==}
-    engines: {node: '>=4.0'}
+  /ws/8.5.0:
+    resolution: {integrity: sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
     dev: false
 
   /xss/1.0.14:
@@ -5085,8 +4954,8 @@ packages:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: false
 
-  /yaml/2.2.1:
-    resolution: {integrity: sha512-e0WHiYql7+9wr4cWMx3TVQrNwejKaEe7/rHNmQmqRjazfOP5W8PB6Jpebb5o6fIapbz9o9+2ipcaTM2ZwDI6lw==}
+  /yaml/2.2.2:
+    resolution: {integrity: sha512-CBKFWExMn46Foo4cldiChEzn7S7SRV+wqiluAb6xmueD/fGyRHIhX8m14vVGgeFWjN540nKCNVj6P21eQjgTuA==}
     engines: {node: '>= 14'}
     dev: false
 
@@ -5135,54 +5004,52 @@ packages:
     resolution: {integrity: sha512-1xlKTD4O/4H2MEQ/McteFAdujc4cHxNZYDRzjxtWfLAimYbPzV7mIa+ZzzJqpN830AuNklVDA6RgHwcop6IZKw==}
     dev: false
 
-  file:projects/gravatar-parquet.tgz_typeorm@0.3.12:
-    resolution: {integrity: sha512-hgSO0a3c8Ri8igRWci2cpZyuq0VLNoqCYftuGVwVqHGLle/K/HcVZXADqlFvOPdjfliuzuUPckRPQMcNTZ7SbQ==, tarball: file:projects/gravatar-parquet.tgz}
-    id: file:projects/gravatar-parquet.tgz
+  file:projects/gravatar-parquet.tgz:
+    resolution: {integrity: sha512-8RB0LeRgQErorryOyu9lIgBGeo9Dr06rNQmp56cbmwbdyp34EfmsyUFlMy1rl9nz6merB/9GhH/Ba9WOckFb2A==, tarball: file:projects/gravatar-parquet.tgz}
     name: '@rush-temp/gravatar-parquet'
     version: 0.0.0
     dependencies:
       '@aws-sdk/client-s3': 3.296.0
-      '@subsquid/archive-registry': 2.1.9
-      '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
-      '@subsquid/evm-typegen': 2.1.1
+      '@subsquid/archive-registry': 2.1.13
+      '@subsquid/evm-processor': 1.0.0
+      '@subsquid/evm-typegen': 3.0.0_ethers@6.3.0
       '@subsquid/file-store': 0.2.0
       '@subsquid/file-store-parquet': 0.4.0_@subsquid+file-store@0.2.0
       '@subsquid/file-store-s3': 0.2.0_ec2339f70d1310ad9afdacddc53c86c6
-      '@subsquid/util-internal-json': 0.2.1
-      '@types/node': 18.15.5
+      '@subsquid/util-internal-json': 1.0.0
+      '@types/node': 20.0.0
       dotenv: 16.0.3
-      ethers: 5.7.2
-      typescript: 5.0.2
+      ethers: 6.3.0
+      typescript: 5.0.4
     transitivePeerDependencies:
       - '@aws-sdk/signature-v4-crt'
       - aws-crt
       - bufferutil
       - encoding
       - supports-color
-      - typeorm
       - utf-8-validate
     dev: false
 
   file:projects/gravatar.tgz_ts-node@10.9.1:
-    resolution: {integrity: sha512-dAkDdmjcyIXx0QuRknDMQ5y6tcqYb6XWOFOfoqxagpbl3d1uMTB/5+tGpYVT3rEbrfF9EFCpYi6ahvd6bcqVNQ==, tarball: file:projects/gravatar.tgz}
+    resolution: {integrity: sha512-T3ISmQCrYvmbrBerK2j5IzjXtLfdATu8SQ/ABdEx1c698Lc/sTOKhfKw1+vnWVSRbJs3BmLS8SsI6Gb5NfHfFg==, tarball: file:projects/gravatar.tgz}
     id: file:projects/gravatar.tgz
     name: '@rush-temp/gravatar'
     version: 0.0.0
     dependencies:
-      '@subsquid/archive-registry': 2.1.9
-      '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
-      '@subsquid/evm-typegen': 2.1.1
-      '@subsquid/graphql-server': 3.3.2_typeorm@0.3.12
-      '@subsquid/typeorm-codegen': 0.3.3
-      '@subsquid/typeorm-migration': 0.1.6_typeorm@0.3.12
-      '@subsquid/typeorm-store': 0.2.2_typeorm@0.3.12
-      '@subsquid/util-internal-json': 0.2.1
-      '@types/node': 18.15.5
+      '@subsquid/archive-registry': 2.1.13
+      '@subsquid/evm-processor': 1.0.0
+      '@subsquid/evm-typegen': 3.0.0_ethers@6.3.0
+      '@subsquid/graphql-server': 4.0.0_typeorm@0.3.15
+      '@subsquid/typeorm-codegen': 1.0.0
+      '@subsquid/typeorm-migration': 1.0.0_typeorm@0.3.15
+      '@subsquid/typeorm-store': 1.0.0_typeorm@0.3.15
+      '@subsquid/util-internal-json': 1.0.0
+      '@types/node': 20.0.0
       dotenv: 16.0.3
-      ethers: 5.7.2
+      ethers: 6.3.0
       pg: 8.8.0
-      typeorm: 0.3.12_pg@8.8.0+ts-node@10.9.1
-      typescript: 5.0.2
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
+      typescript: 5.0.4
     transitivePeerDependencies:
       - '@google-cloud/spanner'
       - '@sap/hana-client'
@@ -5210,26 +5077,26 @@ packages:
     dev: false
 
   file:projects/ink-erc20.tgz_ts-node@10.9.1:
-    resolution: {integrity: sha512-ASYDMZt2sfx9X7+l0mTgasMdAEAKgon0NPzmUd/ADN/MdEmQWFVjb7GeCioYH0dlQUsQ8PRkPZxGQiLeCGbtsQ==, tarball: file:projects/ink-erc20.tgz}
+    resolution: {integrity: sha512-CKnvnQIJK5vWsdeUOuFPt3+CMwFcsNmUHpJsvY7AKX60ZBDXBiUXIPQqsv8CzIlMdm+ejqMUYPIxxMX6Vc6Ggg==, tarball: file:projects/ink-erc20.tgz}
     id: file:projects/ink-erc20.tgz
     name: '@rush-temp/ink-erc20'
     version: 0.0.0
     dependencies:
-      '@subsquid/archive-registry': 2.1.9
-      '@subsquid/graphql-server': 3.3.2_typeorm@0.3.12
+      '@subsquid/archive-registry': 2.1.13
+      '@subsquid/graphql-server': 3.3.2_typeorm@0.3.15
       '@subsquid/ink-abi': 1.1.0
       '@subsquid/ink-typegen': 0.2.1
       '@subsquid/ss58': 0.1.4
       '@subsquid/substrate-metadata-explorer': 1.1.2
-      '@subsquid/substrate-processor': 2.4.1_24be6cc6048e0dbb798046c26453161d
+      '@subsquid/substrate-processor': 2.4.1_1246982f7a24212c3d685903745efa05
       '@subsquid/typeorm-codegen': 0.3.3
-      '@subsquid/typeorm-migration': 0.1.6_typeorm@0.3.12
-      '@subsquid/typeorm-store': 0.2.2_typeorm@0.3.12
-      '@types/node': 18.15.5
+      '@subsquid/typeorm-migration': 0.1.6_typeorm@0.3.15
+      '@subsquid/typeorm-store': 0.2.2_typeorm@0.3.15
+      '@types/node': 20.0.0
       dotenv: 16.0.3
       pg: 8.8.0
-      typeorm: 0.3.12_pg@8.8.0+ts-node@10.9.1
-      typescript: 5.0.2
+      typeorm: 0.3.15_pg@8.8.0+ts-node@10.9.1
+      typescript: 5.0.4
     transitivePeerDependencies:
       - '@google-cloud/spanner'
       - '@sap/hana-client'
@@ -5256,63 +5123,61 @@ packages:
       - utf-8-validate
     dev: false
 
-  file:projects/squid-gen-evm.tgz_typeorm@0.3.12:
-    resolution: {integrity: sha512-ZmLJezr2zr/sZT/CKdcfCGm9hMjkySj3pnul/oshKZg6G2DkgdKuUfA0AnYiTGgqJutk0dDjlxezV6gzQEtSyQ==, tarball: file:projects/squid-gen-evm.tgz}
-    id: file:projects/squid-gen-evm.tgz
+  file:projects/squid-gen-evm.tgz:
+    resolution: {integrity: sha512-r7NhoButwK55cqjcckfHuHF6V1vd/zhnHkpgn6xoAdX6K//a6HYScaYPHHxH+GFrfwaVSKs45nZOd0eC4LL2HA==, tarball: file:projects/squid-gen-evm.tgz}
     name: '@rush-temp/squid-gen-evm'
     version: 0.0.0
     dependencies:
-      '@subsquid/archive-registry': 2.1.10
-      '@subsquid/evm-processor': 0.4.0_typeorm@0.3.12
-      '@subsquid/evm-typegen': 2.1.1
-      '@subsquid/logger': 0.3.1
-      '@subsquid/util-internal': 1.1.0
-      '@subsquid/util-internal-code-printer': 0.1.1
-      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.0
-      '@subsquid/util-internal-config': 1.0.1
-      '@subsquid/util-internal-json': 0.2.1
-      '@subsquid/util-naming': 0.0.2
-      '@types/node': 18.15.5
-      commander: 10.0.0
-      ethers: 5.7.2
-      json-schema-to-typescript: 12.0.0
-      ts-node: 10.9.1_cac398dc69ef9ba81c05bffba6cf6d5b
-      typescript: 5.0.2
-      yaml: 2.2.1
+      '@subsquid/archive-registry': 2.1.13
+      '@subsquid/evm-processor': 1.1.0
+      '@subsquid/evm-typegen': 3.0.0_ethers@6.3.0
+      '@subsquid/logger': 1.0.0
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-code-printer': 1.0.0
+      '@subsquid/util-internal-commander': 1.0.0_commander@10.0.1
+      '@subsquid/util-internal-config': 2.0.0
+      '@subsquid/util-internal-json': 1.0.0
+      '@subsquid/util-naming': 1.0.0
+      '@types/node': 20.0.0
+      commander: 10.0.1
+      ethers: 6.3.0
+      json-schema-to-typescript: 13.0.1
+      ts-node: 10.9.1_eccc456b68e5796b8cbb2cb75e0631ff
+      typescript: 5.0.4
+      yaml: 2.2.2
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
       - bufferutil
       - encoding
       - supports-color
-      - typeorm
       - utf-8-validate
     dev: false
 
-  file:projects/squid-gen-ink.tgz_24be6cc6048e0dbb798046c26453161d:
-    resolution: {integrity: sha512-8xlL+qkleTzIOzOE+yVFL0WZqgQ5Sq/d7/RuTwbHh8VM2NEMI7am8+mdotmvYlCnjHqzUGWncF+TeWQ4tDAjqw==, tarball: file:projects/squid-gen-ink.tgz}
+  file:projects/squid-gen-ink.tgz_typeorm@0.3.15:
+    resolution: {integrity: sha512-VpT378Um2FhhVNJ4WkFD4BBlRL6/xl0u/4wdaWs00Zg3hKK2nG5Xmm1bKwNX4li1FDOr2dm2SWP/THPTJl3smg==, tarball: file:projects/squid-gen-ink.tgz}
     id: file:projects/squid-gen-ink.tgz
     name: '@rush-temp/squid-gen-ink'
     version: 0.0.0
     dependencies:
-      '@subsquid/archive-registry': 2.1.10
+      '@subsquid/archive-registry': 2.1.13
       '@subsquid/ink-abi': 1.1.0
       '@subsquid/ink-typegen': 0.2.1
-      '@subsquid/logger': 0.3.1
-      '@subsquid/substrate-processor': 2.4.1_24be6cc6048e0dbb798046c26453161d
+      '@subsquid/logger': 1.0.0
+      '@subsquid/substrate-processor': 2.4.1_typeorm@0.3.15
       '@subsquid/substrate-typegen': 2.2.1
-      '@subsquid/util-internal': 1.1.0
-      '@subsquid/util-internal-code-printer': 0.1.1
-      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.0
-      '@subsquid/util-internal-config': 1.0.1
-      '@subsquid/util-internal-json': 0.2.1
-      '@subsquid/util-naming': 0.0.2
-      '@types/node': 18.15.5
-      commander: 10.0.0
-      json-schema-to-typescript: 12.0.0
-      typescript: 5.0.2
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-code-printer': 1.0.0
+      '@subsquid/util-internal-commander': 1.0.0_commander@10.0.1
+      '@subsquid/util-internal-config': 2.0.0
+      '@subsquid/util-internal-json': 1.0.0
+      '@subsquid/util-naming': 1.0.0
+      '@types/node': 20.0.0
+      commander: 10.0.1
+      json-schema-to-typescript: 13.0.1
+      typescript: 5.0.4
       upath: 2.0.1
-      yaml: 2.2.1
+      yaml: 2.2.2
     transitivePeerDependencies:
       - '@subsquid/typeorm-store'
       - encoding
@@ -5320,23 +5185,25 @@ packages:
       - typeorm
     dev: false
 
-  file:projects/squid-gen-targets.tgz_commander@10.0.0:
-    resolution: {integrity: sha512-qFNWjWe0KlQM05KrYel/OH+jcE9Pvj9dYwzgb6mfUD2XLAKj6miEiFF6qMNu/Qk7lLwd0RPu4kktuWstjgAOJg==, tarball: file:projects/squid-gen-targets.tgz}
+  file:projects/squid-gen-targets.tgz_78f09fb194586edd84b5a7d8bdb9b34f:
+    resolution: {integrity: sha512-Z83GbPFQY46JbaxZlJ2vf60j0FvYQXPCPmi7F93ogBsVrqLTYv/uBLXldM7OntWHTJZi9O9TcBYsQS4VL0aRGg==, tarball: file:projects/squid-gen-targets.tgz}
     id: file:projects/squid-gen-targets.tgz
     name: '@rush-temp/squid-gen-targets'
     version: 0.0.0
     dependencies:
-      '@subsquid/logger': 0.3.1
-      '@subsquid/typeorm-codegen': 0.3.3
-      '@subsquid/util-internal': 1.1.0
-      '@subsquid/util-internal-code-printer': 0.1.1
-      '@subsquid/util-internal-commander': 0.0.2_commander@10.0.0
-      '@subsquid/util-internal-config': 1.0.1
-      '@subsquid/util-naming': 0.0.2
-      '@types/node': 18.15.5
-      typescript: 5.0.2
+      '@subsquid/file-store': 1.0.0_b5ceb7cf9cdaed5e1f3ec654007c883c
+      '@subsquid/logger': 1.0.0
+      '@subsquid/typeorm-codegen': 1.0.0
+      '@subsquid/util-internal': 2.1.0
+      '@subsquid/util-internal-code-printer': 1.0.0
+      '@subsquid/util-internal-commander': 1.0.0_commander@10.0.1
+      '@subsquid/util-internal-config': 2.0.0
+      '@subsquid/util-naming': 1.0.0
+      '@types/node': 20.0.0
+      typescript: 5.0.4
     transitivePeerDependencies:
       - '@subsquid/big-decimal'
+      - '@subsquid/util-internal-processor-tools'
       - bufferutil
       - commander
       - encoding
@@ -5346,27 +5213,27 @@ packages:
     dev: false
 
   file:projects/squid-gen-utils.tgz:
-    resolution: {integrity: sha512-WOzYeQvg0cspZsbncVW56p6oQ+opArnR2xZTOzG0TJNZXz+p4zHL4El9R4lSxuoTA5NyXcc+8ZD9izeq0CfUxQ==, tarball: file:projects/squid-gen-utils.tgz}
+    resolution: {integrity: sha512-um+ukAY2+YlLCYmxcwx2RS2DgLhRw70caZhK1x622Ds+vDL8vtRNsPQlcCe6jcaRqCOCNAbyQwcgH0O8fUN7Lw==, tarball: file:projects/squid-gen-utils.tgz}
     name: '@rush-temp/squid-gen-utils'
     version: 0.0.0
     dependencies:
-      '@types/node': 18.15.5
-      typescript: 5.0.2
+      '@types/node': 20.0.0
+      typescript: 5.0.4
       upath: 2.0.1
     dev: false
 
   file:projects/workspace.tgz:
-    resolution: {integrity: sha512-40WAqhedPKY7H5Up9ImkITiehYqQlt+ogEQckvoAJqsFKwqROOU1so8fZb+Tt8VfQDRsgYCV3b/6CKOroRHIHw==, tarball: file:projects/workspace.tgz}
+    resolution: {integrity: sha512-NasivJI+lyv6TWEPuMWD16oCsfeQ+8BG2XD+f6xnMlcsmiGWaLc86SM6bHmOh7fCCz0z/HyCzPvxUqctkEiZbQ==, tarball: file:projects/workspace.tgz}
     name: '@rush-temp/workspace'
     version: 0.0.0
     dependencies:
-      '@subsquid/util-internal': 1.1.0
-      '@types/node': 18.15.5
+      '@subsquid/util-internal': 2.0.0
+      '@types/node': 20.0.0
       '@types/semver': 7.3.13
-      commander: 10.0.0
+      commander: 10.0.1
       jsonc-parser: 3.2.0
       latest-version: 5.1.0
       semver: 7.3.8
       type-fest: 3.7.1
-      typescript: 5.0.2
+      typescript: 5.0.4
     dev: false

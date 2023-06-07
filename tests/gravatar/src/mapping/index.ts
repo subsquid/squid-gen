@@ -1,1 +1,1 @@
-export * as gravatar from './gravatar'
+export * as contract from './contract'

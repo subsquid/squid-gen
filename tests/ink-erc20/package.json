@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .ts --ignore-path .gitignore --ignore-pattern src/abi/**/*  --fix"
   },
   "dependencies": {
-    "@subsquid/archive-registry": "2.1.9",
+    "@subsquid/archive-registry": "2.1.13",
     "@subsquid/graphql-server": "3.3.2",
     "@subsquid/ink-abi": "^1.1.0",
     "@subsquid/ss58": "^0.1.4",
@@ -27,7 +27,7 @@
     "@subsquid/ink-typegen": "^0.2.1",
     "@subsquid/substrate-metadata-explorer": "^1.1.0",
     "@subsquid/typeorm-codegen": "^0.3.3",
-    "@types/node": "^18.13.0",
-    "typescript": "~5.0.0"
+    "@types/node": "^20.0.0",
+    "typescript": "~5.0.4"
   }
 }

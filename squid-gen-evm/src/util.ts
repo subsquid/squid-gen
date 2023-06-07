@@ -50,7 +50,7 @@ export function getArchive(str: string): SquidArchive {
     }
 }
 
-export function getType(param: ethers.utils.ParamType): ParamType {
+export function getType(param: ethers.ParamType): ParamType {
     if (param.baseType === 'array' || param.baseType === 'tuple') {
         return 'json'
     }
