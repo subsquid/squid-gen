@@ -28,7 +28,7 @@
     "@subsquid/util-internal-code-printer": "^1.0.0",
     "@subsquid/util-internal-commander": "^1.0.0",
     "@subsquid/util-internal-config": "^2.0.0",
-    "@subsquid/util-internal": "^2.0.0",
+    "@subsquid/util-internal": "^2.1.0",
     "@subsquid/util-naming": "^1.0.0",
     "commander": "^10.0.1",
     "yaml": "^2.2.2",
@@ -41,7 +41,7 @@
   },
   "peerDependencies": {
     "@subsquid/archive-registry": "2.1.13",
-    "@subsquid/evm-processor": "^1.0.0",
+    "@subsquid/evm-processor": "^1.1.0",
     "@subsquid/evm-typegen": "^3.0.0",
     "@subsquid/util-internal-json": "^1.0.0",
     "ethers": "^6.3.0"
