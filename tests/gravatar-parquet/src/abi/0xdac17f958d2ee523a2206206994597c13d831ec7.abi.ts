@@ -462,6 +462,7 @@ export const ABI_JSON = [
     },
     {
         "type": "constructor",
+        "stateMutability": "undefined",
         "payable": false,
         "inputs": [
             {

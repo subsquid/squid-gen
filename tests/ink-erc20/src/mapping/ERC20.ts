@@ -2,10 +2,9 @@ import {SubstrateBlock, ContractsContractEmittedEvent} from '@subsquid/substrate
 import {EntityBuffer} from '../entityBuffer'
 import {Erc20EventTransfer, Erc20EventApproval} from '../model'
 import * as spec from '../abi/ERC20'
-import {fromss58, normalize} from '../util'
+import {normalize} from '../util'
 
-const ss58address = 'XnrLUQucQvzp5kaaWLG9Q3LbZw5DPwpGn69B5YcywSWVr5w'
-export const { prefix, hexAddress: address } = fromss58(ss58address)
+export const address = '0x5207202c27b646ceeb294ce516d4334edafbd771f869215cb070ba51dd7e2c72'
 
 export function parse(block: SubstrateBlock, event: ContractsContractEmittedEvent) {
     let e = normalize(spec.decodeEvent(event.args.data))

@@ -118,7 +118,7 @@ export class MappingCodegen {
                                     `transaction.block.height`,
                                     `new Date(transaction.block.timestamp)`,
                                     `transaction.hash`,
-                                    `transaction.to`,
+                                    `transaction.to!`,
                                     `'${f}'`,
                                     `transaction.value`,
                                     `transaction.status != null ? Boolean(transaction.status) : undefined`,

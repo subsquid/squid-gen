@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@subsquid/logger": "^1.0.0",
-    "@subsquid/util-internal": "^2.0.0",
+    "@subsquid/util-internal": "^2.1.0",
     "@subsquid/util-internal-code-printer": "^1.0.0",
     "@subsquid/util-internal-commander": "^1.0.0",
     "@subsquid/util-internal-config": "^2.0.0",
@@ -40,8 +40,8 @@
     "typescript": "~5.0.4"
   },
   "peerDependencies": {
-    "@subsquid/archive-registry": "2.1.13",
-    "@subsquid/substrate-processor": "2.4.1",
+    "@subsquid/archive-registry": "^2.1.14",
+    "@subsquid/substrate-processor": "^3.0.0",
     "@subsquid/ink-abi": "^1.1.0",
     "@subsquid/ink-typegen": "^0.2.1",
     "@subsquid/substrate-typegen": "^2.2.1",

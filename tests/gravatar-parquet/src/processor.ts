@@ -1,80 +1,51 @@
-import {EvmBatchProcessor, BatchHandlerContext} from '@subsquid/evm-processor'
+import {EvmBatchProcessor, EvmBatchProcessorFields, BlockHeader, Log as _Log, Transaction as _Transaction} from '@subsquid/evm-processor'
 import {lookupArchive} from '@subsquid/archive-registry'
-import {usdt} from './mapping'
-import {db, Store} from './db'
+import * as usdtAbi from './abi/0xdac17f958d2ee523a2206206994597c13d831ec7'
 
-const processor = new EvmBatchProcessor()
-processor.setDataSource({
-    archive: lookupArchive('eth-mainnet', {type: 'EVM'}),
-})
-processor.addLog(usdt.address, {
-    filter: [
-        [
-            usdt.spec.events['Transfer'].topic,
-        ],
-    ],
-    data: {
-        evmLog: {
-            topics: true,
-            data: true,
-        },
-        transaction: {
-            hash: true,
-            from: true,
-        },
-    } as const,
-})
-processor.addTransaction(usdt.address, {
-    sighash: [
-        usdt.spec.functions['deprecate'].sighash,
-        usdt.spec.functions['approve'].sighash,
-        usdt.spec.functions['addBlackList'].sighash,
-        usdt.spec.functions['transferFrom'].sighash,
-        usdt.spec.functions['unpause'].sighash,
-        usdt.spec.functions['pause'].sighash,
-        usdt.spec.functions['transfer'].sighash,
-        usdt.spec.functions['setParams'].sighash,
-        usdt.spec.functions['issue'].sighash,
-        usdt.spec.functions['redeem'].sighash,
-        usdt.spec.functions['removeBlackList'].sighash,
-        usdt.spec.functions['transferOwnership'].sighash,
-        usdt.spec.functions['destroyBlackFunds'].sighash,
-    ],
-    data: {
-        transaction: {
-            hash: true,
-            input: true,
-            from: true,
-            value: true,
-        },
-    } as const,
-})
-
-processor.run(db, async (ctx: BatchHandlerContext<Store, any>) => {
-    for (let {header: block, items} of ctx.blocks) {
-        ctx.store.Block.write({
-            id: block.id,
-            number: block.height,
-            timestamp: new Date(block.timestamp),
-        })
-        let lastTxHash: string | undefined
-        for (let item of items) {
-            if (item.transaction.hash != lastTxHash) {
-                lastTxHash = item.transaction.hash
-                ctx.store.Transaction.write({
-                    id: item.transaction.id,
-                    blockNumber: block.height,
-                    blockTimestamp: new Date(block.timestamp),
-                    hash: item.transaction.hash,
-                    to: item.transaction.to,
-                    from: item.transaction.from,
-                    success: item.transaction.success,
-                })
-            }
-
-            if (item.address === usdt.address) {
-                usdt.parse(ctx, block, item)
-            }
+export const processor = new EvmBatchProcessor()
+    .setDataSource({
+        archive: lookupArchive('eth-mainnet', {type: 'EVM'}),
+    })
+    .setFields({
+            log: {
+                topics: true,
+                data: true,
+                transactionHash: true,
+            },
+            transaction: {
+                hash: true,
+                input: true,
+                from: true,
+                value: true,
+                status: true,
         }
-    }
-})
+    })
+    .addLog({
+        address: ['0xdac17f958d2ee523a2206206994597c13d831ec7'],
+        topic0: [
+            usdtAbi.events['Transfer'].topic,
+        ],
+    })
+    .addTransaction({
+        to: ['0xdac17f958d2ee523a2206206994597c13d831ec7'],
+        sighash: [
+            usdtAbi.functions['deprecate'].sighash,
+            usdtAbi.functions['approve'].sighash,
+            usdtAbi.functions['addBlackList'].sighash,
+            usdtAbi.functions['transferFrom'].sighash,
+            usdtAbi.functions['unpause'].sighash,
+            usdtAbi.functions['pause'].sighash,
+            usdtAbi.functions['transfer'].sighash,
+            usdtAbi.functions['setParams'].sighash,
+            usdtAbi.functions['issue'].sighash,
+            usdtAbi.functions['redeem'].sighash,
+            usdtAbi.functions['removeBlackList'].sighash,
+            usdtAbi.functions['transferOwnership'].sighash,
+            usdtAbi.functions['destroyBlackFunds'].sighash,
+        ],
+    })
+
+export type Fields = EvmBatchProcessorFields<typeof processor>
+export type Block = BlockHeader<Fields>
+export type Log = _Log<Fields>
+export type Transaction = _Transaction<Fields>

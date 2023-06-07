@@ -2,22 +2,22 @@ import * as ethers from 'ethers'
 import {LogEvent, Func, ContractBase} from './abi.support'
 import {ABI_JSON} from './0xdac17f958d2ee523a2206206994597c13d831ec7.abi'
 
-export const abi = new ethers.utils.Interface(ABI_JSON);
+export const abi = new ethers.Interface(ABI_JSON);
 
 export const events = {
-    Issue: new LogEvent<([amount: ethers.BigNumber] & {amount: ethers.BigNumber})>(
+    Issue: new LogEvent<([amount: bigint] & {amount: bigint})>(
         abi, '0xcb8241adb0c3fdb35b70c24ce35c5eb0c17af7431c99f827d44a445ca624176a'
     ),
-    Redeem: new LogEvent<([amount: ethers.BigNumber] & {amount: ethers.BigNumber})>(
+    Redeem: new LogEvent<([amount: bigint] & {amount: bigint})>(
         abi, '0x702d5967f45f6513a38ffc42d6ba9bf230bd40e8f53b16363c7eb4fd2deb9a44'
     ),
     Deprecate: new LogEvent<([newAddress: string] & {newAddress: string})>(
         abi, '0xcc358699805e9a8b7f77b522628c7cb9abd07d9efb86b6fb616af1609036a99e'
     ),
-    Params: new LogEvent<([feeBasisPoints: ethers.BigNumber, maxFee: ethers.BigNumber] & {feeBasisPoints: ethers.BigNumber, maxFee: ethers.BigNumber})>(
+    Params: new LogEvent<([feeBasisPoints: bigint, maxFee: bigint] & {feeBasisPoints: bigint, maxFee: bigint})>(
         abi, '0xb044a1e409eac5c48e5af22d4af52670dd1a99059537a78b31b48c6500a6354e'
     ),
-    DestroyedBlackFunds: new LogEvent<([_blackListedUser: string, _balance: ethers.BigNumber] & {_blackListedUser: string, _balance: ethers.BigNumber})>(
+    DestroyedBlackFunds: new LogEvent<([_blackListedUser: string, _balance: bigint] & {_blackListedUser: string, _balance: bigint})>(
         abi, '0x61e6e66b0d6339b2980aecc6ccc0039736791f0ccde9ed512e789a7fbdd698c6'
     ),
     AddedBlackList: new LogEvent<([_user: string] & {_user: string})>(
@@ -26,10 +26,10 @@ export const events = {
     RemovedBlackList: new LogEvent<([_user: string] & {_user: string})>(
         abi, '0xd7e9ec6e6ecd65492dce6bf513cd6867560d49544421d0783ddf06e76c24470c'
     ),
-    Approval: new LogEvent<([owner: string, spender: string, value: ethers.BigNumber] & {owner: string, spender: string, value: ethers.BigNumber})>(
+    Approval: new LogEvent<([owner: string, spender: string, value: bigint] & {owner: string, spender: string, value: bigint})>(
         abi, '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925'
     ),
-    Transfer: new LogEvent<([from: string, to: string, value: ethers.BigNumber] & {from: string, to: string, value: ethers.BigNumber})>(
+    Transfer: new LogEvent<([from: string, to: string, value: bigint] & {from: string, to: string, value: bigint})>(
         abi, '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
     ),
     Pause: new LogEvent<[]>(
@@ -47,7 +47,7 @@ export const functions = {
     deprecate: new Func<[_upgradedAddress: string], {_upgradedAddress: string}, []>(
         abi, '0x0753c30c'
     ),
-    approve: new Func<[_spender: string, _value: ethers.BigNumber], {_spender: string, _value: ethers.BigNumber}, []>(
+    approve: new Func<[_spender: string, _value: bigint], {_spender: string, _value: bigint}, []>(
         abi, '0x095ea7b3'
     ),
     deprecated: new Func<[], {}, boolean>(
@@ -56,25 +56,25 @@ export const functions = {
     addBlackList: new Func<[_evilUser: string], {_evilUser: string}, []>(
         abi, '0x0ecb93c0'
     ),
-    totalSupply: new Func<[], {}, ethers.BigNumber>(
+    totalSupply: new Func<[], {}, bigint>(
         abi, '0x18160ddd'
     ),
-    transferFrom: new Func<[_from: string, _to: string, _value: ethers.BigNumber], {_from: string, _to: string, _value: ethers.BigNumber}, []>(
+    transferFrom: new Func<[_from: string, _to: string, _value: bigint], {_from: string, _to: string, _value: bigint}, []>(
         abi, '0x23b872dd'
     ),
     upgradedAddress: new Func<[], {}, string>(
         abi, '0x26976e3f'
     ),
-    balances: new Func<[_: string], {}, ethers.BigNumber>(
+    balances: new Func<[_: string], {}, bigint>(
         abi, '0x27e235e3'
     ),
-    decimals: new Func<[], {}, ethers.BigNumber>(
+    decimals: new Func<[], {}, bigint>(
         abi, '0x313ce567'
     ),
-    maximumFee: new Func<[], {}, ethers.BigNumber>(
+    maximumFee: new Func<[], {}, bigint>(
         abi, '0x35390714'
     ),
-    _totalSupply: new Func<[], {}, ethers.BigNumber>(
+    _totalSupply: new Func<[], {}, bigint>(
         abi, '0x3eaaf86b'
     ),
     unpause: new Func<[], {}, []>(
@@ -83,13 +83,13 @@ export const functions = {
     getBlackListStatus: new Func<[_maker: string], {_maker: string}, boolean>(
         abi, '0x59bf1abe'
     ),
-    allowed: new Func<[_: string, _: string], {}, ethers.BigNumber>(
+    allowed: new Func<[_: string, _: string], {}, bigint>(
         abi, '0x5c658165'
     ),
     paused: new Func<[], {}, boolean>(
         abi, '0x5c975abb'
     ),
-    balanceOf: new Func<[who: string], {who: string}, ethers.BigNumber>(
+    balanceOf: new Func<[who: string], {who: string}, bigint>(
         abi, '0x70a08231'
     ),
     pause: new Func<[], {}, []>(
@@ -104,22 +104,22 @@ export const functions = {
     symbol: new Func<[], {}, string>(
         abi, '0x95d89b41'
     ),
-    transfer: new Func<[_to: string, _value: ethers.BigNumber], {_to: string, _value: ethers.BigNumber}, []>(
+    transfer: new Func<[_to: string, _value: bigint], {_to: string, _value: bigint}, []>(
         abi, '0xa9059cbb'
     ),
-    setParams: new Func<[newBasisPoints: ethers.BigNumber, newMaxFee: ethers.BigNumber], {newBasisPoints: ethers.BigNumber, newMaxFee: ethers.BigNumber}, []>(
+    setParams: new Func<[newBasisPoints: bigint, newMaxFee: bigint], {newBasisPoints: bigint, newMaxFee: bigint}, []>(
         abi, '0xc0324c77'
     ),
-    issue: new Func<[amount: ethers.BigNumber], {amount: ethers.BigNumber}, []>(
+    issue: new Func<[amount: bigint], {amount: bigint}, []>(
         abi, '0xcc872b66'
     ),
-    redeem: new Func<[amount: ethers.BigNumber], {amount: ethers.BigNumber}, []>(
+    redeem: new Func<[amount: bigint], {amount: bigint}, []>(
         abi, '0xdb006a75'
     ),
-    allowance: new Func<[_owner: string, _spender: string], {_owner: string, _spender: string}, ethers.BigNumber>(
+    allowance: new Func<[_owner: string, _spender: string], {_owner: string, _spender: string}, bigint>(
         abi, '0xdd62ed3e'
     ),
-    basisPointsRate: new Func<[], {}, ethers.BigNumber>(
+    basisPointsRate: new Func<[], {}, bigint>(
         abi, '0xdd644f72'
     ),
     isBlackListed: new Func<[_: string], {}, boolean>(
@@ -128,7 +128,7 @@ export const functions = {
     removeBlackList: new Func<[_clearedUser: string], {_clearedUser: string}, []>(
         abi, '0xe4997dc5'
     ),
-    MAX_UINT: new Func<[], {}, ethers.BigNumber>(
+    MAX_UINT: new Func<[], {}, bigint>(
         abi, '0xe5b5019a'
     ),
     transferOwnership: new Func<[newOwner: string], {newOwner: string}, []>(
@@ -149,7 +149,7 @@ export class Contract extends ContractBase {
         return this.eth_call(functions.deprecated, [])
     }
 
-    totalSupply(): Promise<ethers.BigNumber> {
+    totalSupply(): Promise<bigint> {
         return this.eth_call(functions.totalSupply, [])
     }
 
@@ -157,19 +157,19 @@ export class Contract extends ContractBase {
         return this.eth_call(functions.upgradedAddress, [])
     }
 
-    balances(arg0: string): Promise<ethers.BigNumber> {
+    balances(arg0: string): Promise<bigint> {
         return this.eth_call(functions.balances, [arg0])
     }
 
-    decimals(): Promise<ethers.BigNumber> {
+    decimals(): Promise<bigint> {
         return this.eth_call(functions.decimals, [])
     }
 
-    maximumFee(): Promise<ethers.BigNumber> {
+    maximumFee(): Promise<bigint> {
         return this.eth_call(functions.maximumFee, [])
     }
 
-    _totalSupply(): Promise<ethers.BigNumber> {
+    _totalSupply(): Promise<bigint> {
         return this.eth_call(functions._totalSupply, [])
     }
 
@@ -177,7 +177,7 @@ export class Contract extends ContractBase {
         return this.eth_call(functions.getBlackListStatus, [_maker])
     }
 
-    allowed(arg0: string, arg1: string): Promise<ethers.BigNumber> {
+    allowed(arg0: string, arg1: string): Promise<bigint> {
         return this.eth_call(functions.allowed, [arg0, arg1])
     }
 
@@ -185,7 +185,7 @@ export class Contract extends ContractBase {
         return this.eth_call(functions.paused, [])
     }
 
-    balanceOf(who: string): Promise<ethers.BigNumber> {
+    balanceOf(who: string): Promise<bigint> {
         return this.eth_call(functions.balanceOf, [who])
     }
 
@@ -201,11 +201,11 @@ export class Contract extends ContractBase {
         return this.eth_call(functions.symbol, [])
     }
 
-    allowance(_owner: string, _spender: string): Promise<ethers.BigNumber> {
+    allowance(_owner: string, _spender: string): Promise<bigint> {
         return this.eth_call(functions.allowance, [_owner, _spender])
     }
 
-    basisPointsRate(): Promise<ethers.BigNumber> {
+    basisPointsRate(): Promise<bigint> {
         return this.eth_call(functions.basisPointsRate, [])
     }
 
@@ -213,7 +213,7 @@ export class Contract extends ContractBase {
         return this.eth_call(functions.isBlackListed, [arg0])
     }
 
-    MAX_UINT(): Promise<ethers.BigNumber> {
+    MAX_UINT(): Promise<bigint> {
         return this.eth_call(functions.MAX_UINT, [])
     }
 }

@@ -1,4 +1,4 @@
-import {SubstrateBatchProcessor, BatchContext} from '@subsquid/substrate-processor'
+import {SubstrateBatchProcessor, DataHandlerContext} from '@subsquid/substrate-processor'
 import {lookupArchive} from '@subsquid/archive-registry'
 import {ERC20} from './mapping'
 import {db, Store} from './db'
@@ -15,7 +15,7 @@ const processor = new SubstrateBatchProcessor()
         },
     })
 
-processor.run(db, async (ctx: BatchContext<Store, any>) => {
+processor.run(db, async (ctx: DataHandlerContext<Store, any>) => {
     for (let {header: block, items} of ctx.blocks) {
         EntityBuffer.add(
             new Block({

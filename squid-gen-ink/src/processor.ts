@@ -43,7 +43,7 @@ export class ProcessorCodegen {
         })
         this.out.line()
         let targetPrinter = this.getTargetPrinter()
-        this.out.line(`processor.run(db, async (ctx: BatchContext<Store, any>) => {`)
+        this.out.line(`processor.run(db, async (ctx: DataHandlerContext<Store, any>) => {`)
         this.out.indentation(() => {
             targetPrinter.printPreBatch()
             this.out.block(`for (let {header: block, items} of ctx.blocks)`, () => {
@@ -72,7 +72,7 @@ export class ProcessorCodegen {
     private printImports() {
         let targetPrinter = this.getTargetPrinter()
         this.out.lazy(() => {
-            this.out.line(`import {SubstrateBatchProcessor, BatchContext} from '@subsquid/substrate-processor'`)
+            this.out.line(`import {SubstrateBatchProcessor, DataHandlerContext} from '@subsquid/substrate-processor'`)
             if (this.archiveRegistry) {
                 this.out.line(`import {lookupArchive} from '@subsquid/archive-registry'`)
             }

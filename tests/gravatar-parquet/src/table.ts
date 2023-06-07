@@ -18,7 +18,7 @@ export let Transaction = new Table(
         hash: Column(Types.String(), {nullable: false}),
         to: Column(Types.String(), {nullable: true}),
         from: Column(Types.String(), {nullable: true}),
-        success: Column(Types.Boolean(), {nullable: true}),
+        status: Column(Types.Int64(), {nullable: true}),
     }
 )
 
