@@ -11,7 +11,7 @@
     "lint": "eslint . --ext .ts --ignore-path .gitignore --ignore-pattern src/abi/**/*  --fix"
   },
   "dependencies": {
-    "@subsquid/archive-registry": "^2.1.14",
+    "@subsquid/archive-registry": "^3.0.0",
     "@subsquid/graphql-server": "^4.0.0",
     "@subsquid/ink-abi": "^1.1.0",
     "@subsquid/ss58": "^0.1.4",

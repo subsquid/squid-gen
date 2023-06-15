@@ -6,19 +6,19 @@
     "build": "rm -rf lib/ && tsc"
   },
   "dependencies": {
-    "@subsquid/archive-registry": "^2.1.14",
-    "@subsquid/evm-processor": "^1.1.0",
+    "@subsquid/archive-registry": "^3.0.0",
+    "@subsquid/evm-processor": "^1.5.1",
     "@subsquid/graphql-server": "^4.0.0",
     "@subsquid/typeorm-migration": "^1.0.0",
     "@subsquid/typeorm-store": "^1.0.0",
-    "@subsquid/util-internal-json": "^1.0.0",
+    "@subsquid/util-internal-json": "^1.2.0",
     "dotenv": "^16.0.3",
-    "ethers": "^6.3.0",
+    "ethers": "^6.5.1",
     "pg": "8.8.0",
     "typeorm": "^0.3.15"
   },
   "devDependencies": {
-    "@subsquid/evm-typegen": "^3.0.0",
+    "@subsquid/evm-typegen": "^3.2.0",
     "@subsquid/squid-gen-evm": "^1.0.1",
     "@subsquid/typeorm-codegen": "^1.0.0",
     "@types/node": "^20.0.0",
