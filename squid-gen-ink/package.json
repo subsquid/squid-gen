@@ -22,12 +22,12 @@
     "config2type": "json2ts src/config.schema.json > src/config.ts"
   },
   "dependencies": {
-    "@subsquid/logger": "^1.0.0",
-    "@subsquid/util-internal": "^2.1.0",
-    "@subsquid/util-internal-code-printer": "^1.0.0",
-    "@subsquid/util-internal-commander": "^1.0.0",
-    "@subsquid/util-internal-config": "^2.0.0",
-    "@subsquid/util-naming": "^1.0.0",
+    "@subsquid/logger": "^1.2.0",
+    "@subsquid/util-internal": "^2.3.0",
+    "@subsquid/util-internal-code-printer": "^1.2.0",
+    "@subsquid/util-internal-commander": "^1.2.0",
+    "@subsquid/util-internal-config": "^2.2.0",
+    "@subsquid/util-naming": "^1.2.0",
     "commander": "^10.0.1",
     "upath": "^2.0.1",
     "yaml": "^2.2.2",
