@@ -31,7 +31,7 @@
     "commander": "^10.0.1",
     "upath": "^2.0.1",
     "yaml": "^2.2.2",
-    "@subsquid/squid-gen-targets": "^1.0.1",
+    "@subsquid/squid-gen-targets": "^1.0.0",
     "@subsquid/squid-gen-utils": "^1.0.0"
   },
   "devDependencies": {
