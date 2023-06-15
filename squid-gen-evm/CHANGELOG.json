@@ -2,6 +2,18 @@
   "name": "@subsquid/squid-gen-evm",
   "entries": [
     {
+      "version": "1.1.0",
+      "tag": "@subsquid/squid-gen-evm_v1.1.0",
+      "date": "Thu, 15 Jun 2023 09:42:14 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "bump packages"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.0.1",
       "tag": "@subsquid/squid-gen-evm_v1.0.1",
       "date": "Thu, 15 Jun 2023 09:28:49 GMT",

@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-ink
 
-This log was last generated on Thu, 15 Jun 2023 09:28:49 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Jun 2023 09:42:14 GMT and should not be manually modified.
+
+## 1.1.0
+Thu, 15 Jun 2023 09:42:14 GMT
+
+### Minor changes
+
+- bump packages
 
 ## 1.0.1
 Thu, 15 Jun 2023 09:28:49 GMT
