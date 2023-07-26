@@ -40,7 +40,7 @@ export function getArchive(str: string): SquidArchive {
             value: str,
             kind: 'url',
         }
-    } else if (archivesRegistryEVM.archives.some((a) => a.network === str)) {
+    } else if (archivesRegistryEVM().archives.some((a) => a.network === str)) {
         return {
             value: str,
             kind: 'name',
