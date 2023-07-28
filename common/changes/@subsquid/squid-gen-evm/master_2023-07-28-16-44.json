@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-evm",
+      "comment": "bump packages",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-evm"
+}
