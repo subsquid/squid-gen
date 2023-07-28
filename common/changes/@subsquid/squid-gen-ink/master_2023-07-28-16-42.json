@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-ink",
+      "comment": "make compatible with new archive registry",
+      "type": "minor"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-ink"
+}
