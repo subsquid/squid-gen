@@ -420,25 +420,29 @@
          "packageName": "@subsquid/squid-gen-evm",
          "projectFolder": "squid-gen-evm",
          "shouldPublish": true,
-         "versionPolicyName": "npm"
+         "versionPolicyName": "npm",
+         "tags": ["evm"]
       },
       {
          "packageName": "@subsquid/squid-gen-ink",
          "projectFolder": "squid-gen-ink",
          "shouldPublish": true,
-         "versionPolicyName": "npm"
+         "versionPolicyName": "npm",
+         "tags": ["substrate"]
       },
       {
          "packageName": "@subsquid/squid-gen-targets",
          "projectFolder": "squid-gen-targets",
          "shouldPublish": true,
-         "versionPolicyName": "npm"
+         "versionPolicyName": "npm",
+         "tags": []
       },
       {
          "packageName": "@subsquid/squid-gen-utils",
          "projectFolder": "squid-gen-utils",
          "shouldPublish": true,
-         "versionPolicyName": "npm"
+         "versionPolicyName": "npm",
+         "tags": []
       },
       {
          "packageName": "gravatar",

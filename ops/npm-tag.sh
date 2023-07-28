@@ -1,10 +1,13 @@
 #!/bin/bash
 
-tag="$1"
+rush_list=$(node common/scripts/install-run-rush.js -q list --to-version-policy npm --json)
+json_packages=$(echo $rush_list \
+    | sed 's/^[^{]*[{]/{/')
 
-packages=$(node common/scripts/install-run-rush.js -q list --json \
-    | jq '.projects[] | select(.versionPolicyName == "npm") | (.name + "@" + .version)' -r)
+packages=$(echo $json_packages \
+    | jq '.projects[] | select((.tags == []) or (.tags[] | index("substrate") | not)) | .name + "@" + .version' -r)
 
 for pkg in $packages; do
-    npm dist-tag add "$pkg" "$tag"
+    echo "$pkg"
+    npm dist-tag add "$pkg" "latest" || exit 1
 done
