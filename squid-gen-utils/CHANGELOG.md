@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-utils
 
-This log was last generated on Wed, 07 Jun 2023 12:55:19 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Jul 2023 16:46:27 GMT and should not be manually modified.
+
+## 1.1.0
+Fri, 28 Jul 2023 16:46:27 GMT
+
+### Minor changes
+
+- bump packages
 
 ## 1.0.0
 Wed, 07 Jun 2023 12:55:19 GMT

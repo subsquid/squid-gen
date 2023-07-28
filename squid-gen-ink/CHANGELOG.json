@@ -2,6 +2,29 @@
   "name": "@subsquid/squid-gen-ink",
   "entries": [
     {
+      "version": "1.2.0",
+      "tag": "@subsquid/squid-gen-ink_v1.2.0",
+      "date": "Fri, 28 Jul 2023 16:46:27 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "make compatible with new archive registry"
+          },
+          {
+            "comment": "bump packages"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@subsquid/squid-gen-targets\" from `^1.0.1` to `^1.1.0`"
+          },
+          {
+            "comment": "Updating dependency \"@subsquid/squid-gen-utils\" from `^1.0.0` to `^1.1.0`"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@subsquid/squid-gen-ink_v1.1.0",
       "date": "Thu, 15 Jun 2023 09:42:14 GMT",
