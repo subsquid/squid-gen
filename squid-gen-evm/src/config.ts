@@ -13,6 +13,18 @@ export interface Config {
    * Source Squid Archive for an EVM network. Can be a URL or an alias. See docs.subsquid.io/archives/overview.
    */
   archive: string;
+  /**
+   * Chain node RPC endpoint URL
+   */
+  chain?:
+    | string
+    | {
+        url: string;
+        capacity?: number;
+        rateLimit?: number;
+        requestTimeout?: number;
+        maxBatchCallSize?: number;
+      };
   target:
     | {
         type: "postgres";

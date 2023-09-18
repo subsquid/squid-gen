@@ -8,6 +8,38 @@
       "description": "Source Squid Archive for an EVM network. Can be a URL or an alias. See docs.subsquid.io/archives/overview.",
       "type": "string"
     },
+    "chain": {
+      "description": "Chain node RPC endpoint URL",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "capacity": {
+              "type": "number"
+            },
+            "rateLimit": {
+              "type": "number"
+            },
+            "requestTimeout": {
+              "type": "number"
+            },
+            "maxBatchCallSize": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "url"
+          ]
+        }
+      ]
+    },
     "target": {
       "oneOf": [
         {

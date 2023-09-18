@@ -92,6 +92,7 @@ export async function generateSquid(config: Config) {
     new ProcessorCodegen(srcOutputDir, {
         contracts,
         archive,
+        chain: config.chain,
     }).generate()
 
     let mappingsOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'mapping')))
