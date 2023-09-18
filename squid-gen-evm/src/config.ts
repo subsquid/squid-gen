@@ -28,10 +28,12 @@ export interface Config {
   target:
     | {
         type: "postgres";
+        stateSchema?: string;
         path?: null;
       }
     | {
         type: "parquet";
+        stateSchema?: null;
         path: string;
       };
   /**

@@ -48,6 +48,9 @@
             "type": {
               "const": "postgres"
             },
+            "stateSchema": {
+              "type": "string"
+            },
             "path": {
               "type": "null"
             }
@@ -62,6 +65,9 @@
           "properties": {
             "type": {
               "const": "parquet"
+            },
+            "stateSchema": {
+              "type": "null"
             },
             "path": {
               "type": "string"

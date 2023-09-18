@@ -11,7 +11,7 @@ type EntityMap = Map<Fragment, Entity>
 export class PostgresTarget implements DataTarget {
     private entityMap: EntityMap
 
-    constructor(private src: OutDir, fragments: Fragment[], options: any) {
+    constructor(private src: OutDir, fragments: Fragment[], private options: any) {
         this.entityMap = new Map<Fragment, Entity>()
 
         let overloads: Record<string, number> = {}
@@ -88,7 +88,15 @@ export class PostgresTarget implements DataTarget {
         let db = this.src.file('db.ts')
         db.line(`import {Store as Store_, TypeormDatabase} from '@subsquid/typeorm-store'`)
         db.line()
-        db.line(`export let db = new TypeormDatabase()`)
+        if (this.options?.stateSchema) {
+            db.line(`export let db = new TypeormDatabase({`)
+            db.indentation(() => {
+                db.line(`stateSchema: '${this.options.stateSchema}',`)
+            })
+            db.line(`})`)
+        } else {
+            db.line(`export let db = new TypeormDatabase()`)
+        }
         db.line(`export type Store = Store_`)
         db.write()
 
