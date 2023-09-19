@@ -40,6 +40,10 @@
         }
       ]
     },
+    "finalityConfirmation": {
+      "description": "Sets the number of blocks after which the processor will consider the consensus data final. Use a value appropriate for your network.",
+      "type": "number"
+    },
     "target": {
       "oneOf": [
         {

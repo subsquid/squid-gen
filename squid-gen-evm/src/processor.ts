@@ -15,7 +15,7 @@ export class ProcessorCodegen {
             archive: SquidArchive
             chain?: SquidChainRpc
             contracts: SquidContract[]
-            from?: number
+            finalityConfirmation?: number
         }
     ) {
         this.out = this.outDir.file(`processor.ts`)
@@ -37,6 +37,9 @@ export class ProcessorCodegen {
                 this.printChain()
             })
             this.out.line(`})`)
+            if (this.options.finalityConfirmation != null) {
+                this.out.line(`.setFinalityConfirmation(${this.options.finalityConfirmation})`)
+            }
             this.out.line(`.setFields({`)
             this.out.indentation(() => {
                 this.out.indentation(() => {

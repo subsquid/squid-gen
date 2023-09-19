@@ -93,6 +93,7 @@ export async function generateSquid(config: Config) {
         contracts,
         archive,
         chain: config.chain,
+        finalityConfirmation: config.finalityConfirmation,
     }).generate()
 
     let mappingsOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'mapping')))

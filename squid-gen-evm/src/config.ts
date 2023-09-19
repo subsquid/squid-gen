@@ -25,6 +25,10 @@ export interface Config {
         requestTimeout?: number;
         maxBatchCallSize?: number;
       };
+  /**
+   * Sets the number of blocks after which the processor will consider the consensus data final. Use a value appropriate for your network.
+   */
+  finalityConfirmation?: number;
   target:
     | {
         type: "postgres";
