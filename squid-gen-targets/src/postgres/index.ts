@@ -104,7 +104,7 @@ export class PostgresTarget implements DataTarget {
     }
 
     createPrinter(out: FileOutput): DataTargetPrinter {
-        return new PostgresTargetPrinter(out, this.entityMap)
+        return new PostgresTargetPrinter(out, this.entityMap, this.options)
     }
 }
 
@@ -112,14 +112,18 @@ class PostgresTargetPrinter implements DataTargetPrinter {
     private models = new Set<string>()
     private buffer = false
 
-    constructor(private out: FileOutput, private entityMap: EntityMap) {}
+    constructor(private out: FileOutput, private entityMap: EntityMap, private options: any) {}
 
     printPreBatch(): void {}
 
     printPostBatch(): void {
         this.useBuffer()
         this.out.block(`for (let entities of EntityBuffer.flush())`, () => {
-            this.out.line(`await ctx.store.insert(entities)`)
+            if (this.options?.saveStrategy === 'upsert') {
+                this.out.line(`await ctx.store.upsert(entities)`)
+            } else {
+                this.out.line(`await ctx.store.insert(entities)`)
+            }
         })
     }
 

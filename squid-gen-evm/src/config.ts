@@ -33,11 +33,13 @@ export interface Config {
     | {
         type: "postgres";
         stateSchema?: string;
+        saveStrategy?: "upsert" | "insert";
         path?: null;
       }
     | {
         type: "parquet";
         stateSchema?: null;
+        saveStrategy?: null;
         path: string;
       };
   /**

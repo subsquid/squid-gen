@@ -55,6 +55,16 @@
             "stateSchema": {
               "type": "string"
             },
+            "saveStrategy": {
+              "oneOf": [
+                {
+                  "const": "upsert"
+                },
+                {
+                  "const": "insert"
+                }
+              ]
+            },
             "path": {
               "type": "null"
             }
@@ -71,6 +81,9 @@
               "const": "parquet"
             },
             "stateSchema": {
+              "type": "null"
+            },
+            "saveStrategy": {
               "type": "null"
             },
             "path": {
