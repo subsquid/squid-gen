@@ -90,7 +90,6 @@ export class ProcessorCodegen {
     }
 
     private printChain() {
-        console.log('printChain', this.options.chain)
         if (!this.options.chain) {
             return
         }
