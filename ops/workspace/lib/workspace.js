@@ -152,6 +152,7 @@ class Workspace {
         return path.resolve(this.dir, file);
     }
 }
+exports.Workspace = Workspace;
 __decorate([
     util_internal_1.def,
     __metadata("design:type", Function),
@@ -164,7 +165,6 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Map)
 ], Workspace.prototype, "packages", null);
-exports.Workspace = Workspace;
 function combinePrefix(p1, p2) {
     if (!p1 || !p2)
         return '';
