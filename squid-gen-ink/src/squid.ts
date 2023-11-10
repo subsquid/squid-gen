@@ -5,7 +5,7 @@ import {InkProject, getInkProject} from '@subsquid/ink-abi/lib/metadata/validato
 import {createLogger} from '@subsquid/logger'
 import {DataTarget, ParquetFileTarget, PostgresTarget} from '@subsquid/squid-gen-targets'
 import {Fragment, FragmentParam, spawnAsync} from '@subsquid/squid-gen-utils'
-import {Interfaces} from '@subsquid/substrate-typegen/lib/ifs'
+import {Interfaces, Sink} from '@subsquid/substrate-typegen/lib/ifs'
 import {OutDir} from '@subsquid/util-internal-code-printer'
 import {toCamelCase} from '@subsquid/util-naming'
 import {Config} from './config'
@@ -109,7 +109,7 @@ function validateContractNames(config: Config) {
 
 function getEvents(project: InkProject, contractName: string, names: string[] | true) {
     let description = new AbiDescription(project)
-    let ifs = new Interfaces(description.types(), new Map())
+    let ifs = new Interfaces(new Sink(description.types(), new Map()))
 
     let fragments: Record<string, Fragment> = {}
     for (let fragment of project.spec.events) {
