@@ -1810,6 +1810,18 @@ packages:
       ajv: 8.12.0
     dev: false
 
+  /@subsquid/ink-abi/3.0.1_83f446ab42a13c4aff7fc3ac795d1606:
+    resolution: {integrity: sha512-KVylF+0M86nS9+GT9bcUdBkcs/yHXJBBULLs8NQpnaP/OQ6Ma/PzBENe4/ez3Kg0gMHjKJFIfNvbgqxflAj8Hw==}
+    peerDependencies:
+      '@subsquid/substrate-runtime': ^1.0.0
+    dependencies:
+      '@subsquid/scale-codec': 4.0.0
+      '@subsquid/substrate-runtime': 1.0.1
+      '@subsquid/util-internal': 2.5.2
+      '@subsquid/util-internal-hex': 1.2.1
+      ajv: 8.12.0
+    dev: false
+
   /@subsquid/ink-typegen/0.2.1:
     resolution: {integrity: sha512-Wx99Hf9U4oxokqKu2KfYG7xdEcB0j5EnhQR/qZOSPDNxVkTnqdBzKK7qIBGKVHnncmm/stfB8mpRHw9OPg18vg==}
     hasBin: true
@@ -1819,6 +1831,22 @@ packages:
       '@subsquid/util-internal': 1.1.0
       '@subsquid/util-internal-code-printer': 0.1.1
       commander: 10.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@subsquid/ink-typegen/3.0.2_83f446ab42a13c4aff7fc3ac795d1606:
+    resolution: {integrity: sha512-LPX3VX3mUOik+6RKS6ln3HwFJ/SCWq7QCaVf9TF7FLNrNy05jK+yv9KdJuOch+A/BhHYHreUb0mPaHZNirimiQ==}
+    hasBin: true
+    peerDependencies:
+      '@subsquid/substrate-runtime': ^1.0.0
+    dependencies:
+      '@subsquid/ink-abi': 3.0.1_83f446ab42a13c4aff7fc3ac795d1606
+      '@subsquid/substrate-runtime': 1.0.1
+      '@subsquid/substrate-typegen': 8.0.1_83f446ab42a13c4aff7fc3ac795d1606
+      '@subsquid/util-internal': 2.5.2
+      '@subsquid/util-internal-code-printer': 1.2.1
+      commander: 11.1.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -5228,14 +5256,14 @@ packages:
     dev: false
 
   file:projects/squid-gen-ink.tgz_0b5aa64b681e0824670ed06a176b8b79:
-    resolution: {integrity: sha512-7gIE8inS40Fcdpu4Yvm2umz+hSLksv8Rqon3bPUToA9tGhHbduSPM1KAKZEBPrP0IIThVfSFtVNoB78N4pmALA==, tarball: file:projects/squid-gen-ink.tgz}
+    resolution: {integrity: sha512-4AVyBogFqE4TTdcCANvdfnsXwq9fhrKYdhOi1uvifb0AvhZ2LAj33hWvm9KsVzuZEoncrMnld2OeBdp0HuooZQ==, tarball: file:projects/squid-gen-ink.tgz}
     id: file:projects/squid-gen-ink.tgz
     name: '@rush-temp/squid-gen-ink'
     version: 0.0.0
     dependencies:
       '@subsquid/archive-registry': 3.3.0
-      '@subsquid/ink-abi': 1.1.0
-      '@subsquid/ink-typegen': 0.2.1
+      '@subsquid/ink-abi': 3.0.1_83f446ab42a13c4aff7fc3ac795d1606
+      '@subsquid/ink-typegen': 3.0.2_83f446ab42a13c4aff7fc3ac795d1606
       '@subsquid/logger': 1.3.1
       '@subsquid/substrate-processor': 3.3.0_typeorm@0.3.17
       '@subsquid/substrate-typegen': 8.0.1_83f446ab42a13c4aff7fc3ac795d1606
