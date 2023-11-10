@@ -11,7 +11,7 @@ type EntityMap = Map<Fragment, Entity>
 export class PostgresTarget implements DataTarget {
     private entityMap: EntityMap
 
-    constructor(private src: OutDir, fragments: Fragment[], options: any) {
+    constructor(private src: OutDir, fragments: Fragment[], private options: any) {
         this.entityMap = new Map<Fragment, Entity>()
 
         let overloads: Record<string, number> = {}
@@ -88,7 +88,15 @@ export class PostgresTarget implements DataTarget {
         let db = this.src.file('db.ts')
         db.line(`import {Store as Store_, TypeormDatabase} from '@subsquid/typeorm-store'`)
         db.line()
-        db.line(`export let db = new TypeormDatabase()`)
+        if (this.options?.stateSchema) {
+            db.line(`export let db = new TypeormDatabase({`)
+            db.indentation(() => {
+                db.line(`stateSchema: '${this.options.stateSchema}',`)
+            })
+            db.line(`})`)
+        } else {
+            db.line(`export let db = new TypeormDatabase()`)
+        }
         db.line(`export type Store = Store_`)
         db.write()
 
@@ -96,7 +104,7 @@ export class PostgresTarget implements DataTarget {
     }
 
     createPrinter(out: FileOutput): DataTargetPrinter {
-        return new PostgresTargetPrinter(out, this.entityMap)
+        return new PostgresTargetPrinter(out, this.entityMap, this.options)
     }
 }
 
@@ -104,14 +112,18 @@ class PostgresTargetPrinter implements DataTargetPrinter {
     private models = new Set<string>()
     private buffer = false
 
-    constructor(private out: FileOutput, private entityMap: EntityMap) {}
+    constructor(private out: FileOutput, private entityMap: EntityMap, private options: any) {}
 
     printPreBatch(): void {}
 
     printPostBatch(): void {
         this.useBuffer()
         this.out.block(`for (let entities of EntityBuffer.flush())`, () => {
-            this.out.line(`await ctx.store.insert(entities)`)
+            if (this.options?.saveStrategy === 'upsert') {
+                this.out.line(`await ctx.store.upsert(entities)`)
+            } else {
+                this.out.line(`await ctx.store.insert(entities)`)
+            }
         })
     }
 

@@ -79,7 +79,11 @@ export async function generateSquid(config: Config) {
     let dataTarget: DataTarget
     switch (config.target.type) {
         case 'postgres':
-            dataTarget = new PostgresTarget(srcOutputDir, fragments, {})
+            const options = {
+                stateSchema: config.target?.stateSchema,
+                saveStrategy: config.target?.saveStrategy,
+            }
+            dataTarget = new PostgresTarget(srcOutputDir, fragments, options)
             break
         case 'parquet':
             dataTarget = new ParquetFileTarget(srcOutputDir, fragments, {path: config.target.path})
@@ -92,6 +96,8 @@ export async function generateSquid(config: Config) {
     new ProcessorCodegen(srcOutputDir, {
         contracts,
         archive,
+        chain: config.chain,
+        finalityConfirmation: config.finalityConfirmation,
     }).generate()
 
     let mappingsOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'mapping')))

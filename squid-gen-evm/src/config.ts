@@ -13,13 +13,33 @@ export interface Config {
    * Source Squid Archive for an EVM network. Can be a URL or an alias. See docs.subsquid.io/archives/overview.
    */
   archive: string;
+  /**
+   * Chain node RPC endpoint URL
+   */
+  chain?:
+    | string
+    | {
+        url: string;
+        capacity?: number;
+        rateLimit?: number;
+        requestTimeout?: number;
+        maxBatchCallSize?: number;
+      };
+  /**
+   * Sets the number of blocks after which the processor will consider the consensus data final. Use a value appropriate for your network.
+   */
+  finalityConfirmation?: number;
   target:
     | {
         type: "postgres";
+        stateSchema?: string;
+        saveStrategy?: "upsert" | "insert";
         path?: null;
       }
     | {
         type: "parquet";
+        stateSchema?: null;
+        saveStrategy?: null;
         path: string;
       };
   /**

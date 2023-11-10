@@ -8,6 +8,42 @@
       "description": "Source Squid Archive for an EVM network. Can be a URL or an alias. See docs.subsquid.io/archives/overview.",
       "type": "string"
     },
+    "chain": {
+      "description": "Chain node RPC endpoint URL",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "capacity": {
+              "type": "number"
+            },
+            "rateLimit": {
+              "type": "number"
+            },
+            "requestTimeout": {
+              "type": "number"
+            },
+            "maxBatchCallSize": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "url"
+          ]
+        }
+      ]
+    },
+    "finalityConfirmation": {
+      "description": "Sets the number of blocks after which the processor will consider the consensus data final. Use a value appropriate for your network.",
+      "type": "number"
+    },
     "target": {
       "oneOf": [
         {
@@ -15,6 +51,19 @@
           "properties": {
             "type": {
               "const": "postgres"
+            },
+            "stateSchema": {
+              "type": "string"
+            },
+            "saveStrategy": {
+              "oneOf": [
+                {
+                  "const": "upsert"
+                },
+                {
+                  "const": "insert"
+                }
+              ]
             },
             "path": {
               "type": "null"
@@ -30,6 +79,12 @@
           "properties": {
             "type": {
               "const": "parquet"
+            },
+            "stateSchema": {
+              "type": "null"
+            },
+            "saveStrategy": {
+              "type": "null"
             },
             "path": {
               "type": "string"

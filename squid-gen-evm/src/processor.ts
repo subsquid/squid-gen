@@ -1,5 +1,5 @@
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
-import {SquidArchive, SquidContract} from './interfaces'
+import {SquidArchive, SquidChainRpc, SquidContract} from './interfaces'
 import path from 'path'
 import {resolveModule} from '@subsquid/squid-gen-utils'
 
@@ -13,8 +13,9 @@ export class ProcessorCodegen {
         private outDir: OutDir,
         private options: {
             archive: SquidArchive
+            chain?: SquidChainRpc
             contracts: SquidContract[]
-            from?: number
+            finalityConfirmation?: number
         }
     ) {
         this.out = this.outDir.file(`processor.ts`)
@@ -33,8 +34,12 @@ export class ProcessorCodegen {
                 } else {
                     this.out.line(`archive: '${this.options.archive.value}',`)
                 }
+                this.printChain()
             })
             this.out.line(`})`)
+            if (this.options.finalityConfirmation != null) {
+                this.out.line(`.setFinalityConfirmation(${this.options.finalityConfirmation})`)
+            }
             this.out.line(`.setFields({`)
             this.out.indentation(() => {
                 this.out.indentation(() => {
@@ -85,6 +90,44 @@ export class ProcessorCodegen {
                 )
             }
         })
+    }
+
+    private printChain() {
+        if (!this.options.chain) {
+            return
+        }
+
+        if (typeof this.options.chain === 'string') {
+            this.out.line(`chain: '${this.options.chain}',`)
+            return
+        } 
+
+        this.out.line(`chain: {`)
+        this.out.indentation(() => {
+            if (!this.options.chain) {
+                return
+            }
+    
+            if (typeof this.options.chain === 'string') {
+                this.out.line(`url: '${this.options.chain}',`)
+                return
+            } 
+    
+            this.out.line(`url: '${this.options.chain.url}',`)
+            if (this.options.chain.capacity != null) {
+                this.out.line(`capacity: ${this.options.chain.capacity},`)
+            }
+            if (this.options.chain.rateLimit != null) {
+                this.out.line(`rateLimit: ${this.options.chain.rateLimit},`)
+            }
+            if (this.options.chain.requestTimeout != null) {
+                this.out.line(`requestTimeout: ${this.options.chain.requestTimeout},`)
+            }
+            if (this.options.chain.maxBatchCallSize != null) {
+                this.out.line(`maxBatchCallSize: ${this.options.chain.maxBatchCallSize},`)
+            }
+        })
+        this.out.line(`},`) 
     }
 
     private printSubscribes() {

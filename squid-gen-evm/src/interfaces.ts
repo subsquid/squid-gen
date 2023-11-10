@@ -20,3 +20,11 @@ export interface SquidArchive {
     value: string
     kind: 'url' | 'name'
 }
+
+export type SquidChainRpc = string | {
+    url: string
+    capacity?: number
+    rateLimit?: number
+    requestTimeout?: number
+    maxBatchCallSize?: number
+}
