@@ -43,7 +43,7 @@
     "@subsquid/archive-registry": "^3.2.0",
     "@subsquid/ink-abi": "^3.0.0",
     "@subsquid/ink-typegen": "^3.0.0",
-    "@subsquid/substrate-processor": "^3.3.0",
+    "@subsquid/substrate-processor": "^3.3.0 || ^8.0.0",
     "@subsquid/substrate-typegen": "^8.0.0",
     "@subsquid/util-internal-json": "^1.2.0"
   }
