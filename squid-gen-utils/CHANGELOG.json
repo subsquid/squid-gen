@@ -2,6 +2,18 @@
   "name": "@subsquid/squid-gen-utils",
   "entries": [
     {
+      "version": "1.1.1",
+      "tag": "@subsquid/squid-gen-utils_v1.1.1",
+      "date": "Wed, 24 Jan 2024 11:59:32 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update to package deps"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "tag": "@subsquid/squid-gen-utils_v1.1.0",
       "date": "Fri, 28 Jul 2023 16:46:27 GMT",

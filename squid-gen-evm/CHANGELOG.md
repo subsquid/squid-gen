@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-evm
 
-This log was last generated on Fri, 28 Jul 2023 16:46:27 GMT and should not be manually modified.
+This log was last generated on Wed, 24 Jan 2024 11:59:32 GMT and should not be manually modified.
+
+## 1.2.1
+Wed, 24 Jan 2024 11:59:32 GMT
+
+### Patches
+
+- Updates to package deps and to rush itself
 
 ## 1.2.0
 Fri, 28 Jul 2023 16:46:27 GMT
