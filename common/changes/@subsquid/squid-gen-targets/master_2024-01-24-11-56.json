@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-targets",
+      "comment": "Updates to package deps",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-targets"
+}
