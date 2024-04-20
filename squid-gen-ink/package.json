@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.4.5",
-    "json-schema-to-typescript": "^13.0.2",
+    "json-schema-to-typescript": "^14.0.0",
     "typescript": "~5.2.0"
   },
   "peerDependencies": {
