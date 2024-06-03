@@ -4,6 +4,7 @@ import {resolveModule} from '@subsquid/squid-gen-utils'
 import {def} from '@subsquid/util-internal'
 import {FileOutput, OutDir} from '@subsquid/util-internal-code-printer'
 import {SquidContract} from './interfaces'
+import {toCamelCase} from "@subsquid/util-naming";
 
 export class MappingCodegen {
     private out: FileOutput
@@ -37,9 +38,21 @@ export class MappingCodegen {
             this.out.line(`import {Store} from '${resolveModule(this.out.file, path.resolve(`src`, `db`))}'`)
             this.getTargetPrinter().printImports()
             this.out.line(
-                `import * as spec from '${resolveModule(
+                `import {functions, events} from '${resolveModule(
                     this.out.file,
                     path.resolve(`src`, `abi`, this.options.contract.spec)
+                )}'`
+            )
+            this.out.line(
+                `import * as eventHandlers from '${resolveModule(
+                    this.out.file,
+                    path.resolve(`src`, `handlers`, `${this.options.contract.name}_events`)
+                )}'`
+            )
+            this.out.line(
+                `import * as functionHandlers from '${resolveModule(
+                    this.out.file,
+                    path.resolve(`src`, `handlers`, `${this.options.contract.name}_functions`)
                 )}'`
             )
             if (this.util.size > 0) {
@@ -61,36 +74,19 @@ export class MappingCodegen {
         })
     }
 
+    private printEventHandle(e: string) {
+        this.out.block(`if (events['${e}'].is(log))`, () => {
+            this.out.line(`return eventHandlers.${toCamelCase(`handle_${e}_event`)}(ctx, log)`)
+        })
+    }
+
     private printEventsParser() {
-        let targetPrinter = this.getTargetPrinter()
         this.useProcessor('Log')
         this.out.block(`export function parseEvent(ctx: DataHandlerContext<Store>, log: Log)`, () => {
             this.out.block(`try`, () => {
-                this.out.block(`switch (log.topics[0])`, () => {
-                    for (let e in this.options.contract.events) {
-                        let fragment = this.options.contract.events[e]
-                        this.out.block(`case spec.events['${e}'].topic:`, () => {
-                            this.out.line(`let e = spec.events['${e}'].decode(log)`)
-                            targetPrinter.printFragmentSave(fragment, [
-                                `log.id`,
-                                `log.block.height`,
-                                `new Date(log.block.timestamp)`,
-                                `log.transactionHash`,
-                                `log.address`,
-                                `'${e}'`,
-                                ...fragment.params.slice(6).map((p, i) => {
-                                    if (p.type === `json`) {
-                                        this.useJSON()
-                                        return `toJSON(e[${i}])`
-                                    } else {
-                                        return `e[${i}]`
-                                    }
-                                }),
-                            ])
-                            this.out.line('break')
-                        })
-                    }
-                })
+                for (const e in this.options.contract.events) {
+                    this.printEventHandle(e)
+                }
             })
             this.out.block(`catch (error)`, () => {
                 this.out.line(
@@ -101,40 +97,21 @@ export class MappingCodegen {
         })
     }
 
+    private printFunctionHandle(f: string) {
+        this.out.block(`if (functions['${f}'].is(transaction))`, () => {
+            this.out.line(`return functionHandlers.${toCamelCase(`handle_${f}_function`)}(ctx, transaction)`)
+        })
+    }
+
     private printFunctionsParser() {
-        let targetPrinter = this.getTargetPrinter()
         this.useProcessor('Transaction')
         this.out.block(
             `export function parseFunction(ctx: DataHandlerContext<Store>, transaction: Transaction)`,
             () => {
                 this.out.block(`try`, () => {
-                    this.out.block(`switch (transaction.input.slice(0, 10))`, () => {
-                        for (let f in this.options.contract.functions) {
-                            let fragment = this.options.contract.functions[f]
-                            this.out.block(`case spec.functions['${f}'].sighash:`, () => {
-                                this.out.line(`let f = spec.functions['${f}'].decode(transaction.input)`)
-                                targetPrinter.printFragmentSave(fragment, [
-                                    `transaction.id`,
-                                    `transaction.block.height`,
-                                    `new Date(transaction.block.timestamp)`,
-                                    `transaction.hash`,
-                                    `transaction.to!`,
-                                    `'${f}'`,
-                                    `transaction.value`,
-                                    `transaction.status != null ? Boolean(transaction.status) : undefined`,
-                                    ...fragment.params.slice(8).map((p, i) => {
-                                        if (p.type === `json`) {
-                                            this.useJSON()
-                                            return `toJSON(f[${i}])`
-                                        } else {
-                                            return `f[${i}]`
-                                        }
-                                    }),
-                                ])
-                                this.out.line('break')
-                            })
-                        }
-                    })
+                    for (const f in this.options.contract.functions) {
+                        this.printFunctionHandle(f)
+                    }
                 })
                 this.out.block(`catch (error)`, () => {
                     this.out.line(
@@ -144,10 +121,6 @@ export class MappingCodegen {
                 })
             }
         )
-    }
-
-    private useJSON() {
-        this.json = true
     }
 
     private useProcessor(str: string) {

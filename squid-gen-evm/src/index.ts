@@ -8,11 +8,13 @@ import {toCamelCase} from '@subsquid/util-naming'
 import {Config} from './config'
 import {MappingCodegen} from './mappings'
 import {ProcessorCodegen} from './processor'
-import {SpecFile, SquidContract} from './interfaces'
+import {EscapedFragment, SpecFile, SquidContract} from './interfaces'
 import {getArchive, getType, spawnAsync} from './util'
-import {block, event, function_, transaction} from './staticEntities'
-import {Fragment, FragmentParam} from '@subsquid/squid-gen-utils'
+import {block, transaction, event as staticEvent, function_ as staticFunction} from './staticEntities'
+import {Fragment} from '@subsquid/squid-gen-utils'
 import {CoreCodegen} from './core'
+import {Codec} from "@subsquid/evm-codec";
+import {HandlersCodegen} from "./handlers";
 
 export let logger = createLogger(`sqd:squidgen`)
 
@@ -105,6 +107,11 @@ export async function generateSquid(config: Config) {
         new MappingCodegen(mappingsOutputDir, {contract, dataTarget}).generate()
     }
 
+    let handlersOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'handlers')))
+    for (let contract of contracts) {
+        new HandlersCodegen(handlersOutputDir, {contract, dataTarget}).generate()
+    }
+
     let mappingsIndex = mappingsOutputDir.file('index.ts')
     for (let contract of contracts) {
         mappingsIndex.line(`export * as ${contract.name} from './${contract.name}'`)
@@ -127,79 +134,70 @@ function validateContractNames(config: Config) {
 function getEvents(specFile: SpecFile, contractName: string, names: string[] | true) {
     let items = specFile.events || {}
 
-    let fragments: Record<string, Fragment> = {}
-    for (let name in items) {
-        let fragment = items[name].fragment
+    const filteredNames = names === true ? Object.keys(items) : names
 
-        let params: FragmentParam[] = [...event.params]
-        for (let i = 0; i < fragment.inputs.length; i++) {
-            let input = fragment.inputs[i]
+    const events: Record<string, EscapedFragment> = {}
+    for (const name of filteredNames) {
+        const event = items[name]
+        assert(event != null, `Event "${name}" doesn't exist for this contract`)
 
-            params.push({
-                name: input.name || `param${i}`,
-                indexed: input.indexed ?? false,
-                type: getType(input),
+        events[name] = {
+            name: `${contractName}_event_${name}`,
+            params: [...staticEvent.params, ...Object.entries(event.params).map(([name, param]: [string, Codec<any> & {indexed?: boolean}]) => ({
+                name: toEventParamName(name),
+                originalName: name,
+                type: getType(param),
+                indexed: !!param.indexed,
                 nullable: false,
-            })
-        }
-
-        fragments[name] = {
-            name: `${contractName}_event_${fragment.name}`,
-            params,
+                static: !param.isDynamic,
+            }))]
         }
     }
 
-    names = names == true ? Object.keys(items) : names
-
-    let filtered: Record<string, Fragment> = {}
-    for (let name of names) {
-        let fragment = fragments[name]
-        assert(fragment != null, `Event "${name}" doesn't exist for this contract`)
-
-        filtered[name] = fragment
-    }
-
-    return filtered
+    return events
 }
 
 function getFunctions(specFile: SpecFile, contractName: string, names: string[] | true) {
-    let items = specFile.functions || {}
+    const items = specFile.functions || {}
 
-    let fragments: Record<string, Fragment> = {}
-    for (let name in items) {
-        let fragment = items[name].fragment
+    const filteredNames = names === true ? Object.keys(items) : names
 
-        let params: FragmentParam[] = [...function_.params]
-        for (let i = 0; i < fragment.inputs.length; i++) {
-            let input = fragment.inputs[i]
-            params.push({
-                name: input.name || `param${i}`,
-                indexed: input.indexed ?? false,
-                type: getType(input),
-                nullable: false,
-            })
-        }
+    const functions: Record<string, EscapedFragment> = {}
+    for (const name of filteredNames) {
+        const fun= items[name]
+        assert(fun != null, `Function "${name}" doesn't exist for this contract`)
 
-        fragments[name] = {
-            name: `${contractName}_function_${fragment.name}`,
-            params,
-        }
-    }
-
-    names = names == true ? Object.keys(items) : names
-
-    let filtered: Record<string, Fragment> = {}
-    for (let name of names) {
-        let fragment = fragments[name]
-        assert(fragment != null, `Function "${name}" doesn't exist for this contract`)
-
-        if (specFile.functions[name].fragment.stateMutability === 'view') {
+        if (fun.isView) {
             logger.warn(`readonly function "${name}" skipped`)
             continue
         }
 
-        filtered[name] = fragment
+        functions[name] = {
+            name: `${contractName}_function_${name}`,
+            params: [...staticFunction.params, ...Object.entries(fun.args as Record<string, Codec<any>>).map(([name, param]) => ({
+                name: toFunctionParamName(name),
+                type: getType(param),
+                indexed: false,
+                nullable: false,
+                static: !param.isDynamic,
+            }))],
+        }
     }
 
-    return filtered
+    return functions
+}
+
+// in case of name conflicts, like event arg named `id`
+function toEventParamName(name: string) {
+    if (staticEvent.params.some((p) => p.name === name)) {
+        return `param_${name}`
+    }
+    return name
+}
+
+function toFunctionParamName(name: string) {
+    if (staticFunction.params.some((p) => p.name === name)) {
+        return `param_${name}`
+    }
+    return name
 }

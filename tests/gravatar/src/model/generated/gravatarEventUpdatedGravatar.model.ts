@@ -2,8 +2,8 @@ import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, I
 import * as marshal from "./marshal"
 
 @Entity_()
-export class ContractFunctionMint {
-    constructor(props?: Partial<ContractFunctionMint>) {
+export class GravatarEventUpdatedGravatar {
+    constructor(props?: Partial<GravatarEventUpdatedGravatar>) {
         Object.assign(this, props)
     }
 
@@ -28,15 +28,17 @@ export class ContractFunctionMint {
 
     @Index_()
     @Column_("text", {nullable: false})
-    functionName!: string
+    eventName!: string
 
-    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: true})
-    functionValue!: bigint | undefined | null
+    @Column_("numeric", {transformer: marshal.bigintTransformer, nullable: false})
+    paramId!: bigint
 
-    @Index_()
-    @Column_("bool", {nullable: true})
-    functionSuccess!: boolean | undefined | null
+    @Column_("text", {nullable: false})
+    owner!: string
 
-    @Column_("jsonb", {nullable: false})
-    params!: unknown
+    @Column_("text", {nullable: false})
+    displayName!: string
+
+    @Column_("text", {nullable: false})
+    imageUrl!: string
 }

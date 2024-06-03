@@ -1,18 +1,23 @@
-import {Fragment} from '@subsquid/squid-gen-utils'
-import {ethers} from 'ethers'
+import {AbiEvent, AbiFunction} from "@subsquid/evm-abi";
+import {Fragment, FragmentParam} from "@subsquid/squid-gen-utils";
 
 export interface SpecFile {
-    abi: ethers.Interface
-    events: Record<string, {fragment: ethers.EventFragment}>
-    functions: Record<string, {fragment: ethers.FunctionFragment}>
+    events: Record<string, AbiEvent<any>>
+    functions: Record<string, AbiFunction<any, any>>
+}
+
+export type EscapedFragment = {
+    name: string
+    params: (FragmentParam & { originalName?: string })[]
+
 }
 
 export interface SquidContract {
     name: string
     spec: string
     address: string
-    events: Record<string, Fragment>
-    functions: Record<string, Fragment>
+    events: Record<string, EscapedFragment>
+    functions: Record<string, EscapedFragment>
     range?: {from?: number; to?: number}
 }
 

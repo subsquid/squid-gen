@@ -1,8 +1,8 @@
 import {spawn} from 'child_process'
 import {archivesRegistryEVM} from '@subsquid/archive-registry'
 import {SquidArchive} from './interfaces'
-import ethers from 'ethers'
 import {ParamType} from '@subsquid/squid-gen-utils'
+import type {Codec} from "@subsquid/evm-codec";
 
 export async function spawnAsync(command: string, args: string[]) {
     return await new Promise<number>((resolve, reject) => {
@@ -50,26 +50,20 @@ export function getArchive(str: string): SquidArchive {
     }
 }
 
-export function getType(param: ethers.ParamType): ParamType {
-    if (param.baseType === 'array' || param.baseType === 'tuple') {
+export function getType(param: Codec<any>): ParamType {
+    if (param.baseType === "struct" || param.baseType === "array") {
         return 'json'
     }
 
-    if (param.type === 'address' || param.type === 'string') {
+    if (param.baseType === 'address' || param.baseType === 'string' || param.baseType === 'bytes') {
         return 'string'
     }
 
-    if (param.type === 'bool') {
+    if (param.baseType === 'bool') {
         return 'boolean'
     }
-
-    let match = param.type.match(/^(u?int)([0-9]+)$/)
-    if (match) {
-        return parseInt(match[2]) < 53 ? 'int' : 'bigint'
-    }
-
-    if (param.type.substring(0, 5) === 'bytes') {
-        return 'string'
+    if (param.baseType === 'int') {
+        return 'bigint'
     }
 
     throw new Error('unknown type')

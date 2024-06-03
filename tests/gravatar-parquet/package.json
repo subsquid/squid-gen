@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "@subsquid/archive-registry": "^3.2.0",
-    "@subsquid/evm-processor": "^1.7.3",
+    "@subsquid/evm-processor": "^1.19.1",
+    "@subsquid/evm-abi": "^0.2.4",
+    "@subsquid/evm-codec": "^0.3.0",
     "@subsquid/util-internal-json": "^1.2.0",
     "dotenv": "^16.3.1",
     "ethers": "^6.6.6",
@@ -17,8 +19,8 @@
     "@aws-sdk/client-s3": "^3.379.1"
   },
   "devDependencies": {
-    "@subsquid/evm-typegen": "^3.2.2",
-    "@subsquid/squid-gen-evm": "^1.2.1",
+    "@subsquid/evm-typegen": "^4.1.4",
+    "@subsquid/squid-gen-evm": "1.2.2",
     "@types/node": "^20.4.5",
     "typescript": "~5.0.4"
   }
