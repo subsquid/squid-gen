@@ -14,6 +14,7 @@ import {block, transaction, event as staticEvent, function_ as staticFunction} f
 import {Fragment} from '@subsquid/squid-gen-utils'
 import {CoreCodegen} from './core'
 import {Codec} from "@subsquid/evm-codec";
+import {HandlersCodegen} from "./handlers";
 
 export let logger = createLogger(`sqd:squidgen`)
 
@@ -104,6 +105,11 @@ export async function generateSquid(config: Config) {
     let mappingsOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'mapping')))
     for (let contract of contracts) {
         new MappingCodegen(mappingsOutputDir, {contract, dataTarget}).generate()
+    }
+
+    let handlersOutputDir = srcOutputDir.child(path.relative(srcOutputDir.path(), path.resolve(`src`, 'handlers')))
+    for (let contract of contracts) {
+        new HandlersCodegen(handlersOutputDir, {contract, dataTarget}).generate()
     }
 
     let mappingsIndex = mappingsOutputDir.file('index.ts')

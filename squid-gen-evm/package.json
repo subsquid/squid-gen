@@ -43,7 +43,7 @@
   },
   "peerDependencies": {
     "@subsquid/archive-registry": "^3.2.0",
-    "@subsquid/evm-processor": "^1.7.3",
+    "@subsquid/evm-processor": "^1.15.0",
     "@subsquid/evm-typegen": "^4.1.4",
     "@subsquid/util-internal-json": "^1.2.0",
     "ethers": "^6.6.6"
