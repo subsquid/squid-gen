@@ -75,15 +75,15 @@ export class MappingCodegen {
                                 `log.id`,
                                 `log.block.height`,
                                 `new Date(log.block.timestamp)`,
-                                `log.transactionHash`,
+                                `log.transaction!.hash`,
                                 `log.address`,
                                 `'${e}'`,
-                                ...fragment.params.slice(6).map((p, i) => {
+                                ...fragment.params.slice(6).map((p) => {
                                     if (p.type === `json`) {
                                         this.useJSON()
-                                        return `toJSON(e[${i}])`
+                                        return `toJSON(e.${p.originalName ?? p.name})`
                                     } else {
-                                        return `e[${i}]`
+                                        return `e.${p.originalName ?? p.name}`
                                     }
                                 }),
                             ])
@@ -117,7 +117,7 @@ export class MappingCodegen {
                                     `transaction.id`,
                                     `transaction.block.height`,
                                     `new Date(transaction.block.timestamp)`,
-                                    `transaction.hash`,
+                                    `transaction!.hash`,
                                     `transaction.to!`,
                                     `'${f}'`,
                                     `transaction.value`,
@@ -125,9 +125,9 @@ export class MappingCodegen {
                                     ...fragment.params.slice(8).map((p, i) => {
                                         if (p.type === `json`) {
                                             this.useJSON()
-                                            return `toJSON(f[${i}])`
+                                            return `toJSON(f.${p.originalName ?? p.name})`
                                         } else {
-                                            return `f[${i}]`
+                                            return `f.${p.originalName ?? p.name}`
                                         }
                                     }),
                                 ])

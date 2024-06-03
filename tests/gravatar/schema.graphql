@@ -14,7 +14,33 @@ type Transaction @entity {
     status: Int @index
 }
 
-type ContractFunctionMint @entity {
+type GravatarEventNewGravatar @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    paramId: BigInt!
+    owner: String!
+    displayName: String!
+    imageUrl: String!
+}
+
+type GravatarEventUpdatedGravatar @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    paramId: BigInt!
+    owner: String!
+    displayName: String!
+    imageUrl: String!
+}
+
+type GravatarFunctionUpdateGravatarImage @entity {
     id: ID!
     blockNumber: Int! @index
     blockTimestamp: DateTime! @index
@@ -23,6 +49,42 @@ type ContractFunctionMint @entity {
     functionName: String! @index
     functionValue: BigInt
     functionSuccess: Boolean @index
-    params: JSON!
+    imageUrl: String!
+}
+
+type GravatarFunctionSetMythicalGravatar @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+}
+
+type GravatarFunctionUpdateGravatarName @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    displayName: String!
+}
+
+type GravatarFunctionCreateGravatar @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    displayName: String!
+    imageUrl: String!
 }
 
