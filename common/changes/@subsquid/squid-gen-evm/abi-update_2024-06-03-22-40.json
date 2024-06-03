@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-evm",
+      "comment": "Update squid gen to support new evm abi",
+      "type": "major"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-evm"
+}
