@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-evm
 
-This log was last generated on Wed, 24 Jan 2024 11:59:32 GMT and should not be manually modified.
+This log was last generated on Mon, 03 Jun 2024 22:42:15 GMT and should not be manually modified.
+
+## 2.0.0
+Mon, 03 Jun 2024 22:42:15 GMT
+
+### Breaking changes
+
+- Update squid gen to support new evm abi
 
 ## 1.2.1
 Wed, 24 Jan 2024 11:59:32 GMT
