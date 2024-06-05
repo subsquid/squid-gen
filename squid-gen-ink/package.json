@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@subsquid/logger": "^1.3.0",
-    "@subsquid/squid-gen-targets": "^1.1.1",
+    "@subsquid/squid-gen-targets": "^1.1.2",
     "@subsquid/squid-gen-utils": "^1.1.1",
     "@subsquid/util-internal": "^3.0.0",
     "@subsquid/util-internal-code-printer": "^1.2.0",
