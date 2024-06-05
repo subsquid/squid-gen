@@ -68,6 +68,13 @@ export class PostgresTarget implements DataTarget {
 
     async generate() {
         let schema = this.src.file('../schema.graphql')
+        schema.line(`"""`)
+        schema.line(`This is GraphQL schema file. It was generated automatically by the squid-gen tool.`)
+        schema.line(`Each type corresponds to an entity in the database, a GraphQL type and an event/function on the contract.`)
+        schema.line(`Feel free to change the schema to fit your needs, and run \`sqd codegen\` to regenerate the models.`)
+        schema.line(`See more here: https://docs.subsquid.io/sdk/reference/schema-file/`)
+        schema.line(`"""`)
+        schema.line()
         for (let e of this.entityMap.values()) {
             let indexedFields = e.fields.filter((f) => f.indexed).map((f) => `"${f.name}"`)
             schema.block(`type ${e.name} @entity`, () => {

@@ -74,9 +74,16 @@ export class MappingCodegen {
         })
     }
 
-    private printEventHandle(e: string) {
-        this.out.block(`if (events['${e}'].is(log))`, () => {
-            this.out.line(`return eventHandlers.${toCamelCase(`handle_${e}_event`)}(ctx, log)`)
+    private propGetter(prop: string) {
+        if (prop.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/)) {
+            return `.${prop}`
+        }
+        return `['${prop}']`
+    }
+
+    private printEventHandle(fragmentName: string, abiName: string) {
+        this.out.block(`if (events${this.propGetter(abiName)}.is(log))`, () => {
+            this.out.line(`return eventHandlers.${toCamelCase(`handle_${fragmentName}_event`)}(ctx, log)`)
         })
     }
 
@@ -85,7 +92,7 @@ export class MappingCodegen {
         this.out.block(`export function parseEvent(ctx: DataHandlerContext<Store>, log: Log)`, () => {
             this.out.block(`try`, () => {
                 for (const e in this.options.contract.events) {
-                    this.printEventHandle(e)
+                    this.printEventHandle(e, this.options.contract.events[e].abiName)
                 }
             })
             this.out.block(`catch (error)`, () => {
@@ -97,9 +104,9 @@ export class MappingCodegen {
         })
     }
 
-    private printFunctionHandle(f: string) {
-        this.out.block(`if (functions['${f}'].is(transaction))`, () => {
-            this.out.line(`return functionHandlers.${toCamelCase(`handle_${f}_function`)}(ctx, transaction)`)
+    private printFunctionHandle(fragmentName: string, abiName: string) {
+        this.out.block(`if (functions${this.propGetter(abiName)}.is(transaction))`, () => {
+            this.out.line(`return functionHandlers.${toCamelCase(`handle_${fragmentName}_function`)}(ctx, transaction)`)
         })
     }
 
@@ -110,7 +117,7 @@ export class MappingCodegen {
             () => {
                 this.out.block(`try`, () => {
                     for (const f in this.options.contract.functions) {
-                        this.printFunctionHandle(f)
+                        this.printFunctionHandle(f, this.options.contract.functions[f].abiName)
                     }
                 })
                 this.out.block(`catch (error)`, () => {

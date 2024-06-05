@@ -6,6 +6,9 @@ import {Block, Transaction} from './model'
 
 processor.run(db, async (ctx) => {
     for (let block of ctx.blocks) {
+        // Use ctx.log for logging. Avoid using `console.log` in squids
+        ctx.log.info(`Received block #${block.header.height} with ${block.transactions.length} transactions`)
+
         EntityBuffer.add(
             new Block({
                 id: block.header.id,

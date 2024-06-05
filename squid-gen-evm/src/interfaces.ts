@@ -8,7 +8,8 @@ export interface SpecFile {
 
 export type EscapedFragment = {
     name: string
-    params: (FragmentParam & { originalName?: string })[]
+    abiName: string
+    params: (FragmentParam & { abiName?: string })[]
 
 }
 

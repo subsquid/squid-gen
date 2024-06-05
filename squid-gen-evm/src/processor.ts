@@ -148,7 +148,7 @@ export class ProcessorCodegen {
                     this.out.line(`topic0: [`)
                     this.out.indentation(() => {
                         for (let e in contract.events) {
-                            this.out.line(`${contract.name}Abi.events['${e}'].topic,`)
+                            this.out.line(`${contract.name}Abi.events['${contract.events[e].abiName}'].topic,`)
                         }
                     })
                     this.out.line(`],`)
@@ -177,7 +177,7 @@ export class ProcessorCodegen {
                     this.out.line(`sighash: [`)
                     this.out.indentation(() => {
                         for (let f in contract.functions) {
-                            this.out.line(`${contract.name}Abi.functions['${f}'].sighash,`)
+                            this.out.line(`${contract.name}Abi.functions['${contract.functions[f].abiName}'].sighash,`)
                         }
                     })
                     this.out.line(`],`)

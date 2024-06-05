@@ -455,6 +455,11 @@
          "shouldPublish": false
       },
       {
+         "packageName": "worker-registration-test",
+         "projectFolder": "tests/worker-registration",
+         "shouldPublish": false
+      },
+      {
          "packageName": "ink-erc20",
          "projectFolder": "tests/ink-erc20",
          "shouldPublish": false
