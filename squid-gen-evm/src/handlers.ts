@@ -63,7 +63,7 @@ export class HandlersCodegen {
             const fragment = this.options.contract.events[e]
             const handlerName = toCamelCase(`handle_${e}_event`)
             this.eventsOut.block(`export function ${handlerName}(ctx: DataHandlerContext<Store>, log: Log)`, () => {
-                this.eventsOut.line(`const e = events['${e}'].decode(log)`)
+                this.eventsOut.line(`const e = events['${fragment.abiName}'].decode(log)`)
                 targetPrinter.printFragmentSave(fragment, [
                     `log.id`,
                     `log.block.height`,
@@ -74,9 +74,9 @@ export class HandlersCodegen {
                     ...fragment.params.slice(6).map((p) => {
                         if (p.type === `json`) {
                             this.useJSON()
-                            return `toJSON(e.${p.originalName ?? p.name})`
+                            return `toJSON(e.${p.abiName ?? p.name})`
                         } else {
-                            return `e.${p.originalName ?? p.name}`
+                            return `e.${p.abiName ?? p.name}`
                         }
                     }),
                 ])
@@ -91,7 +91,7 @@ export class HandlersCodegen {
             const fragment = this.options.contract.functions[f]
             const handlerName = toCamelCase(`handle_${f}_function`)
             this.functionsOut.block(`export function ${handlerName}(ctx: DataHandlerContext<Store>, transaction: Transaction)`, () => {
-                this.functionsOut.line(`const f = functions['${f}'].decode(transaction)`)
+                this.functionsOut.line(`const f = functions['${fragment.abiName}'].decode(transaction)`)
                 targetPrinter.printFragmentSave(fragment, [
                     `transaction.id`,
                     `transaction.block.height`,
@@ -104,9 +104,9 @@ export class HandlersCodegen {
                     ...fragment.params.slice(8).map((p, i) => {
                         if (p.type === `json`) {
                             this.useJSON()
-                            return `toJSON(f.${p.originalName ?? p.name})`
+                            return `toJSON(f.${p.abiName ?? p.name})`
                         } else {
-                            return `f.${p.originalName ?? p.name}`
+                            return `f.${p.abiName ?? p.name}`
                         }
                     }),
                 ])

@@ -131,6 +131,14 @@ function validateContractNames(config: Config) {
     }
 }
 
+function dedupName(name: string, names: string[]) {
+    if (!name.includes('(')) return name;
+    const [base, _] = name.split('(');
+    const overloads = names.filter((n) => n.startsWith(base));
+    const index = overloads.indexOf(name);
+    return `${base}_${index + 1}`;
+}
+
 function getEvents(specFile: SpecFile, contractName: string, names: string[] | true) {
     let items = specFile.events || {}
 
@@ -140,12 +148,13 @@ function getEvents(specFile: SpecFile, contractName: string, names: string[] | t
     for (const name of filteredNames) {
         const event = items[name]
         assert(event != null, `Event "${name}" doesn't exist for this contract`)
-
-        events[name] = {
-            name: `${contractName}_event_${name}`,
+        const dedupedName = dedupName(name, filteredNames)
+        events[dedupedName] = {
+            name: `${contractName}_event_${dedupedName}`,
+            abiName: name,
             params: [...staticEvent.params, ...Object.entries(event.params).map(([name, param]: [string, Codec<any> & {indexed?: boolean}]) => ({
                 name: toEventParamName(name),
-                originalName: name,
+                abiName: name,
                 type: getType(param),
                 indexed: !!param.indexed,
                 nullable: false,
@@ -171,9 +180,11 @@ function getFunctions(specFile: SpecFile, contractName: string, names: string[] 
             logger.warn(`readonly function "${name}" skipped`)
             continue
         }
+        const dedupedName = dedupName(name, filteredNames)
 
-        functions[name] = {
-            name: `${contractName}_function_${name}`,
+        functions[dedupedName] = {
+            name: `${contractName}_function_${dedupedName}`,
+            abiName: name,
             params: [...staticFunction.params, ...Object.entries(fun.args as Record<string, Codec<any>>).map(([name, param]) => ({
                 name: toFunctionParamName(name),
                 type: getType(param),

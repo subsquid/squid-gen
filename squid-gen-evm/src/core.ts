@@ -29,6 +29,9 @@ export class CoreCodegen {
         this.out.indentation(() => {
             targetPrinter.printPreBatch()
             this.out.block(`for (let block of ctx.blocks)`, () => {
+                this.out.line('// Use ctx.log for logging. Avoid using `console.log` in squids')
+                this.out.line(`ctx.log.info(\`Received block #\${block.header.height} with \${block.transactions.length} transactions\`)`)
+                this.out.line()
                 targetPrinter.printFragmentSave(block, [
                     `block.header.id`,
                     `block.header.height`,

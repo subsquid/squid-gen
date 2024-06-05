@@ -1,0 +1,853 @@
+"""
+This is GraphQL schema file. It is generated automatically by the squid-gen tool.
+Each type corresponds to an entity in the database, a GraphQL type and an event/function on the contract.
+Feel free to change the schema to fit your needs, and run `npx sqd codegen` to regenerate the models.
+See more here: https://docs.subsquid.io/sdk/reference/schema-file/
+"""
+
+type Block @entity {
+    id: ID!
+    number: Int! @index
+    timestamp: DateTime! @index
+}
+
+type Transaction @entity {
+    id: ID!
+    blockNumber: Int @index
+    blockTimestamp: DateTime! @index
+    hash: String! @index
+    to: String @index
+    from: String @index
+    status: Int @index
+}
+
+type WorkerRegistrationEventExcessiveBondReturned @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    workerId: BigInt! @index
+    amount: BigInt!
+}
+
+type WorkerRegistrationEventMetadataUpdated @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    workerId: BigInt! @index
+    metadata: String!
+}
+
+type WorkerRegistrationEventPaused @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    account: String!
+}
+
+type WorkerRegistrationEventRoleAdminChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    role: String! @index
+    previousAdminRole: String! @index
+    newAdminRole: String! @index
+}
+
+type WorkerRegistrationEventRoleGranted @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    role: String! @index
+    account: String! @index
+    sender: String! @index
+}
+
+type WorkerRegistrationEventRoleRevoked @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    role: String! @index
+    account: String! @index
+    sender: String! @index
+}
+
+type WorkerRegistrationEventUnpaused @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    account: String!
+}
+
+type WorkerRegistrationEventWorkerDeregistered @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    workerId: BigInt! @index
+    account: String! @index
+    deregistedAt: BigInt!
+}
+
+type WorkerRegistrationEventWorkerRegistered @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    workerId: BigInt! @index
+    peerId: String!
+    registrar: String! @index
+    registeredAt: BigInt!
+    metadata: String!
+}
+
+type WorkerRegistrationEventWorkerWithdrawn @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    workerId: BigInt! @index
+    account: String! @index
+}
+
+type WorkerRegistrationFunctionDeregister @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+}
+
+type WorkerRegistrationFunctionGrantRole @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    role: String!
+    account: String!
+}
+
+type WorkerRegistrationFunctionPause @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+}
+
+type WorkerRegistrationFunctionRegister1 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+}
+
+type WorkerRegistrationFunctionRegister2 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+    metadata: String!
+}
+
+type WorkerRegistrationFunctionRenounceRole @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    role: String!
+    callerConfirmation: String!
+}
+
+type WorkerRegistrationFunctionReturnExcessiveBond @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+}
+
+type WorkerRegistrationFunctionRevokeRole @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    role: String!
+    account: String!
+}
+
+type WorkerRegistrationFunctionUnpause @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+}
+
+type WorkerRegistrationFunctionUpdateMetadata @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+    metadata: String!
+}
+
+type WorkerRegistrationFunctionWithdraw @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+}
+
+type GatewayRegistryEventAllocatedCUs @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gateway: String! @index
+    peerId: String!
+    workerIds: JSON!
+    shares: JSON!
+}
+
+type GatewayRegistryEventAutoextensionDisabled @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+    lockEnd: BigInt!
+}
+
+type GatewayRegistryEventAutoextensionEnabled @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+}
+
+type GatewayRegistryEventAverageBlockTimeChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    newBlockTime: BigInt!
+}
+
+type GatewayRegistryEventDefaultStrategyChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    strategy: String! @index
+}
+
+type GatewayRegistryEventGatewayAddressChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+    peerId: String!
+    newAddress: String!
+}
+
+type GatewayRegistryEventInitialized @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    version: BigInt!
+}
+
+type GatewayRegistryEventManaChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    newCuPerSqd: BigInt!
+}
+
+type GatewayRegistryEventMaxGatewaysPerClusterChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    newAmount: BigInt!
+}
+
+type GatewayRegistryEventMetadataChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+    peerId: String!
+    metadata: String!
+}
+
+type GatewayRegistryEventMinStakeChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    newAmount: BigInt!
+}
+
+type GatewayRegistryEventPaused @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    account: String!
+}
+
+type GatewayRegistryEventRegistered @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+    paramId: String! @index
+    peerId: String!
+}
+
+type GatewayRegistryEventRoleAdminChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    role: String! @index
+    previousAdminRole: String! @index
+    newAdminRole: String! @index
+}
+
+type GatewayRegistryEventRoleGranted @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    role: String! @index
+    account: String! @index
+    sender: String! @index
+}
+
+type GatewayRegistryEventRoleRevoked @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    role: String! @index
+    account: String! @index
+    sender: String! @index
+}
+
+type GatewayRegistryEventStaked @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+    amount: BigInt!
+    lockStart: BigInt!
+    lockEnd: BigInt!
+    computationUnits: BigInt!
+}
+
+type GatewayRegistryEventStrategyAllowed @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    strategy: String! @index
+    isAllowed: Boolean!
+}
+
+type GatewayRegistryEventUnpaused @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    account: String!
+}
+
+type GatewayRegistryEventUnregistered @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+    peerId: String!
+}
+
+type GatewayRegistryEventUnstaked @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+    amount: BigInt!
+}
+
+type GatewayRegistryEventUsedStrategyChanged @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    eventName: String! @index
+    gatewayOperator: String! @index
+    strategy: String!
+}
+
+type GatewayRegistryFunctionAddStake @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    amount: BigInt!
+}
+
+type GatewayRegistryFunctionAllocateComputationUnits @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    workerIds: JSON!
+    cus: JSON!
+}
+
+type GatewayRegistryFunctionDisableAutoExtension @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+}
+
+type GatewayRegistryFunctionEnableAutoExtension @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+}
+
+type GatewayRegistryFunctionGrantRole @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    role: String!
+    account: String!
+}
+
+type GatewayRegistryFunctionInitialize @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    token: String!
+    router: String!
+}
+
+type GatewayRegistryFunctionPause @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+}
+
+type GatewayRegistryFunctionRegister1 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+}
+
+type GatewayRegistryFunctionRegister2 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+    metadata: String!
+    gatewayAddress: String!
+}
+
+type GatewayRegistryFunctionRegister3 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+    metadata: String!
+}
+
+type GatewayRegistryFunctionRegister4 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: JSON!
+    metadata: JSON!
+    gatewayAddress: JSON!
+}
+
+type GatewayRegistryFunctionRenounceRole @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    role: String!
+    callerConfirmation: String!
+}
+
+type GatewayRegistryFunctionRevokeRole @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    role: String!
+    account: String!
+}
+
+type GatewayRegistryFunctionSetAverageBlockTime @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    newAverageBlockTime: BigInt!
+}
+
+type GatewayRegistryFunctionSetGatewayAddress @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+    newAddress: String!
+}
+
+type GatewayRegistryFunctionSetIsStrategyAllowed @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    strategy: String!
+    isAllowed: Boolean!
+    isDefault: Boolean!
+}
+
+type GatewayRegistryFunctionSetMana @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    newMana: BigInt!
+}
+
+type GatewayRegistryFunctionSetMaxGatewaysPerCluster @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    maxGatewaysPerCluster: BigInt!
+}
+
+type GatewayRegistryFunctionSetMetadata @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+    metadata: String!
+}
+
+type GatewayRegistryFunctionSetMinStake @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    minStake: BigInt!
+}
+
+type GatewayRegistryFunctionStake1 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    amount: BigInt!
+    durationBlocks: BigInt!
+}
+
+type GatewayRegistryFunctionStake2 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    amount: BigInt!
+    durationBlocks: BigInt!
+    withAutoExtension: Boolean!
+}
+
+type GatewayRegistryFunctionUnpause @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+}
+
+type GatewayRegistryFunctionUnregister1 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: String!
+}
+
+type GatewayRegistryFunctionUnregister2 @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    peerId: JSON!
+}
+
+type GatewayRegistryFunctionUnstake @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+}
+
+type GatewayRegistryFunctionUseStrategy @entity {
+    id: ID!
+    blockNumber: Int! @index
+    blockTimestamp: DateTime! @index
+    transactionHash: String! @index
+    contract: String! @index
+    functionName: String! @index
+    functionValue: BigInt
+    functionSuccess: Boolean @index
+    strategy: String!
+}
+

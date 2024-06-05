@@ -29,6 +29,9 @@ dependencies:
   '@rush-temp/squid-gen-utils':
     specifier: file:./projects/squid-gen-utils.tgz
     version: file:projects/squid-gen-utils.tgz
+  '@rush-temp/worker-registration-test':
+    specifier: file:./projects/worker-registration-test.tgz
+    version: file:projects/worker-registration-test.tgz(ts-node@10.9.1)
   '@rush-temp/workspace':
     specifier: file:./projects/workspace.tgz
     version: file:projects/workspace.tgz
@@ -5284,7 +5287,7 @@ packages:
     dev: false
 
   file:projects/gravatar-parquet.tgz(@subsquid/util-internal-processor-tools@2.0.0):
-    resolution: {integrity: sha512-OyVF0NKOtPahS22Qicw+jf44c52dFptzGZQJxnX0xATFlv/xgz8W1qubjqXMkQSifad3RWaqFQQQhJNgnin8zA==, tarball: file:projects/gravatar-parquet.tgz}
+    resolution: {integrity: sha512-mqaTF2xjqNyovcbqoN4UfZ644nh7OAgboHIXVKacCgtV9Z33+9RXF69sWqmLcRiM0zuv3xsc+l9Hr0NAFjtVsA==, tarball: file:projects/gravatar-parquet.tgz}
     id: file:projects/gravatar-parquet.tgz
     name: '@rush-temp/gravatar-parquet'
     version: 0.0.0
@@ -5503,6 +5506,54 @@ packages:
       '@types/node': 20.9.0
       typescript: 5.2.2
       upath: 2.0.1
+    dev: false
+
+  file:projects/worker-registration-test.tgz(ts-node@10.9.1):
+    resolution: {integrity: sha512-qEYrpWp36WPqMeinnTnkPSPBPrluJtqBK90f6wMTb58W7HQhwDL8nTFk0ZDTNiubauB0sFHfs1/cjgswh8+Opw==, tarball: file:projects/worker-registration-test.tgz}
+    id: file:projects/worker-registration-test.tgz
+    name: '@rush-temp/worker-registration-test'
+    version: 0.0.0
+    dependencies:
+      '@subsquid/archive-registry': 3.3.0
+      '@subsquid/evm-abi': 0.2.4
+      '@subsquid/evm-codec': 0.3.0
+      '@subsquid/evm-processor': 1.19.1
+      '@subsquid/evm-typegen': 4.1.4
+      '@subsquid/graphql-server': 4.3.1(typeorm@0.3.17)
+      '@subsquid/typeorm-codegen': 1.3.2
+      '@subsquid/typeorm-migration': 1.2.2(typeorm@0.3.17)
+      '@subsquid/typeorm-store': 1.2.4(typeorm@0.3.17)
+      '@subsquid/util-internal-json': 1.2.3
+      '@types/node': 20.9.0
+      dotenv: 16.3.1
+      ethers: 6.8.1
+      pg: 8.8.0
+      typeorm: 0.3.17(pg@8.8.0)(ts-node@10.9.1)
+      typescript: 5.0.4
+    transitivePeerDependencies:
+      - '@google-cloud/spanner'
+      - '@sap/hana-client'
+      - '@subsquid/big-decimal'
+      - better-sqlite3
+      - bufferutil
+      - class-validator
+      - encoding
+      - hdb-pool
+      - ioredis
+      - mongodb
+      - mssql
+      - mysql2
+      - oracledb
+      - pg-native
+      - pg-query-stream
+      - redis
+      - sql.js
+      - sqlite3
+      - supports-color
+      - ts-node
+      - type-graphql
+      - typeorm-aurora-data-api-driver
+      - utf-8-validate
     dev: false
 
   file:projects/workspace.tgz:

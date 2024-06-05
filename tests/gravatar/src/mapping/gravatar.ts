@@ -10,10 +10,10 @@ const address = '0x2e645469f354bb4f5c8a05b3b30a929361cf77ec'
 
 export function parseEvent(ctx: DataHandlerContext<Store>, log: Log) {
     try {
-        if (events['NewGravatar'].is(log)) {
+        if (events.NewGravatar.is(log)) {
             return eventHandlers.handleNewGravatarEvent(ctx, log)
         }
-        if (events['UpdatedGravatar'].is(log)) {
+        if (events.UpdatedGravatar.is(log)) {
             return eventHandlers.handleUpdatedGravatarEvent(ctx, log)
         }
     }
@@ -24,16 +24,16 @@ export function parseEvent(ctx: DataHandlerContext<Store>, log: Log) {
 
 export function parseFunction(ctx: DataHandlerContext<Store>, transaction: Transaction) {
     try {
-        if (functions['updateGravatarImage'].is(transaction)) {
+        if (functions.updateGravatarImage.is(transaction)) {
             return functionHandlers.handleUpdateGravatarImageFunction(ctx, transaction)
         }
-        if (functions['setMythicalGravatar'].is(transaction)) {
+        if (functions.setMythicalGravatar.is(transaction)) {
             return functionHandlers.handleSetMythicalGravatarFunction(ctx, transaction)
         }
-        if (functions['updateGravatarName'].is(transaction)) {
+        if (functions.updateGravatarName.is(transaction)) {
             return functionHandlers.handleUpdateGravatarNameFunction(ctx, transaction)
         }
-        if (functions['createGravatar'].is(transaction)) {
+        if (functions.createGravatar.is(transaction)) {
             return functionHandlers.handleCreateGravatarFunction(ctx, transaction)
         }
     }
