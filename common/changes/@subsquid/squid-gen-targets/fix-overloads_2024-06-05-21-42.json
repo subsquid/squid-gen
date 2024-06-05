@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-targets",
+      "comment": "Add comments for generated schema",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-targets"
+}
