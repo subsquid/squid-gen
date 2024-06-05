@@ -2,6 +2,23 @@
   "name": "@subsquid/squid-gen-evm",
   "entries": [
     {
+      "version": "2.0.1",
+      "tag": "@subsquid/squid-gen-evm_v2.0.1",
+      "date": "Wed, 05 Jun 2024 21:49:52 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix problems with function overloading"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@subsquid/squid-gen-targets\" from `^1.1.1` to `^1.1.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "2.0.0",
       "tag": "@subsquid/squid-gen-evm_v2.0.0",
       "date": "Mon, 03 Jun 2024 22:42:15 GMT",

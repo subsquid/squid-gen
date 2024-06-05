@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-targets
 
-This log was last generated on Wed, 24 Jan 2024 11:59:32 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jun 2024 21:49:52 GMT and should not be manually modified.
+
+## 1.1.2
+Wed, 05 Jun 2024 21:49:52 GMT
+
+### Patches
+
+- Add comments for generated schema
 
 ## 1.1.1
 Wed, 24 Jan 2024 11:59:32 GMT

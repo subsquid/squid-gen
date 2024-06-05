@@ -2,6 +2,18 @@
   "name": "@subsquid/squid-gen-targets",
   "entries": [
     {
+      "version": "1.1.2",
+      "tag": "@subsquid/squid-gen-targets_v1.1.2",
+      "date": "Wed, 05 Jun 2024 21:49:52 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add comments for generated schema"
+          }
+        ]
+      }
+    },
+    {
       "version": "1.1.1",
       "tag": "@subsquid/squid-gen-targets_v1.1.1",
       "date": "Wed, 24 Jan 2024 11:59:32 GMT",
