@@ -26,7 +26,7 @@ export class ProcessorCodegen {
         this.out.line()
         this.out.line(`export const processor = new EvmBatchProcessor()`)
         this.out.indentation(() => {
-            this.printDoc('Datalake with historical data for the network', 'https://docs.subsquid.io/subsquid-network/reference/evm-networks/')
+            this.printDoc('Data lake with historical data for the network', 'https://docs.subsquid.io/subsquid-network/reference/evm-networks/')
             this.out.line(`.setGateway('${this.options.archive.value}')`)
             this.printDoc('RPC endpoint to fetch latest blocks.\nSet RPC_URL environment variable, or specify ChainRpc endpoint', 'https://docs.subsquid.io/sdk/reference/processors/evm-batch/general/#set-rpc-endpoint')
             this.out.line(`.setRpcEndpoint(process.env.RPC_URL)`)
