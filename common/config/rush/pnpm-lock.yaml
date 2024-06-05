@@ -29,9 +29,6 @@ dependencies:
   '@rush-temp/squid-gen-utils':
     specifier: file:./projects/squid-gen-utils.tgz
     version: file:projects/squid-gen-utils.tgz
-  '@rush-temp/worker-registration-test':
-    specifier: file:./projects/worker-registration-test.tgz
-    version: file:projects/worker-registration-test.tgz(ts-node@10.9.1)
   '@rush-temp/workspace':
     specifier: file:./projects/workspace.tgz
     version: file:projects/workspace.tgz
@@ -5287,7 +5284,7 @@ packages:
     dev: false
 
   file:projects/gravatar-parquet.tgz(@subsquid/util-internal-processor-tools@2.0.0):
-    resolution: {integrity: sha512-mqaTF2xjqNyovcbqoN4UfZ644nh7OAgboHIXVKacCgtV9Z33+9RXF69sWqmLcRiM0zuv3xsc+l9Hr0NAFjtVsA==, tarball: file:projects/gravatar-parquet.tgz}
+    resolution: {integrity: sha512-lKbaVtpxr9DE08/MjFqqDx9K0Er5omvofyJPU70LsNU0snkZ63+8vL+kMQh7PFqOF6wz//NNB7RIBgS8tg8z+Q==, tarball: file:projects/gravatar-parquet.tgz}
     id: file:projects/gravatar-parquet.tgz
     name: '@rush-temp/gravatar-parquet'
     version: 0.0.0
@@ -5315,7 +5312,7 @@ packages:
     dev: false
 
   file:projects/gravatar.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-FmMCnXfdQONeKJFSFoVVvAX/0Y8d9vqODyp3fPD60RLgXGMKTbzB+Ye0J+3gZKQBzR3lTXWV5Xtcuy9HzdGIHQ==, tarball: file:projects/gravatar.tgz}
+    resolution: {integrity: sha512-G2wZnHF0/LFyUpT69Grzf8qM4LZaaFBO7hcDmfu/Li4SewSdbizM2fVhwQwPjO0WAU05Yg4mSNOiXNVdRAk/EQ==, tarball: file:projects/gravatar.tgz}
     id: file:projects/gravatar.tgz
     name: '@rush-temp/gravatar'
     version: 0.0.0
@@ -5410,7 +5407,7 @@ packages:
     dev: false
 
   file:projects/squid-gen-evm.tgz:
-    resolution: {integrity: sha512-ByG3KP9G1nzT+I0dglQenuDnpO7Iw2bmUyZZM28ETL0fv3oxDckKhIpbUJUKkn9OiMGJpCX2YtAuc08W03sQFQ==, tarball: file:projects/squid-gen-evm.tgz}
+    resolution: {integrity: sha512-V/LH99ejobqJcW9Y3tXIAo4PVPBabeZRQMnOIkKeAolaYk+6W7iYut9cqc+Djip8IVLjAd8SK0xUDVoHaaVTaQ==, tarball: file:projects/squid-gen-evm.tgz}
     name: '@rush-temp/squid-gen-evm'
     version: 0.0.0
     dependencies:
@@ -5442,7 +5439,7 @@ packages:
     dev: false
 
   file:projects/squid-gen-ink.tgz(@subsquid/substrate-runtime@1.0.1)(typeorm@0.3.17):
-    resolution: {integrity: sha512-Ob0OIrl8J4wjSCidlZfAAxXmXB/1PphuLlOV9MXy5ukfLvAhlKwL13bUYW9wkD5lAzKEvtX7jL1A2V29ZaY6Pw==, tarball: file:projects/squid-gen-ink.tgz}
+    resolution: {integrity: sha512-1Z2uBKkU1USjw9VDhMkJwxQVhdzlyOpjFNe1SfDG46FavnXDmWoMY7H1afTNJwELkTOXUs0qu3qNpS6jMlPFjA==, tarball: file:projects/squid-gen-ink.tgz}
     id: file:projects/squid-gen-ink.tgz
     name: '@rush-temp/squid-gen-ink'
     version: 0.0.0
@@ -5506,54 +5503,6 @@ packages:
       '@types/node': 20.9.0
       typescript: 5.2.2
       upath: 2.0.1
-    dev: false
-
-  file:projects/worker-registration-test.tgz(ts-node@10.9.1):
-    resolution: {integrity: sha512-qEYrpWp36WPqMeinnTnkPSPBPrluJtqBK90f6wMTb58W7HQhwDL8nTFk0ZDTNiubauB0sFHfs1/cjgswh8+Opw==, tarball: file:projects/worker-registration-test.tgz}
-    id: file:projects/worker-registration-test.tgz
-    name: '@rush-temp/worker-registration-test'
-    version: 0.0.0
-    dependencies:
-      '@subsquid/archive-registry': 3.3.0
-      '@subsquid/evm-abi': 0.2.4
-      '@subsquid/evm-codec': 0.3.0
-      '@subsquid/evm-processor': 1.19.1
-      '@subsquid/evm-typegen': 4.1.4
-      '@subsquid/graphql-server': 4.3.1(typeorm@0.3.17)
-      '@subsquid/typeorm-codegen': 1.3.2
-      '@subsquid/typeorm-migration': 1.2.2(typeorm@0.3.17)
-      '@subsquid/typeorm-store': 1.2.4(typeorm@0.3.17)
-      '@subsquid/util-internal-json': 1.2.3
-      '@types/node': 20.9.0
-      dotenv: 16.3.1
-      ethers: 6.8.1
-      pg: 8.8.0
-      typeorm: 0.3.17(pg@8.8.0)(ts-node@10.9.1)
-      typescript: 5.0.4
-    transitivePeerDependencies:
-      - '@google-cloud/spanner'
-      - '@sap/hana-client'
-      - '@subsquid/big-decimal'
-      - better-sqlite3
-      - bufferutil
-      - class-validator
-      - encoding
-      - hdb-pool
-      - ioredis
-      - mongodb
-      - mssql
-      - mysql2
-      - oracledb
-      - pg-native
-      - pg-query-stream
-      - redis
-      - sql.js
-      - sqlite3
-      - supports-color
-      - ts-node
-      - type-graphql
-      - typeorm-aurora-data-api-driver
-      - utf-8-validate
     dev: false
 
   file:projects/workspace.tgz:
