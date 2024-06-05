@@ -1,6 +1,13 @@
 # Change Log - @subsquid/squid-gen-evm
 
-This log was last generated on Wed, 05 Jun 2024 21:49:52 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jun 2024 23:16:08 GMT and should not be manually modified.
+
+## 2.0.2
+Wed, 05 Jun 2024 23:16:08 GMT
+
+### Patches
+
+- wording change
 
 ## 2.0.1
 Wed, 05 Jun 2024 21:49:52 GMT
