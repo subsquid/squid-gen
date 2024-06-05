@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@subsquid/squid-gen-evm",
+      "comment": "wording change",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@subsquid/squid-gen-evm"
+}
