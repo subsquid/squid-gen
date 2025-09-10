@@ -17,3 +17,7 @@ deploy:
     cmd:
       - sqd
       - serve:prod
+#scale:
+#  addons:
+#    postgres:
+#      storage: 200G

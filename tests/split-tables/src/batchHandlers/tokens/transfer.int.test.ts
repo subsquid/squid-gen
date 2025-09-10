@@ -58,8 +58,9 @@ describe('handleTransfers integration', () => {
     expect(dbTransfers[0]).toMatchObject({
       id: 'myusdclogid',
       block: 77,
-      ...decodedTestLog,
       txn_hash: '0xmyusdctransactionhashfromlog',
+      from: decodedTestLog.from,
+      to: decodedTestLog.to,
       value: decodedTestLog.value.toString()
     })
   })

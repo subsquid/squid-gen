@@ -33,7 +33,7 @@ export async function handleTransfers(
       default:
         throw new Error(`handleTransfers for a log from an unknown contract instance ${l.contract.instanceName}`)
     }
-    
+
     return new ContractClass({
       id: l.id,
       block: l.block.height,
@@ -45,6 +45,6 @@ export async function handleTransfers(
   })
 
   await ctx.store.insert(transfers)
-  
+
   return { transfers }
 }

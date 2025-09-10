@@ -104,7 +104,11 @@ processor.run(db, async (ctx: ProcessorContext) => {
   let processed: any = {}
   for (let {contract: contractName, events: eventRequests} of config.requests) {
     for (let {name: eventName, batchHandler} of eventRequests) {
-      processed = await batchHandler(ctx, sortedEventLogs[contractName][eventName], processed)
+      processed = await batchHandler(
+        ctx,
+        sortedEventLogs[contractName][eventName],
+        processed
+      )
     }
   }
 })

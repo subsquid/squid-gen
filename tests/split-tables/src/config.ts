@@ -25,6 +25,7 @@ import * as erc20Abi from './abi/erc20'
 import * as aavePoolAbi from './abi/aave-pool'
 
 import { handleTransfers } from './batchHandlers/tokens/transfer'
+import { handleLiquidationCalls } from './batchHandlers/aave-pool/liquidationCall'
 
 // Can vary by network/processor, but we'll use a single global value here.
 export const fieldSelection = {
@@ -87,7 +88,7 @@ export const config: FullConfig = {
           {
             name: 'LiquidationCall',
             abiHelper: aavePoolAbi.events.LiquidationCall,
-            batchHandler: async () => {}
+            batchHandler: handleLiquidationCalls
           }
         ],
         range: {
