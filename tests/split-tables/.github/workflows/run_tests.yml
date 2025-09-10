@@ -1,0 +1,36 @@
+name: Tests
+concurrency: 1
+on:
+  pull_request:
+    branches:
+      - master
+#    paths:
+#      - .github/workflows/run_tests.yml
+#      - /**
+  workflow_dispatch:
+jobs:
+  setup-build-publish-deploy:
+    name: Run tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: squid
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 23798:5432
+    steps:
+#      - name: cancel previous runs
+#        uses: styfle/cancel-workflow-action@0.5.0
+#        with:
+#          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install
+        run: npm install
+
+      - name: Run tests
+        run: npm test

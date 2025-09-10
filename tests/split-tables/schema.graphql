@@ -1,0 +1,30 @@
+type TokensUsdcTransfer @entity {
+  id: ID!
+  block: Int!
+  txnHash: String!
+  from: String!
+  to: String!
+  value: BigInt!
+}
+
+type TokensSqdTransfer @entity {
+  id: ID!
+  block: Int!
+  txnHash: String!
+  from: String!
+  to: String!
+  value: BigInt!
+}
+
+type AavePoolMainLiquidationCall @entity {
+  id: ID!
+  block: Int!
+  txnHash: String!
+  collateralAsset: String!
+  debtAsset: String!
+  user: String!
+  debtToCover: BigInt!
+  liquidatedCollateralAmount: BigInt!
+  liquidator: String!
+  receiveAToken: Boolean
+}

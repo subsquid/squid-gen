@@ -1,0 +1,20 @@
+manifestVersion: subsquid.io/v0.1
+name: reference-squid
+version: 1
+description: A squid that indexes ERC20 transfers and has a test
+build: 
+deploy:
+  addons:
+    postgres: 
+    rpc:
+      - eth.http
+  processor:
+    env:
+      ETHEREUM_RPC: ${{ addons.rpc.eth.http }}
+    cmd:
+      - sqd
+      - process:prod
+  api:
+    cmd:
+      - sqd
+      - serve:prod
