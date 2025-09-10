@@ -64,4 +64,52 @@ describe('handleTransfers integration', () => {
       value: decodedTestLog.value.toString()
     })
   })
+
+  it('should process a sqd transfer and save it to the database', async () => {
+    const decodedTestLog = {
+      from: '0xfromsqd',
+      to: '0xtosqd',
+      value: BigInt(520)
+    }
+    const testLog = {
+      contract: {
+        name: 'Tokens',
+        instanceName: 'sqd',
+        instanceAddress: '0xsqd'
+      },
+      decoded: decodedTestLog,
+      ...createDefaultLog()
+    }
+    testLog.id = 'mysqdlogid'
+    testLog.block.height = 9900
+    testLog.transactionHash = '0xmysqdtransactionhashfromlog'
+
+    // Minimal ProcessorContext mock
+    const ctx = { store } as any
+    const { transfers } = await handleTransfers(ctx, [testLog], {})
+
+    expect(transfers).toHaveLength(1)
+    expect(transfers[0]).toMatchObject({
+      id: 'mysqdlogid',
+      block: 9900,
+      ...decodedTestLog,
+      txnHash: '0xmysqdtransactionhashfromlog',
+    })
+
+    const dbTransfers = await db.dataSource
+      .createQueryBuilder()
+      .select('*')
+      .from('tokens_sqd_transfer', 't')
+      .getRawMany()
+
+    expect(dbTransfers).toHaveLength(1)
+    expect(dbTransfers[0]).toMatchObject({
+      id: 'mysqdlogid',
+      block: 9900,
+      txn_hash: '0xmysqdtransactionhashfromlog',
+      from: decodedTestLog.from,
+      to: decodedTestLog.to,
+      value: decodedTestLog.value.toString()
+    })
+  })
 }) 
