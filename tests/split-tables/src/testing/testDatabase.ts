@@ -22,6 +22,8 @@ export const PG_CONFIG = {
 }
 
 export async function setupTestDatabase() : Promise<TestDatabase> {
+  const cwd = process.cwd()
+
   const dbName = randomDbName()
   const pool = new Pool({ ...PG_CONFIG, database: 'postgres' })
   await pool.query(`CREATE DATABASE "${dbName}"`)
@@ -31,7 +33,7 @@ export async function setupTestDatabase() : Promise<TestDatabase> {
   await testPool.end()
 
   // Getting some values from typeorm-store's default TypeORM config to match the behavior
-  const defaultConfig = createOrmConfig({projectDir: __dirname + '/../../'})
+  const defaultConfig = createOrmConfig({projectDir: cwd})
 
   // Set up TypeORM DataSource
   const dataSource = new DataSource({
@@ -41,8 +43,8 @@ export async function setupTestDatabase() : Promise<TestDatabase> {
     username: PG_CONFIG.user,
     password: PG_CONFIG.password,
     database: dbName,
-    entities: [__dirname + '/../model/generated/*.model.{ts,js}'],
-    migrations: [__dirname + '/../../db/migrations/*.js'],
+    entities: [cwd + '/src/model/generated/*.model.{ts,js}'],
+    migrations: [cwd + '/db/migrations/*.js'],
     synchronize: false,
     logging: false,
     namingStrategy: defaultConfig.namingStrategy
