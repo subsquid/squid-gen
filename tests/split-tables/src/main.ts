@@ -20,7 +20,7 @@ import {
   type ProcessorContext
 } from './config'
 
-const chain = Object.keys(fullConfig).find(k => k === process.argv[1])
+const chain = Object.keys(fullConfig).find(k => k === process.argv[2])
 if (!chain) {
   console.log(`The only argument of this squid's executable must be one of ${Object.keys(fullConfig)}, got ${process.argv[1]} instead`)
   process.exit(1)
@@ -28,7 +28,10 @@ if (!chain) {
 const config = fullConfig[chain]
 
 const processor = createProcessor(config)
-const db = new TypeormDatabase({supportHotBlocks: true})
+const db = new TypeormDatabase({
+  stateSchema: `${chain}_processor`,
+  supportHotBlocks: true
+})
 
 interface SortedEventLogs {
   [contract: string]: {
@@ -91,7 +94,8 @@ processor.run(db, async (ctx: ProcessorContext) => {
             instanceAddress: contractInstanceAddress
           },
           decoded,
-          ...log
+          ...log,
+          block: block.header // doing this manually cause full augmentBlock() from @subsquid/solana-objects is sorta slow
         })
       }
     }

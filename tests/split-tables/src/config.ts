@@ -24,6 +24,8 @@ import {
 import * as erc20Abi from './abi/erc20'
 import * as aavePoolAbi from './abi/aave-pool'
 
+import { handleTransfers } from './batchHandlers/tokens/transfer'
+
 // Can vary by network/processor, but we'll use a single global value here.
 export const fieldSelection = {
   log: {
@@ -69,7 +71,7 @@ export const config: FullConfig = {
           {
             name: 'Transfer',
             abiHelper: erc20Abi.events.Transfer,
-            batchHandler: async () => {}
+            batchHandler: handleTransfers
           }
         ],
         range: {
@@ -108,7 +110,7 @@ export const config: FullConfig = {
           {
             name: 'Transfer',
             abiHelper: erc20Abi.events.Transfer,
-            batchHandler: async () => {}
+            batchHandler: handleTransfers
           }
         ],
         range: {

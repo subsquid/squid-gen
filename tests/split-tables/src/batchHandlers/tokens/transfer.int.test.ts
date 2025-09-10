@@ -59,7 +59,8 @@ describe('handleTransfers integration', () => {
       id: 'myusdclogid',
       block: 77,
       ...decodedTestLog,
-      txnHash: '0xmyusdctransactionhashfromlog',
+      txn_hash: '0xmyusdctransactionhashfromlog',
+      value: decodedTestLog.value.toString()
     })
   })
 }) 

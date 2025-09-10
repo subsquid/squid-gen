@@ -1,19 +1,18 @@
 manifestVersion: subsquid.io/v0.1
-name: reference-squid
-version: 1
-description: A squid that indexes ERC20 transfers and has a test
+name: create-squid-ref-split-tables
+description: Reference squid for the split tables mode of the create-squid utility
 build: 
 deploy:
   addons:
     postgres: 
     rpc:
       - eth.http
+      - arbitrum-one.http
   processor:
-    env:
-      ETHEREUM_RPC: ${{ addons.rpc.eth.http }}
-    cmd:
-      - sqd
-      - process:prod
+    - name: ethereum-mainnet-processor
+      cmd: [ "sqd", "process:ethereum-mainnet:prod" ]
+    - name: arbitrum-one-processor
+      cmd: [ "sqd", "process:arbitrum-one:prod" ]
   api:
     cmd:
       - sqd

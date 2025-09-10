@@ -44,15 +44,26 @@
         "description": "Generate data access classes for an ABI file(s) in the ./abi folder",
         "cmd": ["squid-evm-typegen", "./src/abi", {"glob": "./abi/*.json"}, "--multicall"]
       },
-      "process": {
+      "process:ethereum-mainnet": {
         "description": "Load .env and start the squid processor",
         "deps": ["build", "migration:apply"],
-        "cmd": ["node", "--require=dotenv/config", "lib/main.js"]
+        "cmd": ["node", "--require=dotenv/config", "lib/main.js", "ethereum-mainnet"]
       },
-      "process:prod": {
+      "process:ethereum-mainnet:prod": {
         "description": "Start the squid processor",
         "deps": ["migration:apply"],
-        "cmd": ["node", "lib/main.js"],
+        "cmd": ["node", "lib/main.js", "ethereum-mainnet"],
+        "hidden": true
+      },
+      "process:arbitrum-one": {
+        "description": "Load .env and start the squid processor",
+        "deps": ["build", "migration:apply"],
+        "cmd": ["node", "--require=dotenv/config", "lib/main.js", "arbitrum-one"]
+      },
+      "process:arbitrum-one:prod": {
+        "description": "Start the squid processor",
+        "deps": ["migration:apply"],
+        "cmd": ["node", "lib/main.js", "arbitrum-one"],
         "hidden": true
       },
       "serve": {
@@ -75,10 +86,6 @@
         "description": "Bump @subsquid packages to the latest versions",
         "deps": ["check-updates"],
         "cmd": ["npm", "i", "-f"]
-      },
-      "open": {
-        "description": "Open a local browser window",
-        "cmd": ["npx", "--yes", "opener"]
       }
     }
   }
