@@ -1,0 +1,23 @@
+manifestVersion: subsquid.io/v0.1
+name: create-squid-ref-event-tables
+description: Reference squid for the split tables mode of the create-squid utility
+build: 
+deploy:
+  addons:
+    postgres: 
+    rpc:
+      - eth.http
+      - arbitrum-one.http
+  processor:
+    - name: ethereum-mainnet-processor
+      cmd: [ "sqd", "process:ethereum-mainnet:prod" ]
+    - name: arbitrum-one-processor
+      cmd: [ "sqd", "process:arbitrum-one:prod" ]
+  api:
+    cmd:
+      - sqd
+      - serve:prod
+scale:
+  addons:
+    postgres:
+      storage: 200G

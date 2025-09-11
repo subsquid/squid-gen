@@ -1,0 +1,25 @@
+type TokensTransfer @entity {
+  id: ID!
+  network: String!
+  instanceAddress: String!
+  block: Int!
+  txnHash: String!
+  from: String!
+  to: String!
+  value: BigInt!
+}
+
+type AavePoolLiquidationCall @entity {
+  id: ID!
+  network: String!
+  instanceAddress: String!
+  block: Int!
+  txnHash: String!
+  collateralAsset: String!
+  debtAsset: String!
+  user: String!
+  debtToCover: BigInt!
+  liquidatedCollateralAmount: BigInt!
+  liquidator: String!
+  receiveAToken: Boolean
+}
