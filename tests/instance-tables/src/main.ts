@@ -19,6 +19,9 @@ import {
   type DecodedLogWithContractMetadata,
   type ProcessorContext
 } from './config'
+import {
+  NetworkName
+} from './types/config'
 
 const chain = Object.keys(fullConfig).find(k => k === process.argv[2])
 if (!chain) {
@@ -105,6 +108,7 @@ processor.run(db, async (ctx: ProcessorContext) => {
   for (let {contract: contractName, events: eventRequests} of config.requests) {
     for (let {name: eventName, batchHandler} of eventRequests) {
       processed = await batchHandler(
+        chain as NetworkName,
         ctx,
         sortedEventLogs[contractName][eventName],
         processed

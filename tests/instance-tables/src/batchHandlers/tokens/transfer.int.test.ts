@@ -38,7 +38,12 @@ describe('handleTransfers integration', () => {
 
     // Minimal ProcessorContext mock
     const ctx = { store } as any
-    const { transfers } = await handleTransfers(ctx, [testLog], {})
+    const { transfers } = await handleTransfers(
+      'ethereum-mainnet',
+      ctx,
+      [testLog],
+      {}
+    )
 
     expect(transfers).toHaveLength(1)
     expect(transfers[0]).toMatchObject({
@@ -86,7 +91,12 @@ describe('handleTransfers integration', () => {
 
     // Minimal ProcessorContext mock
     const ctx = { store } as any
-    const { transfers } = await handleTransfers(ctx, [testLog], {})
+    const { transfers } = await handleTransfers(
+      'arbitrum-one',
+      ctx,
+      [testLog],
+      {}
+    )
 
     expect(transfers).toHaveLength(1)
     expect(transfers[0]).toMatchObject({

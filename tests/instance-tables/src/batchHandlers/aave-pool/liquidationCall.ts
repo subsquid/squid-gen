@@ -12,8 +12,12 @@ import {
 import {
   TokensTransfer
 } from '../tokens/transfer'
+import {
+  NetworkName
+} from '../../types/config'
 
 export async function handleLiquidationCalls(
+  network: NetworkName,
   ctx: ProcessorContext,
   logs: DecodedLogWithContractMetadata[],
   previouslyProcessed: {

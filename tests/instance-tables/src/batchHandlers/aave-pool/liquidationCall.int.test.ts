@@ -42,7 +42,12 @@ describe('handleLiquidationCalls integration', () => {
 
     // Minimal ProcessorContext mock
     const ctx = { store } as any
-    const { liquidationCalls } = await handleLiquidationCalls(ctx, [testLog], { transfers: [] })
+    const { liquidationCalls } = await handleLiquidationCalls(
+      'ethereum-mainnet',
+      ctx,
+      [testLog],
+      { transfers: [] }
+    )
 
     expect(liquidationCalls).toHaveLength(1)
     expect(liquidationCalls[0]).toMatchObject({

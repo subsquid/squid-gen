@@ -10,10 +10,14 @@ import {
   ProcessorContext,
   DecodedLogWithContractMetadata
 } from '../../config'
+import {
+  NetworkName
+} from '../../types/config'
 
 export type TokensTransfer = TokensUsdcTransfer | TokensSqdTransfer
 
 export async function handleTransfers(
+  network: NetworkName,
   ctx: ProcessorContext,
   logs: DecodedLogWithContractMetadata[],
   previouslyProcessed: {}
