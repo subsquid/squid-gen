@@ -1,5 +1,5 @@
 manifestVersion: subsquid.io/v0.1
-name: create-squid-ref-split-tables
+name: create-squid-ref-instance-tables
 description: Reference squid for the split tables mode of the create-squid utility
 build: 
 deploy:
