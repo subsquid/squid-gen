@@ -77,11 +77,11 @@ processor.run(db, async (ctx: ProcessorContext) => {
       for (let {contract: contractName, addresses: instanceAddresses, events: eventRequests} of config.requests) {
         let contractInstance = Object.entries(instanceAddresses).find(a => a[1] === log.address)
         if (!contractInstance)
-          break
+          continue
 
         let matchingEventRequest = eventRequests.find(e => e.abiHelper.is(log))
         if (!matchingEventRequest)
-          break
+          continue
 
         let [
           contractInstanceName,
